@@ -40,8 +40,8 @@ Rather than treating Spider-Man motifs as static decorative illustrations or a g
 
 | Phase | Description |
 | :--- | :--- |
-| **Phase 0** | **Project Setup & Ground Truth** *(Current)* |
-| **Phase 1** | Creative Direction & Spider-Man/Spider-Verse Metaphor |
+| **Phase 0** | **Project Setup & Ground Truth** *(Completed)* |
+| **Phase 1** | **Creative Direction & Visual Identity** *(Completed — see [docs/creative_direction.md](./docs/creative_direction.md))* |
 | **Phase 2** | Inspiration & Interaction Research (Miu Miu, TRIONN, Awwwards) |
 | **Phase 3** | Information Architecture & Node Connection Model |
 | **Phase 4** | Spider-Web Navigation System (Shooting, Pulling, Anchoring) |
@@ -62,6 +62,6 @@ Rather than treating Spider-Man motifs as static decorative illustrations or a g
 ---
 
 ## Current Status
-- **Stage**: Project Initialization (Phase 0 Complete)
-- **Active State**: Baseline context, master documents, and foundational structure verified.
-- **Next Step**: Awaiting the execution prompt for the next phase. No UI coding or placeholder generation has been initiated.
+- **Stage**: Phase 1 Complete — Creative Direction & Visual Identity established.
+- **Active Specification**: [Creative Direction Specification](./docs/creative_direction.md)
+- **Next Step**: Phase 2 — Inspiration & Interaction Research (Miu Miu, TRIONN, Awwwards). No production UI coding or asset generation has been initiated.
