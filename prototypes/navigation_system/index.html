@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spider-Web Navigation Motion Sandbox — Full Scene Scale Transition</title>
+  <title>Spider-Web Navigation Motion Sandbox — Full Scene Visibility</title>
   <style>
     :root {
-      --bg-primary: #07090E;
-      --bg-surface: #0D111A;
+      --bg-primary: #05070B;
+      --bg-card-home: #0F172A;
+      --bg-card-about: #131B2E;
       --accent-red: #FF2A4B;
       --accent-cyan: #00D2FF;
-      --text-primary: #F4F6FB;
-      --text-muted: #8E9BAE;
+      --text-primary: #FFFFFF;
+      --text-muted: #94A3B8;
       --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
     }
 
@@ -27,17 +28,17 @@
       user-select: none;
     }
 
-    /* Top Controls Header */
+    /* Top Navigation Bar */
     header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      height: 58px;
+      height: 60px;
       padding: 0 24px;
-      background: rgba(7, 9, 14, 0.94);
+      background: rgba(5, 7, 11, 0.96);
       backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -46,8 +47,8 @@
 
     .brand-title {
       font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
+      font-weight: 800;
+      letter-spacing: 0.08em;
     }
     .brand-title span {
       color: var(--accent-cyan);
@@ -62,12 +63,12 @@
     }
 
     .nav-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: var(--text-muted);
-      padding: 8px 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #cbd5e1;
+      padding: 8px 24px;
       border-radius: 6px;
-      font-size: 12px;
+      font-size: 13px;
       font-family: var(--font-mono);
       font-weight: 700;
       cursor: pointer;
@@ -75,15 +76,15 @@
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .nav-btn:hover {
-      color: var(--text-primary);
+      color: #fff;
       border-color: var(--accent-cyan);
-      background: rgba(0, 210, 255, 0.1);
+      background: rgba(0, 210, 255, 0.15);
     }
     .nav-btn.active {
       background: var(--accent-red);
       color: #fff;
       border-color: var(--accent-red);
-      box-shadow: 0 0 20px rgba(255, 42, 75, 0.5);
+      box-shadow: 0 0 24px rgba(255, 42, 75, 0.6);
     }
 
     /* Spatial Canvas Viewport */
@@ -130,91 +131,106 @@
     }
 
     /* =========================================================================
-       1. FULL-SCREEN IMMERSIVE SCENE (BIG VIEW)
+       1. HIGH-CONTRAST FULL-SCREEN SCENE (BIG VIEW)
        ========================================================================= */
     .full-scene-view {
-      width: 880px;
-      height: 520px;
-      background: rgba(13, 17, 26, 0.95);
-      border: 2px solid rgba(0, 210, 255, 0.5);
-      border-radius: 20px;
+      width: 820px;
+      height: 480px;
+      border-radius: 24px;
       backdrop-filter: blur(24px);
-      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.9), 0 0 60px rgba(0, 210, 255, 0.2);
-      padding: 50px 60px;
+      padding: 48px 56px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       text-align: center;
       position: relative;
+      user-select: none;
+    }
+
+    #full-home {
+      background: linear-gradient(145deg, #0F172A 0%, #1E293B 100%);
+      border: 3px solid #00D2FF;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 210, 255, 0.3);
+    }
+
+    #full-about {
+      background: linear-gradient(145deg, #181829 0%, #231C32 100%);
+      border: 3px solid #FF2A4B;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 50px rgba(255, 42, 75, 0.3);
     }
 
     .full-scene-view.chromatic-impact {
-      border-color: #00D2FF;
-      box-shadow: -4px 0 35px rgba(255, 42, 75, 0.6), 4px 0 35px rgba(0, 210, 255, 0.65), 0 30px 100px rgba(0,0,0,0.95);
+      box-shadow: -6px 0 45px rgba(255, 42, 75, 0.7), 6px 0 45px rgba(0, 210, 255, 0.75), 0 25px 80px rgba(0,0,0,0.95);
     }
     .full-scene-view.chromatic-impact h1 {
-      text-shadow: -3px 0 rgba(255, 42, 75, 0.9), 3px 0 rgba(0, 210, 255, 0.9);
+      text-shadow: -4px 0 rgba(255, 42, 75, 0.9), 4px 0 rgba(0, 210, 255, 0.9);
     }
 
-    .scene-badge {
+    .scene-badge-pill {
       display: inline-block;
       font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--accent-cyan);
-      letter-spacing: 0.15em;
-      padding: 6px 16px;
-      border-radius: 20px;
-      background: rgba(0, 210, 255, 0.08);
-      border: 1px solid rgba(0, 210, 255, 0.3);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      padding: 8px 20px;
+      border-radius: 30px;
       text-transform: uppercase;
       margin: 0 auto 12px auto;
     }
+    #full-home .scene-badge-pill {
+      color: #00D2FF;
+      background: rgba(0, 210, 255, 0.15);
+      border: 1px solid rgba(0, 210, 255, 0.4);
+    }
+    #full-about .scene-badge-pill {
+      color: #FF2A4B;
+      background: rgba(255, 42, 75, 0.15);
+      border: 1px solid rgba(255, 42, 75, 0.4);
+    }
 
     .scene-huge-title {
-      font-size: 82px;
+      font-size: 96px;
       font-weight: 900;
       letter-spacing: -0.04em;
       line-height: 1.0;
-      background: linear-gradient(135deg, #FFFFFF 40%, #A3B1CC 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin: 10px 0;
+      color: #FFFFFF;
+      margin: 10px 0 6px 0;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
 
-    .scene-sub-row {
+    .scene-sub-state {
       font-family: var(--font-mono);
-      font-size: 14px;
-      color: var(--accent-cyan);
-      display: flex;
-      justify-content: center;
-      gap: 16px;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: #E2E8F0;
+      margin-bottom: 8px;
     }
 
     .scene-footer-hud {
       display: flex;
       justify-content: space-between;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 2px solid rgba(255, 255, 255, 0.15);
       padding-top: 18px;
       font-family: var(--font-mono);
-      font-size: 11.5px;
-      color: var(--text-muted);
+      font-size: 12px;
+      color: #94A3B8;
     }
     .scene-footer-hud strong {
-      color: var(--text-primary);
+      color: #FFFFFF;
     }
 
     /* =========================================================================
-       2. COMPACT NODE / PORTAL (SMALL VIEW IN WEB NETWORK)
+       2. HIGH-CONTRAST COMPACT NODE (SMALL VIEW IN WEB NETWORK)
        ========================================================================= */
     .compact-node-view {
       width: 220px;
       height: 110px;
-      background: rgba(13, 17, 26, 0.95);
-      border: 2px solid rgba(0, 210, 255, 0.4);
-      border-radius: 12px;
+      background: #0F172A;
+      border: 2px solid var(--accent-cyan);
+      border-radius: 14px;
       padding: 14px;
-      backdrop-filter: blur(14px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 210, 255, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 210, 255, 0.3);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -223,10 +239,13 @@
       cursor: pointer;
       user-select: none;
     }
+    #compact-about {
+      background: #181829;
+      border-color: var(--accent-red);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 42, 75, 0.3);
+    }
     .compact-node-view:hover {
-      border-color: var(--accent-cyan);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 210, 255, 0.3);
-      transform: scale(1.05);
+      transform: scale(1.08);
     }
 
     .node-anchor-dot {
@@ -234,109 +253,112 @@
       top: -12px;
       left: 50%;
       transform: translateX(-50%);
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
-      background: var(--bg-primary);
+      background: #05070B;
       border: 2px solid var(--accent-cyan);
-      box-shadow: 0 0 12px var(--accent-cyan);
+      box-shadow: 0 0 14px var(--accent-cyan);
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+    #compact-about .node-anchor-dot {
+      border-color: var(--accent-red);
+      box-shadow: 0 0 14px var(--accent-red);
     }
     .node-anchor-dot::after {
       content: '';
       width: 8px;
       height: 8px;
-      background: #fff;
+      background: #FFFFFF;
       border-radius: 50%;
     }
 
     .node-tag-txt {
       font-family: var(--font-mono);
-      font-size: 9.5px;
+      font-size: 10px;
       color: var(--accent-cyan);
       margin-bottom: 2px;
+      font-weight: 700;
+    }
+    #compact-about .node-tag-txt {
+      color: var(--accent-red);
     }
     .node-title-txt {
-      font-size: 18px;
+      font-size: 22px;
       font-weight: 900;
-      color: var(--text-primary);
+      color: #FFFFFF;
       letter-spacing: -0.02em;
     }
     .node-status-txt {
       font-family: var(--font-mono);
-      font-size: 9.5px;
-      color: var(--text-muted);
+      font-size: 10px;
+      color: #94A3B8;
       margin-top: 4px;
     }
 
-    /* Live Telemetry Panel */
+    /* =========================================================================
+       3. NON-INTRUSIVE COLLAPSIBLE TELEMETRY PANEL (BOTTOM RIGHT CORNER)
+       ========================================================================= */
     #telemetry-panel {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 320px;
-      background: rgba(13, 17, 26, 0.94);
-      border: 1px solid rgba(0, 210, 255, 0.3);
-      border-radius: 8px;
-      padding: 16px;
+      width: 270px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(0, 210, 255, 0.35);
+      border-radius: 10px;
+      padding: 14px;
       font-family: var(--font-mono);
       font-size: 11px;
       z-index: 100;
       backdrop-filter: blur(16px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      transition: transform 0.25s ease;
     }
 
     .tele-header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       color: var(--accent-cyan);
       font-weight: 700;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding-bottom: 8px;
-      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 6px;
+      margin-bottom: 8px;
     }
+
+    .tele-toggle-btn {
+      background: none;
+      border: none;
+      color: #94A3B8;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+    .tele-toggle-btn:hover { color: #fff; }
 
     .tele-row {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 5px;
-      color: var(--text-muted);
+      margin-bottom: 4px;
+      color: #94A3B8;
     }
     .tele-val {
-      color: var(--text-primary);
+      color: #FFFFFF;
       font-weight: 600;
     }
     .state-badge {
-      background: rgba(0, 210, 255, 0.15);
+      background: rgba(0, 210, 255, 0.2);
       color: var(--accent-cyan);
       padding: 2px 6px;
       border-radius: 3px;
       font-weight: bold;
     }
     .state-badge.active-anim {
-      background: rgba(255, 42, 75, 0.2);
+      background: rgba(255, 42, 75, 0.3);
       color: var(--accent-red);
-    }
-
-    .controls-grid {
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-    .slider-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 10px;
-    }
-    .slider-row input[type="range"] {
-      width: 120px;
-      accent-color: var(--accent-cyan);
     }
 
     /* Key Hints */
@@ -345,19 +367,20 @@
       bottom: 20px;
       left: 20px;
       font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-muted);
-      background: rgba(13, 17, 26, 0.75);
-      padding: 8px 14px;
-      border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 12px;
+      color: #94A3B8;
+      background: rgba(15, 23, 42, 0.85);
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.12);
       z-index: 100;
     }
     .key-hints kbd {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.15);
       padding: 2px 6px;
-      border-radius: 3px;
+      border-radius: 4px;
       color: var(--accent-cyan);
+      font-weight: 700;
       margin: 0 2px;
     }
   </style>
@@ -382,53 +405,43 @@
         <!-- Compact View (Hidden Initially) -->
         <div class="compact-node-view" id="compact-home" onclick="requestNavigation('home')" style="display: none;">
           <div class="node-anchor-dot"></div>
-          <div class="node-tag-txt">PORTAL // NODE_01</div>
+          <div class="node-tag-txt">NODE // 01</div>
           <div class="node-title-txt">HOME</div>
-          <div class="node-status-txt">Kevin Prakash J &bull; VIT</div>
+          <div class="node-status-txt">COMPACT NODE</div>
         </div>
         <!-- Full Scene View (Visible Initially) -->
         <div class="full-scene-view" id="full-home">
           <div>
-            <div class="scene-badge">ACTIVE VIEWPORT SCENE</div>
+            <div class="scene-badge-pill">ACTIVE VIEWPORT SCENE</div>
             <h1 class="scene-huge-title">HOME</h1>
-            <div class="scene-sub-row">
-              <div>AI / ML</div> <span>&bull;</span>
-              <div>SOFTWARE ENGINEERING</div> <span>&bull;</span>
-              <div>COMPUTER VISION</div> <span>&bull;</span>
-              <div>RESEARCH</div>
-            </div>
+            <div class="scene-sub-state">FULL SCENE</div>
           </div>
           <div class="scene-footer-hud">
-            <div>COORDINATES: <strong>(0, 0) // ROOT_NODE</strong></div>
-            <div>STATUS: <strong>FULL SCENE FOCUSED (1.00x)</strong></div>
+            <div>NODE: <strong>01 // ROOT</strong></div>
+            <div>STATUS: <strong>FULL SCENE (1.00x)</strong></div>
           </div>
         </div>
       </div>
 
       <!-- SCENE 2: ABOUT ENTITY -->
-      <div class="scene-entity" id="entity-about" style="left: 1000px; top: 850px;">
+      <div class="scene-entity" id="entity-about" style="left: 900px; top: 850px;">
         <!-- Compact View (Visible Initially in Web) -->
         <div class="compact-node-view" id="compact-about" onclick="requestNavigation('about')">
           <div class="node-anchor-dot"></div>
-          <div class="node-tag-txt">PORTAL // NODE_02</div>
+          <div class="node-tag-txt">NODE // 02</div>
           <div class="node-title-txt">ABOUT</div>
-          <div class="node-status-txt">Profile &bull; VIT Vellore 8.72</div>
+          <div class="node-status-txt">COMPACT NODE</div>
         </div>
         <!-- Full Scene View (Hidden Initially) -->
         <div class="full-scene-view" id="full-about" style="display: none;">
           <div>
-            <div class="scene-badge" style="color: var(--accent-red); border-color: rgba(255,42,75,0.3); background: rgba(255,42,75,0.08);">ACTIVE VIEWPORT SCENE</div>
-            <h1 class="scene-huge-title" style="background: linear-gradient(135deg, #FFFFFF 40%, #00D2FF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">ABOUT</h1>
-            <div class="scene-sub-row">
-              <div>B.TECH CSE</div> <span>&bull;</span>
-              <div>VIT VELLORE</div> <span>&bull;</span>
-              <div>CGPA 8.72/10</div> <span>&bull;</span>
-              <div>SYNCFUSION AI INTERN</div>
-            </div>
+            <div class="scene-badge-pill">ACTIVE VIEWPORT SCENE</div>
+            <h1 class="scene-huge-title">ABOUT</h1>
+            <div class="scene-sub-state">FULL SCENE</div>
           </div>
           <div class="scene-footer-hud">
-            <div>COORDINATES: <strong>(-1000, -650) // ABOUT_NODE</strong></div>
-            <div>STATUS: <strong>FULL SCENE FOCUSED (1.00x)</strong></div>
+            <div>NODE: <strong>02 // ABOUT</strong></div>
+            <div>STATUS: <strong>FULL SCENE (1.00x)</strong></div>
           </div>
         </div>
       </div>
@@ -443,62 +456,33 @@
 
   <div id="telemetry-panel">
     <div class="tele-header">
-      <span>MOTION TELEMETRY ENGINE</span>
+      <span>TELEMETRY</span>
       <span id="tele-fps">60 FPS</span>
     </div>
-    <div class="tele-row">
-      <span>STATE:</span>
-      <span class="state-badge" id="tele-state">IDLE</span>
-    </div>
-    <div class="tele-row">
-      <span>ROUTE:</span>
-      <span class="tele-val" id="tele-route">home &rarr; home</span>
-    </div>
-    <div class="tele-row">
-      <span>ACTIVE SCALE:</span>
-      <span class="tele-val" id="tele-scale">1.00x (FULL)</span>
-    </div>
-    <div class="tele-row">
-      <span>IMPACT VIBE:</span>
-      <span class="tele-val" id="tele-vibe">0.0 px</span>
-    </div>
-
-    <div class="controls-grid">
-      <div class="slider-row">
-        <span>Collapse Speed (ms)</span>
-        <input type="range" id="param-collapse" min="80" max="250" value="130" step="10">
+    <div id="tele-body">
+      <div class="tele-row">
+        <span>STATE:</span>
+        <span class="state-badge" id="tele-state">IDLE</span>
       </div>
-      <div class="slider-row">
-        <span>Shoot Speed (ms)</span>
-        <input type="range" id="param-shoot" min="100" max="300" value="150" step="10">
+      <div class="tele-row">
+        <span>ROUTE:</span>
+        <span class="tele-val" id="tele-route">home &rarr; home</span>
       </div>
-      <div class="slider-row">
-        <span>Spring Stiffness (k)</span>
-        <input type="range" id="param-k" min="200" max="650" value="440" step="10">
+      <div class="tele-row">
+        <span>SCALE:</span>
+        <span class="tele-val" id="tele-scale">1.00x (FULL)</span>
       </div>
-      <div class="slider-row">
-        <span>Expansion Speed (ms)</span>
-        <input type="range" id="param-exp" min="100" max="300" value="160" step="10">
-      </div>
-      <div class="slider-row">
-        <span>Peak Overshoot Scale</span>
-        <input type="range" id="param-peak-scale" min="1.02" max="1.12" value="1.06" step="0.01">
-      </div>
-      <div class="slider-row">
-        <span>Impact Vibration (px)</span>
-        <input type="range" id="param-impact-vib" min="1.0" max="8.0" value="3.5" step="0.5">
-      </div>
-      <div class="slider-row" style="margin-top: 4px;">
-        <label><input type="checkbox" id="param-chromatic" checked> Chromatic Impact</label>
-        <label><input type="checkbox" id="param-reduced-motion"> Reduced Motion</label>
+      <div class="tele-row">
+        <span>VIBE:</span>
+        <span class="tele-val" id="tele-vibe">0.0 px</span>
       </div>
     </div>
   </div>
 
   <script>
-    // --- 1. Centralized Motion Configuration ---
+    // --- 1. Motion & Physics Configuration ---
     const CONFIG = {
-      collapseDurationMs: 130,   // Full scene shrinks down into compact node
+      collapseDurationMs: 140,   // Full scene shrinks down into compact node
       shootDurationMs: 150,      // Web shoots between compact nodes
       tensionDurationMs: 80,     // Tension hold
       springK: 440,              // Camera travel stiffness
@@ -516,13 +500,13 @@
     // --- 2. Two Primary Scene Entities ---
     const SCENES = [
       { id: 'home', label: 'HOME', x: 0, y: 0 },
-      { id: 'about', label: 'ABOUT', x: -1000, y: -650 }
+      { id: 'about', label: 'ABOUT', x: -1100, y: -650 }
     ];
 
     const sceneMap = {};
     SCENES.forEach(s => sceneMap[s.id] = s);
 
-    // --- 3. Enhanced 10-Stage Finite State Machine ---
+    // --- 3. 10-Stage Finite State Machine ---
     const STATES = {
       IDLE: 'IDLE',
       COLLAPSING: 'COLLAPSING',
@@ -577,16 +561,6 @@
     const teleScale = document.getElementById('tele-scale');
     const teleVibe = document.getElementById('tele-vibe');
     const teleFps = document.getElementById('tele-fps');
-
-    // Controls
-    document.getElementById('param-collapse').addEventListener('input', e => CONFIG.collapseDurationMs = +e.target.value);
-    document.getElementById('param-shoot').addEventListener('input', e => CONFIG.shootDurationMs = +e.target.value);
-    document.getElementById('param-k').addEventListener('input', e => CONFIG.springK = +e.target.value);
-    document.getElementById('param-exp').addEventListener('input', e => CONFIG.expansionDurationMs = +e.target.value);
-    document.getElementById('param-peak-scale').addEventListener('input', e => CONFIG.expansionPeakScale = +e.target.value);
-    document.getElementById('param-impact-vib').addEventListener('input', e => CONFIG.impactVibAmp = +e.target.value);
-    document.getElementById('param-chromatic').addEventListener('change', e => CONFIG.chromaticEnabled = e.target.checked);
-    document.getElementById('param-reduced-motion').addEventListener('change', e => CONFIG.reducedMotion = e.target.checked);
 
     // --- 4. Init DOM & Canvas ---
     function init() {
@@ -717,7 +691,7 @@
       switch (currentState) {
         case STATES.COLLAPSING:
           collapsePhase = Math.min(elapsed / CONFIG.collapseDurationMs, 1.0);
-          // STEP 2: Current Full Scene dramatically shrinks (1.00x -> 0.25x)
+          // Current Full Scene dramatically shrinks (1.00x -> 0.25x)
           const easeCollapse = Math.pow(collapsePhase, 2);
           if (entityStates[currentSceneId]) {
             entityStates[currentSceneId].scale = 1.0 - easeCollapse * 0.75; // 1.00 -> 0.25
@@ -745,7 +719,7 @@
 
         case STATES.SHOOTING:
           shootProgress = Math.min(elapsed / CONFIG.shootDurationMs, 1.0);
-          // STEP 3: Web shoots from current compact node -> target compact node
+          // Web shoots from current compact node -> target compact node
           const easeShoot = 1 - Math.pow(1 - shootProgress, 3);
           webTip.x = webOrigin.x + (webAnchor.x - webOrigin.x) * easeShoot;
           webTip.y = webOrigin.y + (webAnchor.y - webOrigin.y) * easeShoot;
@@ -781,7 +755,7 @@
           const distToTarget = Math.hypot(targetCamX - camX, targetCamY - camY);
           webSag = Math.max(0, webSag - dt * 50);
 
-          // STEP 4 & 5: When camera reaches threshold near target compact node, trigger dynamic expansion
+          // When camera reaches threshold near target compact node, trigger dynamic expansion
           if (distToTarget < 24.0) {
             entityStates[targetSceneId].mode = 'full';
             entityStates[targetSceneId].scale = 0.25; // Starts expanding from compact scale
@@ -795,7 +769,7 @@
 
         case STATES.ARRIVAL_EXPANSION:
           expansionPhase = Math.min(elapsed / CONFIG.expansionDurationMs, 1.0);
-          // STEP 5: Target Scene smoothly expands from SMALL (0.25x) -> BIG (1.06x overshoot)
+          // Target Scene smoothly expands from SMALL (0.25x) -> BIG (1.06x overshoot)
           const easeExp = 1 - Math.pow(1 - expansionPhase, 3);
           if (entityStates[targetSceneId]) {
             entityStates[targetSceneId].scale = 0.25 + (CONFIG.expansionPeakScale - 0.25) * easeExp;
@@ -806,7 +780,7 @@
             currentState = STATES.IMPACT;
             animStartTime = now;
 
-            // STEP 6: Trigger chromatic impact
+            // Trigger chromatic impact
             const targetFull = document.getElementById(`full-${targetSceneId}`);
             if (targetFull && CONFIG.chromaticEnabled) {
               targetFull.classList.add('chromatic-impact');
@@ -816,7 +790,7 @@
 
         case STATES.IMPACT:
           impactPhase = Math.min(elapsed / CONFIG.impactDurationMs, 1.0);
-          // STEP 6: Micro-vibration (3.5px decaying sinusoidal)
+          // Micro-vibration (3.5px decaying sinusoidal)
           const vibDamp = 1.0 - impactPhase;
           const vibAngle = impactPhase * Math.PI * 8;
           const currentVib = Math.sin(vibAngle) * CONFIG.impactVibAmp * vibDamp;
