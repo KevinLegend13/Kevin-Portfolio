@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production / Build Output
+dist/
+build/
+out/
+.next/
+.turbo/
+
+# Environment and Secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+*.pem
+*.key
+
+# Logs and Debugging
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+
+# Editor and IDE Files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+[Ee]xternal/
+[Bb]in/
+[Oo]bj/
+
+# Temporary / Cache
+.cache/
+.eslintcache
+.stylelintcache
+*.tmp
+*.temp
