@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spider-Web Navigation Motion Sandbox — Full Scene Visibility</title>
+  <title>Spider-Web Navigation Prototype — Full Page to Node Motion</title>
   <style>
     :root {
-      --bg-primary: #05070B;
-      --bg-card-home: #0F172A;
-      --bg-card-about: #131B2E;
+      --bg-space: #06080D;
+      --bg-card-home: #0D1527;
+      --bg-card-about: #1A1226;
       --accent-red: #FF2A4B;
       --accent-cyan: #00D2FF;
       --text-primary: #FFFFFF;
@@ -19,42 +19,47 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: var(--bg-primary);
+      background: var(--bg-space);
       color: var(--text-primary);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       overflow: hidden;
       width: 100vw;
       height: 100vh;
       user-select: none;
     }
 
-    /* Top Navigation Bar */
+    /* Fixed Top Navbar */
     header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      height: 60px;
-      padding: 0 24px;
-      background: rgba(5, 7, 11, 0.96);
-      backdrop-filter: blur(16px);
+      height: 64px;
+      padding: 0 32px;
+      background: rgba(6, 8, 13, 0.96);
+      backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 100;
+      z-index: 200;
     }
 
     .brand-title {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 800;
       letter-spacing: 0.08em;
+      color: #fff;
     }
     .brand-title span {
       color: var(--accent-cyan);
       font-family: var(--font-mono);
       font-size: 11px;
       margin-left: 8px;
+      background: rgba(0, 210, 255, 0.12);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 210, 255, 0.3);
     }
 
     .nav-pills {
@@ -63,22 +68,22 @@
     }
 
     .nav-btn {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #cbd5e1;
-      padding: 8px 24px;
-      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #94A3B8;
+      padding: 9px 24px;
+      border-radius: 8px;
       font-size: 13px;
       font-family: var(--font-mono);
       font-weight: 700;
       cursor: pointer;
-      min-height: 40px;
+      min-height: 42px;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .nav-btn:hover {
       color: #fff;
       border-color: var(--accent-cyan);
-      background: rgba(0, 210, 255, 0.15);
+      background: rgba(0, 210, 255, 0.12);
     }
     .nav-btn.active {
       background: var(--accent-red);
@@ -87,13 +92,13 @@
       box-shadow: 0 0 24px rgba(255, 42, 75, 0.6);
     }
 
-    /* Spatial Canvas Viewport */
+    /* Spatial Canvas Container */
     #world-viewport {
       position: absolute;
-      top: 0;
+      top: 64px;
       left: 0;
       width: 100vw;
-      height: 100vh;
+      height: calc(100vh - 64px);
       overflow: hidden;
     }
 
@@ -107,130 +112,160 @@
       pointer-events: none;
     }
 
-    #world-plane {
+    /* Entities Container */
+    #entities-container {
       position: absolute;
-      width: 4000px;
-      height: 3000px;
-      top: 50%;
-      left: 50%;
-      transform: translate3d(0, 0, 0);
-      transform-origin: 0 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: 5;
-      will-change: transform;
+      pointer-events: none;
     }
 
-    /* Scene Entity Wrapper */
     .scene-entity {
       position: absolute;
-      transform: translate(-50%, -50%) scale(1);
       transform-origin: center center;
       will-change: transform, opacity;
+      pointer-events: auto;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     /* =========================================================================
-       1. HIGH-CONTRAST FULL-SCREEN SCENE (BIG VIEW)
+       1. FULL PAGE VIEW (BIG WEBPAGE ENVIRONMENT)
        ========================================================================= */
-    .full-scene-view {
-      width: 820px;
-      height: 480px;
+    .full-page-view {
+      width: 86vw;
+      max-width: 1100px;
+      height: 76vh;
+      max-height: 640px;
       border-radius: 24px;
-      backdrop-filter: blur(24px);
-      padding: 48px 56px;
+      padding: 44px 52px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      text-align: center;
+      text-align: left;
       position: relative;
       user-select: none;
+      backdrop-filter: blur(24px);
     }
 
-    #full-home {
-      background: linear-gradient(145deg, #0F172A 0%, #1E293B 100%);
+    #page-home {
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
       border: 3px solid #00D2FF;
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 210, 255, 0.3);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 210, 255, 0.25);
     }
 
-    #full-about {
-      background: linear-gradient(145deg, #181829 0%, #231C32 100%);
+    #page-about {
+      background: linear-gradient(135deg, #1A1325 0%, #281838 100%);
       border: 3px solid #FF2A4B;
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 50px rgba(255, 42, 75, 0.3);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.9), 0 0 50px rgba(255, 42, 75, 0.25);
     }
 
-    .full-scene-view.chromatic-impact {
-      box-shadow: -6px 0 45px rgba(255, 42, 75, 0.7), 6px 0 45px rgba(0, 210, 255, 0.75), 0 25px 80px rgba(0,0,0,0.95);
+    .full-page-view.chromatic-impact {
+      box-shadow: -6px 0 50px rgba(255, 42, 75, 0.8), 6px 0 50px rgba(0, 210, 255, 0.8), 0 30px 90px rgba(0,0,0,0.95);
     }
-    .full-scene-view.chromatic-impact h1 {
+    .full-page-view.chromatic-impact h1 {
       text-shadow: -4px 0 rgba(255, 42, 75, 0.9), 4px 0 rgba(0, 210, 255, 0.9);
     }
 
-    .scene-badge-pill {
+    .page-tag-badge {
       display: inline-block;
       font-family: var(--font-mono);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.16em;
-      padding: 8px 20px;
-      border-radius: 30px;
+      letter-spacing: 0.15em;
+      padding: 6px 16px;
+      border-radius: 20px;
       text-transform: uppercase;
-      margin: 0 auto 12px auto;
+      margin-bottom: 14px;
     }
-    #full-home .scene-badge-pill {
+    #page-home .page-tag-badge {
       color: #00D2FF;
       background: rgba(0, 210, 255, 0.15);
       border: 1px solid rgba(0, 210, 255, 0.4);
     }
-    #full-about .scene-badge-pill {
+    #page-about .page-tag-badge {
       color: #FF2A4B;
       background: rgba(255, 42, 75, 0.15);
       border: 1px solid rgba(255, 42, 75, 0.4);
     }
 
-    .scene-huge-title {
-      font-size: 96px;
+    .page-hero-title {
+      font-size: 64px;
       font-weight: 900;
       letter-spacing: -0.04em;
-      line-height: 1.0;
+      line-height: 1.05;
       color: #FFFFFF;
-      margin: 10px 0 6px 0;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      margin-bottom: 12px;
     }
 
-    .scene-sub-state {
+    .page-subtitle {
+      font-size: 18px;
+      line-height: 1.5;
+      color: #94A3B8;
+      max-width: 800px;
+      margin-bottom: 24px;
+    }
+
+    .page-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .page-grid-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .pgc-tag {
       font-family: var(--font-mono);
-      font-size: 20px;
+      font-size: 10.5px;
+      color: var(--accent-cyan);
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    #page-about .pgc-tag {
+      color: var(--accent-red);
+    }
+    .pgc-title {
+      font-size: 16px;
       font-weight: 800;
-      letter-spacing: 0.12em;
-      color: #E2E8F0;
-      margin-bottom: 8px;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+    }
+    .pgc-desc {
+      font-size: 12px;
+      color: #94A3B8;
+      line-height: 1.4;
     }
 
-    .scene-footer-hud {
+    .page-footer-bar {
       display: flex;
       justify-content: space-between;
-      border-top: 2px solid rgba(255, 255, 255, 0.15);
-      padding-top: 18px;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 16px;
       font-family: var(--font-mono);
       font-size: 12px;
       color: #94A3B8;
     }
-    .scene-footer-hud strong {
+    .page-footer-bar strong {
       color: #FFFFFF;
     }
 
     /* =========================================================================
-       2. HIGH-CONTRAST COMPACT NODE (SMALL VIEW IN WEB NETWORK)
+       2. COMPACT NODE VIEW (SMALL PORTAL IN SPATIAL WEB)
        ========================================================================= */
     .compact-node-view {
-      width: 220px;
-      height: 110px;
-      background: #0F172A;
-      border: 2px solid var(--accent-cyan);
+      width: 260px;
+      height: 130px;
       border-radius: 14px;
-      padding: 14px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 210, 255, 0.3);
+      padding: 16px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -238,14 +273,24 @@
       position: relative;
       cursor: pointer;
       user-select: none;
+      backdrop-filter: blur(16px);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
+
+    #compact-home {
+      background: #0D1527;
+      border: 2px solid #00D2FF;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 210, 255, 0.35);
+    }
+
     #compact-about {
-      background: #181829;
-      border-color: var(--accent-red);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 42, 75, 0.3);
+      background: #1A1226;
+      border: 2px solid #FF2A4B;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 42, 75, 0.35);
     }
+
     .compact-node-view:hover {
-      transform: scale(1.08);
+      transform: scale(1.06);
     }
 
     .node-anchor-dot {
@@ -256,16 +301,16 @@
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      background: #05070B;
+      background: var(--bg-space);
       border: 2px solid var(--accent-cyan);
-      box-shadow: 0 0 14px var(--accent-cyan);
+      box-shadow: 0 0 12px var(--accent-cyan);
       display: flex;
       align-items: center;
       justify-content: center;
     }
     #compact-about .node-anchor-dot {
       border-color: var(--accent-red);
-      box-shadow: 0 0 14px var(--accent-red);
+      box-shadow: 0 0 12px var(--accent-red);
     }
     .node-anchor-dot::after {
       content: '';
@@ -278,9 +323,10 @@
     .node-tag-txt {
       font-family: var(--font-mono);
       font-size: 10px;
+      font-weight: 700;
       color: var(--accent-cyan);
       margin-bottom: 2px;
-      font-weight: 700;
+      text-transform: uppercase;
     }
     #compact-about .node-tag-txt {
       color: var(--accent-red);
@@ -293,95 +339,57 @@
     }
     .node-status-txt {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 10.5px;
       color: #94A3B8;
       margin-top: 4px;
     }
 
-    /* =========================================================================
-       3. NON-INTRUSIVE COLLAPSIBLE TELEMETRY PANEL (BOTTOM RIGHT CORNER)
-       ========================================================================= */
-    #telemetry-panel {
+    /* Corner HUD Telemetry */
+    #telemetry-hud {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 270px;
-      background: rgba(15, 23, 42, 0.95);
+      width: 260px;
+      background: rgba(13, 21, 39, 0.95);
       border: 1px solid rgba(0, 210, 255, 0.35);
       border-radius: 10px;
       padding: 14px;
       font-family: var(--font-mono);
       font-size: 11px;
-      z-index: 100;
+      z-index: 200;
       backdrop-filter: blur(16px);
       box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-      transition: transform 0.25s ease;
     }
 
-    .tele-header {
+    .hud-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       color: var(--accent-cyan);
       font-weight: 700;
       border-bottom: 1px solid rgba(255,255,255,0.1);
       padding-bottom: 6px;
       margin-bottom: 8px;
     }
-
-    .tele-toggle-btn {
-      background: none;
-      border: none;
-      color: #94A3B8;
-      cursor: pointer;
-      font-family: var(--font-mono);
-      font-size: 11px;
-    }
-    .tele-toggle-btn:hover { color: #fff; }
-
-    .tele-row {
+    .hud-row {
       display: flex;
       justify-content: space-between;
       margin-bottom: 4px;
       color: #94A3B8;
     }
-    .tele-val {
+    .hud-val {
       color: #FFFFFF;
       font-weight: 600;
     }
-    .state-badge {
+    .hud-badge {
       background: rgba(0, 210, 255, 0.2);
       color: var(--accent-cyan);
       padding: 2px 6px;
       border-radius: 3px;
       font-weight: bold;
     }
-    .state-badge.active-anim {
+    .hud-badge.active-anim {
       background: rgba(255, 42, 75, 0.3);
       color: var(--accent-red);
-    }
-
-    /* Key Hints */
-    .key-hints {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: #94A3B8;
-      background: rgba(15, 23, 42, 0.85);
-      padding: 10px 18px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.12);
-      z-index: 100;
-    }
-    .key-hints kbd {
-      background: rgba(255,255,255,0.15);
-      padding: 2px 6px;
-      border-radius: 4px;
-      color: var(--accent-cyan);
-      font-weight: 700;
-      margin: 0 2px;
     }
   </style>
 </head>
@@ -389,7 +397,7 @@
 
   <header>
     <div class="brand-title">
-      MOTION PROTOTYPE <span>// FULL SCENE &harr; COMPACT NODE // PH4</span>
+      KEVIN PRAKASH J <span>// SPIDER-WEB NAVIGATION SYSTEM</span>
     </div>
     <div class="nav-pills">
       <button class="nav-btn active" id="btn-home" onclick="requestNavigation('home')">1. HOME</button>
@@ -398,50 +406,89 @@
   </header>
 
   <div id="world-viewport">
-    <div id="world-plane">
+    <div id="entities-container">
 
-      <!-- SCENE 1: HOME ENTITY -->
-      <div class="scene-entity" id="entity-home" style="left: 2000px; top: 1500px;">
-        <!-- Compact View (Hidden Initially) -->
+      <!-- ENTITY 1: HOME -->
+      <div class="scene-entity" id="entity-home">
+        <!-- Compact View -->
         <div class="compact-node-view" id="compact-home" onclick="requestNavigation('home')" style="display: none;">
           <div class="node-anchor-dot"></div>
-          <div class="node-tag-txt">NODE // 01</div>
+          <div class="node-tag-txt">NODE_01 // ROOT</div>
           <div class="node-title-txt">HOME</div>
-          <div class="node-status-txt">COMPACT NODE</div>
+          <div class="node-status-txt">Kevin Prakash J &bull; VIT 8.72</div>
         </div>
-        <!-- Full Scene View (Visible Initially) -->
-        <div class="full-scene-view" id="full-home">
+        <!-- Full Page View -->
+        <div class="full-page-view" id="page-home">
           <div>
-            <div class="scene-badge-pill">ACTIVE VIEWPORT SCENE</div>
-            <h1 class="scene-huge-title">HOME</h1>
-            <div class="scene-sub-state">FULL SCENE</div>
+            <div class="page-tag-badge">FULL WEBPAGE ENVIRONMENT // ACTIVE VIEWPORT</div>
+            <h1 class="page-hero-title">KEVIN PRAKASH J</h1>
+            <p class="page-subtitle">
+              AI/ML-focused software engineer and researcher who builds practical intelligent systems. 
+              Fourth-year B.Tech CSE at VIT University, Vellore (CGPA 8.72/10) with verified software engineering internship exposure at Syncfusion.
+            </p>
           </div>
-          <div class="scene-footer-hud">
-            <div>NODE: <strong>01 // ROOT</strong></div>
-            <div>STATUS: <strong>FULL SCENE (1.00x)</strong></div>
+          <div class="page-cards-grid">
+            <div class="page-grid-card">
+              <div class="pgc-tag">ACADEMICS</div>
+              <div class="pgc-title">VIT Vellore (8.72)</div>
+              <div class="pgc-desc">B.Tech Computer Science & Engineering 2023–2027.</div>
+            </div>
+            <div class="page-grid-card">
+              <div class="pgc-tag">FLAGSHIP SOFTWARE</div>
+              <div class="pgc-title">TeamFlow Platform</div>
+              <div class="pgc-desc">Full-Stack FastAPI, React, PostgreSQL 17, JWT & RBAC.</div>
+            </div>
+            <div class="page-grid-card">
+              <div class="pgc-tag">APPLIED RESEARCH</div>
+              <div class="pgc-title">Indic NLP & One Health</div>
+              <div class="pgc-desc">Multilingual sentence embeddings and Digital Twin AI.</div>
+            </div>
+          </div>
+          <div class="page-footer-bar">
+            <div>CURRENT STATE: <strong>BIG HOME (1.00x FULL WEBPAGE)</strong></div>
+            <div>ACTION: <strong>CLICK "2. ABOUT" IN NAVBAR TO TEST TRANSITION &rarr;</strong></div>
           </div>
         </div>
       </div>
 
-      <!-- SCENE 2: ABOUT ENTITY -->
-      <div class="scene-entity" id="entity-about" style="left: 900px; top: 850px;">
-        <!-- Compact View (Visible Initially in Web) -->
+      <!-- ENTITY 2: ABOUT -->
+      <div class="scene-entity" id="entity-about">
+        <!-- Compact View -->
         <div class="compact-node-view" id="compact-about" onclick="requestNavigation('about')">
           <div class="node-anchor-dot"></div>
-          <div class="node-tag-txt">NODE // 02</div>
+          <div class="node-tag-txt">NODE_02 // PROFILE</div>
           <div class="node-title-txt">ABOUT</div>
-          <div class="node-status-txt">COMPACT NODE</div>
+          <div class="node-status-txt">VIT Vellore &bull; Syncfusion Intern</div>
         </div>
-        <!-- Full Scene View (Hidden Initially) -->
-        <div class="full-scene-view" id="full-about" style="display: none;">
+        <!-- Full Page View -->
+        <div class="full-page-view" id="page-about" style="display: none;">
           <div>
-            <div class="scene-badge-pill">ACTIVE VIEWPORT SCENE</div>
-            <h1 class="scene-huge-title">ABOUT</h1>
-            <div class="scene-sub-state">FULL SCENE</div>
+            <div class="page-tag-badge">FULL WEBPAGE ENVIRONMENT // ACTIVE VIEWPORT</div>
+            <h1 class="page-hero-title">ABOUT KEVIN</h1>
+            <p class="page-subtitle">
+              Engineering identity combining AI/ML research depth with production full-stack systems engineering and real-time computer vision intelligence.
+            </p>
           </div>
-          <div class="scene-footer-hud">
-            <div>NODE: <strong>02 // ABOUT</strong></div>
-            <div>STATUS: <strong>FULL SCENE (1.00x)</strong></div>
+          <div class="page-cards-grid">
+            <div class="page-grid-card">
+              <div class="pgc-tag">EDUCATION</div>
+              <div class="pgc-title">VIT University, Vellore</div>
+              <div class="pgc-desc">2023–2027 &bull; CGPA: 8.72/10 &bull; Focus on AI/ML and Systems.</div>
+            </div>
+            <div class="page-grid-card">
+              <div class="pgc-tag">EXPERIENCE</div>
+              <div class="pgc-title">Syncfusion AI Intern</div>
+              <div class="pgc-desc">May–June 2026 &bull; ASP.NET Core, React, TypeScript, C#, RBAC.</div>
+            </div>
+            <div class="page-grid-card">
+              <div class="pgc-tag">METHODOLOGY</div>
+              <div class="pgc-title">Reproducible Systems</div>
+              <div class="pgc-desc">Automated PyTest suites, FastAPI routers, clean architecture.</div>
+            </div>
+          </div>
+          <div class="page-footer-bar">
+            <div>CURRENT STATE: <strong>BIG ABOUT (1.00x FULL WEBPAGE)</strong></div>
+            <div>ACTION: <strong>CLICK "1. HOME" IN NAVBAR TO TEST REVERSE MOTION &rarr;</strong></div>
           </div>
         </div>
       </div>
@@ -450,32 +497,26 @@
     <canvas id="world-canvas"></canvas>
   </div>
 
-  <div class="key-hints">
-    <span>Keys: <kbd>1</kbd> Go to HOME &nbsp;|&nbsp; <kbd>2</kbd> Go to ABOUT</span>
-  </div>
-
-  <div id="telemetry-panel">
-    <div class="tele-header">
-      <span>TELEMETRY</span>
+  <div id="telemetry-hud">
+    <div class="hud-header">
+      <span>MOTION TELEMETRY</span>
       <span id="tele-fps">60 FPS</span>
     </div>
-    <div id="tele-body">
-      <div class="tele-row">
-        <span>STATE:</span>
-        <span class="state-badge" id="tele-state">IDLE</span>
-      </div>
-      <div class="tele-row">
-        <span>ROUTE:</span>
-        <span class="tele-val" id="tele-route">home &rarr; home</span>
-      </div>
-      <div class="tele-row">
-        <span>SCALE:</span>
-        <span class="tele-val" id="tele-scale">1.00x (FULL)</span>
-      </div>
-      <div class="tele-row">
-        <span>VIBE:</span>
-        <span class="tele-val" id="tele-vibe">0.0 px</span>
-      </div>
+    <div class="hud-row">
+      <span>STATE:</span>
+      <span class="hud-badge" id="tele-state">IDLE</span>
+    </div>
+    <div class="hud-row">
+      <span>ROUTE:</span>
+      <span class="hud-val" id="tele-route">home &rarr; home</span>
+    </div>
+    <div class="hud-row">
+      <span>SCALE:</span>
+      <span class="hud-val" id="tele-scale">1.00x (FULL)</span>
+    </div>
+    <div class="hud-row">
+      <span>IMPACT VIBE:</span>
+      <span class="hud-val" id="tele-vibe">0.0 px</span>
     </div>
   </div>
 
@@ -485,7 +526,7 @@
       collapseDurationMs: 140,   // Full scene shrinks down into compact node
       shootDurationMs: 150,      // Web shoots between compact nodes
       tensionDurationMs: 80,     // Tension hold
-      springK: 440,              // Camera travel stiffness
+      springK: 440,              // Camera spring stiffness
       springC: 26,               // Damping
       mass: 1.0,                 // Inertial mass
       expansionDurationMs: 160,  // Compact node dynamically expands into full scene
@@ -493,20 +534,19 @@
       impactDurationMs: 75,      // Impact vibration duration
       impactVibAmp: 3.5,         // Peak vibration (px)
       settleDurationMs: 130,     // Settle to 1.00x
-      chromaticEnabled: true,
-      reducedMotion: false
+      chromaticEnabled: true
     };
 
-    // --- 2. Two Primary Scene Entities ---
+    // --- 2. World Spatial Coordinates (HOME at 0,0 | ABOUT at -1000, 0) ---
     const SCENES = [
       { id: 'home', label: 'HOME', x: 0, y: 0 },
-      { id: 'about', label: 'ABOUT', x: -1100, y: -650 }
+      { id: 'about', label: 'ABOUT', x: -1000, y: 0 }
     ];
 
     const sceneMap = {};
     SCENES.forEach(s => sceneMap[s.id] = s);
 
-    // --- 3. 10-Stage Finite State Machine ---
+    // --- 3. 10-Stage State Machine ---
     const STATES = {
       IDLE: 'IDLE',
       COLLAPSING: 'COLLAPSING',
@@ -532,7 +572,6 @@
     let impactPhase = 0;
     let settlePhase = 0;
 
-    // Entity presentation state: { mode: 'full' | 'compact', scale: 1.0, opacity: 1.0, vibX: 0, vibY: 0 }
     const entityStates = {
       home: { mode: 'full', scale: 1.0, opacity: 1.0, vibX: 0, vibY: 0 },
       about: { mode: 'compact', scale: 1.0, opacity: 1.0, vibX: 0, vibY: 0 }
@@ -552,10 +591,8 @@
     let sparks = [];
 
     // DOM Elements
-    const worldPlane = document.getElementById('world-plane');
     const canvas = document.getElementById('world-canvas');
     const ctx = canvas.getContext('2d');
-
     const teleState = document.getElementById('tele-state');
     const teleRoute = document.getElementById('tele-route');
     const teleScale = document.getElementById('tele-scale');
@@ -573,27 +610,28 @@
       });
 
       updateDOMViews();
+      positionEntities();
     }
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = window.innerHeight - 64;
     }
 
     function updateDOMViews() {
       SCENES.forEach(s => {
         const compactEl = document.getElementById(`compact-${s.id}`);
-        const fullEl = document.getElementById(`full-${s.id}`);
+        const pageEl = document.getElementById(`page-${s.id}`);
         const state = entityStates[s.id];
 
         if (state.mode === 'full') {
           if (compactEl) compactEl.style.display = 'none';
-          if (fullEl) {
-            fullEl.style.display = 'flex';
-            fullEl.style.opacity = state.opacity.toFixed(2);
+          if (pageEl) {
+            pageEl.style.display = 'flex';
+            pageEl.style.opacity = state.opacity.toFixed(2);
           }
         } else {
-          if (fullEl) fullEl.style.display = 'none';
+          if (pageEl) pageEl.style.display = 'none';
           if (compactEl) {
             compactEl.style.display = 'flex';
             compactEl.style.opacity = state.opacity.toFixed(2);
@@ -622,25 +660,6 @@
 
       teleRoute.textContent = `${currentSceneId} &rarr; ${targetSceneId}`;
 
-      // Accessible reduced motion override
-      if (CONFIG.reducedMotion || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        SCENES.forEach(s => {
-          entityStates[s.id].mode = s.id === targetSceneId ? 'full' : 'compact';
-          entityStates[s.id].scale = 1.0;
-          entityStates[s.id].opacity = 1.0;
-          entityStates[s.id].vibX = 0;
-          entityStates[s.id].vibY = 0;
-        });
-        currentSceneId = targetSceneId;
-        camX = targetScene.x;
-        camY = targetScene.y;
-        velX = 0; velY = 0;
-        currentState = STATES.IDLE;
-        updateDOMViews();
-        updateTelemetry();
-        return;
-      }
-
       currentState = STATES.COLLAPSING;
       animStartTime = performance.now();
       updateTelemetry();
@@ -661,7 +680,7 @@
       }
     }
 
-    // --- 6. Main Physics & State Evaluation Loop ---
+    // --- 6. Physics & Animation Main Loop ---
     let lastTime = performance.now();
     let frameCount = 0;
     let lastFpsUpdate = performance.now();
@@ -679,7 +698,7 @@
 
       evaluateStateMachine(now, dt);
       updateCameraPhysics(dt);
-      applySceneTransforms();
+      positionEntities();
       renderCanvasWeb();
 
       requestAnimationFrame(animate);
@@ -691,15 +710,14 @@
       switch (currentState) {
         case STATES.COLLAPSING:
           collapsePhase = Math.min(elapsed / CONFIG.collapseDurationMs, 1.0);
-          // Current Full Scene dramatically shrinks (1.00x -> 0.25x)
+          // STEP 1 & 2: Big full page visibly collapses (1.00x -> 0.20x)
           const easeCollapse = Math.pow(collapsePhase, 2);
           if (entityStates[currentSceneId]) {
-            entityStates[currentSceneId].scale = 1.0 - easeCollapse * 0.75; // 1.00 -> 0.25
-            entityStates[currentSceneId].opacity = 1.0 - easeCollapse * 0.35; // 1.00 -> 0.65
+            entityStates[currentSceneId].scale = 1.0 - easeCollapse * 0.80; // 1.00 -> 0.20
+            entityStates[currentSceneId].opacity = 1.0 - easeCollapse * 0.30;
           }
 
           if (collapsePhase >= 1.0) {
-            // Swap to compact node representation
             entityStates[currentSceneId].mode = 'compact';
             entityStates[currentSceneId].scale = 1.0;
             entityStates[currentSceneId].opacity = 1.0;
@@ -719,7 +737,7 @@
 
         case STATES.SHOOTING:
           shootProgress = Math.min(elapsed / CONFIG.shootDurationMs, 1.0);
-          // Web shoots from current compact node -> target compact node
+          // STEP 3: Web shoots from current compact node -> target compact node
           const easeShoot = 1 - Math.pow(1 - shootProgress, 3);
           webTip.x = webOrigin.x + (webAnchor.x - webOrigin.x) * easeShoot;
           webTip.y = webOrigin.y + (webAnchor.y - webOrigin.y) * easeShoot;
@@ -740,7 +758,7 @@
 
         case STATES.TENSION:
           tensionPhase = Math.min(elapsed / CONFIG.tensionDurationMs, 1.0);
-          webSag = Math.sin(tensionPhase * Math.PI) * 34;
+          webSag = Math.sin(tensionPhase * Math.PI) * 36;
 
           if (tensionPhase >= 1.0) {
             currentState = STATES.PULLING;
@@ -755,10 +773,10 @@
           const distToTarget = Math.hypot(targetCamX - camX, targetCamY - camY);
           webSag = Math.max(0, webSag - dt * 50);
 
-          // When camera reaches threshold near target compact node, trigger dynamic expansion
+          // STEP 4 & 5: When approaching target compact node, trigger dynamic expansion
           if (distToTarget < 24.0) {
             entityStates[targetSceneId].mode = 'full';
-            entityStates[targetSceneId].scale = 0.25; // Starts expanding from compact scale
+            entityStates[targetSceneId].scale = 0.20; // Starts expanding from compact scale
             entityStates[targetSceneId].opacity = 0.65;
             updateDOMViews();
 
@@ -769,10 +787,10 @@
 
         case STATES.ARRIVAL_EXPANSION:
           expansionPhase = Math.min(elapsed / CONFIG.expansionDurationMs, 1.0);
-          // Target Scene smoothly expands from SMALL (0.25x) -> BIG (1.06x overshoot)
+          // STEP 5: Small target node expands dynamically into BIG full page (0.20x -> 1.06x)
           const easeExp = 1 - Math.pow(1 - expansionPhase, 3);
           if (entityStates[targetSceneId]) {
-            entityStates[targetSceneId].scale = 0.25 + (CONFIG.expansionPeakScale - 0.25) * easeExp;
+            entityStates[targetSceneId].scale = 0.20 + (CONFIG.expansionPeakScale - 0.20) * easeExp;
             entityStates[targetSceneId].opacity = 0.65 + 0.35 * easeExp;
           }
 
@@ -780,17 +798,16 @@
             currentState = STATES.IMPACT;
             animStartTime = now;
 
-            // Trigger chromatic impact
-            const targetFull = document.getElementById(`full-${targetSceneId}`);
-            if (targetFull && CONFIG.chromaticEnabled) {
-              targetFull.classList.add('chromatic-impact');
+            const targetPage = document.getElementById(`page-${targetSceneId}`);
+            if (targetPage && CONFIG.chromaticEnabled) {
+              targetPage.classList.add('chromatic-impact');
             }
           }
           break;
 
         case STATES.IMPACT:
           impactPhase = Math.min(elapsed / CONFIG.impactDurationMs, 1.0);
-          // Micro-vibration (3.5px decaying sinusoidal)
+          // STEP 6: Micro-vibration (3.5px decaying sinusoidal)
           const vibDamp = 1.0 - impactPhase;
           const vibAngle = impactPhase * Math.PI * 8;
           const currentVib = Math.sin(vibAngle) * CONFIG.impactVibAmp * vibDamp;
@@ -807,14 +824,13 @@
             currentState = STATES.SETTLING;
             animStartTime = now;
 
-            const targetFull = document.getElementById(`full-${targetSceneId}`);
-            if (targetFull) targetFull.classList.remove('chromatic-impact');
+            const targetPage = document.getElementById(`page-${targetSceneId}`);
+            if (targetPage) targetPage.classList.remove('chromatic-impact');
           }
           break;
 
         case STATES.SETTLING:
           settlePhase = Math.min(elapsed / CONFIG.settleDurationMs, 1.0);
-          // Smooth harmonic settle from 1.06x -> 1.00x resting scale
           const easeSettle = Math.sin((settlePhase * Math.PI) / 2);
           if (entityStates[targetSceneId]) {
             entityStates[targetSceneId].scale = CONFIG.expansionPeakScale - (CONFIG.expansionPeakScale - 1.00) * easeSettle;
@@ -863,11 +879,21 @@
       camY += velY * dt;
     }
 
-    function applySceneTransforms() {
+    // Direct, crystal-clear viewport-centered positioning
+    function positionEntities() {
+      const centerX = window.innerWidth / 2;
+      const centerY = (window.innerHeight - 64) / 2;
+
       SCENES.forEach(s => {
         const entity = document.getElementById(`entity-${s.id}`);
         const state = entityStates[s.id];
         if (entity && state) {
+          // Screen coordinate of entity = Center + (EntityWorldCoord - CameraWorldCoord)
+          const posX = centerX + (s.x - camX);
+          const posY = centerY + (s.y - camY);
+
+          entity.style.left = `${posX}px`;
+          entity.style.top = `${posY}px`;
           entity.style.transform = `translate(-50%, -50%) scale(${state.scale.toFixed(3)}) translate(${state.vibX.toFixed(1)}px, ${state.vibY.toFixed(1)}px)`;
         }
       });
@@ -876,9 +902,9 @@
     function updateTelemetry() {
       teleState.textContent = currentState;
       if (currentState !== STATES.IDLE) {
-        teleState.className = 'state-badge active-anim';
+        teleState.className = 'hud-badge active-anim';
       } else {
-        teleState.className = 'state-badge';
+        teleState.className = 'hud-badge';
       }
       const activeState = entityStates[targetSceneId || currentSceneId];
       if (activeState) {
@@ -888,24 +914,19 @@
 
     // --- 7. Canvas Web Vector Rendering ---
     function renderCanvasWeb() {
-      const screenCenterX = window.innerWidth / 2;
-      const screenCenterY = window.innerHeight / 2;
-
-      const transX = screenCenterX - 2000 - camX;
-      const transY = screenCenterY - 1500 - camY;
-
-      worldPlane.style.transform = `translate3d(${transX}px, ${transY}px, 0)`;
+      const centerX = window.innerWidth / 2;
+      const centerY = (window.innerHeight - 64) / 2;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const worldToScreen = (wx, wy) => ({
-        x: screenCenterX + (wx - camX),
-        y: screenCenterY + (wy - camY)
+        x: centerX + (wx - camX),
+        y: centerY + (wy - camY)
       });
 
-      // Background Permanent Macro Web Line
+      // Background Permanent Macro Web Connection
       ctx.lineWidth = 1.5;
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
       ctx.setLineDash([6, 6]);
 
       const s1 = worldToScreen(SCENES[0].x, SCENES[0].y);
@@ -916,7 +937,7 @@
       ctx.stroke();
       ctx.setLineDash([]);
 
-      // Dynamic Active Filament between Compact Nodes
+      // Dynamic Active Web Filament
       if (currentState !== STATES.IDLE && webOpacity > 0.01) {
         const sOrigin = worldToScreen(webOrigin.x, webOrigin.y);
         const sTip = worldToScreen(webTip.x, webTip.y);
