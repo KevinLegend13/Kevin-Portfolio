@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spider-Web Navigation Prototype (Compact Nodes & Full Pages) — Kevin Prakash J</title>
+  <title>Spider-Web Navigation Prototype (Master Profile Ground Truth) — Kevin Prakash J</title>
   <style>
     :root {
       --bg-primary: #07090E;
@@ -113,8 +113,8 @@
 
     #world-plane {
       position: absolute;
-      width: 5000px;
-      height: 4000px;
+      width: 5200px;
+      height: 4200px;
       top: 50%;
       left: 50%;
       transform: translate3d(0, 0, 0);
@@ -217,7 +217,7 @@
        2. FULL DETAILED SECTION PAGE (Active Focus Environment)
        ========================================================================= */
     .full-page-view {
-      background: rgba(13, 17, 26, 0.94);
+      background: rgba(13, 17, 26, 0.95);
       border: 1px solid rgba(0, 210, 255, 0.45);
       border-radius: 18px;
       backdrop-filter: blur(24px);
@@ -237,7 +237,7 @@
       text-shadow: -2px 0 rgba(255, 42, 75, 0.8), 2px 0 rgba(0, 210, 255, 0.8);
     }
 
-    /* Common Full Page Elements */
+    /* Typography & Hierarchy */
     .badge-pill {
       display: inline-block;
       font-family: var(--font-mono);
@@ -252,7 +252,7 @@
       text-transform: uppercase;
     }
     .page-main-title {
-      font-size: 38px;
+      font-size: 36px;
       font-weight: 800;
       letter-spacing: -0.03em;
       line-height: 1.1;
@@ -311,7 +311,7 @@
 
     /* Page 2: FULL ABOUT */
     #page-about {
-      width: 960px;
+      width: 980px;
     }
     .about-top-bar {
       display: flex;
@@ -327,7 +327,7 @@
       gap: 28px;
     }
     .about-section-heading {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       color: var(--accent-cyan);
       margin-bottom: 12px;
@@ -349,7 +349,7 @@
 
     /* Page 3: FULL SKILLS */
     #page-skills {
-      width: 1000px;
+      width: 1020px;
     }
     .skills-full-grid {
       display: grid;
@@ -387,7 +387,7 @@
 
     /* Page 4: FULL PROJECTS */
     #page-projects {
-      width: 1020px;
+      width: 1040px;
     }
     .teamflow-flagship-card {
       background: linear-gradient(135deg, rgba(0, 210, 255, 0.08) 0%, rgba(255, 42, 75, 0.06) 100%);
@@ -403,8 +403,8 @@
     .tfc-stack { display: flex; gap: 6px; flex-wrap: wrap; }
     .projects-sub-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 16px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
     }
     .proj-card-sub {
       background: rgba(255, 255, 255, 0.03);
@@ -413,12 +413,12 @@
       padding: 16px;
     }
     .pcs-tag { font-family: var(--font-mono); font-size: 10px; color: var(--accent-cyan); margin-bottom: 4px; }
-    .pcs-title { font-size: 14.5px; font-weight: 700; margin-bottom: 6px; }
-    .pcs-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+    .pcs-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    .pcs-desc { font-size: 11.5px; color: var(--text-muted); line-height: 1.4; }
 
     /* Page 5: FULL RESEARCH */
     #page-research {
-      width: 980px;
+      width: 1000px;
     }
     .research-two-col {
       display: grid;
@@ -540,7 +540,7 @@
 
   <header>
     <div class="brand-title">
-      KEVIN PRAKASH J <span>// COMPACT NODES &harr; FULL PAGES // PH4</span>
+      KEVIN PRAKASH J <span>// MASTER PROFILE GROUND TRUTH // PH4</span>
     </div>
     <div class="nav-pills" id="nav-pill-container">
       <!-- Generated in JS -->
@@ -551,7 +551,7 @@
     <div id="world-plane">
 
       <!-- 1. HOME ENTITY -->
-      <div class="section-entity" id="entity-home" style="left: 2500px; top: 2000px;">
+      <div class="section-entity" id="entity-home" style="left: 2600px; top: 2100px;">
         <!-- Compact Portal Node -->
         <div class="compact-node-view" onclick="requestNavigation('home')" id="node-home" style="display: none;">
           <div class="node-anchor-point"></div>
@@ -559,7 +559,7 @@
           <div class="node-name">HOME</div>
           <div class="node-gist">Kevin Prakash J &bull; VIT Vellore (8.72)</div>
           <div class="node-pills">
-            <span class="node-pill">AI / ML</span>
+            <span class="node-pill">AI/ML</span>
             <span class="node-pill">Systems</span>
             <span class="node-pill">Vision</span>
             <span class="node-pill">Research</span>
@@ -567,17 +567,17 @@
         </div>
         <!-- Full Page View -->
         <div class="full-page-view" id="page-home">
-          <div class="badge-pill">PORTFOLIO ARCHITECTURE // IDENTITY CORE</div>
+          <div class="badge-pill">GROUND TRUTH // MASTER PROFILE V3</div>
           <h1 class="home-hero-huge">KEVIN PRAKASH J</h1>
           <div class="home-pillars-row">
-            <div>AI / ML</div> <span>&bull;</span>
-            <div>SOFTWARE ENGINEERING</div> <span>&bull;</span>
+            <div>AI & RESEARCH</div> <span>&bull;</span>
             <div>COMPUTER VISION</div> <span>&bull;</span>
-            <div>APPLIED RESEARCH</div>
+            <div>SOFTWARE ENGINEERING</div>
           </div>
           <p class="page-desc">
-            Fourth-year Computer Science undergraduate at VIT Vellore (CGPA 8.72/10) with verified software engineering internship exposure at Syncfusion. 
-            Building practical intelligent architectures, full-stack systems, and advancing research in multilingual semantic embeddings.
+            AI/ML-focused software engineer and researcher who builds practical intelligent systems. 
+            Fourth-year B.Tech CSE student at VIT University, Vellore (2023–2027, CGPA 8.72/10) with verified software engineering internship experience at Syncfusion. 
+            Bridging multilingual NLP research, real-time gesture intelligence, and full-stack software architectures.
           </p>
           <div class="home-full-grid">
             <div class="home-grid-card">
@@ -588,17 +588,17 @@
             <div class="home-grid-card">
               <div class="hgc-tag">FLAGSHIP SOFTWARE</div>
               <div class="hgc-val">TeamFlow Platform</div>
-              <div class="hgc-sub">FastAPI &bull; PostgreSQL &bull; RBAC</div>
+              <div class="hgc-sub">FastAPI &bull; React &bull; PostgreSQL</div>
             </div>
             <div class="home-grid-card">
-              <div class="hgc-tag">SCIENTIFIC RESEARCH</div>
+              <div class="hgc-tag">ACTIVE RESEARCH</div>
               <div class="hgc-val">Indic NLP Embeddings</div>
               <div class="hgc-sub">Cross-Lingual Alignment</div>
             </div>
             <div class="home-grid-card">
-              <div class="hgc-tag">CAREER STATUS</div>
-              <div class="hgc-val" style="color: var(--accent-cyan);">Available 2026/27</div>
-              <div class="hgc-sub">AI/ML & Systems Roles</div>
+              <div class="hgc-tag">INDUSTRY TENURE</div>
+              <div class="hgc-val" style="color: var(--accent-cyan);">Syncfusion Software</div>
+              <div class="hgc-sub">AI Intern &bull; ASP.NET / React</div>
             </div>
           </div>
         </div>
@@ -611,47 +611,47 @@
           <div class="node-anchor-point"></div>
           <div class="node-tag">NODE_01 // PROFILE</div>
           <div class="node-name">ABOUT</div>
-          <div class="node-gist">Academic & Industry Journey</div>
+          <div class="node-gist">Academic & Industry Profile</div>
           <div class="node-pills">
             <span class="node-pill">VIT 8.72</span>
             <span class="node-pill">Syncfusion</span>
-            <span class="node-pill">Triad</span>
+            <span class="node-pill">Pillars</span>
           </div>
         </div>
         <!-- Full Page View -->
         <div class="full-page-view" id="page-about" style="display: none;">
           <div class="about-top-bar">
             <div>
-              <div class="badge-pill">ACADEMIC & PROFESSIONAL BACKGROUND</div>
-              <h2 class="page-main-title">About & Engineering Triad</h2>
+              <div class="badge-pill">PERSONAL & ACADEMIC GROUND TRUTH</div>
+              <h2 class="page-main-title">Professional Identity & Experience</h2>
             </div>
             <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan);">NODE_01 // PROFILE</div>
           </div>
           <div class="about-two-col">
             <div>
-              <div class="about-section-heading">01. EDUCATION & EXPERIENCE</div>
+              <div class="about-section-heading">01. EDUCATION & INDUSTRY TENURE</div>
               <div class="about-timeline-item">
-                <div class="ati-date">2023 – 2027 (4TH YEAR UNDERGRADUATE)</div>
+                <div class="ati-date">AUGUST 2023 – MAY 2027 (FOURTH YEAR)</div>
                 <div class="ati-title">B.Tech Computer Science & Engineering</div>
-                <div class="ati-desc">VIT University, Vellore — CGPA: 8.72 / 10. Focused on neural architectures, distributed software systems, and data pipelines.</div>
+                <div class="ati-desc">VIT University, Vellore — Current CGPA: <strong>8.72 / 10</strong>. Specialization in Artificial Intelligence, Machine Learning, NLP, Computer Vision, LLMs, and Software Engineering.</div>
               </div>
               <div class="about-timeline-item">
                 <div class="ati-date">MAY – JUNE 2026</div>
                 <div class="ati-title">AI Intern — Syncfusion Software Pvt. Ltd.</div>
-                <div class="ati-desc">Built enterprise features using ASP.NET Core, React, TypeScript, C#, and RBAC authorization boundaries.</div>
+                <div class="ati-desc">Enterprise software engineering exposure including <strong>ASP.NET Core, React, TypeScript, REST APIs, Role-Based Access Control (RBAC), C#, and Git</strong>.</div>
               </div>
             </div>
             <div>
-              <div class="about-section-heading">02. TRIAD OF STRENGTHS</div>
+              <div class="about-section-heading">02. TRIAD OF STRENGTHS & PHILOSOPHY</div>
               <div class="about-timeline-item">
-                <div class="ati-date">RESEARCH DEPTH</div>
-                <div class="ati-title">AI/ML, NLP & Knowledge Graphs</div>
-                <div class="ati-desc">Investigating low-resource Indic language representations, sentence embeddings, and agentic GraphRAG reasoning.</div>
+                <div class="ati-date">CORE STRENGTHS TRIAD</div>
+                <div class="ati-title">AI & Research + Vision + Systems</div>
+                <div class="ati-desc">Combining algorithmic depth in multilingual sentence embeddings and One Health digital twins with production full-stack engineering and real-time computer vision.</div>
               </div>
               <div class="about-timeline-item">
-                <div class="ati-date">SYSTEMS RIGOR</div>
-                <div class="ati-title">Production Software Engineering</div>
-                <div class="ati-desc">Developing modular FastAPI backends, PostgreSQL schemas, JWT bearer security, and automated Pytest test suites.</div>
+                <div class="ati-date">ENGINEERING PHILOSOPHY</div>
+                <div class="ati-title">Reproducible, Validated Workflows</div>
+                <div class="ati-desc">Front-loaded specifications, one-shot Python data processing scripts, automated Pytest verification, and clean service-layer architectural separation.</div>
               </div>
             </div>
           </div>
@@ -659,13 +659,13 @@
       </div>
 
       <!-- 3. SKILLS ENTITY -->
-      <div class="section-entity" id="entity-skills" style="left: 3600px; top: 1250px;">
+      <div class="section-entity" id="entity-skills" style="left: 3800px; top: 1250px;">
         <!-- Compact Portal Node -->
         <div class="compact-node-view" onclick="requestNavigation('skills')" id="node-skills">
           <div class="node-anchor-point"></div>
           <div class="node-tag">NODE_02 // TAXONOMY</div>
           <div class="node-name">SKILLS</div>
-          <div class="node-gist">Living Technical Network</div>
+          <div class="node-gist">Confirmed Technical Skills</div>
           <div class="node-pills">
             <span class="node-pill">PyTorch</span>
             <span class="node-pill">FastAPI</span>
@@ -676,20 +676,21 @@
         <div class="full-page-view" id="page-skills" style="display: none;">
           <div class="about-top-bar">
             <div>
-              <div class="badge-pill">LIVING TECHNOLOGY NETWORK</div>
-              <h2 class="page-main-title">Skills & Technical Competencies</h2>
+              <div class="badge-pill">VERIFIED TECHNICAL SKILLS (MASTER PROFILE)</div>
+              <h2 class="page-main-title">Technical Skills & Technology Taxonomy</h2>
             </div>
-            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan);">NODE_02 // CONSTELLATION</div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan);">NODE_02 // TAXONOMY</div>
           </div>
           <div class="skills-full-grid">
             <div class="skill-domain-box">
-              <div class="sdb-title">AI / ML & NLP</div>
+              <div class="sdb-title">AI / ML & LLMs</div>
               <div class="sdb-pills">
                 <span class="sdb-pill">PyTorch</span>
                 <span class="sdb-pill">TensorFlow</span>
                 <span class="sdb-pill">Hugging Face</span>
                 <span class="sdb-pill">LangChain</span>
                 <span class="sdb-pill">Ollama</span>
+                <span class="sdb-pill">Prompt Engineering</span>
                 <span class="sdb-pill">NLP</span>
                 <span class="sdb-pill">LLMs</span>
               </div>
@@ -698,20 +699,22 @@
               <div class="sdb-title">Computer Vision</div>
               <div class="sdb-pills">
                 <span class="sdb-pill">OpenCV</span>
-                <span class="sdb-pill">MediaPipe</span>
-                <span class="sdb-pill">21-Hand Landmarks</span>
-                <span class="sdb-pill">Gesture AI</span>
+                <span class="sdb-pill">MediaPipe Hand Landmarks</span>
+                <span class="sdb-pill">Gesture Recognition</span>
+                <span class="sdb-pill">Camera Input Pipelines</span>
               </div>
             </div>
             <div class="skill-domain-box">
-              <div class="sdb-title">Web & Backend Systems</div>
+              <div class="sdb-title">Web & Software Engineering</div>
               <div class="sdb-pills">
                 <span class="sdb-pill">React</span>
                 <span class="sdb-pill">TypeScript</span>
                 <span class="sdb-pill">JavaScript</span>
-                <span class="sdb-pill">FastAPI</span>
+                <span class="sdb-pill">HTML / CSS</span>
+                <span class="sdb-pill">Tailwind CSS</span>
                 <span class="sdb-pill">Flask</span>
                 <span class="sdb-pill">ASP.NET Core</span>
+                <span class="sdb-pill">C#</span>
                 <span class="sdb-pill">REST APIs</span>
               </div>
             </div>
@@ -722,15 +725,15 @@
                 <span class="sdb-pill">Java</span>
                 <span class="sdb-pill">C</span>
                 <span class="sdb-pill">C++</span>
-                <span class="sdb-pill">C#</span>
               </div>
             </div>
             <div class="skill-domain-box">
               <div class="sdb-title">Databases & Storage</div>
               <div class="sdb-pills">
-                <span class="sdb-pill">PostgreSQL 17</span>
                 <span class="sdb-pill">MySQL</span>
+                <span class="sdb-pill">PostgreSQL 17.11</span>
                 <span class="sdb-pill">SQLAlchemy 2.x</span>
+                <span class="sdb-pill">SQLite (Historical)</span>
               </div>
             </div>
             <div class="skill-domain-box">
@@ -741,6 +744,8 @@
                 <span class="sdb-pill">Git / GitHub</span>
                 <span class="sdb-pill">Linux</span>
                 <span class="sdb-pill">VS Code</span>
+                <span class="sdb-pill">Streamlit</span>
+                <span class="sdb-pill">PyInstaller</span>
               </div>
             </div>
           </div>
@@ -748,11 +753,11 @@
       </div>
 
       <!-- 4. PROJECTS ENTITY -->
-      <div class="section-entity" id="entity-projects" style="left: 3650px; top: 2750px;">
+      <div class="section-entity" id="entity-projects" style="left: 3850px; top: 2950px;">
         <!-- Compact Portal Node -->
         <div class="compact-node-view" onclick="requestNavigation('projects')" id="node-projects">
           <div class="node-anchor-point"></div>
-          <div class="node-tag">NODE_03 // SYSTEMS</div>
+          <div class="node-tag">NODE_03 // PROJECTS</div>
           <div class="node-name">PROJECTS</div>
           <div class="node-gist">TeamFlow & Systems Suite</div>
           <div class="node-pills">
@@ -765,51 +770,58 @@
         <div class="full-page-view" id="page-projects" style="display: none;">
           <div class="about-top-bar">
             <div>
-              <div class="badge-pill">ENGINEERING CASE STUDIES</div>
-              <h2 class="page-main-title">Systems & Applications</h2>
+              <div class="badge-pill">CONFIRMED PROJECT PORTFOLIO</div>
+              <h2 class="page-main-title">Engineering Systems & Case Studies</h2>
             </div>
             <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan);">NODE_03 // SYSTEMS</div>
           </div>
           <div class="teamflow-flagship-card">
             <div class="tfc-header">
-              <div class="tfc-title">TeamFlow — Full-Stack Project Platform</div>
-              <span class="tfc-tag">FLAGSHIP SOFTWARE CASE STUDY</span>
+              <div class="tfc-title">TeamFlow — Full-Stack Team & Project Management Platform</div>
+              <span class="tfc-tag">FLAGSHIP SOFTWARE ENGINEERING CASE STUDY</span>
             </div>
             <div class="tfc-desc">
-              A comprehensive team and project management platform engineered with FastAPI backend services and a React/TypeScript Vite client. 
-              Implements JWT authentication, role-based access control (Owner/Admin/Member), PostgreSQL 17 data integrity constraints, Kanban task workflows, and automated backend test suites.
+              Centralized platform for teams, projects, and task management treated as a finished production product. 
+              Engineered with a React + TypeScript + Vite frontend and a FastAPI backend organized into routers, schemas, services, SQLAlchemy 2.x models, and security dependencies. 
+              Features JWT bearer authentication, bcrypt hashing, team-scoped authorization (Owner/Admin/Member), PostgreSQL 17.11 integrity constraints, Kanban task workflows, activity logs, and automated Pytest verification.
             </div>
             <div class="tfc-stack">
-              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">React + Vite</span>
-              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">TypeScript</span>
+              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">React + TypeScript</span>
+              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">Vite / React Router</span>
               <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">FastAPI (Python)</span>
-              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">PostgreSQL 17</span>
-              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">JWT / RBAC</span>
-              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">PyTest Verified</span>
+              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">PostgreSQL 17.11</span>
+              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">SQLAlchemy 2.x / Pydantic</span>
+              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">JWT / bcrypt RBAC</span>
+              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">PyTest Suite</span>
             </div>
           </div>
           <div class="projects-sub-grid">
             <div class="proj-card-sub">
               <div class="pcs-tag">COMPUTER VISION</div>
               <div class="pcs-title">ISL Translator</div>
-              <div class="pcs-desc">OpenCV and MediaPipe 21-hand landmark tracking for real-time sign language recognition and speech synthesis.</div>
+              <div class="pcs-desc">Camera input, OpenCV, MediaPipe hand landmarks, gesture recognition, text generation, and speech output.</div>
             </div>
             <div class="proj-card-sub">
               <div class="pcs-tag">MULTIMODAL AI</div>
-              <div class="pcs-title">One Health AI</div>
-              <div class="pcs-desc">Avian Influenza surveillance engine combining climate/satellite data with agentic GraphRAG reasoning.</div>
+              <div class="pcs-title">One Health / Avian AI</div>
+              <div class="pcs-desc">Multimodal prediction engine, Knowledge Graph, Agentic AI, GraphRAG reasoning, and explainability layer.</div>
             </div>
             <div class="proj-card-sub">
               <div class="pcs-tag">FULL-STACK APP</div>
               <div class="pcs-title">MyKitchen Planner</div>
-              <div class="pcs-desc">Meal recommendation and dish planning platform built around Python/Flask and relational databases.</div>
+              <div class="pcs-desc">Dish recommendation and meal planning application built around Python/Flask, web interface, and database.</div>
+            </div>
+            <div class="proj-card-sub">
+              <div class="pcs-tag">NLP / LLM APP & CLOUD</div>
+              <div class="pcs-title">Email Summarizer & AWS Attendance</div>
+              <div class="pcs-desc">Python + LangChain LLM summarization; Cloud attendance infrastructure on AWS EC2, S3, and RDS.</div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- 5. RESEARCH ENTITY -->
-      <div class="section-entity" id="entity-research" style="left: 1350px; top: 2800px;">
+      <div class="section-entity" id="entity-research" style="left: 1350px; top: 3000px;">
         <!-- Compact Portal Node -->
         <div class="compact-node-view" onclick="requestNavigation('research')" id="node-research">
           <div class="node-anchor-point"></div>
@@ -825,33 +837,33 @@
         <div class="full-page-view" id="page-research" style="display: none;">
           <div class="about-top-bar">
             <div>
-              <div class="badge-pill">SCIENTIFIC & APPLIED RESEARCH</div>
-              <h2 class="page-main-title">Research Investigations & Papers</h2>
+              <div class="badge-pill">APPLIED RESEARCH INVESTIGATIONS (MASTER PROFILE)</div>
+              <h2 class="page-main-title">Scientific & Algorithmic Research</h2>
             </div>
             <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan);">NODE_04 // INVESTIGATION</div>
           </div>
           <div class="research-two-col">
             <div class="res-paper-card">
-              <div class="rpc-tag">MULTILINGUAL NLP // EMBEDDINGS</div>
-              <div class="rpc-title">Cross-Lingual Semantic Alignment in Indic Languages</div>
+              <div class="rpc-tag">MULTILINGUAL INDIC NLP</div>
+              <div class="rpc-title">“Cross-Lingual Semantic Alignment and Language-Family Structure in Multilingual Sentence Embeddings for Indic Languages”</div>
               <div class="rpc-body">
-                Investigating semantic drift and language-family representations across low-resource Indic language pairs using multilingual transformer embeddings.
+                Studying semantic alignment across Indic languages and investigating how language-family structure is reflected in multilingual sentence embeddings.
               </div>
               <div class="rpc-spec-box">
                 MODELS: mBERT, XLM-R, LaBSE, MuRIL<br>
-                DATASETS: Samanantar, Wiki-Translate, IN22<br>
-                METRICS: STS Correlation, Bitext Retrieval, Graph Modularity
+                DATASETS: Samanantar, Wiki-Translate, IN22 / Indic-language resources<br>
+                EVALUATION: Semantic affinity, graph modularity, manual STS correlation, bitext retrieval evaluation, language-family-aware analysis.
               </div>
             </div>
             <div class="res-paper-card">
-              <div class="rpc-tag">DIGITAL TWIN // ONE HEALTH</div>
-              <div class="rpc-title">Predictive Platform for Avian Influenza Surveillance</div>
+              <div class="rpc-tag">ONE HEALTH / DIGITAL TWIN</div>
+              <div class="rpc-title">Digital Twin / One Health Platform for Predictive Food & Health Security (Avian Influenza Surveillance)</div>
               <div class="rpc-body">
-                Digital Twin architecture fusing satellite, meteorological, and veterinary data to deliver explainable decision intelligence beyond basic risk scoring.
+                Avian Influenza surveillance and prediction across representative regions (India, Vietnam, US, Netherlands, 2020–present) with dynamically updated real-world data.
               </div>
               <div class="rpc-spec-box">
-                DATA: ERA5, MODIS, FAO EMPRES, WOAH WAHIS<br>
-                ARCHITECTURE: Multimodal Engine &rarr; Knowledge Graph &rarr; GraphRAG &rarr; Agentic Decision System
+                ARCHITECTURE: Multimodal Prediction Engine &rarr; One Health Knowledge Graph &rarr; Agentic Decision Engine &rarr; LLM Reasoning + GraphRAG &rarr; Explainability Layer &rarr; Decision Support System.<br>
+                DATA: ERA5, MODIS, FAO EMPRES, WOAH WAHIS, WHO FluNet, eBird, FAOSTAT, UN Comtrade, GDELT, WHO/WOAH/FAO.
               </div>
             </div>
           </div>
@@ -868,7 +880,7 @@
 
   <div id="telemetry-panel">
     <div class="tele-header">
-      <span>SPATIAL SANDBOX TELEMETRY</span>
+      <span>GROUND TRUTH TELEMETRY</span>
       <span id="tele-fps">60 FPS</span>
     </div>
     <div class="tele-row">
@@ -881,7 +893,7 @@
     </div>
     <div class="tele-row">
       <span>PAGE SCALE:</span>
-      <span class="tele-val" id="tele-scale">1.00x</span>
+      <span class="tele-val" id="tele-scale">1.00x (FULL)</span>
     </div>
     <div class="tele-row">
       <span>IMPACT VIBE:</span>
@@ -938,13 +950,13 @@
       reducedMotion: false
     };
 
-    // --- 2. Spatial Entities & World Coordinates (Origin = 2500, 2000) ---
+    // --- 2. Spatial Entities & World Coordinates (Origin = 2600, 2100) ---
     const SECTIONS = [
       { id: 'home', index: 1, label: 'HOME', x: 0, y: 0 },
-      { id: 'about', index: 2, label: 'ABOUT', x: -1100, y: -800 },
-      { id: 'skills', index: 3, label: 'SKILLS', x: 1100, y: -750 },
-      { id: 'projects', index: 4, label: 'PROJECTS', x: 1150, y: 750 },
-      { id: 'research', index: 5, label: 'RESEARCH', x: -1150, y: 800 }
+      { id: 'about', index: 2, label: 'ABOUT', x: -1200, y: -900 },
+      { id: 'skills', index: 3, label: 'SKILLS', x: 1200, y: -850 },
+      { id: 'projects', index: 4, label: 'PROJECTS', x: 1250, y: 850 },
+      { id: 'research', index: 5, label: 'RESEARCH', x: -1250, y: 900 }
     ];
 
     const sectionMap = {};
@@ -976,7 +988,6 @@
     let impactPhase = 0;
     let settlePhase = 0;
 
-    // View state tracking per entity: { viewMode: 'full' | 'compact', scale: 1.0, opacity: 1.0, vibX: 0, vibY: 0 }
     const entityStates = {};
     SECTIONS.forEach(s => {
       entityStates[s.id] = {
@@ -1225,7 +1236,7 @@
           webSag = Math.max(0, webSag - dt * 50);
 
           // Trigger expansion when approaching the destination compact node
-          if (distToTarget < 18.0) {
+          if (distToTarget < 20.0) {
             entityStates[targetSectionId].viewMode = 'full';
             entityStates[targetSectionId].scale = 0.55;
             entityStates[targetSectionId].opacity = 0.65;
@@ -1238,7 +1249,6 @@
 
         case STATES.ARRIVAL_EXPANSION:
           expansionPhase = Math.min(elapsed / CONFIG.expansionDurationMs, 1.0);
-          // Significant spatial expansion from compact scale (0.55x -> peak scale 1.05x)
           const easeExp = 1 - Math.pow(1 - expansionPhase, 3);
           if (entityStates[targetSectionId]) {
             entityStates[targetSectionId].scale = 0.55 + (CONFIG.expansionPeakScale - 0.55) * easeExp;
@@ -1357,8 +1367,8 @@
       const screenCenterX = window.innerWidth / 2;
       const screenCenterY = window.innerHeight / 2;
 
-      const transX = screenCenterX - 2500 - camX;
-      const transY = screenCenterY - 2000 - camY;
+      const transX = screenCenterX - 2600 - camX;
+      const transY = screenCenterY - 2100 - camY;
 
       worldPlane.style.transform = `translate3d(${transX}px, ${transY}px, 0)`;
 
