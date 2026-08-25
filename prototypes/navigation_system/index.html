@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spider-Web Navigation Prototype — Kevin Prakash J</title>
+  <title>Spider-Web Navigation Prototype (Arrival Motion) — Kevin Prakash J</title>
   <style>
     :root {
       --bg-primary: #07090E;
@@ -39,8 +39,8 @@
       right: 0;
       height: 54px;
       padding: 0 24px;
-      background: rgba(7, 9, 14, 0.85);
-      backdrop-filter: blur(12px);
+      background: rgba(7, 9, 14, 0.88);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border-subtle);
       display: flex;
       justify-content: space-between;
@@ -49,7 +49,7 @@
     }
 
     .brand-title {
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
       letter-spacing: 0.06em;
       color: var(--text-primary);
@@ -128,18 +128,29 @@
       position: absolute;
       width: 520px;
       padding: 32px;
-      background: rgba(13, 17, 26, 0.85);
+      background: rgba(13, 17, 26, 0.88);
       border: 1px solid var(--border-subtle);
       border-radius: 12px;
       backdrop-filter: blur(16px);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-      transform: translate(-50%, -50%);
-      transition: border-color 0.3s, box-shadow 0.3s;
+      transform: translate(-50%, -50%) scale(1);
+      transform-origin: center center;
+      transition: border-color 0.25s, box-shadow 0.25s, opacity 0.2s;
+      will-change: transform, opacity;
     }
 
     .section-zone.active-zone {
-      border-color: rgba(0, 210, 255, 0.5);
-      box-shadow: 0 0 40px rgba(0, 210, 255, 0.15), 0 20px 50px rgba(0,0,0,0.7);
+      border-color: rgba(0, 210, 255, 0.6);
+      box-shadow: 0 0 35px rgba(0, 210, 255, 0.18), 0 20px 50px rgba(0,0,0,0.7);
+    }
+
+    /* Subtle Chromatic Impact State */
+    .section-zone.chromatic-impact {
+      border-color: #00D2FF;
+      box-shadow: -2px 0 20px rgba(255, 42, 75, 0.45), 2px 0 20px rgba(0, 210, 255, 0.5), 0 20px 50px rgba(0,0,0,0.8);
+    }
+    .section-zone.chromatic-impact .section-title {
+      text-shadow: -1.5px 0 rgba(255, 42, 75, 0.8), 1.5px 0 rgba(0, 210, 255, 0.8);
     }
 
     .section-tag {
@@ -156,6 +167,7 @@
       font-weight: 800;
       margin-bottom: 12px;
       letter-spacing: -0.02em;
+      transition: text-shadow 0.1s ease;
     }
 
     .section-body {
@@ -212,16 +224,16 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 320px;
-      background: rgba(13, 17, 26, 0.92);
+      width: 330px;
+      background: rgba(13, 17, 26, 0.94);
       border: 1px solid rgba(0, 210, 255, 0.3);
       border-radius: 8px;
       padding: 16px;
       font-family: var(--font-mono);
       font-size: 11px;
       z-index: 100;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     }
 
     .tele-header {
@@ -237,7 +249,7 @@
     .tele-row {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       color: var(--text-muted);
     }
     .tele-val {
@@ -257,12 +269,12 @@
     }
 
     .controls-grid {
-      margin-top: 12px;
+      margin-top: 10px;
       padding-top: 10px;
       border-top: 1px solid rgba(255,255,255,0.08);
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
     }
     .slider-row {
       display: flex;
@@ -270,8 +282,8 @@
       align-items: center;
       font-size: 10px;
     }
-    .slider-row input {
-      width: 130px;
+    .slider-row input[type="range"] {
+      width: 125px;
       accent-color: var(--accent-cyan);
     }
 
@@ -283,7 +295,7 @@
       font-family: var(--font-mono);
       font-size: 11px;
       color: var(--text-muted);
-      background: rgba(13, 17, 26, 0.7);
+      background: rgba(13, 17, 26, 0.75);
       padding: 8px 14px;
       border-radius: 6px;
       border: 1px solid var(--border-subtle);
@@ -302,7 +314,7 @@
 
   <header>
     <div class="brand-title">
-      KEVIN PRAKASH J <span>// SPIDER-WEB NAV PROTO // PH4</span>
+      KEVIN PRAKASH J <span>// SPIDER-WEB NAV // REVISED PH4</span>
     </div>
     <div class="nav-pills" id="nav-pill-container">
       <!-- Generated in JS -->
@@ -322,7 +334,7 @@
 
   <div id="telemetry-panel">
     <div class="tele-header">
-      <span>WEB TELEMETRY ENGINE</span>
+      <span>ARRIVAL MOTION TELEMETRY</span>
       <span id="tele-fps">60 FPS</span>
     </div>
     <div class="tele-row">
@@ -330,54 +342,64 @@
       <span class="state-badge" id="tele-state">IDLE</span>
     </div>
     <div class="tele-row">
-      <span>ORIGIN &rarr; TARGET:</span>
+      <span>ROUTE:</span>
       <span class="tele-val" id="tele-route">home &rarr; home</span>
     </div>
     <div class="tele-row">
-      <span>WEB EXTENSION:</span>
-      <span class="tele-val" id="tele-progress">0.00 %</span>
+      <span>DEST SCALE:</span>
+      <span class="tele-val" id="tele-scale">1.00x</span>
     </div>
     <div class="tele-row">
-      <span>PULL TENSION (k):</span>
-      <span class="tele-val" id="tele-spring-k">380 N/m</span>
-    </div>
-    <div class="tele-row">
-      <span>DAMPING (c):</span>
-      <span class="tele-val" id="tele-spring-c">24 Ns/m</span>
+      <span>IMPACT VIBE:</span>
+      <span class="tele-val" id="tele-vibe">0.0 px</span>
     </div>
 
     <div class="controls-grid">
       <div class="slider-row">
         <span>Shoot Speed (ms)</span>
-        <input type="range" id="param-shoot" min="100" max="400" value="180" step="10">
+        <input type="range" id="param-shoot" min="100" max="350" value="160" step="10">
       </div>
       <div class="slider-row">
         <span>Tension Hold (ms)</span>
-        <input type="range" id="param-tension" min="40" max="250" value="90" step="10">
+        <input type="range" id="param-tension" min="40" max="200" value="80" step="10">
       </div>
       <div class="slider-row">
         <span>Spring Stiffness (k)</span>
-        <input type="range" id="param-k" min="150" max="600" value="380" step="10">
+        <input type="range" id="param-k" min="200" max="650" value="420" step="10">
       </div>
       <div class="slider-row">
         <span>Damping (c)</span>
-        <input type="range" id="param-c" min="10" max="50" value="24" step="1">
+        <input type="range" id="param-c" min="15" max="50" value="26" step="1">
+      </div>
+      <div class="slider-row">
+        <span>Expansion Peak Scale</span>
+        <input type="range" id="param-peak-scale" min="1.02" max="1.10" value="1.05" step="0.01">
+      </div>
+      <div class="slider-row">
+        <span>Impact Vibration (px)</span>
+        <input type="range" id="param-impact-vib" min="1.0" max="8.0" value="3.0" step="0.5">
       </div>
       <div class="slider-row" style="margin-top: 4px;">
+        <label><input type="checkbox" id="param-chromatic" checked> Chromatic Accent</label>
         <label><input type="checkbox" id="param-reduced-motion"> Reduced Motion</label>
       </div>
     </div>
   </div>
 
   <script>
-    // --- 1. Tunable Configuration System ---
+    // --- 1. Centralized Motion & Physics Configuration ---
     const CONFIG = {
-      shootDurationMs: 180,
-      tensionDurationMs: 90,
-      springK: 380,
-      springC: 24,
+      shootDurationMs: 160,
+      tensionDurationMs: 80,
+      springK: 420,
+      springC: 26,
       mass: 1.0,
-      recoilAmplitude: 8.0,
+      expansionDurationMs: 110,
+      expansionPeakScale: 1.05,
+      impactDurationMs: 70,
+      impactVibAmp: 3.0,
+      settleDurationMs: 120,
+      chromaticEnabled: true,
       reducedMotion: false
     };
 
@@ -438,7 +460,7 @@
     const sectionMap = {};
     SECTIONS.forEach(s => sectionMap[s.id] = s);
 
-    // --- 3. Centralized Finite State Machine ---
+    // --- 3. Refined 10-Stage Centralized Finite State Machine ---
     const STATES = {
       IDLE: 'IDLE',
       TARGETING: 'TARGETING',
@@ -446,8 +468,10 @@
       ANCHORED: 'ANCHORED',
       TENSION: 'TENSION',
       PULLING: 'PULLING',
-      ARRIVING: 'ARRIVING',
-      SETTLED: 'SETTLED'
+      ARRIVAL_APPROACH: 'ARRIVAL_APPROACH',
+      ARRIVAL_EXPANSION: 'ARRIVAL_EXPANSION',
+      IMPACT: 'IMPACT',
+      SETTLING: 'SETTLING'
     };
 
     let currentState = STATES.IDLE;
@@ -456,10 +480,24 @@
 
     // Transition State Tracking
     let animStartTime = 0;
-    let shootProgress = 0; // 0 to 1
-    let tensionPhase = 0;  // 0 to 1
+    let shootProgress = 0;
+    let tensionPhase = 0;
+    let expansionPhase = 0;
+    let impactPhase = 0;
+    let settlePhase = 0;
 
-    // Camera / Viewport Physics State
+    // Spatial Scale & Vibration Dynamics per Card
+    const cardDynamicStates = {};
+    SECTIONS.forEach(s => {
+      cardDynamicStates[s.id] = {
+        scale: s.id === 'home' ? 1.0 : 0.82,
+        opacity: s.id === 'home' ? 1.0 : 0.4,
+        vibX: 0,
+        vibY: 0
+      };
+    });
+
+    // Camera Physics State
     let camX = 0, camY = 0;
     let targetCamX = 0, targetCamY = 0;
     let velX = 0, velY = 0;
@@ -469,6 +507,7 @@
     let webTip = { x: 0, y: 0 };
     let webAnchor = { x: 0, y: 0 };
     let webSag = 0;
+    let webOpacity = 1.0;
     let sparks = [];
 
     // DOM Elements
@@ -479,31 +518,21 @@
 
     const teleState = document.getElementById('tele-state');
     const teleRoute = document.getElementById('tele-route');
-    const teleProgress = document.getElementById('tele-progress');
+    const teleScale = document.getElementById('tele-scale');
+    const teleVibe = document.getElementById('tele-vibe');
     const teleFps = document.getElementById('tele-fps');
-    const teleSpringK = document.getElementById('tele-spring-k');
-    const teleSpringC = document.getElementById('tele-spring-c');
 
-    // Controls
-    const paramShoot = document.getElementById('param-shoot');
-    const paramTension = document.getElementById('param-tension');
-    const paramK = document.getElementById('param-k');
-    const paramC = document.getElementById('param-c');
-    const paramReducedMotion = document.getElementById('param-reduced-motion');
+    // Controls Binding
+    document.getElementById('param-shoot').addEventListener('input', e => CONFIG.shootDurationMs = +e.target.value);
+    document.getElementById('param-tension').addEventListener('input', e => CONFIG.tensionDurationMs = +e.target.value);
+    document.getElementById('param-k').addEventListener('input', e => CONFIG.springK = +e.target.value);
+    document.getElementById('param-c').addEventListener('input', e => CONFIG.springC = +e.target.value);
+    document.getElementById('param-peak-scale').addEventListener('input', e => CONFIG.expansionPeakScale = +e.target.value);
+    document.getElementById('param-impact-vib').addEventListener('input', e => CONFIG.impactVibAmp = +e.target.value);
+    document.getElementById('param-chromatic').addEventListener('change', e => CONFIG.chromaticEnabled = e.target.checked);
+    document.getElementById('param-reduced-motion').addEventListener('change', e => CONFIG.reducedMotion = e.target.checked);
 
-    paramShoot.addEventListener('input', (e) => CONFIG.shootDurationMs = +e.target.value);
-    paramTension.addEventListener('input', (e) => CONFIG.tensionDurationMs = +e.target.value);
-    paramK.addEventListener('input', (e) => {
-      CONFIG.springK = +e.target.value;
-      teleSpringK.textContent = CONFIG.springK + ' N/m';
-    });
-    paramC.addEventListener('input', (e) => {
-      CONFIG.springC = +e.target.value;
-      teleSpringC.textContent = CONFIG.springC + ' Ns/m';
-    });
-    paramReducedMotion.addEventListener('change', (e) => CONFIG.reducedMotion = e.target.checked);
-
-    // --- 4. Initialize DOM Plane & Navigation Pills ---
+    // --- 4. Initialize DOM Plane & Navigation ---
     function initDOM() {
       SECTIONS.forEach(s => {
         // Nav button
@@ -550,11 +579,10 @@
       canvas.height = window.innerHeight;
     }
 
-    // --- 5. Navigation Request & Interruption Strategy ---
+    // --- 5. Navigation Request & Interruption Logic ---
     function requestNavigation(targetId) {
       if (targetId === currentSectionId && currentState === STATES.IDLE) return;
 
-      // Interruption logic: If currently navigating, retarget cleanly to new destination
       targetSectionId = targetId;
       const originSec = sectionMap[currentSectionId];
       const targetSec = sectionMap[targetSectionId];
@@ -562,6 +590,7 @@
       webOrigin = { x: originSec.x, y: originSec.y };
       webAnchor = { x: targetSec.x, y: targetSec.y };
       webTip = { x: originSec.x, y: originSec.y };
+      webOpacity = 1.0;
 
       // Update Nav Pills
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -576,6 +605,12 @@
         camX = targetSec.x;
         camY = targetSec.y;
         velX = 0; velY = 0;
+        SECTIONS.forEach(s => {
+          cardDynamicStates[s.id].scale = s.id === currentSectionId ? 1.0 : 0.82;
+          cardDynamicStates[s.id].opacity = s.id === currentSectionId ? 1.0 : 0.4;
+          cardDynamicStates[s.id].vibX = 0;
+          cardDynamicStates[s.id].vibY = 0;
+        });
         currentState = STATES.IDLE;
         updateActiveCardClass();
         updateTelemetry();
@@ -588,37 +623,39 @@
     }
 
     function updateActiveCardClass() {
-      document.querySelectorAll('.section-zone').forEach(c => c.classList.remove('active-zone'));
+      document.querySelectorAll('.section-zone').forEach(c => {
+        c.classList.remove('active-zone');
+        c.classList.remove('chromatic-impact');
+      });
       const targetCard = document.getElementById(`card-${currentSectionId}`);
       if (targetCard) targetCard.classList.add('active-zone');
     }
 
-    // Particle Generator for Web Anchor Sparks
     function emitAnchorSparks(x, y) {
-      for (let i = 0; i < 14; i++) {
+      for (let i = 0; i < 18; i++) {
         const angle = Math.random() * Math.PI * 2;
-        const speed = 1.5 + Math.random() * 4.0;
+        const speed = 2.0 + Math.random() * 4.5;
         sparks.push({
           x, y,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
           life: 1.0,
-          decay: 0.03 + Math.random() * 0.03,
-          color: Math.random() > 0.3 ? '#00D2FF' : '#FF2A4B'
+          decay: 0.035 + Math.random() * 0.035,
+          color: Math.random() > 0.25 ? '#00D2FF' : '#FF2A4B'
         });
       }
     }
 
-    // --- 6. Physics & Animation Main Loop ---
+    // --- 6. Physics & Refined Arrival State Loop ---
     let lastTime = performance.now();
     let frameCount = 0;
     let lastFpsUpdate = performance.now();
 
     function animate(now) {
-      const dt = Math.min((now - lastTime) / 1000, 0.05); // Cap delta time
+      const dt = Math.min((now - lastTime) / 1000, 0.05);
       lastTime = now;
 
-      // FPS update
+      // FPS Calculation
       frameCount++;
       if (now - lastFpsUpdate > 500) {
         teleFps.textContent = `${Math.round((frameCount * 1000) / (now - lastFpsUpdate))} FPS`;
@@ -626,13 +663,9 @@
         lastFpsUpdate = now;
       }
 
-      // State Machine Evaluation
       evaluateStateMachine(now, dt);
-
-      // Camera Spring Physics
       updateCameraPhysics(dt);
-
-      // Render World Plane Transform & Canvas Web
+      applyCardTransforms();
       renderScene();
 
       requestAnimationFrame(animate);
@@ -643,7 +676,6 @@
 
       switch (currentState) {
         case STATES.TARGETING:
-          // Short 40ms lock-on phase
           if (elapsed > 40) {
             currentState = STATES.SHOOTING;
             animStartTime = now;
@@ -651,12 +683,8 @@
           break;
 
         case STATES.SHOOTING:
-          const shootProgressRaw = elapsed / CONFIG.shootDurationMs;
-          shootProgress = Math.min(shootProgressRaw, 1.0);
-          teleProgress.textContent = `${(shootProgress * 100).toFixed(0)} %`;
-
-          // Interpolate web tip from origin to target
-          const easeShoot = 1 - Math.pow(1 - shootProgress, 3); // ease-out cubic
+          shootProgress = Math.min(elapsed / CONFIG.shootDurationMs, 1.0);
+          const easeShoot = 1 - Math.pow(1 - shootProgress, 3);
           webTip.x = webOrigin.x + (webAnchor.x - webOrigin.x) * easeShoot;
           webTip.y = webOrigin.y + (webAnchor.y - webOrigin.y) * easeShoot;
 
@@ -668,7 +696,6 @@
           break;
 
         case STATES.ANCHORED:
-          // Instant anchor & flash (30ms)
           if (elapsed > 30) {
             currentState = STATES.TENSION;
             animStartTime = now;
@@ -677,8 +704,12 @@
 
         case STATES.TENSION:
           tensionPhase = Math.min(elapsed / CONFIG.tensionDurationMs, 1.0);
-          // Web stretches and gains tension curve
-          webSag = Math.sin(tensionPhase * Math.PI) * 28;
+          webSag = Math.sin(tensionPhase * Math.PI) * 30;
+
+          // Departing card begins subtle pre-pull shrink (1.0 -> 0.94)
+          if (cardDynamicStates[currentSectionId]) {
+            cardDynamicStates[currentSectionId].scale = 1.0 - tensionPhase * 0.06;
+          }
 
           if (tensionPhase >= 1.0) {
             currentState = STATES.PULLING;
@@ -690,39 +721,101 @@
           break;
 
         case STATES.PULLING:
-          // Pulling is driven by spring physics toward targetCamX/Y
           const distToTarget = Math.hypot(targetCamX - camX, targetCamY - camY);
-          const currentVel = Math.hypot(velX, velY);
+          const totalDist = Math.hypot(sectionMap[targetSectionId].x - sectionMap[currentSectionId].x, sectionMap[targetSectionId].y - sectionMap[currentSectionId].y) || 1;
+          const pullProgress = Math.max(0, Math.min(1.0, 1.0 - (distToTarget / totalDist)));
 
-          // Web relaxes sag as viewport accelerates toward destination
-          webSag = Math.max(0, webSag - dt * 60);
+          // Departing card shrinks and fades back into space
+          if (cardDynamicStates[currentSectionId]) {
+            cardDynamicStates[currentSectionId].scale = 0.94 - pullProgress * 0.19; // 0.94 -> 0.75
+            cardDynamicStates[currentSectionId].opacity = 1.0 - pullProgress * 0.6; // 1.0 -> 0.40
+          }
 
-          if (distToTarget < 2.0 && currentVel < 15.0) {
-            currentState = STATES.ARRIVING;
+          // Approaching card approaches slightly smaller in space (0.78 -> 0.88)
+          if (cardDynamicStates[targetSectionId]) {
+            cardDynamicStates[targetSectionId].scale = 0.78 + pullProgress * 0.10; // 0.78 -> 0.88
+            cardDynamicStates[targetSectionId].opacity = 0.4 + pullProgress * 0.45; // 0.40 -> 0.85
+          }
+
+          webSag = Math.max(0, webSag - dt * 50);
+
+          // Once camera arrives close enough, trigger arrival expansion
+          if (distToTarget < 12.0) {
+            currentState = STATES.ARRIVAL_EXPANSION;
             animStartTime = now;
           }
           break;
 
-        case STATES.ARRIVING:
-          // Arrival recoil settling (120ms)
-          if (elapsed > 120) {
-            currentState = STATES.SETTLED;
+        case STATES.ARRIVAL_EXPANSION:
+          expansionPhase = Math.min(elapsed / CONFIG.expansionDurationMs, 1.0);
+          // Rapid ease-out cubic expansion towards viewer (0.88 -> peak scale e.g. 1.05)
+          const easeExp = 1 - Math.pow(1 - expansionPhase, 3);
+          if (cardDynamicStates[targetSectionId]) {
+            cardDynamicStates[targetSectionId].scale = 0.88 + (CONFIG.expansionPeakScale - 0.88) * easeExp;
+            cardDynamicStates[targetSectionId].opacity = 0.85 + 0.15 * easeExp;
+          }
+
+          if (expansionPhase >= 1.0) {
+            currentState = STATES.IMPACT;
+            animStartTime = now;
+
+            // Trigger subtle chromatic impact class
+            const targetCard = document.getElementById(`card-${targetSectionId}`);
+            if (targetCard && CONFIG.chromaticEnabled) {
+              targetCard.classList.add('chromatic-impact');
+            }
+          }
+          break;
+
+        case STATES.IMPACT:
+          impactPhase = Math.min(elapsed / CONFIG.impactDurationMs, 1.0);
+          // Damped high-frequency vibration
+          const vibDamp = 1.0 - impactPhase;
+          const vibAngle = impactPhase * Math.PI * 8;
+          const currentVib = Math.sin(vibAngle) * CONFIG.impactVibAmp * vibDamp;
+
+          if (cardDynamicStates[targetSectionId]) {
+            cardDynamicStates[targetSectionId].vibX = currentVib;
+            cardDynamicStates[targetSectionId].vibY = -currentVib * 0.5;
+          }
+          teleVibe.textContent = `${currentVib.toFixed(1)} px`;
+
+          // Web releases and begins dissolving
+          webOpacity = Math.max(0, 1.0 - impactPhase * 1.5);
+
+          if (impactPhase >= 1.0) {
+            currentState = STATES.SETTLING;
+            animStartTime = now;
+
+            // Remove chromatic class
+            const targetCard = document.getElementById(`card-${targetSectionId}`);
+            if (targetCard) targetCard.classList.remove('chromatic-impact');
+          }
+          break;
+
+        case STATES.SETTLING:
+          settlePhase = Math.min(elapsed / CONFIG.settleDurationMs, 1.0);
+          // Smooth damped settle from peak scale to 1.00
+          const easeSettle = Math.sin((settlePhase * Math.PI) / 2);
+          if (cardDynamicStates[targetSectionId]) {
+            cardDynamicStates[targetSectionId].scale = CONFIG.expansionPeakScale - (CONFIG.expansionPeakScale - 1.00) * easeSettle;
+            cardDynamicStates[targetSectionId].vibX = 0;
+            cardDynamicStates[targetSectionId].vibY = 0;
+          }
+          teleVibe.textContent = `0.0 px`;
+
+          if (settlePhase >= 1.0) {
+            currentState = STATES.IDLE;
             currentSectionId = targetSectionId;
             updateActiveCardClass();
-            animStartTime = now;
-          }
-          break;
-
-        case STATES.SETTLED:
-          if (elapsed > 60) {
-            currentState = STATES.IDLE;
             shootProgress = 0;
-            teleProgress.textContent = `0.00 %`;
+            webOpacity = 1.0;
           }
           break;
 
         case STATES.IDLE:
         default:
+          teleVibe.textContent = `0.0 px`;
           break;
       }
 
@@ -731,7 +824,6 @@
 
     function updateCameraPhysics(dt) {
       if (currentState === STATES.IDLE) {
-        // Keep camera steady at current section
         const curSec = sectionMap[currentSectionId];
         targetCamX = curSec.x;
         targetCamY = curSec.y;
@@ -754,6 +846,17 @@
       camY += velY * dt;
     }
 
+    function applyCardTransforms() {
+      SECTIONS.forEach(s => {
+        const card = document.getElementById(`card-${s.id}`);
+        const state = cardDynamicStates[s.id];
+        if (card && state) {
+          card.style.transform = `translate(-50%, -50%) scale(${state.scale.toFixed(3)}) translate(${state.vibX.toFixed(1)}px, ${state.vibY.toFixed(1)}px)`;
+          card.style.opacity = state.opacity.toFixed(2);
+        }
+      });
+    }
+
     function updateTelemetry() {
       teleState.textContent = currentState;
       if (currentState !== STATES.IDLE) {
@@ -761,11 +864,14 @@
       } else {
         teleState.className = 'state-badge';
       }
+      const activeState = cardDynamicStates[targetSectionId || currentSectionId];
+      if (activeState) {
+        teleScale.textContent = `${activeState.scale.toFixed(2)}x`;
+      }
     }
 
     // --- 7. Canvas Web Rendering ---
     function renderScene() {
-      // 1. Move World Plane via hardware accelerated 3D transform
       const screenCenterX = window.innerWidth / 2;
       const screenCenterY = window.innerHeight / 2;
 
@@ -774,16 +880,14 @@
 
       worldPlane.style.transform = `translate3d(${transX}px, ${transY}px, 0)`;
 
-      // 2. Clear Canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Function to transform world coordinates to screen canvas coordinates
       const worldToScreen = (wx, wy) => ({
         x: screenCenterX + (wx - camX),
         y: screenCenterY + (wy - camY)
       });
 
-      // 3. Draw Permanent Background Macro Web Connections
+      // Permanent Background Macro Web Connections
       ctx.lineWidth = 1;
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
       ctx.setLineDash([4, 4]);
@@ -798,15 +902,15 @@
           ctx.stroke();
         }
       }
-      ctx.setLineDash([]); // Reset dash
+      ctx.setLineDash([]);
 
-      // 4. Draw Active Dynamic Web Shoot / Pull Filament
-      if (currentState !== STATES.IDLE) {
+      // Active Dynamic Web Filament
+      if (currentState !== STATES.IDLE && webOpacity > 0.01) {
         const sOrigin = worldToScreen(webOrigin.x, webOrigin.y);
         const sTip = worldToScreen(webTip.x, webTip.y);
         const sAnchor = worldToScreen(webAnchor.x, webAnchor.y);
 
-        // Filament Glow Layer
+        ctx.globalAlpha = webOpacity;
         ctx.shadowColor = '#00D2FF';
         ctx.shadowBlur = currentState === STATES.TENSION ? 18 : 10;
         ctx.lineWidth = currentState === STATES.TENSION ? 3.0 : 2.0;
@@ -816,34 +920,31 @@
         ctx.moveTo(sOrigin.x, sOrigin.y);
 
         if (currentState === STATES.SHOOTING) {
-          // Straight fast vector during shooting
           ctx.lineTo(sTip.x, sTip.y);
           ctx.stroke();
 
-          // Luminous Web Tip Bullet
           ctx.fillStyle = '#FFFFFF';
           ctx.beginPath();
           ctx.arc(sTip.x, sTip.y, 4, 0, Math.PI * 2);
           ctx.fill();
 
-        } else if (currentState === STATES.ANCHORED || currentState === STATES.TENSION || currentState === STATES.PULLING) {
-          // Curved tensile spring curve
+        } else if (currentState === STATES.ANCHORED || currentState === STATES.TENSION || currentState === STATES.PULLING || currentState === STATES.ARRIVAL_EXPANSION || currentState === STATES.IMPACT) {
           const midX = (sOrigin.x + sAnchor.x) / 2;
           const midY = (sOrigin.y + sAnchor.y) / 2 + webSag;
 
           ctx.quadraticCurveTo(midX, midY, sAnchor.x, sAnchor.y);
           ctx.stroke();
 
-          // Anchor point pulse
           ctx.fillStyle = '#FF2A4B';
           ctx.beginPath();
           ctx.arc(sAnchor.x, sAnchor.y, 6, 0, Math.PI * 2);
           ctx.fill();
         }
-        ctx.shadowBlur = 0; // Reset shadow
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1.0;
       }
 
-      // 5. Update and Draw Particles / Anchor Sparks
+      // Update and Draw Sparks
       for (let i = sparks.length - 1; i >= 0; i--) {
         const p = sparks[i];
         p.x += p.vx;
