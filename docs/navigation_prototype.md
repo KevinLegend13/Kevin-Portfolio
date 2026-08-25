@@ -173,3 +173,36 @@ To enable human verification of the scale change, departing shrink, destination 
 
 > **IMPORTANT REMINDER**: These 5 mock environments are temporary motion-validation artifacts isolated inside `prototypes/navigation_system/index.html`. They are NOT final portfolio components and do NOT initiate Phase 5.
 
+---
+
+## 9. Compact Web Nodes vs Full Section Pages Architecture
+
+The navigation system implements a clear structural bifurcation between **Compact Web Nodes** and **Full Section Pages**:
+
+```text
+┌────────────────────────────────────────────────────────────────────────┐
+│               DUAL-STATE PRESENTATION ARCHITECTURE                     │
+├─────────────────────────┬──────────────────────────────────────────────┤
+│ 1. COMPACT WEB NODE     │ • Small, lightweight portal (~250px x 120px) │
+│ (Resting Network Node)  │ • Sits spatially within the persistent web   │
+│                         │ • Contains: Name, anchor, and 3-4 micro-tags │
+│                         │ • Web shoots: Compact Node -> Compact Node   │
+├─────────────────────────┼──────────────────────────────────────────────┤
+│ 2. FULL SECTION PAGE    │ • Expansive, immersive section (~1000px wide)│
+│ (Active Focus Viewport) │ • Dominates the centered viewport reading area│
+│                         │ • Contains: Complete multi-column content,   │
+│                         │   timelines, case studies & data pipelines   │
+└─────────────────────────┴──────────────────────────────────────────────┘
+```
+
+### Complete Two-State Lifecycle Sequence:
+1. **Initial State**: `HOME` is in **Full Page View** (1000px wide, 1.00x scale, active glow), while other sections (`ABOUT`, `SKILLS`, `PROJECTS`, `RESEARCH`) rest as **Compact Web Nodes** (250px wide) connected by background web strands.
+2. **On Selection (e.g. ABOUT)**:
+   - `HOME` collapses from Full Page into its Compact Web Node ($1.00\text{x} \rightarrow 0.55\text{x}$, 120ms).
+   - Glowing web filament shoots from `HOME Compact Node` $\rightarrow$ `ABOUT Compact Node` (160ms).
+   - Filament anchors with spark particles and builds elastic tension ($y_{\text{sag}} \approx 32\text{px}$).
+   - Viewport camera pulls through web space via spring physics ($k=420, c=26$).
+   - Upon arrival threshold (18px), `ABOUT Compact Node` crossfades and **expands dynamically into its Full Section Page** ($0.55\text{x} \rightarrow 1.05\text{x}$, 140ms).
+   - The Full Page delivers a 3.5px micro-vibration impact with a 70ms Spider-Verse chromatic shadow accent before settling smoothly at 1.00x resting scale.
+
+

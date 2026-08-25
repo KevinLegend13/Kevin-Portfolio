@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spider-Web Navigation Prototype (Visual Sandbox) — Kevin Prakash J</title>
+  <title>Spider-Web Navigation Prototype (Compact Nodes & Full Pages) — Kevin Prakash J</title>
   <style>
     :root {
       --bg-primary: #07090E;
@@ -39,7 +39,7 @@
       right: 0;
       height: 54px;
       padding: 0 24px;
-      background: rgba(7, 9, 14, 0.90);
+      background: rgba(7, 9, 14, 0.92);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-subtle);
       display: flex;
@@ -113,8 +113,8 @@
 
     #world-plane {
       position: absolute;
-      width: 4000px;
-      height: 3000px;
+      width: 5000px;
+      height: 4000px;
       top: 50%;
       left: 50%;
       transform: translate3d(0, 0, 0);
@@ -123,133 +123,197 @@
       will-change: transform;
     }
 
-    /* Base Section Mock Environment Container */
-    .section-zone {
+    /* Section Entity Base */
+    .section-entity {
       position: absolute;
-      background: rgba(13, 17, 26, 0.90);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      backdrop-filter: blur(20px);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
-      transform: translate(-50%, -50%) scale(1);
+      transform: translate(-50%, -50%);
       transform-origin: center center;
-      transition: border-color 0.25s, box-shadow 0.25s, opacity 0.25s;
       will-change: transform, opacity;
-      padding: 36px;
-    }
-
-    .section-zone.active-zone {
-      border-color: rgba(0, 210, 255, 0.6);
-      box-shadow: 0 0 45px rgba(0, 210, 255, 0.18), 0 25px 60px rgba(0,0,0,0.8);
-    }
-
-    /* Subtle Chromatic Impact State */
-    .section-zone.chromatic-impact {
-      border-color: #00D2FF;
-      box-shadow: -3px 0 25px rgba(255, 42, 75, 0.5), 3px 0 25px rgba(0, 210, 255, 0.55), 0 25px 60px rgba(0,0,0,0.85);
-    }
-    .section-zone.chromatic-impact h2 {
-      text-shadow: -2px 0 rgba(255, 42, 75, 0.8), 2px 0 rgba(0, 210, 255, 0.8);
-    }
-
-    /* Node Target Anchor Point on Card */
-    .node-anchor {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--bg-primary);
-      border: 2px solid var(--accent-cyan);
-      box-shadow: 0 0 12px var(--accent-cyan);
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      z-index: 20;
     }
-    .node-anchor::after {
+
+    /* =========================================================================
+       1. COMPACT WEB NODE / PORTAL PREVIEW (Resting in Web Network)
+       ========================================================================= */
+    .compact-node-view {
+      width: 250px;
+      background: rgba(13, 17, 26, 0.92);
+      border: 1px solid rgba(0, 210, 255, 0.35);
+      border-radius: 12px;
+      padding: 16px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 210, 255, 0.12);
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      user-select: none;
+    }
+    .compact-node-view:hover {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 210, 255, 0.25);
+      transform: scale(1.04);
+    }
+    .node-anchor-point {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--bg-primary);
+      border: 2px solid var(--accent-cyan);
+      box-shadow: 0 0 10px var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .node-anchor-point::after {
       content: '';
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       background: #fff;
       border-radius: 50%;
     }
-
-    /* --- ENVIRONMENT 1: HOME (Monumental Identity Hub) --- */
-    #card-home {
-      width: 780px;
-      text-align: center;
-      padding: 50px 44px;
+    .node-tag {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      color: var(--accent-cyan);
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+      text-transform: uppercase;
     }
-    .home-badge {
+    .node-name {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .node-gist {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    .node-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .node-pill {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      padding: 2px 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+      color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* =========================================================================
+       2. FULL DETAILED SECTION PAGE (Active Focus Environment)
+       ========================================================================= */
+    .full-page-view {
+      background: rgba(13, 17, 26, 0.94);
+      border: 1px solid rgba(0, 210, 255, 0.45);
+      border-radius: 18px;
+      backdrop-filter: blur(24px);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85), 0 0 50px rgba(0, 210, 255, 0.15);
+      padding: 44px 48px;
+      transform-origin: center center;
+      will-change: transform, opacity;
+      position: relative;
+    }
+
+    .full-page-view.chromatic-impact {
+      border-color: #00D2FF;
+      box-shadow: -3px 0 30px rgba(255, 42, 75, 0.5), 3px 0 30px rgba(0, 210, 255, 0.55), 0 30px 80px rgba(0,0,0,0.9);
+    }
+    .full-page-view.chromatic-impact h1,
+    .full-page-view.chromatic-impact h2 {
+      text-shadow: -2px 0 rgba(255, 42, 75, 0.8), 2px 0 rgba(0, 210, 255, 0.8);
+    }
+
+    /* Common Full Page Elements */
+    .badge-pill {
       display: inline-block;
       font-family: var(--font-mono);
       font-size: 11px;
       color: var(--accent-cyan);
-      letter-spacing: 0.15em;
+      letter-spacing: 0.12em;
       padding: 4px 12px;
       border-radius: 20px;
       background: rgba(0, 210, 255, 0.08);
       border: 1px solid rgba(0, 210, 255, 0.25);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       text-transform: uppercase;
     }
-    .home-hero-title {
-      font-size: 52px;
-      font-weight: 900;
+    .page-main-title {
+      font-size: 38px;
+      font-weight: 800;
       letter-spacing: -0.03em;
-      line-height: 1.05;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .page-desc {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    /* Page 1: FULL HOME */
+    #page-home {
+      width: 980px;
+      text-align: center;
+    }
+    .home-hero-huge {
+      font-size: 58px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.02;
       margin-bottom: 16px;
       background: linear-gradient(135deg, #FFFFFF 40%, #A3B1CC 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .home-pillars {
+    .home-pillars-row {
       display: flex;
       justify-content: center;
       gap: 16px;
       font-family: var(--font-mono);
       font-size: 12px;
       color: var(--accent-cyan);
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
-    .home-pillars span {
-      color: var(--text-muted);
-    }
-    .home-desc {
-      font-size: 15px;
-      line-height: 1.6;
-      color: var(--text-muted);
-      max-width: 620px;
-      margin: 0 auto 30px auto;
-    }
-    .home-hud-grid {
+    .home-pillars-row span { color: var(--text-muted); }
+    .home-full-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 14px;
+      margin-top: 24px;
+      padding-top: 24px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 20px;
-      font-family: var(--font-mono);
-      font-size: 11px;
       text-align: left;
     }
-    .hud-box {
+    .home-grid-card {
       background: rgba(255, 255, 255, 0.03);
-      padding: 10px 14px;
-      border-radius: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
-    .hud-box-lbl { color: var(--text-muted); font-size: 9.5px; margin-bottom: 3px; }
-    .hud-box-val { color: var(--text-primary); font-weight: 600; }
+    .hgc-tag { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); margin-bottom: 4px; }
+    .hgc-val { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .hgc-sub { font-size: 11.5px; color: var(--text-muted); line-height: 1.3; }
 
-    /* --- ENVIRONMENT 2: ABOUT (Timeline & Credentials) --- */
-    #card-about {
-      width: 740px;
+    /* Page 2: FULL ABOUT */
+    #page-about {
+      width: 960px;
     }
-    .about-header {
+    .about-top-bar {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
@@ -257,126 +321,128 @@
       padding-bottom: 16px;
       margin-bottom: 24px;
     }
-    .about-title { font-size: 32px; font-weight: 800; }
-    .about-coord { font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan); }
-    .about-grid {
+    .about-two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      gap: 28px;
     }
-    .timeline-card {
+    .about-section-heading {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      margin-bottom: 12px;
+      font-family: var(--font-mono);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .about-timeline-item {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 8px;
       padding: 18px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
-    .tl-date { font-family: var(--font-mono); font-size: 11px; color: var(--accent-red); margin-bottom: 4px; font-weight: 600; }
-    .tl-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-    .tl-sub { font-size: 12.5px; color: var(--text-muted); line-height: 1.4; }
+    .ati-date { font-family: var(--font-mono); font-size: 11px; color: var(--accent-red); font-weight: 700; margin-bottom: 4px; }
+    .ati-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .ati-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
 
-    /* --- ENVIRONMENT 3: SKILLS (Interactive Constellation Clusters) --- */
-    #card-skills {
-      width: 820px;
+    /* Page 3: FULL SKILLS */
+    #page-skills {
+      width: 1000px;
     }
-    .skills-cluster-grid {
+    .skills-full-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      margin-top: 18px;
+      margin-top: 20px;
     }
-    .skill-cat-card {
+    .skill-domain-box {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 10px;
-      padding: 16px;
+      padding: 18px;
     }
-    .cat-name {
+    .sdb-title {
       font-family: var(--font-mono);
-      font-size: 11.5px;
-      color: var(--accent-cyan);
+      font-size: 12px;
       font-weight: 700;
+      color: var(--accent-cyan);
       margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 6px;
     }
-    .cat-name::before {
-      content: '◆';
-      color: var(--accent-red);
-      font-size: 9px;
-    }
-    .skill-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .skill-pill {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .sdb-title::before { content: '◆'; color: var(--accent-red); font-size: 9px; }
+    .sdb-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .sdb-pill {
+      font-family: var(--font-mono);
       font-size: 11px;
       padding: 3px 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 4px;
       color: #cbd5e1;
-      font-family: var(--font-mono);
     }
 
-    /* --- ENVIRONMENT 4: PROJECTS (Systems Grid with TeamFlow Flagship) --- */
-    #card-projects {
-      width: 860px;
+    /* Page 4: FULL PROJECTS */
+    #page-projects {
+      width: 1020px;
     }
-    .proj-flagship {
+    .teamflow-flagship-card {
       background: linear-gradient(135deg, rgba(0, 210, 255, 0.08) 0%, rgba(255, 42, 75, 0.06) 100%);
-      border: 1px solid rgba(0, 210, 255, 0.35);
-      border-radius: 10px;
-      padding: 24px;
-      margin-bottom: 18px;
+      border: 1px solid rgba(0, 210, 255, 0.4);
+      border-radius: 12px;
+      padding: 26px;
+      margin-bottom: 20px;
     }
-    .flag-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .flag-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--accent-red); font-weight: 700; }
-    .flag-title { font-size: 22px; font-weight: 800; }
-    .flag-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
-    .flag-stack { display: flex; gap: 6px; flex-wrap: wrap; }
-    .proj-mini-grid {
+    .tfc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .tfc-tag { font-family: var(--font-mono); font-size: 11px; color: var(--accent-red); font-weight: 700; }
+    .tfc-title { font-size: 24px; font-weight: 800; }
+    .tfc-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+    .tfc-stack { display: flex; gap: 6px; flex-wrap: wrap; }
+    .projects-sub-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
     }
-    .proj-mini-card {
+    .proj-card-sub {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 8px;
       padding: 16px;
     }
-    .mini-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; color: var(--text-primary); }
-    .mini-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+    .pcs-tag { font-family: var(--font-mono); font-size: 10px; color: var(--accent-cyan); margin-bottom: 4px; }
+    .pcs-title { font-size: 14.5px; font-weight: 700; margin-bottom: 6px; }
+    .pcs-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
 
-    /* --- ENVIRONMENT 5: RESEARCH (Investigation & Data Pipelines) --- */
-    #card-research {
-      width: 820px;
+    /* Page 5: FULL RESEARCH */
+    #page-research {
+      width: 980px;
     }
-    .res-section-grid {
+    .research-two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      margin-top: 18px;
+      gap: 24px;
+      margin-top: 20px;
     }
-    .res-card {
+    .res-paper-card {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 10px;
-      padding: 22px;
+      border-radius: 12px;
+      padding: 24px;
     }
-    .res-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--accent-cyan); margin-bottom: 8px; }
-    .res-heading { font-size: 17px; font-weight: 800; margin-bottom: 10px; line-height: 1.3; }
-    .res-body { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
-    .res-pipeline-box {
+    .rpc-tag { font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan); margin-bottom: 8px; }
+    .rpc-title { font-size: 18px; font-weight: 800; line-height: 1.3; margin-bottom: 12px; }
+    .rpc-body { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+    .rpc-spec-box {
       background: rgba(0, 0, 0, 0.4);
       border-left: 2px solid var(--accent-red);
-      padding: 8px 12px;
+      padding: 10px 14px;
       font-family: var(--font-mono);
-      font-size: 10.5px;
+      font-size: 11px;
       color: #94a3b8;
+      line-height: 1.5;
     }
 
     /* Live Telemetry Panel */
@@ -474,7 +540,7 @@
 
   <header>
     <div class="brand-title">
-      KEVIN PRAKASH J <span>// SPATIAL TRANSITION SANDBOX // PH4</span>
+      KEVIN PRAKASH J <span>// COMPACT NODES &harr; FULL PAGES // PH4</span>
     </div>
     <div class="nav-pills" id="nav-pill-container">
       <!-- Generated in JS -->
@@ -483,229 +549,315 @@
 
   <div id="world-viewport">
     <div id="world-plane">
-      <!-- 1. HOME ENVIRONMENT -->
-      <div class="section-zone active-zone" id="card-home" style="left: 2000px; top: 1500px;">
-        <div class="node-anchor" onclick="requestNavigation('home')" title="Web Anchor Node"></div>
-        <div class="home-badge">PORTFOLIO ENTRY // SPIDER-VERSE METAPHOR</div>
-        <h1 class="home-hero-title">KEVIN PRAKASH J</h1>
-        <div class="home-pillars">
-          <div>AI / ML</div> <span>•</span>
-          <div>SOFTWARE ENGINEERING</div> <span>•</span>
-          <div>COMPUTER VISION</div> <span>•</span>
-          <div>APPLIED RESEARCH</div>
-        </div>
-        <p class="home-desc">
-          Building intelligent, full-stack systems and advancing research in multilingual semantic embeddings. 
-          Fourth-year B.Tech CSE at VIT Vellore with verified software engineering internship exposure at Syncfusion.
-        </p>
-        <div class="home-hud-grid">
-          <div class="hud-box">
-            <div class="hud-box-lbl">ACADEMIC</div>
-            <div class="hud-box-val">VIT Vellore (8.72)</div>
-          </div>
-          <div class="hud-box">
-            <div class="hud-box-lbl">FLAGSHIP</div>
-            <div class="hud-box-val">TeamFlow (FastAPI)</div>
-          </div>
-          <div class="hud-box">
-            <div class="hud-box-lbl">RESEARCH</div>
-            <div class="hud-box-val">Indic NLP Embeddings</div>
-          </div>
-          <div class="hud-box">
-            <div class="hud-box-lbl">STATUS</div>
-            <div class="hud-box-val" style="color: var(--accent-cyan);">Available 2026/27</div>
-          </div>
-        </div>
-      </div>
 
-      <!-- 2. ABOUT ENVIRONMENT -->
-      <div class="section-zone" id="card-about" style="left: 1100px; top: 900px;">
-        <div class="node-anchor" onclick="requestNavigation('about')" title="Web Anchor Node"></div>
-        <div class="about-header">
-          <div>
-            <div class="home-badge">ACADEMIC & PROFESSIONAL JOURNEY</div>
-            <h2 class="about-title">About & Engineering Triad</h2>
+      <!-- 1. HOME ENTITY -->
+      <div class="section-entity" id="entity-home" style="left: 2500px; top: 2000px;">
+        <!-- Compact Portal Node -->
+        <div class="compact-node-view" onclick="requestNavigation('home')" id="node-home" style="display: none;">
+          <div class="node-anchor-point"></div>
+          <div class="node-tag">NODE_00 // ROOT</div>
+          <div class="node-name">HOME</div>
+          <div class="node-gist">Kevin Prakash J &bull; VIT Vellore (8.72)</div>
+          <div class="node-pills">
+            <span class="node-pill">AI / ML</span>
+            <span class="node-pill">Systems</span>
+            <span class="node-pill">Vision</span>
+            <span class="node-pill">Research</span>
           </div>
-          <div class="about-coord">NODE_01 // VIT_VELLORE</div>
         </div>
-        <div class="about-grid">
-          <div>
-            <div class="timeline-card">
-              <div class="tl-date">2023 – 2027 (CURRENT: 4TH YEAR)</div>
-              <div class="tl-title">B.Tech Computer Science & Engineering</div>
-              <div class="tl-sub">VIT University, Vellore — CGPA: 8.72 / 10. Core focus in intelligent architectures, distributed systems, and neural network pipelines.</div>
-            </div>
-            <div class="timeline-card">
-              <div class="tl-date">MAY – JUNE 2026</div>
-              <div class="tl-title">AI Intern — Syncfusion Software</div>
-              <div class="tl-sub">Enterprise engineering with ASP.NET Core, React, TypeScript, C#, and RBAC security boundaries.</div>
-            </div>
+        <!-- Full Page View -->
+        <div class="full-page-view" id="page-home">
+          <div class="badge-pill">PORTFOLIO ARCHITECTURE // IDENTITY CORE</div>
+          <h1 class="home-hero-huge">KEVIN PRAKASH J</h1>
+          <div class="home-pillars-row">
+            <div>AI / ML</div> <span>&bull;</span>
+            <div>SOFTWARE ENGINEERING</div> <span>&bull;</span>
+            <div>COMPUTER VISION</div> <span>&bull;</span>
+            <div>APPLIED RESEARCH</div>
           </div>
-          <div>
-            <div class="timeline-card">
-              <div class="tl-date">CORE PILLAR I</div>
-              <div class="tl-title">AI / ML & Multilingual NLP</div>
-              <div class="tl-sub">Researching cross-lingual alignment in Indic sentence embeddings and agentic GraphRAG reasoning.</div>
+          <p class="page-desc">
+            Fourth-year Computer Science undergraduate at VIT Vellore (CGPA 8.72/10) with verified software engineering internship exposure at Syncfusion. 
+            Building practical intelligent architectures, full-stack systems, and advancing research in multilingual semantic embeddings.
+          </p>
+          <div class="home-full-grid">
+            <div class="home-grid-card">
+              <div class="hgc-tag">ACADEMIC PROFILE</div>
+              <div class="hgc-val">VIT Vellore (8.72)</div>
+              <div class="hgc-sub">B.Tech CSE 2023–2027</div>
             </div>
-            <div class="timeline-card">
-              <div class="tl-date">CORE PILLAR II</div>
-              <div class="tl-title">Full-Stack Software Architecture</div>
-              <div class="tl-sub">Designing production FastAPI backends, PostgreSQL schemas, JWT bearer flows, and test suites.</div>
+            <div class="home-grid-card">
+              <div class="hgc-tag">FLAGSHIP SOFTWARE</div>
+              <div class="hgc-val">TeamFlow Platform</div>
+              <div class="hgc-sub">FastAPI &bull; PostgreSQL &bull; RBAC</div>
+            </div>
+            <div class="home-grid-card">
+              <div class="hgc-tag">SCIENTIFIC RESEARCH</div>
+              <div class="hgc-val">Indic NLP Embeddings</div>
+              <div class="hgc-sub">Cross-Lingual Alignment</div>
+            </div>
+            <div class="home-grid-card">
+              <div class="hgc-tag">CAREER STATUS</div>
+              <div class="hgc-val" style="color: var(--accent-cyan);">Available 2026/27</div>
+              <div class="hgc-sub">AI/ML & Systems Roles</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 3. SKILLS ENVIRONMENT -->
-      <div class="section-zone" id="card-skills" style="left: 2900px; top: 950px;">
-        <div class="node-anchor" onclick="requestNavigation('skills')" title="Web Anchor Node"></div>
-        <div class="about-header">
-          <div>
-            <div class="home-badge">LIVING NETWORK TAXONOMY</div>
-            <h2 class="about-title">Skills & Technologies</h2>
+      <!-- 2. ABOUT ENTITY -->
+      <div class="section-entity" id="entity-about" style="left: 1400px; top: 1200px;">
+        <!-- Compact Portal Node -->
+        <div class="compact-node-view" onclick="requestNavigation('about')" id="node-about">
+          <div class="node-anchor-point"></div>
+          <div class="node-tag">NODE_01 // PROFILE</div>
+          <div class="node-name">ABOUT</div>
+          <div class="node-gist">Academic & Industry Journey</div>
+          <div class="node-pills">
+            <span class="node-pill">VIT 8.72</span>
+            <span class="node-pill">Syncfusion</span>
+            <span class="node-pill">Triad</span>
           </div>
-          <div class="about-coord">NODE_02 // CONSTELLATION</div>
         </div>
-        <div class="skills-cluster-grid">
-          <div class="skill-cat-card">
-            <div class="cat-name">AI / ML & NLP</div>
-            <div class="skill-pills">
-              <span class="skill-pill">PyTorch</span>
-              <span class="skill-pill">TensorFlow</span>
-              <span class="skill-pill">Hugging Face</span>
-              <span class="skill-pill">LangChain</span>
-              <span class="skill-pill">Ollama</span>
-              <span class="skill-pill">LLMs</span>
+        <!-- Full Page View -->
+        <div class="full-page-view" id="page-about" style="display: none;">
+          <div class="about-top-bar">
+            <div>
+              <div class="badge-pill">ACADEMIC & PROFESSIONAL BACKGROUND</div>
+              <h2 class="page-main-title">About & Engineering Triad</h2>
             </div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan);">NODE_01 // PROFILE</div>
           </div>
-          <div class="skill-cat-card">
-            <div class="cat-name">Computer Vision</div>
-            <div class="skill-pills">
-              <span class="skill-pill">OpenCV</span>
-              <span class="skill-pill">MediaPipe</span>
-              <span class="skill-pill">Hand Landmarks</span>
-              <span class="skill-pill">Gesture AI</span>
+          <div class="about-two-col">
+            <div>
+              <div class="about-section-heading">01. EDUCATION & EXPERIENCE</div>
+              <div class="about-timeline-item">
+                <div class="ati-date">2023 – 2027 (4TH YEAR UNDERGRADUATE)</div>
+                <div class="ati-title">B.Tech Computer Science & Engineering</div>
+                <div class="ati-desc">VIT University, Vellore — CGPA: 8.72 / 10. Focused on neural architectures, distributed software systems, and data pipelines.</div>
+              </div>
+              <div class="about-timeline-item">
+                <div class="ati-date">MAY – JUNE 2026</div>
+                <div class="ati-title">AI Intern — Syncfusion Software Pvt. Ltd.</div>
+                <div class="ati-desc">Built enterprise features using ASP.NET Core, React, TypeScript, C#, and RBAC authorization boundaries.</div>
+              </div>
             </div>
-          </div>
-          <div class="skill-cat-card">
-            <div class="cat-name">Web & Backend</div>
-            <div class="skill-pills">
-              <span class="skill-pill">React</span>
-              <span class="skill-pill">TypeScript</span>
-              <span class="skill-pill">FastAPI</span>
-              <span class="skill-pill">Flask</span>
-              <span class="skill-pill">ASP.NET Core</span>
-              <span class="skill-pill">REST APIs</span>
-            </div>
-          </div>
-          <div class="skill-cat-card">
-            <div class="cat-name">Languages</div>
-            <div class="skill-pills">
-              <span class="skill-pill">Python</span>
-              <span class="skill-pill">Java</span>
-              <span class="skill-pill">C</span>
-              <span class="skill-pill">C++</span>
-              <span class="skill-pill">C#</span>
-              <span class="skill-pill">SQL</span>
-            </div>
-          </div>
-          <div class="skill-cat-card">
-            <div class="cat-name">Databases & Tools</div>
-            <div class="skill-pills">
-              <span class="skill-pill">PostgreSQL</span>
-              <span class="skill-pill">MySQL</span>
-              <span class="skill-pill">Git / GitHub</span>
-              <span class="skill-pill">Linux</span>
-              <span class="skill-pill">VS Code</span>
-            </div>
-          </div>
-          <div class="skill-cat-card">
-            <div class="cat-name">Testing & Reliability</div>
-            <div class="skill-pills">
-              <span class="skill-pill">PyTest</span>
-              <span class="skill-pill">Mutation Testing</span>
-              <span class="skill-pill">Streamlit</span>
-              <span class="skill-pill">PyInstaller</span>
+            <div>
+              <div class="about-section-heading">02. TRIAD OF STRENGTHS</div>
+              <div class="about-timeline-item">
+                <div class="ati-date">RESEARCH DEPTH</div>
+                <div class="ati-title">AI/ML, NLP & Knowledge Graphs</div>
+                <div class="ati-desc">Investigating low-resource Indic language representations, sentence embeddings, and agentic GraphRAG reasoning.</div>
+              </div>
+              <div class="about-timeline-item">
+                <div class="ati-date">SYSTEMS RIGOR</div>
+                <div class="ati-title">Production Software Engineering</div>
+                <div class="ati-desc">Developing modular FastAPI backends, PostgreSQL schemas, JWT bearer security, and automated Pytest test suites.</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 4. PROJECTS ENVIRONMENT -->
-      <div class="section-zone" id="card-projects" style="left: 2950px; top: 2100px;">
-        <div class="node-anchor" onclick="requestNavigation('projects')" title="Web Anchor Node"></div>
-        <div class="about-header">
-          <div>
-            <div class="home-badge">ENGINEERING CASE STUDIES</div>
-            <h2 class="about-title">Systems & Applications</h2>
-          </div>
-          <div class="about-coord">NODE_03 // PRODUCTION_PROOFS</div>
-        </div>
-        <div class="proj-flagship">
-          <div class="flag-header">
-            <div class="flag-title">TeamFlow — Full-Stack Project Platform</div>
-            <span class="flag-tag">FLAGSHIP SOFTWARE CASE STUDY</span>
-          </div>
-          <div class="flag-desc">
-            Centralized team and task management platform built around a clean service-layer separation. 
-            Features JWT bearer authentication, role-based access control (Owner/Admin/Member), PostgreSQL 17 schemas, Kanban task workflows, and automated backend test suites.
-          </div>
-          <div class="flag-stack">
-            <span class="skill-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">React + Vite</span>
-            <span class="skill-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">TypeScript</span>
-            <span class="skill-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">FastAPI (Python)</span>
-            <span class="skill-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">PostgreSQL 17</span>
-            <span class="skill-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">SQLAlchemy 2.x</span>
-            <span class="skill-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">JWT / RBAC</span>
+      <!-- 3. SKILLS ENTITY -->
+      <div class="section-entity" id="entity-skills" style="left: 3600px; top: 1250px;">
+        <!-- Compact Portal Node -->
+        <div class="compact-node-view" onclick="requestNavigation('skills')" id="node-skills">
+          <div class="node-anchor-point"></div>
+          <div class="node-tag">NODE_02 // TAXONOMY</div>
+          <div class="node-name">SKILLS</div>
+          <div class="node-gist">Living Technical Network</div>
+          <div class="node-pills">
+            <span class="node-pill">PyTorch</span>
+            <span class="node-pill">FastAPI</span>
+            <span class="node-pill">OpenCV</span>
           </div>
         </div>
-        <div class="proj-mini-grid">
-          <div class="proj-mini-card">
-            <div class="mini-title">Indian Sign Language Translator</div>
-            <div class="mini-desc">Computer-vision system using OpenCV and MediaPipe 21-hand landmark tracking to recognize gestures and synthesize speech.</div>
+        <!-- Full Page View -->
+        <div class="full-page-view" id="page-skills" style="display: none;">
+          <div class="about-top-bar">
+            <div>
+              <div class="badge-pill">LIVING TECHNOLOGY NETWORK</div>
+              <h2 class="page-main-title">Skills & Technical Competencies</h2>
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan);">NODE_02 // CONSTELLATION</div>
           </div>
-          <div class="proj-mini-card">
-            <div class="mini-title">One Health / Avian Influenza AI</div>
-            <div class="mini-desc">Multimodal prediction engine integrating satellite and climate data with agentic GraphRAG reasoning for decision support.</div>
+          <div class="skills-full-grid">
+            <div class="skill-domain-box">
+              <div class="sdb-title">AI / ML & NLP</div>
+              <div class="sdb-pills">
+                <span class="sdb-pill">PyTorch</span>
+                <span class="sdb-pill">TensorFlow</span>
+                <span class="sdb-pill">Hugging Face</span>
+                <span class="sdb-pill">LangChain</span>
+                <span class="sdb-pill">Ollama</span>
+                <span class="sdb-pill">NLP</span>
+                <span class="sdb-pill">LLMs</span>
+              </div>
+            </div>
+            <div class="skill-domain-box">
+              <div class="sdb-title">Computer Vision</div>
+              <div class="sdb-pills">
+                <span class="sdb-pill">OpenCV</span>
+                <span class="sdb-pill">MediaPipe</span>
+                <span class="sdb-pill">21-Hand Landmarks</span>
+                <span class="sdb-pill">Gesture AI</span>
+              </div>
+            </div>
+            <div class="skill-domain-box">
+              <div class="sdb-title">Web & Backend Systems</div>
+              <div class="sdb-pills">
+                <span class="sdb-pill">React</span>
+                <span class="sdb-pill">TypeScript</span>
+                <span class="sdb-pill">JavaScript</span>
+                <span class="sdb-pill">FastAPI</span>
+                <span class="sdb-pill">Flask</span>
+                <span class="sdb-pill">ASP.NET Core</span>
+                <span class="sdb-pill">REST APIs</span>
+              </div>
+            </div>
+            <div class="skill-domain-box">
+              <div class="sdb-title">Programming Languages</div>
+              <div class="sdb-pills">
+                <span class="sdb-pill">Python</span>
+                <span class="sdb-pill">Java</span>
+                <span class="sdb-pill">C</span>
+                <span class="sdb-pill">C++</span>
+                <span class="sdb-pill">C#</span>
+              </div>
+            </div>
+            <div class="skill-domain-box">
+              <div class="sdb-title">Databases & Storage</div>
+              <div class="sdb-pills">
+                <span class="sdb-pill">PostgreSQL 17</span>
+                <span class="sdb-pill">MySQL</span>
+                <span class="sdb-pill">SQLAlchemy 2.x</span>
+              </div>
+            </div>
+            <div class="skill-domain-box">
+              <div class="sdb-title">Testing & Developer Tools</div>
+              <div class="sdb-pills">
+                <span class="sdb-pill">PyTest</span>
+                <span class="sdb-pill">Mutation Testing</span>
+                <span class="sdb-pill">Git / GitHub</span>
+                <span class="sdb-pill">Linux</span>
+                <span class="sdb-pill">VS Code</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- 5. RESEARCH ENVIRONMENT -->
-      <div class="section-zone" id="card-research" style="left: 1050px; top: 2150px;">
-        <div class="node-anchor" onclick="requestNavigation('research')" title="Web Anchor Node"></div>
-        <div class="about-header">
-          <div>
-            <div class="home-badge">APPLIED SCIENTIFIC INVESTIGATION</div>
-            <h2 class="about-title">Research & Technical Papers</h2>
+      <!-- 4. PROJECTS ENTITY -->
+      <div class="section-entity" id="entity-projects" style="left: 3650px; top: 2750px;">
+        <!-- Compact Portal Node -->
+        <div class="compact-node-view" onclick="requestNavigation('projects')" id="node-projects">
+          <div class="node-anchor-point"></div>
+          <div class="node-tag">NODE_03 // SYSTEMS</div>
+          <div class="node-name">PROJECTS</div>
+          <div class="node-gist">TeamFlow & Systems Suite</div>
+          <div class="node-pills">
+            <span class="node-pill">TeamFlow</span>
+            <span class="node-pill">ISL Translator</span>
+            <span class="node-pill">One Health</span>
           </div>
-          <div class="about-coord">NODE_04 // ALGORITHMIC_RESEARCH</div>
         </div>
-        <div class="res-section-grid">
-          <div class="res-card">
-            <div class="res-tag">MULTILINGUAL NLP // EMBEDDINGS</div>
-            <div class="res-heading">Cross-Lingual Semantic Alignment in Indic Languages</div>
-            <div class="res-body">
-              Evaluating semantic drift and language-family representations across low-resource Indic language pairs using mBERT, XLM-R, LaBSE, and MuRIL.
+        <!-- Full Page View -->
+        <div class="full-page-view" id="page-projects" style="display: none;">
+          <div class="about-top-bar">
+            <div>
+              <div class="badge-pill">ENGINEERING CASE STUDIES</div>
+              <h2 class="page-main-title">Systems & Applications</h2>
             </div>
-            <div class="res-pipeline-box">
-              CORPORA: Samanantar, Wiki-Translate, IN22<br>
-              EVAL: STS Correlation, Bitext Retrieval, Graph Modularity
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan);">NODE_03 // SYSTEMS</div>
+          </div>
+          <div class="teamflow-flagship-card">
+            <div class="tfc-header">
+              <div class="tfc-title">TeamFlow — Full-Stack Project Platform</div>
+              <span class="tfc-tag">FLAGSHIP SOFTWARE CASE STUDY</span>
+            </div>
+            <div class="tfc-desc">
+              A comprehensive team and project management platform engineered with FastAPI backend services and a React/TypeScript Vite client. 
+              Implements JWT authentication, role-based access control (Owner/Admin/Member), PostgreSQL 17 data integrity constraints, Kanban task workflows, and automated backend test suites.
+            </div>
+            <div class="tfc-stack">
+              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">React + Vite</span>
+              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">TypeScript</span>
+              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">FastAPI (Python)</span>
+              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">PostgreSQL 17</span>
+              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">JWT / RBAC</span>
+              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">PyTest Verified</span>
             </div>
           </div>
-          <div class="res-card">
-            <div class="res-tag">EPIDEMIOLOGY // DIGITAL TWIN</div>
-            <div class="res-heading">One Health Avian Influenza Surveillance & Prediction</div>
-            <div class="res-body">
-              Digital Twin platform integrating climate, satellite, and veterinary surveillance to predict Avian Influenza outbreaks across India, Vietnam, US, and Netherlands.
+          <div class="projects-sub-grid">
+            <div class="proj-card-sub">
+              <div class="pcs-tag">COMPUTER VISION</div>
+              <div class="pcs-title">ISL Translator</div>
+              <div class="pcs-desc">OpenCV and MediaPipe 21-hand landmark tracking for real-time sign language recognition and speech synthesis.</div>
             </div>
-            <div class="res-pipeline-box">
-              DATA: ERA5, MODIS, FAO EMPRES, WOAH<br>
-              CORE: Multimodal Engine &rarr; GraphRAG &rarr; Agentic AI
+            <div class="proj-card-sub">
+              <div class="pcs-tag">MULTIMODAL AI</div>
+              <div class="pcs-title">One Health AI</div>
+              <div class="pcs-desc">Avian Influenza surveillance engine combining climate/satellite data with agentic GraphRAG reasoning.</div>
+            </div>
+            <div class="proj-card-sub">
+              <div class="pcs-tag">FULL-STACK APP</div>
+              <div class="pcs-title">MyKitchen Planner</div>
+              <div class="pcs-desc">Meal recommendation and dish planning platform built around Python/Flask and relational databases.</div>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- 5. RESEARCH ENTITY -->
+      <div class="section-entity" id="entity-research" style="left: 1350px; top: 2800px;">
+        <!-- Compact Portal Node -->
+        <div class="compact-node-view" onclick="requestNavigation('research')" id="node-research">
+          <div class="node-anchor-point"></div>
+          <div class="node-tag">NODE_04 // RESEARCH</div>
+          <div class="node-name">RESEARCH</div>
+          <div class="node-gist">Indic NLP & Digital Twins</div>
+          <div class="node-pills">
+            <span class="node-pill">MuRIL / LaBSE</span>
+            <span class="node-pill">GraphRAG</span>
+          </div>
+        </div>
+        <!-- Full Page View -->
+        <div class="full-page-view" id="page-research" style="display: none;">
+          <div class="about-top-bar">
+            <div>
+              <div class="badge-pill">SCIENTIFIC & APPLIED RESEARCH</div>
+              <h2 class="page-main-title">Research Investigations & Papers</h2>
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan);">NODE_04 // INVESTIGATION</div>
+          </div>
+          <div class="research-two-col">
+            <div class="res-paper-card">
+              <div class="rpc-tag">MULTILINGUAL NLP // EMBEDDINGS</div>
+              <div class="rpc-title">Cross-Lingual Semantic Alignment in Indic Languages</div>
+              <div class="rpc-body">
+                Investigating semantic drift and language-family representations across low-resource Indic language pairs using multilingual transformer embeddings.
+              </div>
+              <div class="rpc-spec-box">
+                MODELS: mBERT, XLM-R, LaBSE, MuRIL<br>
+                DATASETS: Samanantar, Wiki-Translate, IN22<br>
+                METRICS: STS Correlation, Bitext Retrieval, Graph Modularity
+              </div>
+            </div>
+            <div class="res-paper-card">
+              <div class="rpc-tag">DIGITAL TWIN // ONE HEALTH</div>
+              <div class="rpc-title">Predictive Platform for Avian Influenza Surveillance</div>
+              <div class="rpc-body">
+                Digital Twin architecture fusing satellite, meteorological, and veterinary data to deliver explainable decision intelligence beyond basic risk scoring.
+              </div>
+              <div class="rpc-spec-box">
+                DATA: ERA5, MODIS, FAO EMPRES, WOAH WAHIS<br>
+                ARCHITECTURE: Multimodal Engine &rarr; Knowledge Graph &rarr; GraphRAG &rarr; Agentic Decision System
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
     <canvas id="world-canvas"></canvas>
   </div>
@@ -728,7 +880,7 @@
       <span class="tele-val" id="tele-route">home &rarr; home</span>
     </div>
     <div class="tele-row">
-      <span>DEST SCALE:</span>
+      <span>PAGE SCALE:</span>
       <span class="tele-val" id="tele-scale">1.00x</span>
     </div>
     <div class="tele-row">
@@ -755,7 +907,7 @@
       </div>
       <div class="slider-row">
         <span>Expansion Peak Scale</span>
-        <input type="range" id="param-peak-scale" min="1.02" max="1.12" value="1.06" step="0.01">
+        <input type="range" id="param-peak-scale" min="1.02" max="1.12" value="1.05" step="0.01">
       </div>
       <div class="slider-row">
         <span>Impact Vibration (px)</span>
@@ -771,41 +923,42 @@
   <script>
     // --- 1. Centralized Motion & Physics Configuration ---
     const CONFIG = {
-      shootDurationMs: 160,
-      tensionDurationMs: 80,
-      springK: 420,
-      springC: 26,
-      mass: 1.0,
-      expansionDurationMs: 120,
-      expansionPeakScale: 1.06,
-      impactDurationMs: 75,
-      impactVibAmp: 3.5,
-      settleDurationMs: 130,
+      collapseDurationMs: 120,     // Full page collapse into compact node
+      shootDurationMs: 160,        // Web filament extension
+      tensionDurationMs: 80,       // Tension hold
+      springK: 420,                // Camera spring stiffness
+      springC: 26,                 // Camera spring damping
+      mass: 1.0,                   // Viewport mass
+      expansionDurationMs: 140,    // Compact node expansion into full page
+      expansionPeakScale: 1.05,    // Peak arrival scale
+      impactDurationMs: 70,        // Micro-vibration duration
+      impactVibAmp: 3.5,           // Peak vibration displacement (px)
+      settleDurationMs: 120,       // Harmonic return to 1.00x
       chromaticEnabled: true,
       reducedMotion: false
     };
 
-    // --- 2. Sections & World Coordinates (Origin = 2000, 1500) ---
+    // --- 2. Spatial Entities & World Coordinates (Origin = 2500, 2000) ---
     const SECTIONS = [
       { id: 'home', index: 1, label: 'HOME', x: 0, y: 0 },
-      { id: 'about', index: 2, label: 'ABOUT', x: -900, y: -600 },
-      { id: 'skills', index: 3, label: 'SKILLS', x: 900, y: -550 },
-      { id: 'projects', index: 4, label: 'PROJECTS', x: 950, y: 600 },
-      { id: 'research', index: 5, label: 'RESEARCH', x: -950, y: 650 }
+      { id: 'about', index: 2, label: 'ABOUT', x: -1100, y: -800 },
+      { id: 'skills', index: 3, label: 'SKILLS', x: 1100, y: -750 },
+      { id: 'projects', index: 4, label: 'PROJECTS', x: 1150, y: 750 },
+      { id: 'research', index: 5, label: 'RESEARCH', x: -1150, y: 800 }
     ];
 
     const sectionMap = {};
     SECTIONS.forEach(s => sectionMap[s.id] = s);
 
-    // --- 3. Refined 10-Stage Finite State Machine ---
+    // --- 3. Enhanced 10-Stage Finite State Machine ---
     const STATES = {
       IDLE: 'IDLE',
+      COLLAPSING: 'COLLAPSING',
       TARGETING: 'TARGETING',
       SHOOTING: 'SHOOTING',
       ANCHORED: 'ANCHORED',
       TENSION: 'TENSION',
       PULLING: 'PULLING',
-      ARRIVAL_APPROACH: 'ARRIVAL_APPROACH',
       ARRIVAL_EXPANSION: 'ARRIVAL_EXPANSION',
       IMPACT: 'IMPACT',
       SETTLING: 'SETTLING'
@@ -816,18 +969,20 @@
     let targetSectionId = null;
 
     let animStartTime = 0;
+    let collapsePhase = 0;
     let shootProgress = 0;
     let tensionPhase = 0;
     let expansionPhase = 0;
     let impactPhase = 0;
     let settlePhase = 0;
 
-    // Dynamic scale, opacity and vibration per zone
-    const cardDynamicStates = {};
+    // View state tracking per entity: { viewMode: 'full' | 'compact', scale: 1.0, opacity: 1.0, vibX: 0, vibY: 0 }
+    const entityStates = {};
     SECTIONS.forEach(s => {
-      cardDynamicStates[s.id] = {
-        scale: s.id === 'home' ? 1.0 : 0.68,
-        opacity: s.id === 'home' ? 1.0 : 0.25,
+      entityStates[s.id] = {
+        viewMode: s.id === 'home' ? 'full' : 'compact',
+        scale: 1.0,
+        opacity: 1.0,
         vibX: 0,
         vibY: 0
       };
@@ -858,7 +1013,7 @@
     const teleVibe = document.getElementById('tele-vibe');
     const teleFps = document.getElementById('tele-fps');
 
-    // Controls
+    // Controls Binding
     document.getElementById('param-shoot').addEventListener('input', e => CONFIG.shootDurationMs = +e.target.value);
     document.getElementById('param-tension').addEventListener('input', e => CONFIG.tensionDurationMs = +e.target.value);
     document.getElementById('param-k').addEventListener('input', e => CONFIG.springK = +e.target.value);
@@ -868,7 +1023,7 @@
     document.getElementById('param-chromatic').addEventListener('change', e => CONFIG.chromaticEnabled = e.target.checked);
     document.getElementById('param-reduced-motion').addEventListener('change', e => CONFIG.reducedMotion = e.target.checked);
 
-    // --- 4. Initialize Navigation Pills & Canvas ---
+    // --- 4. Initialize Navigation & Canvas ---
     function init() {
       SECTIONS.forEach(s => {
         const btn = document.createElement('button');
@@ -888,11 +1043,35 @@
           requestNavigation(SECTIONS[num - 1].id);
         }
       });
+
+      updateDOMEntityViews();
     }
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+    }
+
+    function updateDOMEntityViews() {
+      SECTIONS.forEach(s => {
+        const nodeEl = document.getElementById(`node-${s.id}`);
+        const pageEl = document.getElementById(`page-${s.id}`);
+        const state = entityStates[s.id];
+
+        if (state.viewMode === 'full') {
+          if (nodeEl) nodeEl.style.display = 'none';
+          if (pageEl) {
+            pageEl.style.display = 'block';
+            pageEl.style.opacity = state.opacity.toFixed(2);
+          }
+        } else {
+          if (pageEl) pageEl.style.display = 'none';
+          if (nodeEl) {
+            nodeEl.style.display = 'block';
+            nodeEl.style.opacity = state.opacity.toFixed(2);
+          }
+        }
+      });
     }
 
     // --- 5. Navigation & Interruption Handling ---
@@ -917,34 +1096,26 @@
 
       // Accessible reduced motion
       if (CONFIG.reducedMotion || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        SECTIONS.forEach(s => {
+          entityStates[s.id].viewMode = s.id === targetSectionId ? 'full' : 'compact';
+          entityStates[s.id].scale = 1.0;
+          entityStates[s.id].opacity = 1.0;
+          entityStates[s.id].vibX = 0;
+          entityStates[s.id].vibY = 0;
+        });
         currentSectionId = targetSectionId;
         camX = targetSec.x;
         camY = targetSec.y;
         velX = 0; velY = 0;
-        SECTIONS.forEach(s => {
-          cardDynamicStates[s.id].scale = s.id === currentSectionId ? 1.0 : 0.68;
-          cardDynamicStates[s.id].opacity = s.id === currentSectionId ? 1.0 : 0.25;
-          cardDynamicStates[s.id].vibX = 0;
-          cardDynamicStates[s.id].vibY = 0;
-        });
         currentState = STATES.IDLE;
-        updateActiveCardClass();
+        updateDOMEntityViews();
         updateTelemetry();
         return;
       }
 
-      currentState = STATES.TARGETING;
+      currentState = STATES.COLLAPSING;
       animStartTime = performance.now();
       updateTelemetry();
-    }
-
-    function updateActiveCardClass() {
-      document.querySelectorAll('.section-zone').forEach(c => {
-        c.classList.remove('active-zone');
-        c.classList.remove('chromatic-impact');
-      });
-      const targetCard = document.getElementById(`card-${currentSectionId}`);
-      if (targetCard) targetCard.classList.add('active-zone');
     }
 
     function emitAnchorSparks(x, y) {
@@ -962,7 +1133,7 @@
       }
     }
 
-    // --- 6. Physics & Animation Engine ---
+    // --- 6. Physics & Animation Main Loop ---
     let lastTime = performance.now();
     let frameCount = 0;
     let lastFpsUpdate = performance.now();
@@ -980,7 +1151,7 @@
 
       evaluateStateMachine(now, dt);
       updateCameraPhysics(dt);
-      applyCardTransforms();
+      applyEntityTransforms();
       renderScene();
 
       requestAnimationFrame(animate);
@@ -990,8 +1161,27 @@
       const elapsed = now - animStartTime;
 
       switch (currentState) {
+        case STATES.COLLAPSING:
+          collapsePhase = Math.min(elapsed / CONFIG.collapseDurationMs, 1.0);
+          // Departing full page collapses into compact node
+          if (entityStates[currentSectionId]) {
+            entityStates[currentSectionId].scale = 1.0 - collapsePhase * 0.45; // 1.00 -> 0.55
+            entityStates[currentSectionId].opacity = 1.0 - collapsePhase * 0.35; // 1.00 -> 0.65
+          }
+
+          if (collapsePhase >= 1.0) {
+            entityStates[currentSectionId].viewMode = 'compact';
+            entityStates[currentSectionId].scale = 1.0;
+            entityStates[currentSectionId].opacity = 1.0;
+            updateDOMEntityViews();
+
+            currentState = STATES.TARGETING;
+            animStartTime = now;
+          }
+          break;
+
         case STATES.TARGETING:
-          if (elapsed > 40) {
+          if (elapsed > 30) {
             currentState = STATES.SHOOTING;
             animStartTime = now;
           }
@@ -1021,11 +1211,6 @@
           tensionPhase = Math.min(elapsed / CONFIG.tensionDurationMs, 1.0);
           webSag = Math.sin(tensionPhase * Math.PI) * 32;
 
-          // Departing card begins pre-pull shrink (1.00 -> 0.92)
-          if (cardDynamicStates[currentSectionId]) {
-            cardDynamicStates[currentSectionId].scale = 1.0 - tensionPhase * 0.08;
-          }
-
           if (tensionPhase >= 1.0) {
             currentState = STATES.PULLING;
             animStartTime = now;
@@ -1037,25 +1222,15 @@
 
         case STATES.PULLING:
           const distToTarget = Math.hypot(targetCamX - camX, targetCamY - camY);
-          const totalDist = Math.hypot(sectionMap[targetSectionId].x - sectionMap[currentSectionId].x, sectionMap[targetSectionId].y - sectionMap[currentSectionId].y) || 1;
-          const pullProgress = Math.max(0, Math.min(1.0, 1.0 - (distToTarget / totalDist)));
-
-          // Departing card visibly shrinks and recedes into background depth
-          if (cardDynamicStates[currentSectionId]) {
-            cardDynamicStates[currentSectionId].scale = 0.92 - pullProgress * 0.24; // 0.92 -> 0.68
-            cardDynamicStates[currentSectionId].opacity = 1.0 - pullProgress * 0.75; // 1.00 -> 0.25
-          }
-
-          // Approaching card approaches in space from smaller scale (0.68 -> 0.84)
-          if (cardDynamicStates[targetSectionId]) {
-            cardDynamicStates[targetSectionId].scale = 0.68 + pullProgress * 0.16; // 0.68 -> 0.84
-            cardDynamicStates[targetSectionId].opacity = 0.25 + pullProgress * 0.55; // 0.25 -> 0.80
-          }
-
           webSag = Math.max(0, webSag - dt * 50);
 
-          // Once camera arrives at threshold, trigger arrival expansion
-          if (distToTarget < 14.0) {
+          // Trigger expansion when approaching the destination compact node
+          if (distToTarget < 18.0) {
+            entityStates[targetSectionId].viewMode = 'full';
+            entityStates[targetSectionId].scale = 0.55;
+            entityStates[targetSectionId].opacity = 0.65;
+            updateDOMEntityViews();
+
             currentState = STATES.ARRIVAL_EXPANSION;
             animStartTime = now;
           }
@@ -1063,20 +1238,20 @@
 
         case STATES.ARRIVAL_EXPANSION:
           expansionPhase = Math.min(elapsed / CONFIG.expansionDurationMs, 1.0);
-          // Rapid ease-out cubic expansion towards viewer (0.84 -> peak scale e.g. 1.06)
+          // Significant spatial expansion from compact scale (0.55x -> peak scale 1.05x)
           const easeExp = 1 - Math.pow(1 - expansionPhase, 3);
-          if (cardDynamicStates[targetSectionId]) {
-            cardDynamicStates[targetSectionId].scale = 0.84 + (CONFIG.expansionPeakScale - 0.84) * easeExp;
-            cardDynamicStates[targetSectionId].opacity = 0.80 + 0.20 * easeExp;
+          if (entityStates[targetSectionId]) {
+            entityStates[targetSectionId].scale = 0.55 + (CONFIG.expansionPeakScale - 0.55) * easeExp;
+            entityStates[targetSectionId].opacity = 0.65 + 0.35 * easeExp;
           }
 
           if (expansionPhase >= 1.0) {
             currentState = STATES.IMPACT;
             animStartTime = now;
 
-            const targetCard = document.getElementById(`card-${targetSectionId}`);
-            if (targetCard && CONFIG.chromaticEnabled) {
-              targetCard.classList.add('chromatic-impact');
+            const targetPage = document.getElementById(`page-${targetSectionId}`);
+            if (targetPage && CONFIG.chromaticEnabled) {
+              targetPage.classList.add('chromatic-impact');
             }
           }
           break;
@@ -1087,37 +1262,36 @@
           const vibAngle = impactPhase * Math.PI * 8;
           const currentVib = Math.sin(vibAngle) * CONFIG.impactVibAmp * vibDamp;
 
-          if (cardDynamicStates[targetSectionId]) {
-            cardDynamicStates[targetSectionId].vibX = currentVib;
-            cardDynamicStates[targetSectionId].vibY = -currentVib * 0.5;
+          if (entityStates[targetSectionId]) {
+            entityStates[targetSectionId].vibX = currentVib;
+            entityStates[targetSectionId].vibY = -currentVib * 0.5;
           }
           teleVibe.textContent = `${currentVib.toFixed(1)} px`;
 
-          webOpacity = Math.max(0, 1.0 - impactPhase * 1.6);
+          webOpacity = Math.max(0, 1.0 - impactPhase * 1.8);
 
           if (impactPhase >= 1.0) {
             currentState = STATES.SETTLING;
             animStartTime = now;
 
-            const targetCard = document.getElementById(`card-${targetSectionId}`);
-            if (targetCard) targetCard.classList.remove('chromatic-impact');
+            const targetPage = document.getElementById(`page-${targetSectionId}`);
+            if (targetPage) targetPage.classList.remove('chromatic-impact');
           }
           break;
 
         case STATES.SETTLING:
           settlePhase = Math.min(elapsed / CONFIG.settleDurationMs, 1.0);
           const easeSettle = Math.sin((settlePhase * Math.PI) / 2);
-          if (cardDynamicStates[targetSectionId]) {
-            cardDynamicStates[targetSectionId].scale = CONFIG.expansionPeakScale - (CONFIG.expansionPeakScale - 1.00) * easeSettle;
-            cardDynamicStates[targetSectionId].vibX = 0;
-            cardDynamicStates[targetSectionId].vibY = 0;
+          if (entityStates[targetSectionId]) {
+            entityStates[targetSectionId].scale = CONFIG.expansionPeakScale - (CONFIG.expansionPeakScale - 1.00) * easeSettle;
+            entityStates[targetSectionId].vibX = 0;
+            entityStates[targetSectionId].vibY = 0;
           }
           teleVibe.textContent = `0.0 px`;
 
           if (settlePhase >= 1.0) {
             currentState = STATES.IDLE;
             currentSectionId = targetSectionId;
-            updateActiveCardClass();
             shootProgress = 0;
             webOpacity = 1.0;
           }
@@ -1155,13 +1329,12 @@
       camY += velY * dt;
     }
 
-    function applyCardTransforms() {
+    function applyEntityTransforms() {
       SECTIONS.forEach(s => {
-        const card = document.getElementById(`card-${s.id}`);
-        const state = cardDynamicStates[s.id];
-        if (card && state) {
-          card.style.transform = `translate(-50%, -50%) scale(${state.scale.toFixed(3)}) translate(${state.vibX.toFixed(1)}px, ${state.vibY.toFixed(1)}px)`;
-          card.style.opacity = state.opacity.toFixed(2);
+        const entity = document.getElementById(`entity-${s.id}`);
+        const state = entityStates[s.id];
+        if (entity && state) {
+          entity.style.transform = `translate(-50%, -50%) scale(${state.scale.toFixed(3)}) translate(${state.vibX.toFixed(1)}px, ${state.vibY.toFixed(1)}px)`;
         }
       });
     }
@@ -1173,9 +1346,9 @@
       } else {
         teleState.className = 'state-badge';
       }
-      const activeState = cardDynamicStates[targetSectionId || currentSectionId];
+      const activeState = entityStates[targetSectionId || currentSectionId];
       if (activeState) {
-        teleScale.textContent = `${activeState.scale.toFixed(2)}x`;
+        teleScale.textContent = `${activeState.scale.toFixed(2)}x (${activeState.viewMode.toUpperCase()})`;
       }
     }
 
@@ -1184,8 +1357,8 @@
       const screenCenterX = window.innerWidth / 2;
       const screenCenterY = window.innerHeight / 2;
 
-      const transX = screenCenterX - 2000 - camX;
-      const transY = screenCenterY - 1500 - camY;
+      const transX = screenCenterX - 2500 - camX;
+      const transY = screenCenterY - 2000 - camY;
 
       worldPlane.style.transform = `translate3d(${transX}px, ${transY}px, 0)`;
 
@@ -1196,9 +1369,9 @@
         y: screenCenterY + (wy - camY)
       });
 
-      // Background Macro Web Connections
+      // Background Persistent Macro Web Connections
       ctx.lineWidth = 1;
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
       ctx.setLineDash([4, 4]);
 
       for (let i = 0; i < SECTIONS.length; i++) {
@@ -1213,7 +1386,7 @@
       }
       ctx.setLineDash([]);
 
-      // Dynamic Active Filament
+      // Dynamic Active Filament between Compact Nodes
       if (currentState !== STATES.IDLE && webOpacity > 0.01) {
         const sOrigin = worldToScreen(webOrigin.x, webOrigin.y);
         const sTip = worldToScreen(webTip.x, webTip.y);
