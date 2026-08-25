@@ -3,19 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spider-Web Navigation Prototype (Master Profile Ground Truth) — Kevin Prakash J</title>
+  <title>Spider-Web Navigation Motion Sandbox — Full Scene Scale Transition</title>
   <style>
     :root {
       --bg-primary: #07090E;
       --bg-surface: #0D111A;
-      --bg-surface-2: #151C28;
       --accent-red: #FF2A4B;
       --accent-cyan: #00D2FF;
-      --accent-glow: rgba(0, 210, 255, 0.25);
       --text-primary: #F4F6FB;
       --text-muted: #8E9BAE;
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --font-display: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
     }
 
@@ -31,17 +27,17 @@
       user-select: none;
     }
 
-    /* Top HUD / Navigation Bar */
+    /* Top Controls Header */
     header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      height: 54px;
+      height: 58px;
       padding: 0 24px;
-      background: rgba(7, 9, 14, 0.92);
+      background: rgba(7, 9, 14, 0.94);
       backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-subtle);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -49,10 +45,9 @@
     }
 
     .brand-title {
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 700;
       letter-spacing: 0.06em;
-      color: var(--text-primary);
     }
     .brand-title span {
       color: var(--accent-cyan);
@@ -63,35 +58,35 @@
 
     .nav-pills {
       display: flex;
-      gap: 8px;
+      gap: 12px;
     }
 
     .nav-btn {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       color: var(--text-muted);
-      padding: 6px 14px;
-      border-radius: 4px;
-      font-size: 11px;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-size: 12px;
       font-family: var(--font-mono);
+      font-weight: 700;
       cursor: pointer;
-      min-height: 38px;
-      min-width: 44px;
+      min-height: 40px;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .nav-btn:hover {
       color: var(--text-primary);
       border-color: var(--accent-cyan);
-      background: rgba(0, 210, 255, 0.08);
+      background: rgba(0, 210, 255, 0.1);
     }
     .nav-btn.active {
       background: var(--accent-red);
       color: #fff;
       border-color: var(--accent-red);
-      box-shadow: 0 0 16px rgba(255, 42, 75, 0.4);
+      box-shadow: 0 0 20px rgba(255, 42, 75, 0.5);
     }
 
-    /* Spatial Canvas World Container */
+    /* Spatial Canvas Viewport */
     #world-viewport {
       position: absolute;
       top: 0;
@@ -113,8 +108,8 @@
 
     #world-plane {
       position: absolute;
-      width: 5200px;
-      height: 4200px;
+      width: 4000px;
+      height: 3000px;
       top: 50%;
       left: 50%;
       transform: translate3d(0, 0, 0);
@@ -123,10 +118,10 @@
       will-change: transform;
     }
 
-    /* Section Entity Base */
-    .section-entity {
+    /* Scene Entity Wrapper */
+    .scene-entity {
       position: absolute;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scale(1);
       transform-origin: center center;
       will-change: transform, opacity;
       display: flex;
@@ -135,314 +130,145 @@
     }
 
     /* =========================================================================
-       1. COMPACT WEB NODE / PORTAL PREVIEW (Resting in Web Network)
+       1. FULL-SCREEN IMMERSIVE SCENE (BIG VIEW)
+       ========================================================================= */
+    .full-scene-view {
+      width: 880px;
+      height: 520px;
+      background: rgba(13, 17, 26, 0.95);
+      border: 2px solid rgba(0, 210, 255, 0.5);
+      border-radius: 20px;
+      backdrop-filter: blur(24px);
+      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.9), 0 0 60px rgba(0, 210, 255, 0.2);
+      padding: 50px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      position: relative;
+    }
+
+    .full-scene-view.chromatic-impact {
+      border-color: #00D2FF;
+      box-shadow: -4px 0 35px rgba(255, 42, 75, 0.6), 4px 0 35px rgba(0, 210, 255, 0.65), 0 30px 100px rgba(0,0,0,0.95);
+    }
+    .full-scene-view.chromatic-impact h1 {
+      text-shadow: -3px 0 rgba(255, 42, 75, 0.9), 3px 0 rgba(0, 210, 255, 0.9);
+    }
+
+    .scene-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent-cyan);
+      letter-spacing: 0.15em;
+      padding: 6px 16px;
+      border-radius: 20px;
+      background: rgba(0, 210, 255, 0.08);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      text-transform: uppercase;
+      margin: 0 auto 12px auto;
+    }
+
+    .scene-huge-title {
+      font-size: 82px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.0;
+      background: linear-gradient(135deg, #FFFFFF 40%, #A3B1CC 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 10px 0;
+    }
+
+    .scene-sub-row {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--accent-cyan);
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .scene-footer-hud {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 18px;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+    .scene-footer-hud strong {
+      color: var(--text-primary);
+    }
+
+    /* =========================================================================
+       2. COMPACT NODE / PORTAL (SMALL VIEW IN WEB NETWORK)
        ========================================================================= */
     .compact-node-view {
-      width: 250px;
-      background: rgba(13, 17, 26, 0.92);
-      border: 1px solid rgba(0, 210, 255, 0.35);
+      width: 220px;
+      height: 110px;
+      background: rgba(13, 17, 26, 0.95);
+      border: 2px solid rgba(0, 210, 255, 0.4);
       border-radius: 12px;
-      padding: 16px;
+      padding: 14px;
       backdrop-filter: blur(14px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 210, 255, 0.12);
-      cursor: pointer;
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 210, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
       position: relative;
+      cursor: pointer;
       user-select: none;
     }
     .compact-node-view:hover {
       border-color: var(--accent-cyan);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 210, 255, 0.25);
-      transform: scale(1.04);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 210, 255, 0.3);
+      transform: scale(1.05);
     }
-    .node-anchor-point {
+
+    .node-anchor-dot {
       position: absolute;
-      top: -10px;
+      top: -12px;
       left: 50%;
       transform: translateX(-50%);
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       background: var(--bg-primary);
       border: 2px solid var(--accent-cyan);
-      box-shadow: 0 0 10px var(--accent-cyan);
+      box-shadow: 0 0 12px var(--accent-cyan);
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .node-anchor-point::after {
+    .node-anchor-dot::after {
       content: '';
-      width: 6px;
-      height: 6px;
+      width: 8px;
+      height: 8px;
       background: #fff;
       border-radius: 50%;
     }
-    .node-tag {
+
+    .node-tag-txt {
       font-family: var(--font-mono);
       font-size: 9.5px;
       color: var(--accent-cyan);
-      letter-spacing: 0.1em;
-      margin-bottom: 4px;
-      text-transform: uppercase;
+      margin-bottom: 2px;
     }
-    .node-name {
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: -0.01em;
-      color: var(--text-primary);
-      margin-bottom: 6px;
-    }
-    .node-gist {
-      font-size: 11px;
-      color: var(--text-muted);
-      line-height: 1.4;
-      margin-bottom: 8px;
-    }
-    .node-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-    }
-    .node-pill {
-      font-family: var(--font-mono);
-      font-size: 9.5px;
-      padding: 2px 6px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 3px;
-      color: #94a3b8;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    /* =========================================================================
-       2. FULL DETAILED SECTION PAGE (Active Focus Environment)
-       ========================================================================= */
-    .full-page-view {
-      background: rgba(13, 17, 26, 0.95);
-      border: 1px solid rgba(0, 210, 255, 0.45);
-      border-radius: 18px;
-      backdrop-filter: blur(24px);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85), 0 0 50px rgba(0, 210, 255, 0.15);
-      padding: 44px 48px;
-      transform-origin: center center;
-      will-change: transform, opacity;
-      position: relative;
-    }
-
-    .full-page-view.chromatic-impact {
-      border-color: #00D2FF;
-      box-shadow: -3px 0 30px rgba(255, 42, 75, 0.5), 3px 0 30px rgba(0, 210, 255, 0.55), 0 30px 80px rgba(0,0,0,0.9);
-    }
-    .full-page-view.chromatic-impact h1,
-    .full-page-view.chromatic-impact h2 {
-      text-shadow: -2px 0 rgba(255, 42, 75, 0.8), 2px 0 rgba(0, 210, 255, 0.8);
-    }
-
-    /* Typography & Hierarchy */
-    .badge-pill {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--accent-cyan);
-      letter-spacing: 0.12em;
-      padding: 4px 12px;
-      border-radius: 20px;
-      background: rgba(0, 210, 255, 0.08);
-      border: 1px solid rgba(0, 210, 255, 0.25);
-      margin-bottom: 16px;
-      text-transform: uppercase;
-    }
-    .page-main-title {
-      font-size: 36px;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 14px;
-    }
-    .page-desc {
-      font-size: 14.5px;
-      line-height: 1.6;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
-
-    /* Page 1: FULL HOME */
-    #page-home {
-      width: 980px;
-      text-align: center;
-    }
-    .home-hero-huge {
-      font-size: 58px;
+    .node-title-txt {
+      font-size: 18px;
       font-weight: 900;
-      letter-spacing: -0.04em;
-      line-height: 1.02;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, #FFFFFF 40%, #A3B1CC 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
     }
-    .home-pillars-row {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
+    .node-status-txt {
       font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--accent-cyan);
-      margin-bottom: 22px;
-    }
-    .home-pillars-row span { color: var(--text-muted); }
-    .home-full-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-top: 24px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      text-align: left;
-    }
-    .home-grid-card {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 16px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .hgc-tag { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); margin-bottom: 4px; }
-    .hgc-val { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
-    .hgc-sub { font-size: 11.5px; color: var(--text-muted); line-height: 1.3; }
-
-    /* Page 2: FULL ABOUT */
-    #page-about {
-      width: 980px;
-    }
-    .about-top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 16px;
-      margin-bottom: 24px;
-    }
-    .about-two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-    }
-    .about-section-heading {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--accent-cyan);
-      margin-bottom: 12px;
-      font-family: var(--font-mono);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .about-timeline-item {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 8px;
-      padding: 18px;
-      margin-bottom: 14px;
-    }
-    .ati-date { font-family: var(--font-mono); font-size: 11px; color: var(--accent-red); font-weight: 700; margin-bottom: 4px; }
-    .ati-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-    .ati-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
-
-    /* Page 3: FULL SKILLS */
-    #page-skills {
-      width: 1020px;
-    }
-    .skills-full-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 20px;
-    }
-    .skill-domain-box {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 10px;
-      padding: 18px;
-    }
-    .sdb-title {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--accent-cyan);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .sdb-title::before { content: '◆'; color: var(--accent-red); font-size: 9px; }
-    .sdb-pills { display: flex; flex-wrap: wrap; gap: 6px; }
-    .sdb-pill {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      padding: 3px 8px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 4px;
-      color: #cbd5e1;
-    }
-
-    /* Page 4: FULL PROJECTS */
-    #page-projects {
-      width: 1040px;
-    }
-    .teamflow-flagship-card {
-      background: linear-gradient(135deg, rgba(0, 210, 255, 0.08) 0%, rgba(255, 42, 75, 0.06) 100%);
-      border: 1px solid rgba(0, 210, 255, 0.4);
-      border-radius: 12px;
-      padding: 26px;
-      margin-bottom: 20px;
-    }
-    .tfc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .tfc-tag { font-family: var(--font-mono); font-size: 11px; color: var(--accent-red); font-weight: 700; }
-    .tfc-title { font-size: 24px; font-weight: 800; }
-    .tfc-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
-    .tfc-stack { display: flex; gap: 6px; flex-wrap: wrap; }
-    .projects-sub-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-    .proj-card-sub {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 8px;
-      padding: 16px;
-    }
-    .pcs-tag { font-family: var(--font-mono); font-size: 10px; color: var(--accent-cyan); margin-bottom: 4px; }
-    .pcs-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-    .pcs-desc { font-size: 11.5px; color: var(--text-muted); line-height: 1.4; }
-
-    /* Page 5: FULL RESEARCH */
-    #page-research {
-      width: 1000px;
-    }
-    .research-two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: 20px;
-    }
-    .res-paper-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      padding: 24px;
-    }
-    .rpc-tag { font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan); margin-bottom: 8px; }
-    .rpc-title { font-size: 18px; font-weight: 800; line-height: 1.3; margin-bottom: 12px; }
-    .rpc-body { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
-    .rpc-spec-box {
-      background: rgba(0, 0, 0, 0.4);
-      border-left: 2px solid var(--accent-red);
-      padding: 10px 14px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: #94a3b8;
-      line-height: 1.5;
+      font-size: 9.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
     }
 
     /* Live Telemetry Panel */
@@ -450,7 +276,7 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 340px;
+      width: 320px;
       background: rgba(13, 17, 26, 0.94);
       border: 1px solid rgba(0, 210, 255, 0.3);
       border-radius: 8px;
@@ -509,11 +335,11 @@
       font-size: 10px;
     }
     .slider-row input[type="range"] {
-      width: 125px;
+      width: 120px;
       accent-color: var(--accent-cyan);
     }
 
-    /* Keybinds Helper */
+    /* Key Hints */
     .key-hints {
       position: fixed;
       bottom: 20px;
@@ -524,7 +350,7 @@
       background: rgba(13, 17, 26, 0.75);
       padding: 8px 14px;
       border-radius: 6px;
-      border: 1px solid var(--border-subtle);
+      border: 1px solid rgba(255,255,255,0.08);
       z-index: 100;
     }
     .key-hints kbd {
@@ -540,332 +366,69 @@
 
   <header>
     <div class="brand-title">
-      KEVIN PRAKASH J <span>// MASTER PROFILE GROUND TRUTH // PH4</span>
+      MOTION PROTOTYPE <span>// FULL SCENE &harr; COMPACT NODE // PH4</span>
     </div>
-    <div class="nav-pills" id="nav-pill-container">
-      <!-- Generated in JS -->
+    <div class="nav-pills">
+      <button class="nav-btn active" id="btn-home" onclick="requestNavigation('home')">1. HOME</button>
+      <button class="nav-btn" id="btn-about" onclick="requestNavigation('about')">2. ABOUT</button>
     </div>
   </header>
 
   <div id="world-viewport">
     <div id="world-plane">
 
-      <!-- 1. HOME ENTITY -->
-      <div class="section-entity" id="entity-home" style="left: 2600px; top: 2100px;">
-        <!-- Compact Portal Node -->
-        <div class="compact-node-view" onclick="requestNavigation('home')" id="node-home" style="display: none;">
-          <div class="node-anchor-point"></div>
-          <div class="node-tag">NODE_00 // ROOT</div>
-          <div class="node-name">HOME</div>
-          <div class="node-gist">Kevin Prakash J &bull; VIT Vellore (8.72)</div>
-          <div class="node-pills">
-            <span class="node-pill">AI/ML</span>
-            <span class="node-pill">Systems</span>
-            <span class="node-pill">Vision</span>
-            <span class="node-pill">Research</span>
-          </div>
+      <!-- SCENE 1: HOME ENTITY -->
+      <div class="scene-entity" id="entity-home" style="left: 2000px; top: 1500px;">
+        <!-- Compact View (Hidden Initially) -->
+        <div class="compact-node-view" id="compact-home" onclick="requestNavigation('home')" style="display: none;">
+          <div class="node-anchor-dot"></div>
+          <div class="node-tag-txt">PORTAL // NODE_01</div>
+          <div class="node-title-txt">HOME</div>
+          <div class="node-status-txt">Kevin Prakash J &bull; VIT</div>
         </div>
-        <!-- Full Page View -->
-        <div class="full-page-view" id="page-home">
-          <div class="badge-pill">GROUND TRUTH // MASTER PROFILE V3</div>
-          <h1 class="home-hero-huge">KEVIN PRAKASH J</h1>
-          <div class="home-pillars-row">
-            <div>AI & RESEARCH</div> <span>&bull;</span>
-            <div>COMPUTER VISION</div> <span>&bull;</span>
-            <div>SOFTWARE ENGINEERING</div>
+        <!-- Full Scene View (Visible Initially) -->
+        <div class="full-scene-view" id="full-home">
+          <div>
+            <div class="scene-badge">ACTIVE VIEWPORT SCENE</div>
+            <h1 class="scene-huge-title">HOME</h1>
+            <div class="scene-sub-row">
+              <div>AI / ML</div> <span>&bull;</span>
+              <div>SOFTWARE ENGINEERING</div> <span>&bull;</span>
+              <div>COMPUTER VISION</div> <span>&bull;</span>
+              <div>RESEARCH</div>
+            </div>
           </div>
-          <p class="page-desc">
-            AI/ML-focused software engineer and researcher who builds practical intelligent systems. 
-            Fourth-year B.Tech CSE student at VIT University, Vellore (2023–2027, CGPA 8.72/10) with verified software engineering internship experience at Syncfusion. 
-            Bridging multilingual NLP research, real-time gesture intelligence, and full-stack software architectures.
-          </p>
-          <div class="home-full-grid">
-            <div class="home-grid-card">
-              <div class="hgc-tag">ACADEMIC PROFILE</div>
-              <div class="hgc-val">VIT Vellore (8.72)</div>
-              <div class="hgc-sub">B.Tech CSE 2023–2027</div>
-            </div>
-            <div class="home-grid-card">
-              <div class="hgc-tag">FLAGSHIP SOFTWARE</div>
-              <div class="hgc-val">TeamFlow Platform</div>
-              <div class="hgc-sub">FastAPI &bull; React &bull; PostgreSQL</div>
-            </div>
-            <div class="home-grid-card">
-              <div class="hgc-tag">ACTIVE RESEARCH</div>
-              <div class="hgc-val">Indic NLP Embeddings</div>
-              <div class="hgc-sub">Cross-Lingual Alignment</div>
-            </div>
-            <div class="home-grid-card">
-              <div class="hgc-tag">INDUSTRY TENURE</div>
-              <div class="hgc-val" style="color: var(--accent-cyan);">Syncfusion Software</div>
-              <div class="hgc-sub">AI Intern &bull; ASP.NET / React</div>
-            </div>
+          <div class="scene-footer-hud">
+            <div>COORDINATES: <strong>(0, 0) // ROOT_NODE</strong></div>
+            <div>STATUS: <strong>FULL SCENE FOCUSED (1.00x)</strong></div>
           </div>
         </div>
       </div>
 
-      <!-- 2. ABOUT ENTITY -->
-      <div class="section-entity" id="entity-about" style="left: 1400px; top: 1200px;">
-        <!-- Compact Portal Node -->
-        <div class="compact-node-view" onclick="requestNavigation('about')" id="node-about">
-          <div class="node-anchor-point"></div>
-          <div class="node-tag">NODE_01 // PROFILE</div>
-          <div class="node-name">ABOUT</div>
-          <div class="node-gist">Academic & Industry Profile</div>
-          <div class="node-pills">
-            <span class="node-pill">VIT 8.72</span>
-            <span class="node-pill">Syncfusion</span>
-            <span class="node-pill">Pillars</span>
-          </div>
+      <!-- SCENE 2: ABOUT ENTITY -->
+      <div class="scene-entity" id="entity-about" style="left: 1000px; top: 850px;">
+        <!-- Compact View (Visible Initially in Web) -->
+        <div class="compact-node-view" id="compact-about" onclick="requestNavigation('about')">
+          <div class="node-anchor-dot"></div>
+          <div class="node-tag-txt">PORTAL // NODE_02</div>
+          <div class="node-title-txt">ABOUT</div>
+          <div class="node-status-txt">Profile &bull; VIT Vellore 8.72</div>
         </div>
-        <!-- Full Page View -->
-        <div class="full-page-view" id="page-about" style="display: none;">
-          <div class="about-top-bar">
-            <div>
-              <div class="badge-pill">PERSONAL & ACADEMIC GROUND TRUTH</div>
-              <h2 class="page-main-title">Professional Identity & Experience</h2>
-            </div>
-            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan);">NODE_01 // PROFILE</div>
-          </div>
-          <div class="about-two-col">
-            <div>
-              <div class="about-section-heading">01. EDUCATION & INDUSTRY TENURE</div>
-              <div class="about-timeline-item">
-                <div class="ati-date">AUGUST 2023 – MAY 2027 (FOURTH YEAR)</div>
-                <div class="ati-title">B.Tech Computer Science & Engineering</div>
-                <div class="ati-desc">VIT University, Vellore — Current CGPA: <strong>8.72 / 10</strong>. Specialization in Artificial Intelligence, Machine Learning, NLP, Computer Vision, LLMs, and Software Engineering.</div>
-              </div>
-              <div class="about-timeline-item">
-                <div class="ati-date">MAY – JUNE 2026</div>
-                <div class="ati-title">AI Intern — Syncfusion Software Pvt. Ltd.</div>
-                <div class="ati-desc">Enterprise software engineering exposure including <strong>ASP.NET Core, React, TypeScript, REST APIs, Role-Based Access Control (RBAC), C#, and Git</strong>.</div>
-              </div>
-            </div>
-            <div>
-              <div class="about-section-heading">02. TRIAD OF STRENGTHS & PHILOSOPHY</div>
-              <div class="about-timeline-item">
-                <div class="ati-date">CORE STRENGTHS TRIAD</div>
-                <div class="ati-title">AI & Research + Vision + Systems</div>
-                <div class="ati-desc">Combining algorithmic depth in multilingual sentence embeddings and One Health digital twins with production full-stack engineering and real-time computer vision.</div>
-              </div>
-              <div class="about-timeline-item">
-                <div class="ati-date">ENGINEERING PHILOSOPHY</div>
-                <div class="ati-title">Reproducible, Validated Workflows</div>
-                <div class="ati-desc">Front-loaded specifications, one-shot Python data processing scripts, automated Pytest verification, and clean service-layer architectural separation.</div>
-              </div>
+        <!-- Full Scene View (Hidden Initially) -->
+        <div class="full-scene-view" id="full-about" style="display: none;">
+          <div>
+            <div class="scene-badge" style="color: var(--accent-red); border-color: rgba(255,42,75,0.3); background: rgba(255,42,75,0.08);">ACTIVE VIEWPORT SCENE</div>
+            <h1 class="scene-huge-title" style="background: linear-gradient(135deg, #FFFFFF 40%, #00D2FF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">ABOUT</h1>
+            <div class="scene-sub-row">
+              <div>B.TECH CSE</div> <span>&bull;</span>
+              <div>VIT VELLORE</div> <span>&bull;</span>
+              <div>CGPA 8.72/10</div> <span>&bull;</span>
+              <div>SYNCFUSION AI INTERN</div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- 3. SKILLS ENTITY -->
-      <div class="section-entity" id="entity-skills" style="left: 3800px; top: 1250px;">
-        <!-- Compact Portal Node -->
-        <div class="compact-node-view" onclick="requestNavigation('skills')" id="node-skills">
-          <div class="node-anchor-point"></div>
-          <div class="node-tag">NODE_02 // TAXONOMY</div>
-          <div class="node-name">SKILLS</div>
-          <div class="node-gist">Confirmed Technical Skills</div>
-          <div class="node-pills">
-            <span class="node-pill">PyTorch</span>
-            <span class="node-pill">FastAPI</span>
-            <span class="node-pill">OpenCV</span>
-          </div>
-        </div>
-        <!-- Full Page View -->
-        <div class="full-page-view" id="page-skills" style="display: none;">
-          <div class="about-top-bar">
-            <div>
-              <div class="badge-pill">VERIFIED TECHNICAL SKILLS (MASTER PROFILE)</div>
-              <h2 class="page-main-title">Technical Skills & Technology Taxonomy</h2>
-            </div>
-            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan);">NODE_02 // TAXONOMY</div>
-          </div>
-          <div class="skills-full-grid">
-            <div class="skill-domain-box">
-              <div class="sdb-title">AI / ML & LLMs</div>
-              <div class="sdb-pills">
-                <span class="sdb-pill">PyTorch</span>
-                <span class="sdb-pill">TensorFlow</span>
-                <span class="sdb-pill">Hugging Face</span>
-                <span class="sdb-pill">LangChain</span>
-                <span class="sdb-pill">Ollama</span>
-                <span class="sdb-pill">Prompt Engineering</span>
-                <span class="sdb-pill">NLP</span>
-                <span class="sdb-pill">LLMs</span>
-              </div>
-            </div>
-            <div class="skill-domain-box">
-              <div class="sdb-title">Computer Vision</div>
-              <div class="sdb-pills">
-                <span class="sdb-pill">OpenCV</span>
-                <span class="sdb-pill">MediaPipe Hand Landmarks</span>
-                <span class="sdb-pill">Gesture Recognition</span>
-                <span class="sdb-pill">Camera Input Pipelines</span>
-              </div>
-            </div>
-            <div class="skill-domain-box">
-              <div class="sdb-title">Web & Software Engineering</div>
-              <div class="sdb-pills">
-                <span class="sdb-pill">React</span>
-                <span class="sdb-pill">TypeScript</span>
-                <span class="sdb-pill">JavaScript</span>
-                <span class="sdb-pill">HTML / CSS</span>
-                <span class="sdb-pill">Tailwind CSS</span>
-                <span class="sdb-pill">Flask</span>
-                <span class="sdb-pill">ASP.NET Core</span>
-                <span class="sdb-pill">C#</span>
-                <span class="sdb-pill">REST APIs</span>
-              </div>
-            </div>
-            <div class="skill-domain-box">
-              <div class="sdb-title">Programming Languages</div>
-              <div class="sdb-pills">
-                <span class="sdb-pill">Python</span>
-                <span class="sdb-pill">Java</span>
-                <span class="sdb-pill">C</span>
-                <span class="sdb-pill">C++</span>
-              </div>
-            </div>
-            <div class="skill-domain-box">
-              <div class="sdb-title">Databases & Storage</div>
-              <div class="sdb-pills">
-                <span class="sdb-pill">MySQL</span>
-                <span class="sdb-pill">PostgreSQL 17.11</span>
-                <span class="sdb-pill">SQLAlchemy 2.x</span>
-                <span class="sdb-pill">SQLite (Historical)</span>
-              </div>
-            </div>
-            <div class="skill-domain-box">
-              <div class="sdb-title">Testing & Developer Tools</div>
-              <div class="sdb-pills">
-                <span class="sdb-pill">PyTest</span>
-                <span class="sdb-pill">Mutation Testing</span>
-                <span class="sdb-pill">Git / GitHub</span>
-                <span class="sdb-pill">Linux</span>
-                <span class="sdb-pill">VS Code</span>
-                <span class="sdb-pill">Streamlit</span>
-                <span class="sdb-pill">PyInstaller</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4. PROJECTS ENTITY -->
-      <div class="section-entity" id="entity-projects" style="left: 3850px; top: 2950px;">
-        <!-- Compact Portal Node -->
-        <div class="compact-node-view" onclick="requestNavigation('projects')" id="node-projects">
-          <div class="node-anchor-point"></div>
-          <div class="node-tag">NODE_03 // PROJECTS</div>
-          <div class="node-name">PROJECTS</div>
-          <div class="node-gist">TeamFlow & Systems Suite</div>
-          <div class="node-pills">
-            <span class="node-pill">TeamFlow</span>
-            <span class="node-pill">ISL Translator</span>
-            <span class="node-pill">One Health</span>
-          </div>
-        </div>
-        <!-- Full Page View -->
-        <div class="full-page-view" id="page-projects" style="display: none;">
-          <div class="about-top-bar">
-            <div>
-              <div class="badge-pill">CONFIRMED PROJECT PORTFOLIO</div>
-              <h2 class="page-main-title">Engineering Systems & Case Studies</h2>
-            </div>
-            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan);">NODE_03 // SYSTEMS</div>
-          </div>
-          <div class="teamflow-flagship-card">
-            <div class="tfc-header">
-              <div class="tfc-title">TeamFlow — Full-Stack Team & Project Management Platform</div>
-              <span class="tfc-tag">FLAGSHIP SOFTWARE ENGINEERING CASE STUDY</span>
-            </div>
-            <div class="tfc-desc">
-              Centralized platform for teams, projects, and task management treated as a finished production product. 
-              Engineered with a React + TypeScript + Vite frontend and a FastAPI backend organized into routers, schemas, services, SQLAlchemy 2.x models, and security dependencies. 
-              Features JWT bearer authentication, bcrypt hashing, team-scoped authorization (Owner/Admin/Member), PostgreSQL 17.11 integrity constraints, Kanban task workflows, activity logs, and automated Pytest verification.
-            </div>
-            <div class="tfc-stack">
-              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">React + TypeScript</span>
-              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">Vite / React Router</span>
-              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">FastAPI (Python)</span>
-              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">PostgreSQL 17.11</span>
-              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">SQLAlchemy 2.x / Pydantic</span>
-              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">JWT / bcrypt RBAC</span>
-              <span class="sdb-pill" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">PyTest Suite</span>
-            </div>
-          </div>
-          <div class="projects-sub-grid">
-            <div class="proj-card-sub">
-              <div class="pcs-tag">COMPUTER VISION</div>
-              <div class="pcs-title">ISL Translator</div>
-              <div class="pcs-desc">Camera input, OpenCV, MediaPipe hand landmarks, gesture recognition, text generation, and speech output.</div>
-            </div>
-            <div class="proj-card-sub">
-              <div class="pcs-tag">MULTIMODAL AI</div>
-              <div class="pcs-title">One Health / Avian AI</div>
-              <div class="pcs-desc">Multimodal prediction engine, Knowledge Graph, Agentic AI, GraphRAG reasoning, and explainability layer.</div>
-            </div>
-            <div class="proj-card-sub">
-              <div class="pcs-tag">FULL-STACK APP</div>
-              <div class="pcs-title">MyKitchen Planner</div>
-              <div class="pcs-desc">Dish recommendation and meal planning application built around Python/Flask, web interface, and database.</div>
-            </div>
-            <div class="proj-card-sub">
-              <div class="pcs-tag">NLP / LLM APP & CLOUD</div>
-              <div class="pcs-title">Email Summarizer & AWS Attendance</div>
-              <div class="pcs-desc">Python + LangChain LLM summarization; Cloud attendance infrastructure on AWS EC2, S3, and RDS.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 5. RESEARCH ENTITY -->
-      <div class="section-entity" id="entity-research" style="left: 1350px; top: 3000px;">
-        <!-- Compact Portal Node -->
-        <div class="compact-node-view" onclick="requestNavigation('research')" id="node-research">
-          <div class="node-anchor-point"></div>
-          <div class="node-tag">NODE_04 // RESEARCH</div>
-          <div class="node-name">RESEARCH</div>
-          <div class="node-gist">Indic NLP & Digital Twins</div>
-          <div class="node-pills">
-            <span class="node-pill">MuRIL / LaBSE</span>
-            <span class="node-pill">GraphRAG</span>
-          </div>
-        </div>
-        <!-- Full Page View -->
-        <div class="full-page-view" id="page-research" style="display: none;">
-          <div class="about-top-bar">
-            <div>
-              <div class="badge-pill">APPLIED RESEARCH INVESTIGATIONS (MASTER PROFILE)</div>
-              <h2 class="page-main-title">Scientific & Algorithmic Research</h2>
-            </div>
-            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan);">NODE_04 // INVESTIGATION</div>
-          </div>
-          <div class="research-two-col">
-            <div class="res-paper-card">
-              <div class="rpc-tag">MULTILINGUAL INDIC NLP</div>
-              <div class="rpc-title">“Cross-Lingual Semantic Alignment and Language-Family Structure in Multilingual Sentence Embeddings for Indic Languages”</div>
-              <div class="rpc-body">
-                Studying semantic alignment across Indic languages and investigating how language-family structure is reflected in multilingual sentence embeddings.
-              </div>
-              <div class="rpc-spec-box">
-                MODELS: mBERT, XLM-R, LaBSE, MuRIL<br>
-                DATASETS: Samanantar, Wiki-Translate, IN22 / Indic-language resources<br>
-                EVALUATION: Semantic affinity, graph modularity, manual STS correlation, bitext retrieval evaluation, language-family-aware analysis.
-              </div>
-            </div>
-            <div class="res-paper-card">
-              <div class="rpc-tag">ONE HEALTH / DIGITAL TWIN</div>
-              <div class="rpc-title">Digital Twin / One Health Platform for Predictive Food & Health Security (Avian Influenza Surveillance)</div>
-              <div class="rpc-body">
-                Avian Influenza surveillance and prediction across representative regions (India, Vietnam, US, Netherlands, 2020–present) with dynamically updated real-world data.
-              </div>
-              <div class="rpc-spec-box">
-                ARCHITECTURE: Multimodal Prediction Engine &rarr; One Health Knowledge Graph &rarr; Agentic Decision Engine &rarr; LLM Reasoning + GraphRAG &rarr; Explainability Layer &rarr; Decision Support System.<br>
-                DATA: ERA5, MODIS, FAO EMPRES, WOAH WAHIS, WHO FluNet, eBird, FAOSTAT, UN Comtrade, GDELT, WHO/WOAH/FAO.
-              </div>
-            </div>
+          <div class="scene-footer-hud">
+            <div>COORDINATES: <strong>(-1000, -650) // ABOUT_NODE</strong></div>
+            <div>STATUS: <strong>FULL SCENE FOCUSED (1.00x)</strong></div>
           </div>
         </div>
       </div>
@@ -875,12 +438,12 @@
   </div>
 
   <div class="key-hints">
-    <span>Keys: <kbd>1</kbd> Home <kbd>2</kbd> About <kbd>3</kbd> Skills <kbd>4</kbd> Projects <kbd>5</kbd> Research</span>
+    <span>Keys: <kbd>1</kbd> Go to HOME &nbsp;|&nbsp; <kbd>2</kbd> Go to ABOUT</span>
   </div>
 
   <div id="telemetry-panel">
     <div class="tele-header">
-      <span>GROUND TRUTH TELEMETRY</span>
+      <span>MOTION TELEMETRY ENGINE</span>
       <span id="tele-fps">60 FPS</span>
     </div>
     <div class="tele-row">
@@ -892,7 +455,7 @@
       <span class="tele-val" id="tele-route">home &rarr; home</span>
     </div>
     <div class="tele-row">
-      <span>PAGE SCALE:</span>
+      <span>ACTIVE SCALE:</span>
       <span class="tele-val" id="tele-scale">1.00x (FULL)</span>
     </div>
     <div class="tele-row">
@@ -902,65 +465,62 @@
 
     <div class="controls-grid">
       <div class="slider-row">
-        <span>Shoot Speed (ms)</span>
-        <input type="range" id="param-shoot" min="100" max="350" value="160" step="10">
+        <span>Collapse Speed (ms)</span>
+        <input type="range" id="param-collapse" min="80" max="250" value="130" step="10">
       </div>
       <div class="slider-row">
-        <span>Tension Hold (ms)</span>
-        <input type="range" id="param-tension" min="40" max="200" value="80" step="10">
+        <span>Shoot Speed (ms)</span>
+        <input type="range" id="param-shoot" min="100" max="300" value="150" step="10">
       </div>
       <div class="slider-row">
         <span>Spring Stiffness (k)</span>
-        <input type="range" id="param-k" min="200" max="650" value="420" step="10">
+        <input type="range" id="param-k" min="200" max="650" value="440" step="10">
       </div>
       <div class="slider-row">
-        <span>Damping (c)</span>
-        <input type="range" id="param-c" min="15" max="50" value="26" step="1">
+        <span>Expansion Speed (ms)</span>
+        <input type="range" id="param-exp" min="100" max="300" value="160" step="10">
       </div>
       <div class="slider-row">
-        <span>Expansion Peak Scale</span>
-        <input type="range" id="param-peak-scale" min="1.02" max="1.12" value="1.05" step="0.01">
+        <span>Peak Overshoot Scale</span>
+        <input type="range" id="param-peak-scale" min="1.02" max="1.12" value="1.06" step="0.01">
       </div>
       <div class="slider-row">
         <span>Impact Vibration (px)</span>
         <input type="range" id="param-impact-vib" min="1.0" max="8.0" value="3.5" step="0.5">
       </div>
       <div class="slider-row" style="margin-top: 4px;">
-        <label><input type="checkbox" id="param-chromatic" checked> Chromatic Accent</label>
+        <label><input type="checkbox" id="param-chromatic" checked> Chromatic Impact</label>
         <label><input type="checkbox" id="param-reduced-motion"> Reduced Motion</label>
       </div>
     </div>
   </div>
 
   <script>
-    // --- 1. Centralized Motion & Physics Configuration ---
+    // --- 1. Centralized Motion Configuration ---
     const CONFIG = {
-      collapseDurationMs: 120,     // Full page collapse into compact node
-      shootDurationMs: 160,        // Web filament extension
-      tensionDurationMs: 80,       // Tension hold
-      springK: 420,                // Camera spring stiffness
-      springC: 26,                 // Camera spring damping
-      mass: 1.0,                   // Viewport mass
-      expansionDurationMs: 140,    // Compact node expansion into full page
-      expansionPeakScale: 1.05,    // Peak arrival scale
-      impactDurationMs: 70,        // Micro-vibration duration
-      impactVibAmp: 3.5,           // Peak vibration displacement (px)
-      settleDurationMs: 120,       // Harmonic return to 1.00x
+      collapseDurationMs: 130,   // Full scene shrinks down into compact node
+      shootDurationMs: 150,      // Web shoots between compact nodes
+      tensionDurationMs: 80,     // Tension hold
+      springK: 440,              // Camera travel stiffness
+      springC: 26,               // Damping
+      mass: 1.0,                 // Inertial mass
+      expansionDurationMs: 160,  // Compact node dynamically expands into full scene
+      expansionPeakScale: 1.06,  // Arrival overshoot scale
+      impactDurationMs: 75,      // Impact vibration duration
+      impactVibAmp: 3.5,         // Peak vibration (px)
+      settleDurationMs: 130,     // Settle to 1.00x
       chromaticEnabled: true,
       reducedMotion: false
     };
 
-    // --- 2. Spatial Entities & World Coordinates (Origin = 2600, 2100) ---
-    const SECTIONS = [
-      { id: 'home', index: 1, label: 'HOME', x: 0, y: 0 },
-      { id: 'about', index: 2, label: 'ABOUT', x: -1200, y: -900 },
-      { id: 'skills', index: 3, label: 'SKILLS', x: 1200, y: -850 },
-      { id: 'projects', index: 4, label: 'PROJECTS', x: 1250, y: 850 },
-      { id: 'research', index: 5, label: 'RESEARCH', x: -1250, y: 900 }
+    // --- 2. Two Primary Scene Entities ---
+    const SCENES = [
+      { id: 'home', label: 'HOME', x: 0, y: 0 },
+      { id: 'about', label: 'ABOUT', x: -1000, y: -650 }
     ];
 
-    const sectionMap = {};
-    SECTIONS.forEach(s => sectionMap[s.id] = s);
+    const sceneMap = {};
+    SCENES.forEach(s => sceneMap[s.id] = s);
 
     // --- 3. Enhanced 10-Stage Finite State Machine ---
     const STATES = {
@@ -977,8 +537,8 @@
     };
 
     let currentState = STATES.IDLE;
-    let currentSectionId = 'home';
-    let targetSectionId = null;
+    let currentSceneId = 'home';
+    let targetSceneId = null;
 
     let animStartTime = 0;
     let collapsePhase = 0;
@@ -988,16 +548,11 @@
     let impactPhase = 0;
     let settlePhase = 0;
 
-    const entityStates = {};
-    SECTIONS.forEach(s => {
-      entityStates[s.id] = {
-        viewMode: s.id === 'home' ? 'full' : 'compact',
-        scale: 1.0,
-        opacity: 1.0,
-        vibX: 0,
-        vibY: 0
-      };
-    });
+    // Entity presentation state: { mode: 'full' | 'compact', scale: 1.0, opacity: 1.0, vibX: 0, vibY: 0 }
+    const entityStates = {
+      home: { mode: 'full', scale: 1.0, opacity: 1.0, vibX: 0, vibY: 0 },
+      about: { mode: 'compact', scale: 1.0, opacity: 1.0, vibX: 0, vibY: 0 }
+    };
 
     // Camera Physics
     let camX = 0, camY = 0;
@@ -1016,7 +571,6 @@
     const worldPlane = document.getElementById('world-plane');
     const canvas = document.getElementById('world-canvas');
     const ctx = canvas.getContext('2d');
-    const navPillContainer = document.getElementById('nav-pill-container');
 
     const teleState = document.getElementById('tele-state');
     const teleRoute = document.getElementById('tele-route');
@@ -1024,38 +578,27 @@
     const teleVibe = document.getElementById('tele-vibe');
     const teleFps = document.getElementById('tele-fps');
 
-    // Controls Binding
+    // Controls
+    document.getElementById('param-collapse').addEventListener('input', e => CONFIG.collapseDurationMs = +e.target.value);
     document.getElementById('param-shoot').addEventListener('input', e => CONFIG.shootDurationMs = +e.target.value);
-    document.getElementById('param-tension').addEventListener('input', e => CONFIG.tensionDurationMs = +e.target.value);
     document.getElementById('param-k').addEventListener('input', e => CONFIG.springK = +e.target.value);
-    document.getElementById('param-c').addEventListener('input', e => CONFIG.springC = +e.target.value);
+    document.getElementById('param-exp').addEventListener('input', e => CONFIG.expansionDurationMs = +e.target.value);
     document.getElementById('param-peak-scale').addEventListener('input', e => CONFIG.expansionPeakScale = +e.target.value);
     document.getElementById('param-impact-vib').addEventListener('input', e => CONFIG.impactVibAmp = +e.target.value);
     document.getElementById('param-chromatic').addEventListener('change', e => CONFIG.chromaticEnabled = e.target.checked);
     document.getElementById('param-reduced-motion').addEventListener('change', e => CONFIG.reducedMotion = e.target.checked);
 
-    // --- 4. Initialize Navigation & Canvas ---
+    // --- 4. Init DOM & Canvas ---
     function init() {
-      SECTIONS.forEach(s => {
-        const btn = document.createElement('button');
-        btn.className = `nav-btn ${s.id === currentSectionId ? 'active' : ''}`;
-        btn.id = `nav-btn-${s.id}`;
-        btn.textContent = `${s.index}. ${s.label}`;
-        btn.addEventListener('click', () => requestNavigation(s.id));
-        navPillContainer.appendChild(btn);
-      });
-
       window.addEventListener('resize', resizeCanvas);
       resizeCanvas();
 
       window.addEventListener('keydown', (e) => {
-        const num = parseInt(e.key);
-        if (num >= 1 && num <= SECTIONS.length) {
-          requestNavigation(SECTIONS[num - 1].id);
-        }
+        if (e.key === '1') requestNavigation('home');
+        if (e.key === '2') requestNavigation('about');
       });
 
-      updateDOMEntityViews();
+      updateDOMViews();
     }
 
     function resizeCanvas() {
@@ -1063,63 +606,63 @@
       canvas.height = window.innerHeight;
     }
 
-    function updateDOMEntityViews() {
-      SECTIONS.forEach(s => {
-        const nodeEl = document.getElementById(`node-${s.id}`);
-        const pageEl = document.getElementById(`page-${s.id}`);
+    function updateDOMViews() {
+      SCENES.forEach(s => {
+        const compactEl = document.getElementById(`compact-${s.id}`);
+        const fullEl = document.getElementById(`full-${s.id}`);
         const state = entityStates[s.id];
 
-        if (state.viewMode === 'full') {
-          if (nodeEl) nodeEl.style.display = 'none';
-          if (pageEl) {
-            pageEl.style.display = 'block';
-            pageEl.style.opacity = state.opacity.toFixed(2);
+        if (state.mode === 'full') {
+          if (compactEl) compactEl.style.display = 'none';
+          if (fullEl) {
+            fullEl.style.display = 'flex';
+            fullEl.style.opacity = state.opacity.toFixed(2);
           }
         } else {
-          if (pageEl) pageEl.style.display = 'none';
-          if (nodeEl) {
-            nodeEl.style.display = 'block';
-            nodeEl.style.opacity = state.opacity.toFixed(2);
+          if (fullEl) fullEl.style.display = 'none';
+          if (compactEl) {
+            compactEl.style.display = 'flex';
+            compactEl.style.opacity = state.opacity.toFixed(2);
           }
         }
       });
     }
 
-    // --- 5. Navigation & Interruption Handling ---
+    // --- 5. Navigation Request Logic ---
     function requestNavigation(targetId) {
-      if (targetId === currentSectionId && currentState === STATES.IDLE) return;
+      if (targetId === currentSceneId && currentState === STATES.IDLE) return;
 
-      targetSectionId = targetId;
-      const originSec = sectionMap[currentSectionId];
-      const targetSec = sectionMap[targetSectionId];
+      targetSceneId = targetId;
+      const originScene = sceneMap[currentSceneId];
+      const targetScene = sceneMap[targetSceneId];
 
-      webOrigin = { x: originSec.x, y: originSec.y };
-      webAnchor = { x: targetSec.x, y: targetSec.y };
-      webTip = { x: originSec.x, y: originSec.y };
+      webOrigin = { x: originScene.x, y: originScene.y };
+      webAnchor = { x: targetScene.x, y: targetScene.y };
+      webTip = { x: originScene.x, y: originScene.y };
       webOpacity = 1.0;
 
       // Update Nav Buttons
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      const activeBtn = document.getElementById(`nav-btn-${targetId}`);
+      const activeBtn = document.getElementById(`btn-${targetId}`);
       if (activeBtn) activeBtn.classList.add('active');
 
-      teleRoute.textContent = `${currentSectionId} &rarr; ${targetSectionId}`;
+      teleRoute.textContent = `${currentSceneId} &rarr; ${targetSceneId}`;
 
-      // Accessible reduced motion
+      // Accessible reduced motion override
       if (CONFIG.reducedMotion || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        SECTIONS.forEach(s => {
-          entityStates[s.id].viewMode = s.id === targetSectionId ? 'full' : 'compact';
+        SCENES.forEach(s => {
+          entityStates[s.id].mode = s.id === targetSceneId ? 'full' : 'compact';
           entityStates[s.id].scale = 1.0;
           entityStates[s.id].opacity = 1.0;
           entityStates[s.id].vibX = 0;
           entityStates[s.id].vibY = 0;
         });
-        currentSectionId = targetSectionId;
-        camX = targetSec.x;
-        camY = targetSec.y;
+        currentSceneId = targetSceneId;
+        camX = targetScene.x;
+        camY = targetScene.y;
         velX = 0; velY = 0;
         currentState = STATES.IDLE;
-        updateDOMEntityViews();
+        updateDOMViews();
         updateTelemetry();
         return;
       }
@@ -1132,7 +675,7 @@
     function emitAnchorSparks(x, y) {
       for (let i = 0; i < 20; i++) {
         const angle = Math.random() * Math.PI * 2;
-        const speed = 2.0 + Math.random() * 5.0;
+        const speed = 2.5 + Math.random() * 5.5;
         sparks.push({
           x, y,
           vx: Math.cos(angle) * speed,
@@ -1144,7 +687,7 @@
       }
     }
 
-    // --- 6. Physics & Animation Main Loop ---
+    // --- 6. Main Physics & State Evaluation Loop ---
     let lastTime = performance.now();
     let frameCount = 0;
     let lastFpsUpdate = performance.now();
@@ -1162,8 +705,8 @@
 
       evaluateStateMachine(now, dt);
       updateCameraPhysics(dt);
-      applyEntityTransforms();
-      renderScene();
+      applySceneTransforms();
+      renderCanvasWeb();
 
       requestAnimationFrame(animate);
     }
@@ -1174,17 +717,19 @@
       switch (currentState) {
         case STATES.COLLAPSING:
           collapsePhase = Math.min(elapsed / CONFIG.collapseDurationMs, 1.0);
-          // Departing full page collapses into compact node
-          if (entityStates[currentSectionId]) {
-            entityStates[currentSectionId].scale = 1.0 - collapsePhase * 0.45; // 1.00 -> 0.55
-            entityStates[currentSectionId].opacity = 1.0 - collapsePhase * 0.35; // 1.00 -> 0.65
+          // STEP 2: Current Full Scene dramatically shrinks (1.00x -> 0.25x)
+          const easeCollapse = Math.pow(collapsePhase, 2);
+          if (entityStates[currentSceneId]) {
+            entityStates[currentSceneId].scale = 1.0 - easeCollapse * 0.75; // 1.00 -> 0.25
+            entityStates[currentSceneId].opacity = 1.0 - easeCollapse * 0.35; // 1.00 -> 0.65
           }
 
           if (collapsePhase >= 1.0) {
-            entityStates[currentSectionId].viewMode = 'compact';
-            entityStates[currentSectionId].scale = 1.0;
-            entityStates[currentSectionId].opacity = 1.0;
-            updateDOMEntityViews();
+            // Swap to compact node representation
+            entityStates[currentSceneId].mode = 'compact';
+            entityStates[currentSceneId].scale = 1.0;
+            entityStates[currentSceneId].opacity = 1.0;
+            updateDOMViews();
 
             currentState = STATES.TARGETING;
             animStartTime = now;
@@ -1200,6 +745,7 @@
 
         case STATES.SHOOTING:
           shootProgress = Math.min(elapsed / CONFIG.shootDurationMs, 1.0);
+          // STEP 3: Web shoots from current compact node -> target compact node
           const easeShoot = 1 - Math.pow(1 - shootProgress, 3);
           webTip.x = webOrigin.x + (webAnchor.x - webOrigin.x) * easeShoot;
           webTip.y = webOrigin.y + (webAnchor.y - webOrigin.y) * easeShoot;
@@ -1220,14 +766,14 @@
 
         case STATES.TENSION:
           tensionPhase = Math.min(elapsed / CONFIG.tensionDurationMs, 1.0);
-          webSag = Math.sin(tensionPhase * Math.PI) * 32;
+          webSag = Math.sin(tensionPhase * Math.PI) * 34;
 
           if (tensionPhase >= 1.0) {
             currentState = STATES.PULLING;
             animStartTime = now;
-            const targetSec = sectionMap[targetSectionId];
-            targetCamX = targetSec.x;
-            targetCamY = targetSec.y;
+            const targetScene = sceneMap[targetSceneId];
+            targetCamX = targetScene.x;
+            targetCamY = targetScene.y;
           }
           break;
 
@@ -1235,12 +781,12 @@
           const distToTarget = Math.hypot(targetCamX - camX, targetCamY - camY);
           webSag = Math.max(0, webSag - dt * 50);
 
-          // Trigger expansion when approaching the destination compact node
-          if (distToTarget < 20.0) {
-            entityStates[targetSectionId].viewMode = 'full';
-            entityStates[targetSectionId].scale = 0.55;
-            entityStates[targetSectionId].opacity = 0.65;
-            updateDOMEntityViews();
+          // STEP 4 & 5: When camera reaches threshold near target compact node, trigger dynamic expansion
+          if (distToTarget < 24.0) {
+            entityStates[targetSceneId].mode = 'full';
+            entityStates[targetSceneId].scale = 0.25; // Starts expanding from compact scale
+            entityStates[targetSceneId].opacity = 0.65;
+            updateDOMViews();
 
             currentState = STATES.ARRIVAL_EXPANSION;
             animStartTime = now;
@@ -1249,32 +795,35 @@
 
         case STATES.ARRIVAL_EXPANSION:
           expansionPhase = Math.min(elapsed / CONFIG.expansionDurationMs, 1.0);
+          // STEP 5: Target Scene smoothly expands from SMALL (0.25x) -> BIG (1.06x overshoot)
           const easeExp = 1 - Math.pow(1 - expansionPhase, 3);
-          if (entityStates[targetSectionId]) {
-            entityStates[targetSectionId].scale = 0.55 + (CONFIG.expansionPeakScale - 0.55) * easeExp;
-            entityStates[targetSectionId].opacity = 0.65 + 0.35 * easeExp;
+          if (entityStates[targetSceneId]) {
+            entityStates[targetSceneId].scale = 0.25 + (CONFIG.expansionPeakScale - 0.25) * easeExp;
+            entityStates[targetSceneId].opacity = 0.65 + 0.35 * easeExp;
           }
 
           if (expansionPhase >= 1.0) {
             currentState = STATES.IMPACT;
             animStartTime = now;
 
-            const targetPage = document.getElementById(`page-${targetSectionId}`);
-            if (targetPage && CONFIG.chromaticEnabled) {
-              targetPage.classList.add('chromatic-impact');
+            // STEP 6: Trigger chromatic impact
+            const targetFull = document.getElementById(`full-${targetSceneId}`);
+            if (targetFull && CONFIG.chromaticEnabled) {
+              targetFull.classList.add('chromatic-impact');
             }
           }
           break;
 
         case STATES.IMPACT:
           impactPhase = Math.min(elapsed / CONFIG.impactDurationMs, 1.0);
+          // STEP 6: Micro-vibration (3.5px decaying sinusoidal)
           const vibDamp = 1.0 - impactPhase;
           const vibAngle = impactPhase * Math.PI * 8;
           const currentVib = Math.sin(vibAngle) * CONFIG.impactVibAmp * vibDamp;
 
-          if (entityStates[targetSectionId]) {
-            entityStates[targetSectionId].vibX = currentVib;
-            entityStates[targetSectionId].vibY = -currentVib * 0.5;
+          if (entityStates[targetSceneId]) {
+            entityStates[targetSceneId].vibX = currentVib;
+            entityStates[targetSceneId].vibY = -currentVib * 0.5;
           }
           teleVibe.textContent = `${currentVib.toFixed(1)} px`;
 
@@ -1284,24 +833,25 @@
             currentState = STATES.SETTLING;
             animStartTime = now;
 
-            const targetPage = document.getElementById(`page-${targetSectionId}`);
-            if (targetPage) targetPage.classList.remove('chromatic-impact');
+            const targetFull = document.getElementById(`full-${targetSceneId}`);
+            if (targetFull) targetFull.classList.remove('chromatic-impact');
           }
           break;
 
         case STATES.SETTLING:
           settlePhase = Math.min(elapsed / CONFIG.settleDurationMs, 1.0);
+          // Smooth harmonic settle from 1.06x -> 1.00x resting scale
           const easeSettle = Math.sin((settlePhase * Math.PI) / 2);
-          if (entityStates[targetSectionId]) {
-            entityStates[targetSectionId].scale = CONFIG.expansionPeakScale - (CONFIG.expansionPeakScale - 1.00) * easeSettle;
-            entityStates[targetSectionId].vibX = 0;
-            entityStates[targetSectionId].vibY = 0;
+          if (entityStates[targetSceneId]) {
+            entityStates[targetSceneId].scale = CONFIG.expansionPeakScale - (CONFIG.expansionPeakScale - 1.00) * easeSettle;
+            entityStates[targetSceneId].vibX = 0;
+            entityStates[targetSceneId].vibY = 0;
           }
           teleVibe.textContent = `0.0 px`;
 
           if (settlePhase >= 1.0) {
             currentState = STATES.IDLE;
-            currentSectionId = targetSectionId;
+            currentSceneId = targetSceneId;
             shootProgress = 0;
             webOpacity = 1.0;
           }
@@ -1318,9 +868,9 @@
 
     function updateCameraPhysics(dt) {
       if (currentState === STATES.IDLE) {
-        const curSec = sectionMap[currentSectionId];
-        targetCamX = curSec.x;
-        targetCamY = curSec.y;
+        const curScene = sceneMap[currentSceneId];
+        targetCamX = curScene.x;
+        targetCamY = curScene.y;
       }
 
       const dispX = camX - targetCamX;
@@ -1339,8 +889,8 @@
       camY += velY * dt;
     }
 
-    function applyEntityTransforms() {
-      SECTIONS.forEach(s => {
+    function applySceneTransforms() {
+      SCENES.forEach(s => {
         const entity = document.getElementById(`entity-${s.id}`);
         const state = entityStates[s.id];
         if (entity && state) {
@@ -1356,19 +906,19 @@
       } else {
         teleState.className = 'state-badge';
       }
-      const activeState = entityStates[targetSectionId || currentSectionId];
+      const activeState = entityStates[targetSceneId || currentSceneId];
       if (activeState) {
-        teleScale.textContent = `${activeState.scale.toFixed(2)}x (${activeState.viewMode.toUpperCase()})`;
+        teleScale.textContent = `${activeState.scale.toFixed(2)}x (${activeState.mode.toUpperCase()})`;
       }
     }
 
-    // --- 7. Canvas Web Rendering ---
-    function renderScene() {
+    // --- 7. Canvas Web Vector Rendering ---
+    function renderCanvasWeb() {
       const screenCenterX = window.innerWidth / 2;
       const screenCenterY = window.innerHeight / 2;
 
-      const transX = screenCenterX - 2600 - camX;
-      const transY = screenCenterY - 2100 - camY;
+      const transX = screenCenterX - 2000 - camX;
+      const transY = screenCenterY - 1500 - camY;
 
       worldPlane.style.transform = `translate3d(${transX}px, ${transY}px, 0)`;
 
@@ -1379,21 +929,17 @@
         y: screenCenterY + (wy - camY)
       });
 
-      // Background Persistent Macro Web Connections
-      ctx.lineWidth = 1;
+      // Background Permanent Macro Web Line
+      ctx.lineWidth = 1.5;
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-      ctx.setLineDash([4, 4]);
+      ctx.setLineDash([6, 6]);
 
-      for (let i = 0; i < SECTIONS.length; i++) {
-        for (let j = i + 1; j < SECTIONS.length; j++) {
-          const s1 = worldToScreen(SECTIONS[i].x, SECTIONS[i].y);
-          const s2 = worldToScreen(SECTIONS[j].x, SECTIONS[j].y);
-          ctx.beginPath();
-          ctx.moveTo(s1.x, s1.y);
-          ctx.lineTo(s2.x, s2.y);
-          ctx.stroke();
-        }
-      }
+      const s1 = worldToScreen(SCENES[0].x, SCENES[0].y);
+      const s2 = worldToScreen(SCENES[1].x, SCENES[1].y);
+      ctx.beginPath();
+      ctx.moveTo(s1.x, s1.y);
+      ctx.lineTo(s2.x, s2.y);
+      ctx.stroke();
       ctx.setLineDash([]);
 
       // Dynamic Active Filament between Compact Nodes
@@ -1404,8 +950,8 @@
 
         ctx.globalAlpha = webOpacity;
         ctx.shadowColor = '#00D2FF';
-        ctx.shadowBlur = currentState === STATES.TENSION ? 18 : 10;
-        ctx.lineWidth = currentState === STATES.TENSION ? 3.0 : 2.0;
+        ctx.shadowBlur = currentState === STATES.TENSION ? 20 : 12;
+        ctx.lineWidth = currentState === STATES.TENSION ? 3.5 : 2.5;
         ctx.strokeStyle = '#00D2FF';
 
         ctx.beginPath();
@@ -1417,7 +963,7 @@
 
           ctx.fillStyle = '#FFFFFF';
           ctx.beginPath();
-          ctx.arc(sTip.x, sTip.y, 4, 0, Math.PI * 2);
+          ctx.arc(sTip.x, sTip.y, 5, 0, Math.PI * 2);
           ctx.fill();
 
         } else if (currentState === STATES.ANCHORED || currentState === STATES.TENSION || currentState === STATES.PULLING || currentState === STATES.ARRIVAL_EXPANSION || currentState === STATES.IMPACT) {
@@ -1429,7 +975,7 @@
 
           ctx.fillStyle = '#FF2A4B';
           ctx.beginPath();
-          ctx.arc(sAnchor.x, sAnchor.y, 6, 0, Math.PI * 2);
+          ctx.arc(sAnchor.x, sAnchor.y, 7, 0, Math.PI * 2);
           ctx.fill();
         }
         ctx.shadowBlur = 0;
@@ -1452,7 +998,7 @@
         ctx.fillStyle = p.color;
         ctx.globalAlpha = p.life;
         ctx.beginPath();
-        ctx.arc(sp.x, sp.y, 2.5 * p.life, 0, Math.PI * 2);
+        ctx.arc(sp.x, sp.y, 3.0 * p.life, 0, Math.PI * 2);
         ctx.fill();
       }
       ctx.globalAlpha = 1.0;
