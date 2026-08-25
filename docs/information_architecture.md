@@ -399,3 +399,29 @@ The following parameters are intentionally isolated for Phase 4 design:
 1. **Mathematical Coordinate Mapping**: Exact $(x, y)$ coordinate distribution of primary section nodes across standard viewports (1920x1080, 1440x900, 390x844).
 2. **Web Shoot Vector Physics**: Exact projectile curves, bezier tension control points, and particle density per shot.
 3. **Transition Timing Curves**: Fine-tuning easing curves (`cubic-bezier(0.16, 1, 0.3, 1)`) for the viewport camera pull.
+
+---
+
+## 13. Architectural Decision Discipline
+
+| ID | Architectural Decision | Core Reason | Systemic Consequence |
+| :--- | :--- | :--- | :--- |
+| **AD-01** | **DECISION**: Adopt Model C (Contextual Distributed Web) over a static radial hub or linear stack. | **REASON**: Technical projects and skills cross-link dynamically; a static hub forces unnatural return trips, while a linear stack loses spatial interactivity. | **CONSEQUENCE**: Section navigation remains persistent and stable while sub-domain relationships bloom dynamically on context activation. |
+| **AD-02** | **DECISION**: Establish 6 strict, visually differentiated edge types (`EDGE_NAV`, `EDGE_HIERARCHY`, `EDGE_TECH`, `EDGE_RESEARCH`, `EDGE_PROFESSIONAL`, `EDGE_EXTERNAL`). | **REASON**: If "everything connects to everything because web", the interface degenerates into an unreadable visual tangle. | **CONSEQUENCE**: Navigation edges are never confused with skill hierarchies, project implementation links, or research pipelines. |
+| **AD-03** | **DECISION**: Maintain a persistent macro-web (7 section nodes) with contextual micro-webs (skills, project layers, research data streams). | **REASON**: Rendering all 40+ skills, sub-skills, projects, datasets, and models simultaneously creates unmanageable visual and cognitive clutter. | **CONSEQUENCE**: The interface remains clean and scannable at rest, revealing rich technical depth on demand. |
+| **AD-04** | **DECISION**: Position TeamFlow as a multi-tier systems engineering case study (FastAPI + PostgreSQL + RBAC + Kanban) rather than an AI project. | **REASON**: Confirmed by master profile as pure software engineering proof; demonstrates Kevin's full-stack production capabilities alongside his AI research. | **CONSEQUENCE**: Establishes balanced credibility across both software engineering and machine learning recruitment pipelines. |
+| **AD-05** | **DECISION**: Treat research sections as interactive technical narratives (Indic NLP & One Health Avian AI) with visual pipelines rather than dry academic text blocks. | **REASON**: Recruiters and engineers need to grasp the novel architecture (GraphRAG, agentic loops, semantic affinity) in seconds without reading dense papers. | **CONSEQUENCE**: Highlights research depth and algorithmic capability as a competitive differentiator without slowing down exploration. |
+| **AD-06** | **DECISION**: Decouple the Web Physics layer (Canvas 2D) from the Content & Typography layer (Semantic HTML DOM). | **REASON**: Running full WebGL or Three.js meshes creates high CPU/GPU overhead and destroys screen-reader accessibility and SEO indexability. | **CONSEQUENCE**: Guarantees locked 60 FPS performance, lightweight bundle footprint, and 100% WCAG-compliant semantic structure. |
+
+---
+
+## 14. Intermediate Verification Preview
+
+A lightweight standalone interactive preview has been created at:
+**[`docs/preview_ia_topology.html`](./preview_ia_topology.html)**
+
+### What the Preview Demonstrates:
+1. **Clear Edge Class Distinction**: Visually verifies that `EDGE_NAV` (Cyan solid), `EDGE_HIERARCHY` (Violet dashed), `EDGE_TECH` (Blue dotted), `EDGE_RESEARCH` (Amber), and `EDGE_PROFESSIONAL` (Green) operate as distinct semantic channels.
+2. **Contextual Node Distribution**: Interactive inspection demonstrates that child technology nodes and research pipelines attach cleanly to their respective domain anchors without cluttering the primary navigation scaffold.
+3. **Telemetry & HUD Integration**: Verifies the telemetry data stream when hovering nodes, providing instant validation of coordinates, node types, and descriptive metadata.
+

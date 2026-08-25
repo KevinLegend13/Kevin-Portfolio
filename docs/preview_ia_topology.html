@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kevin Prakash J — Information Architecture & Topology Preview</title>
+  <style>
+    :root {
+      --bg: #07090E;
+      --surface: #0D111A;
+      --surface-2: #151C28;
+      --text: #F4F6FB;
+      --muted: #8E9BAE;
+      --red: #FF2A4B;
+      --cyan: #00D2FF;
+      --violet: #9d4edd;
+      --amber: #f59e0b;
+      --green: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 12px 24px;
+      background: rgba(13, 17, 26, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .brand h1 {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--text);
+    }
+    .brand span {
+      font-size: 11px;
+      color: var(--cyan);
+      font-family: monospace;
+    }
+    .legend {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .legend-item:hover, .legend-item.active {
+      border-color: rgba(255, 255, 255, 0.15);
+      color: var(--text);
+    }
+    .line-sample {
+      width: 20px;
+      height: 2px;
+      display: inline-block;
+    }
+    .nav-line { background: var(--cyan); }
+    .hier-line { background: var(--violet); border-top: 2px dashed var(--violet); height: 0; }
+    .tech-line { background: #60a5fa; border-top: 2px dotted #60a5fa; height: 0; }
+    .research-line { background: var(--amber); }
+    .prof-line { background: var(--green); }
+
+    main {
+      flex: 1;
+      position: relative;
+      background: radial-gradient(circle at center, #0e1422 0%, #07090e 100%);
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+    .hud-panel {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      max-width: 380px;
+      background: rgba(13, 17, 26, 0.9);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 12px;
+      backdrop-filter: blur(8px);
+      pointer-events: none;
+    }
+    .hud-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: 6px;
+      font-family: monospace;
+    }
+    .hud-desc {
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .hud-meta {
+      margin-top: 8px;
+      font-family: monospace;
+      font-size: 11px;
+      color: #cbd5e1;
+    }
+    .node-label {
+      font-size: 11px;
+      font-weight: 600;
+      fill: var(--text);
+      text-anchor: middle;
+      user-select: none;
+      pointer-events: none;
+    }
+    .node-sub {
+      font-size: 8.5px;
+      fill: var(--muted);
+      text-anchor: middle;
+      font-family: monospace;
+      user-select: none;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>Kevin Prakash J — Information Architecture Map</h1>
+      <span>TOPOLOGY PREVIEW // PHASE 3 VERIFICATION</span>
+    </div>
+    <div class="legend">
+      <div class="legend-item" id="filter-nav"><span class="line-sample nav-line"></span> EDGE_NAV (Primary Nav)</div>
+      <div class="legend-item" id="filter-hier"><span class="line-sample hier-line"></span> EDGE_HIERARCHY (Skill Bloom)</div>
+      <div class="legend-item" id="filter-tech"><span class="line-sample tech-line"></span> EDGE_TECH (Tech &rarr; Project)</div>
+      <div class="legend-item" id="filter-res"><span class="line-sample research-line"></span> EDGE_RESEARCH (Pipeline)</div>
+      <div class="legend-item" id="filter-prof"><span class="line-sample prof-line"></span> EDGE_PROF (Syncfusion)</div>
+    </div>
+  </header>
+
+  <main>
+    <svg id="canvas" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div class="hud-panel" id="hud">
+      <div class="hud-title" id="hud-title">HOVER A NODE TO INSPECT</div>
+      <div class="hud-desc" id="hud-desc">This interactive preview visualizes the structural separation between navigation edges, hierarchical skills, technical connections, and research pipelines.</div>
+      <div class="hud-meta" id="hud-meta">STATUS: DISTRIBUTED CONTEXTUAL WEB LOCKED</div>
+    </div>
+  </main>
+
+  <script>
+    const svg = document.getElementById('canvas');
+    const hudTitle = document.getElementById('hud-title');
+    const hudDesc = document.getElementById('hud-desc');
+    const hudMeta = document.getElementById('hud-meta');
+
+    const width = window.innerWidth;
+    const height = window.innerHeight - 60;
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+    // Master Nodes
+    const cx = width / 2;
+    const cy = height / 2;
+
+    const nodes = [
+      { id: 'home', label: 'HOME / IDENTITY', sub: 'Kevin Prakash J // VIT', x: cx, y: cy, type: 'root', color: '#FF2A4B', desc: 'Root identity anchor. Fourth-year B.Tech CSE (CGPA 8.72/10).' },
+      { id: 'about', label: 'ABOUT', sub: 'Core Profile', x: cx - 220, y: cy - 180, type: 'section', color: '#00D2FF', desc: 'Personal background, academic journey at VIT Vellore, and engineering philosophy.' },
+      { id: 'skills', label: 'SKILLS WEB', sub: 'Living Network', x: cx + 240, y: cy - 160, type: 'section', color: '#00D2FF', desc: 'Interactive skill network blooming parent domains into confirmed child technologies.' },
+      { id: 'projects', label: 'PROJECTS', sub: 'Flagship & Systems', x: cx + 280, y: cy + 140, type: 'section', color: '#00D2FF', desc: 'Engineering case studies: TeamFlow (Full-Stack Flagship), Indian Sign Language AI, and MyKitchen.' },
+      { id: 'research', label: 'RESEARCH', sub: 'Indic NLP & Avian AI', x: cx, y: cy + 220, type: 'section', color: '#00D2FF', desc: 'Multilingual Indic NLP Embeddings & Avian Influenza One Health Digital Twin.' },
+      { id: 'experience', label: 'EXPERIENCE', sub: 'Syncfusion Software', x: cx - 260, y: cy + 120, type: 'section', color: '#00D2FF', desc: 'AI Intern @ Syncfusion Software Pvt. Ltd. (ASP.NET Core, React, TypeScript, C#, RBAC).' },
+      { id: 'contact', label: 'CONTACT', sub: 'Terminal HUD', x: cx - 180, y: cy + 290, type: 'section', color: '#00D2FF', desc: 'Direct comms terminal, resume download, GitHub, and LinkedIn actions.' },
+
+      // Contextual Skill Categories
+      { id: 'sk_aiml', label: 'AI / ML', sub: 'Category Node', x: cx + 380, y: cy - 240, type: 'skill_cat', color: '#9d4edd', desc: 'PyTorch, TensorFlow, Hugging Face, LangChain, Ollama, LLMs.' },
+      { id: 'sk_web', label: 'Web / Systems', sub: 'Category Node', x: cx + 430, y: cy - 140, type: 'skill_cat', color: '#9d4edd', desc: 'React, TypeScript, FastAPI, ASP.NET Core, REST APIs.' },
+      { id: 'sk_cv', label: 'Computer Vision', sub: 'Category Node', x: cx + 340, y: cy - 70, type: 'skill_cat', color: '#9d4edd', desc: 'OpenCV, MediaPipe 21-hand landmark tracking.' },
+
+      // Contextual Project Entities
+      { id: 'proj_tf', label: 'TeamFlow', sub: 'Full-Stack Case Study', x: cx + 460, y: cy + 180, type: 'project_item', color: '#60a5fa', desc: 'FastAPI + PostgreSQL + React/TypeScript + JWT/RBAC + Kanban.' },
+      { id: 'proj_isl', label: 'ISL Translator', sub: 'Vision AI App', x: cx + 390, y: cy + 260, type: 'project_item', color: '#60a5fa', desc: 'Real-time gesture recognition with OpenCV & MediaPipe speech synthesis.' },
+
+      // Contextual Research Entities
+      { id: 'res_nlp', label: 'Indic NLP', sub: 'Semantic Alignment', x: cx + 120, y: cy + 320, type: 'res_item', color: '#f59e0b', desc: 'Cross-Lingual Semantic Alignment in Multilingual Sentence Embeddings (mBERT, XLM-R, MuRIL).' },
+      { id: 'res_avian', label: 'One Health AI', sub: 'Digital Twin', x: cx - 20, y: cy + 330, type: 'res_item', color: '#f59e0b', desc: 'Epidemiological surveillance using Multimodal Prediction + GraphRAG + Agentic Decision Engine.' }
+    ];
+
+    const edges = [
+      // Primary Persistent Navigation Web (EDGE_NAV)
+      { source: 'home', target: 'about', type: 'nav', label: 'EDGE_NAV' },
+      { source: 'home', target: 'skills', type: 'nav', label: 'EDGE_NAV' },
+      { source: 'home', target: 'projects', type: 'nav', label: 'EDGE_NAV' },
+      { source: 'home', target: 'research', type: 'nav', label: 'EDGE_NAV' },
+      { source: 'home', target: 'experience', type: 'nav', label: 'EDGE_NAV' },
+      { source: 'about', target: 'skills', type: 'nav', label: 'EDGE_NAV' },
+      { source: 'skills', target: 'projects', type: 'nav', label: 'EDGE_NAV' },
+      { source: 'projects', target: 'research', type: 'nav', label: 'EDGE_NAV' },
+      { source: 'research', target: 'experience', type: 'nav', label: 'EDGE_NAV' },
+      { source: 'experience', target: 'contact', type: 'nav', label: 'EDGE_NAV' },
+      { source: 'research', target: 'contact', type: 'nav', label: 'EDGE_NAV' },
+
+      // Hierarchical Skill Blooms (EDGE_HIERARCHY)
+      { source: 'skills', target: 'sk_aiml', type: 'hier', label: 'EDGE_HIERARCHY' },
+      { source: 'skills', target: 'sk_web', type: 'hier', label: 'EDGE_HIERARCHY' },
+      { source: 'skills', target: 'sk_cv', type: 'hier', label: 'EDGE_HIERARCHY' },
+
+      // Technical Project Links (EDGE_TECH)
+      { source: 'sk_web', target: 'proj_tf', type: 'tech', label: 'EDGE_TECH' },
+      { source: 'sk_cv', target: 'proj_isl', type: 'tech', label: 'EDGE_TECH' },
+      { source: 'projects', target: 'proj_tf', type: 'tech', label: 'EDGE_TECH' },
+      { source: 'projects', target: 'proj_isl', type: 'tech', label: 'EDGE_TECH' },
+
+      // Research Pipelines (EDGE_RESEARCH)
+      { source: 'research', target: 'res_nlp', type: 'res', label: 'EDGE_RESEARCH' },
+      { source: 'research', target: 'res_avian', type: 'res', label: 'EDGE_RESEARCH' },
+      { source: 'sk_aiml', target: 'res_nlp', type: 'res', label: 'EDGE_RESEARCH' },
+
+      // Professional Link (EDGE_PROF)
+      { source: 'experience', target: 'sk_web', type: 'prof', label: 'EDGE_PROFESSIONAL' }
+    ];
+
+    const nodeMap = {};
+    nodes.forEach(n => nodeMap[n.id] = n);
+
+    // Draw Edges
+    edges.forEach((e, idx) => {
+      const s = nodeMap[e.source];
+      const t = nodeMap[e.target];
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', s.x);
+      line.setAttribute('y1', s.y);
+      line.setAttribute('x2', t.x);
+      line.setAttribute('y2', t.y);
+      line.setAttribute('id', `edge-${idx}`);
+      line.setAttribute('class', `edge-type-${e.type}`);
+
+      if (e.type === 'nav') {
+        line.setAttribute('stroke', 'rgba(0, 210, 255, 0.35)');
+        line.setAttribute('stroke-width', '1.75');
+      } else if (e.type === 'hier') {
+        line.setAttribute('stroke', 'rgba(157, 78, 221, 0.45)');
+        line.setAttribute('stroke-width', '1.2');
+        line.setAttribute('stroke-dasharray', '4 3');
+      } else if (e.type === 'tech') {
+        line.setAttribute('stroke', 'rgba(96, 165, 250, 0.4)');
+        line.setAttribute('stroke-width', '1');
+        line.setAttribute('stroke-dasharray', '2 2');
+      } else if (e.type === 'res') {
+        line.setAttribute('stroke', 'rgba(245, 158, 11, 0.45)');
+        line.setAttribute('stroke-width', '1.2');
+      } else if (e.type === 'prof') {
+        line.setAttribute('stroke', 'rgba(16, 185, 129, 0.4)');
+        line.setAttribute('stroke-width', '1.2');
+      }
+      svg.appendChild(line);
+    });
+
+    // Draw Nodes
+    nodes.forEach(n => {
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.setAttribute('class', 'node-group');
+      g.style.cursor = 'pointer';
+
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', n.x);
+      circle.setAttribute('cy', n.y);
+      circle.setAttribute('r', n.type === 'root' ? '18' : (n.type === 'section' ? '12' : '7'));
+      circle.setAttribute('fill', n.color);
+      circle.setAttribute('stroke', '#07090E');
+      circle.setAttribute('stroke-width', '3');
+      circle.style.transition = 'all 0.2s ease';
+
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      text.setAttribute('x', n.x);
+      text.setAttribute('y', n.y - (n.type === 'root' ? 24 : (n.type === 'section' ? 18 : 12)));
+      text.setAttribute('class', 'node-label');
+      text.textContent = n.label;
+
+      const sub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      sub.setAttribute('x', n.x);
+      sub.setAttribute('y', n.y + (n.type === 'root' ? 30 : (n.type === 'section' ? 24 : 18)));
+      sub.setAttribute('class', 'node-sub');
+      sub.textContent = n.sub;
+
+      g.appendChild(circle);
+      g.appendChild(text);
+      g.appendChild(sub);
+
+      g.addEventListener('mouseenter', () => {
+        circle.setAttribute('r', n.type === 'root' ? '22' : (n.type === 'section' ? '16' : '10'));
+        circle.setAttribute('stroke', '#00D2FF');
+        hudTitle.textContent = n.label + ' [' + n.type.toUpperCase() + ']';
+        hudDesc.textContent = n.desc;
+        hudMeta.textContent = `COORDINATES: (${Math.round(n.x)}, ${Math.round(n.y)}) // CONNECTED EDGES: ACTIVE`;
+      });
+
+      g.addEventListener('mouseleave', () => {
+        circle.setAttribute('r', n.type === 'root' ? '18' : (n.type === 'section' ? '12' : '7'));
+        circle.setAttribute('stroke', '#07090E');
+      });
+
+      svg.appendChild(g);
+    });
+  </script>
+</body>
+</html>
