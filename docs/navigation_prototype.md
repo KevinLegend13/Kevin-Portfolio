@@ -148,3 +148,28 @@ const STATES = {
 | **Tactile Impact** | Decaying 3px micro-vibration over 70ms gives palpable physical weight. | **Verified** |
 | **Chromatic Accent** | Ultra-brief 70ms RGB border/text offset adds Spider-Verse energy without noise. | **Verified** |
 | **Stable Settle** | Smooth harmonic settle to 1.00x resting scale in 120ms with zero nausea. | **Verified** |
+
+---
+
+## 8. Visual Validation Environments (Temporary Motion Sandbox)
+
+To enable human verification of the scale change, departing shrink, destination approach, and impact, the prototype incorporates 5 distinct temporary mock environments:
+
+1. **HOME (Monumental Identity Hub)**:
+   - *Composition*: 780px wide central anchor with 52px hero typography (`KEVIN PRAKASH J`), 4 core discipline pillars (AI/ML, Software Engineering, CV, Research), and a 4-column HUD status telemetry grid.
+   - *Motion Test*: Tests large-scale recession ($1.00\text{x} \rightarrow 0.68\text{x}$) and returning expansion ($0.84\text{x} \rightarrow 1.06\text{x} \rightarrow 1.00\text{x}$).
+2. **ABOUT (Timeline & Engineering Credentials)**:
+   - *Composition*: 740px wide asymmetric card featuring VIT Vellore degree progress (2023–2027, CGPA 8.72/10), Syncfusion AI Internship timeline, and core technical pillars.
+   - *Motion Test*: Verifies directional diagonal web pull across coordinate quad $(-900, -600)$.
+3. **SKILLS (Living Constellation Network)**:
+   - *Composition*: 820px wide 6-category cluster grid (AI/ML, CV, Web/Systems, Languages, Databases/Tools, Testing) with individual technology pill tags.
+   - *Motion Test*: Confirms dense multi-node layouts do not suffer visual distortion during forward expansion.
+4. **PROJECTS (Systems Grid & TeamFlow Flagship)**:
+   - *Composition*: 860px wide showcase highlighting the full-stack **TeamFlow** case study (FastAPI, React, PostgreSQL 17, JWT/RBAC) alongside secondary project cards (ISL Translator, One Health AI).
+   - *Motion Test*: Verifies that high-detail cards settle cleanly without frame drops.
+5. **RESEARCH (Scientific Investigation & Data Pipelines)**:
+   - *Composition*: 820px wide split research panel detailing *Indic Multilingual NLP Embeddings* (mBERT, MuRIL, Samanantar) and *Avian Influenza One Health Digital Twin* (GraphRAG, Agentic AI, ERA5).
+   - *Motion Test*: Validates long-distance horizontal pull vectors across quad $(-950, 650)$.
+
+> **IMPORTANT REMINDER**: These 5 mock environments are temporary motion-validation artifacts isolated inside `prototypes/navigation_system/index.html`. They are NOT final portfolio components and do NOT initiate Phase 5.
+
