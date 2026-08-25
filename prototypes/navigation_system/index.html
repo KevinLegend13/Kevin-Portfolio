@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spider-Web Navigation Prototype — Kevin Prakash J</title>
+  <style>
+    :root {
+      --bg-primary: #07090E;
+      --bg-surface: #0D111A;
+      --bg-surface-2: #151C28;
+      --accent-red: #FF2A4B;
+      --accent-cyan: #00D2FF;
+      --accent-glow: rgba(0, 210, 255, 0.25);
+      --text-primary: #F4F6FB;
+      --text-muted: #8E9BAE;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --font-display: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      user-select: none;
+    }
+
+    /* Top HUD / Status Bar */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 54px;
+      padding: 0 24px;
+      background: rgba(7, 9, 14, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .brand-title {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--text-primary);
+    }
+    .brand-title span {
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      margin-left: 8px;
+    }
+
+    .nav-pills {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      min-height: 38px;
+      min-width: 44px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--accent-cyan);
+      background: rgba(0, 210, 255, 0.08);
+    }
+    .nav-btn.active {
+      background: var(--accent-red);
+      color: #fff;
+      border-color: var(--accent-red);
+      box-shadow: 0 0 16px rgba(255, 42, 75, 0.4);
+    }
+
+    /* Spatial Canvas World Container */
+    #world-viewport {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #world-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    #world-plane {
+      position: absolute;
+      width: 3000px;
+      height: 2400px;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(0, 0, 0);
+      transform-origin: 0 0;
+      z-index: 5;
+      will-change: transform;
+    }
+
+    /* Section Content Cards */
+    .section-zone {
+      position: absolute;
+      width: 520px;
+      padding: 32px;
+      background: rgba(13, 17, 26, 0.85);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      transform: translate(-50%, -50%);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .section-zone.active-zone {
+      border-color: rgba(0, 210, 255, 0.5);
+      box-shadow: 0 0 40px rgba(0, 210, 255, 0.15), 0 20px 50px rgba(0,0,0,0.7);
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-cyan);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-body {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .section-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+    .section-meta-item {
+      color: #94a3b8;
+    }
+    .section-meta-item strong {
+      color: var(--text-primary);
+    }
+
+    /* Node Target Anchor Point on Card */
+    .node-anchor {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--bg-primary);
+      border: 2px solid var(--accent-cyan);
+      box-shadow: 0 0 10px var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 20;
+    }
+    .node-anchor::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #fff;
+      border-radius: 50%;
+    }
+
+    /* Live Telemetry & Control Panel */
+    #telemetry-panel {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 320px;
+      background: rgba(13, 17, 26, 0.92);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .tele-header {
+      display: flex;
+      justify-content: space-between;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+    }
+
+    .tele-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      color: var(--text-muted);
+    }
+    .tele-val {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .state-badge {
+      background: rgba(0, 210, 255, 0.15);
+      color: var(--accent-cyan);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+    .state-badge.active-anim {
+      background: rgba(255, 42, 75, 0.2);
+      color: var(--accent-red);
+    }
+
+    .controls-grid {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .slider-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+    }
+    .slider-row input {
+      width: 130px;
+      accent-color: var(--accent-cyan);
+    }
+
+    /* Keybinds Helper */
+    .key-hints {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      background: rgba(13, 17, 26, 0.7);
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+      z-index: 100;
+    }
+    .key-hints kbd {
+      background: rgba(255,255,255,0.1);
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: var(--accent-cyan);
+      margin: 0 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-title">
+      KEVIN PRAKASH J <span>// SPIDER-WEB NAV PROTO // PH4</span>
+    </div>
+    <div class="nav-pills" id="nav-pill-container">
+      <!-- Generated in JS -->
+    </div>
+  </header>
+
+  <div id="world-viewport">
+    <div id="world-plane">
+      <!-- Section Zones Generated in JS -->
+    </div>
+    <canvas id="world-canvas"></canvas>
+  </div>
+
+  <div class="key-hints">
+    <span>Keys: <kbd>1</kbd> Home <kbd>2</kbd> About <kbd>3</kbd> Skills <kbd>4</kbd> Projects <kbd>5</kbd> Research</span>
+  </div>
+
+  <div id="telemetry-panel">
+    <div class="tele-header">
+      <span>WEB TELEMETRY ENGINE</span>
+      <span id="tele-fps">60 FPS</span>
+    </div>
+    <div class="tele-row">
+      <span>STATE:</span>
+      <span class="state-badge" id="tele-state">IDLE</span>
+    </div>
+    <div class="tele-row">
+      <span>ORIGIN &rarr; TARGET:</span>
+      <span class="tele-val" id="tele-route">home &rarr; home</span>
+    </div>
+    <div class="tele-row">
+      <span>WEB EXTENSION:</span>
+      <span class="tele-val" id="tele-progress">0.00 %</span>
+    </div>
+    <div class="tele-row">
+      <span>PULL TENSION (k):</span>
+      <span class="tele-val" id="tele-spring-k">380 N/m</span>
+    </div>
+    <div class="tele-row">
+      <span>DAMPING (c):</span>
+      <span class="tele-val" id="tele-spring-c">24 Ns/m</span>
+    </div>
+
+    <div class="controls-grid">
+      <div class="slider-row">
+        <span>Shoot Speed (ms)</span>
+        <input type="range" id="param-shoot" min="100" max="400" value="180" step="10">
+      </div>
+      <div class="slider-row">
+        <span>Tension Hold (ms)</span>
+        <input type="range" id="param-tension" min="40" max="250" value="90" step="10">
+      </div>
+      <div class="slider-row">
+        <span>Spring Stiffness (k)</span>
+        <input type="range" id="param-k" min="150" max="600" value="380" step="10">
+      </div>
+      <div class="slider-row">
+        <span>Damping (c)</span>
+        <input type="range" id="param-c" min="10" max="50" value="24" step="1">
+      </div>
+      <div class="slider-row" style="margin-top: 4px;">
+        <label><input type="checkbox" id="param-reduced-motion"> Reduced Motion</label>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. Tunable Configuration System ---
+    const CONFIG = {
+      shootDurationMs: 180,
+      tensionDurationMs: 90,
+      springK: 380,
+      springC: 24,
+      mass: 1.0,
+      recoilAmplitude: 8.0,
+      reducedMotion: false
+    };
+
+    // --- 2. Sections & Spatial Geometry ---
+    const SECTIONS = [
+      {
+        id: 'home',
+        index: 1,
+        title: 'Kevin Prakash J',
+        tag: 'SEC_00 // ROOT IDENTITY',
+        body: 'AI/ML-focused software engineer and researcher. Fourth-year CSE undergraduate at VIT Vellore (CGPA 8.72/10). Specializing in NLP, Computer Vision, and full-stack systems.',
+        meta: { focus: 'AI + Systems', status: 'Available for Roles', origin: 'VIT Vellore', stack: 'Python, React, FastAPI' },
+        x: 0,
+        y: 0
+      },
+      {
+        id: 'about',
+        index: 2,
+        title: 'Academic & Engineering Profile',
+        tag: 'SEC_01 // BACKGROUND',
+        body: 'Building intelligent, reproducible real-world systems. Combining rigorous research in semantic embeddings with high-performance production software engineering.',
+        meta: { degree: 'B.Tech CSE', timeline: '2023–2027', gpa: '8.72 / 10', interests: 'NLP, Vision, Systems' },
+        x: -700,
+        y: -420
+      },
+      {
+        id: 'skills',
+        index: 3,
+        title: 'Interactive Skill Network',
+        tag: 'SEC_02 // LIVING WEB',
+        body: 'Living topological network of technical competencies spanning deep learning frameworks, computer vision pipelines, full-stack stacks, and testing workflows.',
+        meta: { core_dl: 'PyTorch, TF, HuggingFace', backend: 'FastAPI, ASP.NET, Flask', vision: 'OpenCV, MediaPipe', db: 'PostgreSQL, MySQL' },
+        x: 750,
+        y: -360
+      },
+      {
+        id: 'projects',
+        index: 4,
+        title: 'Featured Systems & Engineering',
+        tag: 'SEC_03 // CASE STUDIES',
+        body: 'Flagship engineering systems including TeamFlow (FastAPI/React/Postgres full-stack platform with RBAC & Kanban), Indian Sign Language AI, and One Health AI.',
+        meta: { flagship: 'TeamFlow', vision_app: 'ISL Translator', cloud: 'AWS Attendance', meal_plan: 'MyKitchen' },
+        x: 820,
+        y: 480
+      },
+      {
+        id: 'research',
+        index: 5,
+        title: 'Applied AI & Scientific Research',
+        tag: 'SEC_04 // INVESTIGATION',
+        body: 'Advancing Multilingual Indic Sentence Embeddings (Samanantar, MuRIL, LaBSE) and Avian Influenza One Health Digital Twin Platforms with GraphRAG.',
+        meta: { nlp_paper: 'Indic Semantic Align', bio_ai: 'Avian Influenza Twin', models: 'MuRIL, XLM-R, LaBSE', engine: 'GraphRAG + LLM' },
+        x: -650,
+        y: 490
+      }
+    ];
+
+    const sectionMap = {};
+    SECTIONS.forEach(s => sectionMap[s.id] = s);
+
+    // --- 3. Centralized Finite State Machine ---
+    const STATES = {
+      IDLE: 'IDLE',
+      TARGETING: 'TARGETING',
+      SHOOTING: 'SHOOTING',
+      ANCHORED: 'ANCHORED',
+      TENSION: 'TENSION',
+      PULLING: 'PULLING',
+      ARRIVING: 'ARRIVING',
+      SETTLED: 'SETTLED'
+    };
+
+    let currentState = STATES.IDLE;
+    let currentSectionId = 'home';
+    let targetSectionId = null;
+
+    // Transition State Tracking
+    let animStartTime = 0;
+    let shootProgress = 0; // 0 to 1
+    let tensionPhase = 0;  // 0 to 1
+
+    // Camera / Viewport Physics State
+    let camX = 0, camY = 0;
+    let targetCamX = 0, targetCamY = 0;
+    let velX = 0, velY = 0;
+
+    // Web Filament State
+    let webOrigin = { x: 0, y: 0 };
+    let webTip = { x: 0, y: 0 };
+    let webAnchor = { x: 0, y: 0 };
+    let webSag = 0;
+    let sparks = [];
+
+    // DOM Elements
+    const worldPlane = document.getElementById('world-plane');
+    const canvas = document.getElementById('world-canvas');
+    const ctx = canvas.getContext('2d');
+    const navPillContainer = document.getElementById('nav-pill-container');
+
+    const teleState = document.getElementById('tele-state');
+    const teleRoute = document.getElementById('tele-route');
+    const teleProgress = document.getElementById('tele-progress');
+    const teleFps = document.getElementById('tele-fps');
+    const teleSpringK = document.getElementById('tele-spring-k');
+    const teleSpringC = document.getElementById('tele-spring-c');
+
+    // Controls
+    const paramShoot = document.getElementById('param-shoot');
+    const paramTension = document.getElementById('param-tension');
+    const paramK = document.getElementById('param-k');
+    const paramC = document.getElementById('param-c');
+    const paramReducedMotion = document.getElementById('param-reduced-motion');
+
+    paramShoot.addEventListener('input', (e) => CONFIG.shootDurationMs = +e.target.value);
+    paramTension.addEventListener('input', (e) => CONFIG.tensionDurationMs = +e.target.value);
+    paramK.addEventListener('input', (e) => {
+      CONFIG.springK = +e.target.value;
+      teleSpringK.textContent = CONFIG.springK + ' N/m';
+    });
+    paramC.addEventListener('input', (e) => {
+      CONFIG.springC = +e.target.value;
+      teleSpringC.textContent = CONFIG.springC + ' Ns/m';
+    });
+    paramReducedMotion.addEventListener('change', (e) => CONFIG.reducedMotion = e.target.checked);
+
+    // --- 4. Initialize DOM Plane & Navigation Pills ---
+    function initDOM() {
+      SECTIONS.forEach(s => {
+        // Nav button
+        const btn = document.createElement('button');
+        btn.className = `nav-btn ${s.id === currentSectionId ? 'active' : ''}`;
+        btn.id = `nav-btn-${s.id}`;
+        btn.textContent = `${s.index}. ${s.id.toUpperCase()}`;
+        btn.addEventListener('click', () => requestNavigation(s.id));
+        navPillContainer.appendChild(btn);
+
+        // Section Card in World Plane
+        const card = document.createElement('div');
+        card.className = `section-zone ${s.id === currentSectionId ? 'active-zone' : ''}`;
+        card.id = `card-${s.id}`;
+        card.style.left = `${1500 + s.x}px`;
+        card.style.top = `${1200 + s.y}px`;
+
+        card.innerHTML = `
+          <div class="node-anchor" onclick="requestNavigation('${s.id}')" title="Web Anchor Node"></div>
+          <div class="section-tag">${s.tag}</div>
+          <div class="section-title">${s.title}</div>
+          <div class="section-body">${s.body}</div>
+          <div class="section-meta-grid">
+            ${Object.entries(s.meta).map(([k, v]) => `<div class="section-meta-item">${k.toUpperCase()}: <strong>${v}</strong></div>`).join('')}
+          </div>
+        `;
+        worldPlane.appendChild(card);
+      });
+
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      // Keyboard support
+      window.addEventListener('keydown', (e) => {
+        const num = parseInt(e.key);
+        if (num >= 1 && num <= SECTIONS.length) {
+          requestNavigation(SECTIONS[num - 1].id);
+        }
+      });
+    }
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    // --- 5. Navigation Request & Interruption Strategy ---
+    function requestNavigation(targetId) {
+      if (targetId === currentSectionId && currentState === STATES.IDLE) return;
+
+      // Interruption logic: If currently navigating, retarget cleanly to new destination
+      targetSectionId = targetId;
+      const originSec = sectionMap[currentSectionId];
+      const targetSec = sectionMap[targetSectionId];
+
+      webOrigin = { x: originSec.x, y: originSec.y };
+      webAnchor = { x: targetSec.x, y: targetSec.y };
+      webTip = { x: originSec.x, y: originSec.y };
+
+      // Update Nav Pills
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`nav-btn-${targetId}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      teleRoute.textContent = `${currentSectionId} &rarr; ${targetSectionId}`;
+
+      // Reduced motion fast-path
+      if (CONFIG.reducedMotion || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        currentSectionId = targetSectionId;
+        camX = targetSec.x;
+        camY = targetSec.y;
+        velX = 0; velY = 0;
+        currentState = STATES.IDLE;
+        updateActiveCardClass();
+        updateTelemetry();
+        return;
+      }
+
+      currentState = STATES.TARGETING;
+      animStartTime = performance.now();
+      updateTelemetry();
+    }
+
+    function updateActiveCardClass() {
+      document.querySelectorAll('.section-zone').forEach(c => c.classList.remove('active-zone'));
+      const targetCard = document.getElementById(`card-${currentSectionId}`);
+      if (targetCard) targetCard.classList.add('active-zone');
+    }
+
+    // Particle Generator for Web Anchor Sparks
+    function emitAnchorSparks(x, y) {
+      for (let i = 0; i < 14; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 1.5 + Math.random() * 4.0;
+        sparks.push({
+          x, y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          life: 1.0,
+          decay: 0.03 + Math.random() * 0.03,
+          color: Math.random() > 0.3 ? '#00D2FF' : '#FF2A4B'
+        });
+      }
+    }
+
+    // --- 6. Physics & Animation Main Loop ---
+    let lastTime = performance.now();
+    let frameCount = 0;
+    let lastFpsUpdate = performance.now();
+
+    function animate(now) {
+      const dt = Math.min((now - lastTime) / 1000, 0.05); // Cap delta time
+      lastTime = now;
+
+      // FPS update
+      frameCount++;
+      if (now - lastFpsUpdate > 500) {
+        teleFps.textContent = `${Math.round((frameCount * 1000) / (now - lastFpsUpdate))} FPS`;
+        frameCount = 0;
+        lastFpsUpdate = now;
+      }
+
+      // State Machine Evaluation
+      evaluateStateMachine(now, dt);
+
+      // Camera Spring Physics
+      updateCameraPhysics(dt);
+
+      // Render World Plane Transform & Canvas Web
+      renderScene();
+
+      requestAnimationFrame(animate);
+    }
+
+    function evaluateStateMachine(now, dt) {
+      const elapsed = now - animStartTime;
+
+      switch (currentState) {
+        case STATES.TARGETING:
+          // Short 40ms lock-on phase
+          if (elapsed > 40) {
+            currentState = STATES.SHOOTING;
+            animStartTime = now;
+          }
+          break;
+
+        case STATES.SHOOTING:
+          const shootProgressRaw = elapsed / CONFIG.shootDurationMs;
+          shootProgress = Math.min(shootProgressRaw, 1.0);
+          teleProgress.textContent = `${(shootProgress * 100).toFixed(0)} %`;
+
+          // Interpolate web tip from origin to target
+          const easeShoot = 1 - Math.pow(1 - shootProgress, 3); // ease-out cubic
+          webTip.x = webOrigin.x + (webAnchor.x - webOrigin.x) * easeShoot;
+          webTip.y = webOrigin.y + (webAnchor.y - webOrigin.y) * easeShoot;
+
+          if (shootProgress >= 1.0) {
+            currentState = STATES.ANCHORED;
+            animStartTime = now;
+            emitAnchorSparks(webAnchor.x, webAnchor.y);
+          }
+          break;
+
+        case STATES.ANCHORED:
+          // Instant anchor & flash (30ms)
+          if (elapsed > 30) {
+            currentState = STATES.TENSION;
+            animStartTime = now;
+          }
+          break;
+
+        case STATES.TENSION:
+          tensionPhase = Math.min(elapsed / CONFIG.tensionDurationMs, 1.0);
+          // Web stretches and gains tension curve
+          webSag = Math.sin(tensionPhase * Math.PI) * 28;
+
+          if (tensionPhase >= 1.0) {
+            currentState = STATES.PULLING;
+            animStartTime = now;
+            const targetSec = sectionMap[targetSectionId];
+            targetCamX = targetSec.x;
+            targetCamY = targetSec.y;
+          }
+          break;
+
+        case STATES.PULLING:
+          // Pulling is driven by spring physics toward targetCamX/Y
+          const distToTarget = Math.hypot(targetCamX - camX, targetCamY - camY);
+          const currentVel = Math.hypot(velX, velY);
+
+          // Web relaxes sag as viewport accelerates toward destination
+          webSag = Math.max(0, webSag - dt * 60);
+
+          if (distToTarget < 2.0 && currentVel < 15.0) {
+            currentState = STATES.ARRIVING;
+            animStartTime = now;
+          }
+          break;
+
+        case STATES.ARRIVING:
+          // Arrival recoil settling (120ms)
+          if (elapsed > 120) {
+            currentState = STATES.SETTLED;
+            currentSectionId = targetSectionId;
+            updateActiveCardClass();
+            animStartTime = now;
+          }
+          break;
+
+        case STATES.SETTLED:
+          if (elapsed > 60) {
+            currentState = STATES.IDLE;
+            shootProgress = 0;
+            teleProgress.textContent = `0.00 %`;
+          }
+          break;
+
+        case STATES.IDLE:
+        default:
+          break;
+      }
+
+      updateTelemetry();
+    }
+
+    function updateCameraPhysics(dt) {
+      if (currentState === STATES.IDLE) {
+        // Keep camera steady at current section
+        const curSec = sectionMap[currentSectionId];
+        targetCamX = curSec.x;
+        targetCamY = curSec.y;
+      }
+
+      // Spring-damper force calculation: F = -k*(x - target) - c*v
+      const dispX = camX - targetCamX;
+      const dispY = camY - targetCamY;
+
+      const forceX = -CONFIG.springK * dispX - CONFIG.springC * velX;
+      const forceY = -CONFIG.springK * dispY - CONFIG.springC * velY;
+
+      const accX = forceX / CONFIG.mass;
+      const accY = forceY / CONFIG.mass;
+
+      velX += accX * dt;
+      velY += accY * dt;
+
+      camX += velX * dt;
+      camY += velY * dt;
+    }
+
+    function updateTelemetry() {
+      teleState.textContent = currentState;
+      if (currentState !== STATES.IDLE) {
+        teleState.className = 'state-badge active-anim';
+      } else {
+        teleState.className = 'state-badge';
+      }
+    }
+
+    // --- 7. Canvas Web Rendering ---
+    function renderScene() {
+      // 1. Move World Plane via hardware accelerated 3D transform
+      const screenCenterX = window.innerWidth / 2;
+      const screenCenterY = window.innerHeight / 2;
+
+      const transX = screenCenterX - 1500 - camX;
+      const transY = screenCenterY - 1200 - camY;
+
+      worldPlane.style.transform = `translate3d(${transX}px, ${transY}px, 0)`;
+
+      // 2. Clear Canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Function to transform world coordinates to screen canvas coordinates
+      const worldToScreen = (wx, wy) => ({
+        x: screenCenterX + (wx - camX),
+        y: screenCenterY + (wy - camY)
+      });
+
+      // 3. Draw Permanent Background Macro Web Connections
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
+      ctx.setLineDash([4, 4]);
+
+      for (let i = 0; i < SECTIONS.length; i++) {
+        for (let j = i + 1; j < SECTIONS.length; j++) {
+          const s1 = worldToScreen(SECTIONS[i].x, SECTIONS[i].y);
+          const s2 = worldToScreen(SECTIONS[j].x, SECTIONS[j].y);
+          ctx.beginPath();
+          ctx.moveTo(s1.x, s1.y);
+          ctx.lineTo(s2.x, s2.y);
+          ctx.stroke();
+        }
+      }
+      ctx.setLineDash([]); // Reset dash
+
+      // 4. Draw Active Dynamic Web Shoot / Pull Filament
+      if (currentState !== STATES.IDLE) {
+        const sOrigin = worldToScreen(webOrigin.x, webOrigin.y);
+        const sTip = worldToScreen(webTip.x, webTip.y);
+        const sAnchor = worldToScreen(webAnchor.x, webAnchor.y);
+
+        // Filament Glow Layer
+        ctx.shadowColor = '#00D2FF';
+        ctx.shadowBlur = currentState === STATES.TENSION ? 18 : 10;
+        ctx.lineWidth = currentState === STATES.TENSION ? 3.0 : 2.0;
+        ctx.strokeStyle = '#00D2FF';
+
+        ctx.beginPath();
+        ctx.moveTo(sOrigin.x, sOrigin.y);
+
+        if (currentState === STATES.SHOOTING) {
+          // Straight fast vector during shooting
+          ctx.lineTo(sTip.x, sTip.y);
+          ctx.stroke();
+
+          // Luminous Web Tip Bullet
+          ctx.fillStyle = '#FFFFFF';
+          ctx.beginPath();
+          ctx.arc(sTip.x, sTip.y, 4, 0, Math.PI * 2);
+          ctx.fill();
+
+        } else if (currentState === STATES.ANCHORED || currentState === STATES.TENSION || currentState === STATES.PULLING) {
+          // Curved tensile spring curve
+          const midX = (sOrigin.x + sAnchor.x) / 2;
+          const midY = (sOrigin.y + sAnchor.y) / 2 + webSag;
+
+          ctx.quadraticCurveTo(midX, midY, sAnchor.x, sAnchor.y);
+          ctx.stroke();
+
+          // Anchor point pulse
+          ctx.fillStyle = '#FF2A4B';
+          ctx.beginPath();
+          ctx.arc(sAnchor.x, sAnchor.y, 6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.shadowBlur = 0; // Reset shadow
+      }
+
+      // 5. Update and Draw Particles / Anchor Sparks
+      for (let i = sparks.length - 1; i >= 0; i--) {
+        const p = sparks[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= p.decay;
+
+        if (p.life <= 0) {
+          sparks.splice(i, 1);
+          continue;
+        }
+
+        const sp = worldToScreen(p.x, p.y);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.life;
+        ctx.beginPath();
+        ctx.arc(sp.x, sp.y, 2.5 * p.life, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1.0;
+    }
+
+    // Run Initialization
+    initDOM();
+    requestAnimationFrame(animate);
+  </script>
+</body>
+</html>

@@ -44,7 +44,7 @@ Rather than treating Spider-Man motifs as static decorative illustrations or a g
 | **Phase 1** | **Creative Direction & Visual Identity** *(Completed — see [docs/creative_direction.md](./docs/creative_direction.md))* |
 | **Phase 2** | **Inspiration & Interaction Research** *(Completed — see [docs/interaction_research.md](./docs/interaction_research.md))* |
 | **Phase 3** | **Information Architecture & Node Connection Model** *(Completed — see [docs/information_architecture.md](./docs/information_architecture.md))* |
-| **Phase 4** | Spider-Web Navigation System (Shooting, Pulling, Anchoring) |
+| **Phase 4** | **Spider-Web Navigation System** *(Completed — see [docs/navigation_prototype.md](./docs/navigation_prototype.md) & [prototypes/navigation_system/index.html](./prototypes/navigation_system/index.html))* |
 | **Phase 5** | Landing / Home Experience & Intro Sequence |
 | **Phase 6** | About Experience (Identity, Timelines, Terminal/Interactive Facts) |
 | **Phase 7** | Interactive Skills Web (Parent-Child Strands & Hover Physics) |
@@ -62,9 +62,11 @@ Rather than treating Spider-Man motifs as static decorative illustrations or a g
 ---
 
 ## Current Status
-- **Stage**: Phase 3 Complete — Information Architecture & Node Connection Model established.
-- **Active Specifications**:
+- **Stage**: Phase 4 Complete — Spider-Web Navigation System Prototype created, verified, and documented.
+- **Active Specifications & Prototypes**:
   - [Creative Direction Specification](./docs/creative_direction.md)
   - [Interaction Research Specification](./docs/interaction_research.md)
   - [Information Architecture Specification](./docs/information_architecture.md)
-- **Next Step**: Phase 4 — Spider-Web Navigation System (Shooting, Pulling, Anchoring). No production UI coding or placeholder generation has been initiated.
+  - [Spider-Web Navigation Prototype Specification](./docs/navigation_prototype.md)
+  - [Runnable Navigation Prototype](./prototypes/navigation_system/index.html)
+- **Next Step**: Phase 5 — Landing / Home Experience & Intro Sequence. No production UI coding or full application expansion has been initiated.
