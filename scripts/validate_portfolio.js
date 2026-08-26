@@ -75,7 +75,7 @@ requiredResearch.forEach(r => {
 assert(content.includes('Kevin_Resume.pdf'), 'Resume link Kevin_Resume.pdf exists');
 assert(content.includes('kevinprakashj@gmail.com'), 'Contact email kevinprakashj@gmail.com exists');
 assert(content.includes('https://github.com/KevinLegend13'), 'GitHub link exists');
-assert(content.includes('https://linkedin.com/in/kevin-prakash-b88286355'), 'LinkedIn link exists');
+assert(content.includes('https://www.linkedin.com/in/kevin-prakashj-98206a3b1/'), 'LinkedIn link exists');
 
 console.log(`\nValidation Complete: ${passCount} Passed, ${failCount} Failed.`);
 process.exit(failCount > 0 ? 1 : 0);
