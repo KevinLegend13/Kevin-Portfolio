@@ -14,13 +14,13 @@
       --bg-surface-elevated: #111827;
       --accent-red: #FF2A4B;
       --accent-cyan: #00D2FF;
-      --accent-cyan-glow: rgba(0, 210, 255, 0.25);
-      --accent-red-glow: rgba(255, 42, 75, 0.25);
+      --accent-cyan-glow: rgba(0, 210, 255, 0.35);
+      --accent-red-glow: rgba(255, 42, 75, 0.35);
       --text-primary: #F8FAFC;
       --text-muted: #94A3B8;
       --text-dim: #64748B;
       --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-cyan: rgba(0, 210, 255, 0.35);
+      --border-cyan: rgba(0, 210, 255, 0.4);
       --border-red: rgba(255, 42, 75, 0.4);
       --font-display: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -190,9 +190,7 @@
       justify-content: center;
     }
 
-    /* =========================================================================
-       1. FULL PAGE CONTAINER BASE (88vw x 78vh)
-       ========================================================================= */
+    /* Full Page Container Base (88vw x 78vh) */
     .full-page-frame {
       width: 88vw;
       max-width: 1160px;
@@ -465,216 +463,273 @@
     }
 
     /* =========================================================================
-       2. FULL INTERACTIVE SKILLS EXPERIENCE (BLOOMING LIVING WEB)
+       2. RADIAL SPIDER-WEB SKILLS EXPERIENCE (OCTOPUS / STUCK-ON-THE-WEB STYLE)
        ========================================================================= */
     #page-skills {
-      background: linear-gradient(145deg, rgba(10, 18, 30, 0.97) 0%, rgba(16, 28, 48, 0.95) 100%);
+      background: radial-gradient(circle at 50% 50%, rgba(14, 25, 45, 0.98) 0%, rgba(6, 10, 18, 0.96) 100%);
       border: 1.5px solid var(--border-cyan);
-      box-shadow: 0 35px 100px rgba(0, 0, 0, 0.92), 0 0 60px var(--accent-cyan-glow);
+      box-shadow: 0 35px 100px rgba(0, 0, 0, 0.92), 0 0 70px var(--accent-cyan-glow);
+      overflow: hidden;
+      position: relative;
     }
 
-    .skills-header-bar {
+    .skills-web-stage {
+      position: relative;
+      width: 100%;
+      height: calc(100% - 60px);
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 14px;
-      margin-bottom: 18px;
+      justify-content: center;
     }
-    .skills-main-title {
+
+    #skills-radial-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Central "SKILLS" Monumental Hub */
+    .skills-center-core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      text-align: center;
+      background: rgba(11, 16, 28, 0.92);
+      border: 2.5px solid var(--accent-cyan);
+      padding: 24px 38px;
+      border-radius: 50%;
+      width: 220px;
+      height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 45px var(--accent-cyan-glow), inset 0 0 25px rgba(0, 210, 255, 0.2);
+      backdrop-filter: blur(16px);
+    }
+    .scc-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      letter-spacing: 0.15em;
+      margin-bottom: 2px;
+    }
+    .scc-title {
       font-family: var(--font-display);
       font-size: 38px;
       font-weight: 900;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
+      letter-spacing: 0.05em;
       color: #FFFFFF;
+      text-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+      line-height: 1.0;
+    }
+    .scc-sub {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      color: var(--text-muted);
       margin-top: 4px;
+      letter-spacing: 0.06em;
     }
 
-    /* Two-Panel Interactive Skills Layout (40% Categories / 60% Blooming Detail) */
-    .skills-interactive-layout {
-      display: grid;
-      grid-template-columns: 360px 1fr;
-      gap: 24px;
-      height: calc(100% - 130px);
-      min-height: 380px;
-    }
-
-    /* Left Pane: Category Parent Anchors */
-    .category-anchors-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      overflow-y: auto;
-      padding-right: 6px;
-    }
-
-    .cat-anchor-btn {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      padding: 14px 18px;
-      text-align: left;
+    /* Radial Nodes Stuck Along the Web Strands */
+    .web-stuck-node {
+      position: absolute;
+      z-index: 20;
+      transform: translate(-50%, -50%);
       cursor: pointer;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      user-select: none;
+    }
+    .web-stuck-node:hover {
+      transform: translate(-50%, -50%) scale(1.12);
+    }
+
+    .wsn-badge-circle {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: rgba(11, 16, 28, 0.95);
+      border: 2px solid var(--accent-cyan);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-cyan-glow);
+      backdrop-filter: blur(14px);
+      padding: 8px;
+      margin-bottom: 6px;
+      transition: all 0.25s ease;
+    }
+    .web-stuck-node:hover .wsn-badge-circle {
+      border-color: #FFFFFF;
+      box-shadow: 0 0 30px var(--accent-cyan);
+      background: rgba(0, 210, 255, 0.15);
+    }
+    .web-stuck-node.accent-red .wsn-badge-circle {
+      border-color: var(--accent-red);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-red-glow);
+    }
+    .web-stuck-node.accent-red:hover .wsn-badge-circle {
+      border-color: #FFFFFF;
+      box-shadow: 0 0 30px var(--accent-red);
+      background: rgba(255, 42, 75, 0.15);
+    }
+
+    .wsn-icon {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+    .wsn-label {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 900;
+      color: #FFFFFF;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+    .wsn-count-pill {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      background: rgba(0, 210, 255, 0.12);
+      padding: 2px 6px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      margin-top: 2px;
+    }
+    .web-stuck-node.accent-red .wsn-count-pill {
+      color: var(--accent-red);
+      background: rgba(255, 42, 75, 0.12);
+      border-color: rgba(255, 42, 75, 0.3);
+    }
+
+    /* Centered Modal Popup Box for Selected Skill Group */
+    .skills-modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(6, 8, 14, 0.85);
+      backdrop-filter: blur(14px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .skills-modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .skills-popup-box {
+      width: 90vw;
+      max-width: 680px;
+      max-height: 82vh;
+      background: linear-gradient(145deg, #0D1527 0%, #151F36 100%);
+      border: 2px solid var(--accent-cyan);
+      border-radius: 20px;
+      padding: 32px 36px;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.95), 0 0 60px var(--accent-cyan-glow);
+      transform: scale(0.85);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-y: auto;
+      scrollbar-width: none;
       position: relative;
+    }
+    .skills-modal-overlay.active .skills-popup-box {
+      transform: scale(1);
+    }
+    .skills-popup-box::-webkit-scrollbar { display: none; }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .modal-close-btn:hover {
+      background: var(--accent-red);
+      border-color: var(--accent-red);
+      box-shadow: 0 0 15px var(--accent-red);
+    }
+
+    .modal-header-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      letter-spacing: 0.12em;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+    .modal-group-title {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 900;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+    }
+
+    .modal-skills-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .modal-skill-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 14px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .cat-anchor-btn:hover {
-      background: rgba(0, 210, 255, 0.06);
-      border-color: rgba(0, 210, 255, 0.35);
-      transform: translateX(4px);
+    .msi-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      max-width: 440px;
     }
-    .cat-anchor-btn.active {
-      background: linear-gradient(135deg, rgba(0, 210, 255, 0.15) 0%, rgba(255, 42, 75, 0.12) 100%);
-      border-color: var(--accent-cyan);
-      box-shadow: 0 0 25px rgba(0, 210, 255, 0.2);
-    }
-
-    .cab-info { display: flex; flex-direction: column; gap: 2px; }
-    .cab-tag {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--accent-cyan);
-      letter-spacing: 0.08em;
-    }
-    .cat-anchor-btn.active .cab-tag { color: var(--accent-red); }
-    .cab-name {
+    .msi-name {
       font-size: 15px;
       font-weight: 800;
       color: #FFFFFF;
     }
-    .cab-count {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-muted);
-      background: rgba(255, 255, 255, 0.06);
-      padding: 4px 10px;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .cat-anchor-btn.active .cab-count {
-      color: #fff;
-      border-color: var(--accent-cyan);
-      background: rgba(0, 210, 255, 0.2);
-    }
-
-    /* Right Pane: Blooming Child Web Grid & Inspector */
-    .skills-bloom-container {
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow-y: auto;
-      position: relative;
-    }
-
-    .bloom-header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    .bloom-domain-title {
-      font-family: var(--font-display);
-      font-size: 20px;
-      font-weight: 900;
-      color: #FFFFFF;
-    }
-    .bloom-edge-badge {
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      color: var(--accent-cyan);
-      background: rgba(0, 210, 255, 0.1);
-      padding: 4px 10px;
-      border-radius: 4px;
-      border: 1px solid rgba(0, 210, 255, 0.3);
-    }
-
-    /* Child Nodes Bloom Grid */
-    .child-nodes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .child-skill-card {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      padding: 14px 16px;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 80px;
-    }
-    .child-skill-card:hover, .child-skill-card.selected {
-      background: rgba(0, 210, 255, 0.08);
-      border-color: var(--accent-cyan);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-cyan-glow);
-    }
-    .child-skill-card.selected {
-      border-color: var(--accent-red);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-red-glow);
-    }
-
-    .csc-name {
-      font-size: 14.5px;
-      font-weight: 800;
-      color: #FFFFFF;
-      margin-bottom: 4px;
-    }
-    .csc-meta {
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      color: var(--text-muted);
-    }
-
-    /* Contextual Inspector Panel for Selected Skill */
-    .skill-context-panel {
-      background: rgba(11, 16, 28, 0.9);
-      border: 1px solid rgba(0, 210, 255, 0.3);
-      border-radius: 10px;
-      padding: 14px 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .scp-left {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-    .scp-tag {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--accent-cyan);
-      letter-spacing: 0.1em;
-    }
-    .scp-headline {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #FFFFFF;
-    }
-    .scp-desc {
+    .msi-context {
       font-size: 12px;
       color: var(--text-muted);
-      max-width: 480px;
+      line-height: 1.4;
     }
+    .msi-context strong { color: var(--accent-cyan); }
 
     /* Chromatic Shadow Accents */
     .full-page-frame.chromatic-impact {
@@ -686,7 +741,7 @@
       text-shadow: -4px 0 rgba(255, 42, 75, 0.9), 4px 0 rgba(0, 210, 255, 0.9);
     }
 
-    /* Projects & Research Generic Full Page Frames */
+    /* Generic Full Pages for Projects & Research */
     #page-projects {
       background: linear-gradient(135deg, rgba(15, 28, 35, 0.96) 0%, rgba(25, 42, 50, 0.94) 100%);
       border: 1.5px solid #00F0FF;
@@ -741,9 +796,7 @@
       line-height: 1.5;
     }
 
-    /* =========================================================================
-       3. COMPACT NODE VIEW (SPATIAL NETWORK PORTALS)
-       ========================================================================= */
+    /* Compact Node View Base */
     .compact-node-view {
       width: 260px;
       height: 130px;
@@ -759,10 +812,7 @@
       backdrop-filter: blur(16px);
       transition: transform 0.2s, box-shadow 0.2s;
     }
-    .compact-node-view:hover {
-      transform: scale(1.06);
-    }
-
+    .compact-node-view:hover { transform: scale(1.06); }
     .node-home-style {
       background: #0B101C;
       border: 2px solid var(--accent-cyan);
@@ -788,7 +838,6 @@
       border: 2px solid #FF007A;
       box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 0, 122, 0.3);
     }
-
     .node-anchor-dot {
       position: absolute;
       top: -12px;
@@ -811,7 +860,6 @@
       background: #FFFFFF;
       border-radius: 50%;
     }
-
     .node-tag-txt {
       font-family: var(--font-mono);
       font-size: 10px;
@@ -959,9 +1007,10 @@
         height: 84vh;
         padding: 24px 20px;
       }
-      .skills-interactive-layout { grid-template-columns: 1fr; height: auto; }
-      .category-anchors-list { flex-direction: row; flex-wrap: wrap; }
-      .cat-anchor-btn { flex: 1 1 45%; }
+      .skills-center-core { width: 160px; height: 160px; }
+      .scc-title { font-size: 28px; }
+      .wsn-badge-circle { width: 72px; height: 72px; }
+      .wsn-label { font-size: 9.5px; }
       .about-lead-title { font-size: 32px; }
       .about-triad-grid { grid-template-columns: 1fr; gap: 14px; }
       .pillars-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -1068,7 +1117,7 @@
             <div class="home-telemetry-cue">
               <span>LOCATION: <strong>VELLORE / CHENNAI</strong></span>
               <span>&bull;</span>
-              <span>NETWORK: <strong>SPIDER-WEB v7</strong></span>
+              <span>NETWORK: <strong>SPIDER-WEB v8</strong></span>
             </div>
           </div>
         </div>
@@ -1173,7 +1222,7 @@
       </div>
 
       <!-- =======================================================
-           NODE 02: SKILLS (INTERACTIVE LIVING SKILLS WEB)
+           NODE 02: SKILLS (RADIAL SPIDER-WEB "STUCK ON WEB" EXPERIENCE)
            ======================================================= -->
       <div class="scene-entity" id="entity-skills">
         <!-- Compact View -->
@@ -1183,72 +1232,72 @@
           <div class="node-title-txt">SKILLS</div>
           <div class="node-status-txt">AI/ML &bull; OpenCV &bull; FastAPI &bull; React &bull; SQL</div>
         </div>
-        <!-- Full Interactive Skills Web View -->
+        <!-- Full Radial Skills Web View -->
         <div class="full-page-frame" id="page-skills" style="display: none;">
-          <div>
-            <div class="skills-header-bar">
-              <div>
-                <div class="hero-status-pill">
-                  <span class="status-dot"></span>
-                  LIVING SKILLS TAXONOMY // INTERACTIVE WEB
-                </div>
-                <h2 class="skills-main-title">Interactive Skills Web</h2>
-              </div>
-              <div class="hero-credentials-tag">
-                Hover or Click Categories to Bloom Child Technology Nodes
-              </div>
+          
+          <div class="hero-top-row" style="z-index: 30; position: relative;">
+            <div class="hero-status-pill">
+              <span class="status-dot"></span>
+              RADIAL SPIDER-WEB TAXONOMY // CLICK ANY NODE FOR DETAILS
+            </div>
+            <div class="hero-credentials-tag">
+              Master Profile Ground Truth
+            </div>
+          </div>
+
+          <!-- Radial Web Stage -->
+          <div class="skills-web-stage" id="skills-web-stage">
+            <canvas id="skills-radial-canvas"></canvas>
+
+            <!-- Center Monumental "SKILLS" Hub -->
+            <div class="skills-center-core">
+              <div class="scc-tag">TAXONOMY // CORE</div>
+              <div class="scc-title">SKILLS</div>
+              <div class="scc-sub">6 RADIAL DOMAINS</div>
             </div>
 
-            <!-- Two-Panel Layout (40% Categories / 60% Blooming Grid & Context) -->
-            <div class="skills-interactive-layout">
-              
-              <!-- Left: Category Parent Anchors -->
-              <div class="category-anchors-list" id="category-anchors-container">
-                <!-- Rendered dynamically in JS -->
-              </div>
+            <!-- Dynamic 6 Stuck-on-the-Web Category Nodes (Rendered in JS) -->
+            <div id="radial-nodes-mount"></div>
 
-              <!-- Right: Blooming Child Skills Web & Context Inspector -->
-              <div class="skills-bloom-container">
+            <!-- Centered Modal Popup Box for Skills Details -->
+            <div class="skills-modal-overlay" id="skills-modal-overlay" onclick="closeSkillsModal(event)">
+              <div class="skills-popup-box" id="skills-popup-box" onclick="event.stopPropagation()">
+                <button class="modal-close-btn" onclick="closeSkillsModal(event)">&times;</button>
+                
                 <div>
-                  <div class="bloom-header-row">
-                    <div class="bloom-domain-title" id="bloom-domain-title">AI / ML & LLMs</div>
-                    <div class="bloom-edge-badge" id="bloom-edge-badge">EDGE_HIERARCHY &bull; 8 TECHNOLOGIES</div>
-                  </div>
-
-                  <!-- Blooming Child Cards Grid -->
-                  <div class="child-nodes-grid" id="child-nodes-container">
+                  <div class="modal-header-tag" id="modal-header-tag">DOMAIN // 01</div>
+                  <h3 class="modal-group-title" id="modal-group-title">AI / ML & NLP</h3>
+                  
+                  <!-- List of Skills in this Group -->
+                  <div class="modal-skills-list" id="modal-skills-list">
                     <!-- Populated dynamically in JS -->
                   </div>
                 </div>
 
-                <!-- Skill Context & Relationship Inspector -->
-                <div class="skill-context-panel" id="skill-context-panel">
-                  <div class="scp-left">
-                    <div class="scp-tag" id="scp-tag">SELECTED TECHNOLOGY CONTEXT</div>
-                    <div class="scp-headline" id="scp-headline">PyTorch</div>
-                    <div class="scp-desc" id="scp-desc">Deep learning model training and sentence embedding alignment experiments across Indic language pairs.</div>
-                  </div>
-                  <div id="scp-action-container">
-                    <button class="semantic-jump-btn" id="scp-action-btn" onclick="requestNavigation('research')">
-                      <span>EXPLORE IN RESEARCH</span> &rarr;
-                    </button>
+                <div class="home-footer-row" style="padding-top: 14px; margin-top: 10px;">
+                  <button class="hero-cta-secondary" onclick="closeSkillsModal(event)">
+                    &larr; BACK TO SKILLS WEB
+                  </button>
+                  <div class="home-telemetry-cue" id="modal-telemetry-cue">
+                    <span>SOURCE: <strong>MASTER PROFILE V3</strong></span>
                   </div>
                 </div>
               </div>
-
             </div>
+
           </div>
 
-          <div class="home-footer-row">
+          <div class="home-footer-row" style="z-index: 30; position: relative;">
             <div class="about-semantic-links">
               <button class="hero-cta-secondary" onclick="requestNavigation('home')">&larr; RETURN TO HOME</button>
-              <button class="semantic-jump-btn" onclick="requestNavigation('projects')"><span>CONNECT TO PROJECTS (TEAMFLOW)</span> &rarr;</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('projects')"><span>CONNECT TO PROJECTS</span> &rarr;</button>
               <button class="semantic-jump-btn" onclick="requestNavigation('about')"><span>ABOUT BACKGROUND</span> &rarr;</button>
             </div>
             <div class="home-telemetry-cue">
-              <span>NODE: <strong>02 // LIVING SKILLS WEB</strong></span>
+              <span>NODE: <strong>02 // SPIDER-WEB TAXONOMY</strong></span>
             </div>
           </div>
+
         </div>
       </div>
 
@@ -1382,91 +1431,99 @@
 
   <script>
     // --- 1. Master Skills Taxonomy Data Grounded in Master Profile ---
-    const SKILLS_TAXONOMY = [
+    const RADIAL_SKILLS_DATA = [
       {
         id: 'ai-ml',
         name: 'AI / ML & NLP',
         tag: 'DOMAIN // 01',
-        description: 'Neural architectures, transformer embeddings, and LLM reasoning pipelines.',
+        icon: '🧠',
+        accentColor: 'cyan',
+        angleDeg: 300, // Top-Left
+        radius: 220,
         skills: [
-          { name: 'PyTorch', meta: 'Deep Learning & NLP', context: 'Used in Indic NLP Embeddings research and neural model evaluation.', linkTo: 'research', linkText: 'EXPLORE IN RESEARCH' },
-          { name: 'TensorFlow', meta: 'Neural Modeling', context: 'Used for neural network experimentation and baseline model comparisons.', linkTo: 'research', linkText: 'EXPLORE IN RESEARCH' },
-          { name: 'Hugging Face', meta: 'Transformers & Datasets', context: 'Integrated for tokenizers, mBERT, MuRIL, and multilingual sentence transformers.', linkTo: 'research', linkText: 'EXPLORE IN RESEARCH' },
-          { name: 'LangChain', meta: 'Agentic LLM Pipelines', context: 'Engineered retrieval-augmented generation and reasoning workflows in AI projects.', linkTo: 'projects', linkText: 'VIEW AI PROJECTS' },
-          { name: 'Ollama', meta: 'Local Model Inference', context: 'Utilized for local LLM inference, embedding extraction, and prompt evaluations.', linkTo: 'projects', linkText: 'VIEW AI PROJECTS' },
-          { name: 'Prompt Engineering', meta: 'Instruction Tuning', context: 'Structured prompt design for few-shot reasoning, summarization, and data extraction.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
-          { name: 'NLP & LLMs', meta: 'Representation Learning', context: 'Semantic affinity, graph modularity, cross-lingual alignment, and bitext retrieval.', linkTo: 'research', linkText: 'EXPLORE IN RESEARCH' }
+          { name: 'PyTorch', context: 'Used in Indic Multilingual NLP sentence embedding experiments and cross-lingual alignment models.', linkTo: 'research', linkText: 'VIEW RESEARCH' },
+          { name: 'TensorFlow', context: 'Used for neural modeling pipelines and comparative benchmark training.', linkTo: 'research', linkText: 'VIEW RESEARCH' },
+          { name: 'Hugging Face', context: 'Used for tokenizer pipelines, mBERT, MuRIL, and multilingual sentence transformers.', linkTo: 'research', linkText: 'VIEW RESEARCH' },
+          { name: 'LangChain & Ollama', context: 'Used for retrieval-augmented generation and local LLM inference workflows.', linkTo: 'projects', linkText: 'VIEW PROJECTS' },
+          { name: 'NLP & LLMs', context: 'Sentence embeddings, cross-lingual semantic alignment, and GraphRAG reasoning.', linkTo: 'research', linkText: 'VIEW RESEARCH' }
         ]
       },
       {
         id: 'vision',
         name: 'Computer Vision',
         tag: 'DOMAIN // 02',
-        description: 'Real-time camera pipelines, hand landmark intelligence, and gesture recognition.',
+        icon: '👁️',
+        accentColor: 'red',
+        angleDeg: 0, // Top-Right / Upper
+        radius: 230,
         skills: [
-          { name: 'OpenCV', meta: 'Image Processing & Video', context: 'Core vision engine for real-time video capture, filtering, and contour processing.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' },
-          { name: 'MediaPipe', meta: '21-Hand Landmark AI', context: 'Extracted high-precision 21 3D hand coordinates for real-time sign recognition.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' },
-          { name: 'Gesture Recognition', meta: 'Spatial Classification', context: 'Machine-learning classification of hand gestures translated to text and speech.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' }
+          { name: 'OpenCV', context: 'Real-time video frame acquisition, filtering, contour isolation, and image processing.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' },
+          { name: 'MediaPipe', context: 'High-precision 21 3D hand landmark coordinate tracking for real-time sign recognition.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' },
+          { name: 'Gesture Recognition', context: 'Machine-learning spatial classification translating gestures into real-time speech.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' }
         ]
       },
       {
         id: 'web-systems',
         name: 'Web & Systems',
         tag: 'DOMAIN // 03',
-        description: 'Production full-stack engineering, enterprise frameworks, and secure REST APIs.',
+        icon: '⚡',
+        accentColor: 'cyan',
+        angleDeg: 60, // Right / Mid-Right
+        radius: 240,
         skills: [
-          { name: 'React', meta: 'Frontend Architecture', context: 'Engineered modern component systems for TeamFlow and Syncfusion enterprise apps.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'TypeScript', meta: 'Type-Safe Systems', context: 'Strict typing across frontend React components, API schemas, and state contracts.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'FastAPI', meta: 'High-Speed Python Backend', context: 'Flagship TeamFlow backend with async routers, dependencies, and Pydantic validation.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'ASP.NET Core', meta: 'Enterprise C# Backend', context: 'Enterprise feature development during Syncfusion AI Internship with RBAC security.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
-          { name: 'C#', meta: 'Object-Oriented Systems', context: 'Backend service development and API routing during Syncfusion internship.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
-          { name: 'Flask', meta: 'Lightweight Web Framework', context: 'Engineered full-stack service architecture for MyKitchen planner application.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
-          { name: 'Tailwind CSS', meta: 'Utility-First Styling', context: 'Engineered responsive UI components with clean design systems.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
-          { name: 'REST APIs', meta: 'API Design & Protocols', context: 'Designed stateless JSON endpoints, JWT bearer auth, and CORS security layers.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' }
-        ]
-      },
-      {
-        id: 'languages',
-        name: 'Programming Languages',
-        tag: 'DOMAIN // 04',
-        description: 'Core languages for systems, algorithms, research modeling, and automation.',
-        skills: [
-          { name: 'Python', meta: 'Primary Engineering Language', context: 'Extensive use across PyTorch research, FastAPI backends, and data pipelines.', linkTo: 'projects', linkText: 'VIEW PROJECTS' },
-          { name: 'Java', meta: 'OOP & Systems Rigor', context: 'Core object-oriented programming, data structures, and algorithmic foundations.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
-          { name: 'C / C++', meta: 'Low-Level Computing', context: 'Systems programming, memory management principles, and algorithmic problem-solving.', linkTo: 'about', linkText: 'VIEW IN ABOUT' }
+          { name: 'FastAPI (Python)', context: 'Engineered flagship TeamFlow async backend with Pydantic schemas and dependency injection.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'React & Vite', context: 'Engineered modular component hierarchy and responsive state management for TeamFlow platform.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'TypeScript & JavaScript', context: 'Strict type safety across frontend models, API contracts, and async network calls.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'ASP.NET Core & C#', context: 'Enterprise feature development and RBAC authorization during Syncfusion AI Internship.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
+          { name: 'Flask & REST APIs', context: 'Stateless JSON endpoints, CORS security, and database integration in MyKitchen planner.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' }
         ]
       },
       {
         id: 'databases',
         name: 'Databases & Storage',
-        tag: 'DOMAIN // 05',
-        description: 'Relational data integrity, schema design, and ORM query optimization.',
+        tag: 'DOMAIN // 04',
+        icon: '🗄️',
+        accentColor: 'red',
+        angleDeg: 120, // Bottom-Right
+        radius: 225,
         skills: [
-          { name: 'PostgreSQL 17.11', meta: 'Primary Relational Database', context: 'Configured relational schema, foreign keys, cascades, and indexes for TeamFlow.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'MySQL', meta: 'Relational Database', context: 'Structured database schema design and relational data operations.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
-          { name: 'SQLAlchemy 2.x', meta: 'Python Async ORM', context: 'Declarative database models, session lifecycle, and transaction management in FastAPI.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' }
+          { name: 'PostgreSQL 17.11', context: 'Primary relational database for TeamFlow; foreign keys, cascades, and indexed queries.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'SQLAlchemy 2.x', context: 'Declarative async ORM models, session handling, and transaction boundaries in FastAPI.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'MySQL', context: 'Relational data modeling, ACID transactions, and structured query optimization.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' }
+        ]
+      },
+      {
+        id: 'languages',
+        name: 'Programming',
+        tag: 'DOMAIN // 05',
+        icon: '💻',
+        accentColor: 'cyan',
+        angleDeg: 180, // Bottom-Left / Left
+        radius: 240,
+        skills: [
+          { name: 'Python', context: 'Primary language across PyTorch research, FastAPI backends, and one-shot data scripts.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
+          { name: 'Java', context: 'Object-oriented programming, data structures, and algorithmic software design.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
+          { name: 'C & C++', context: 'Low-level memory management concepts, computing fundamentals, and algorithms.', linkTo: 'about', linkText: 'VIEW IN ABOUT' }
         ]
       },
       {
         id: 'testing-tools',
-        name: 'Testing & Ecosystem',
+        name: 'Testing & Tools',
         tag: 'DOMAIN // 06',
-        description: 'Automated verification, mutation testing, version control, and Linux workflows.',
+        icon: '🛠️',
+        accentColor: 'cyan',
+        angleDeg: 240, // Top-Left / Upper-Left
+        radius: 230,
         skills: [
-          { name: 'PyTest', meta: 'Automated Test Suites', context: 'Comprehensive backend testing for TeamFlow API endpoints and authentication.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'Mutation Testing', meta: 'Test Quality Analysis', context: 'Evaluated test suite resilience and fault detection capabilities.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
-          { name: 'Git & GitHub', meta: 'Version Control & CI/CD', context: 'Branching strategies, incremental commits, code reviews, and repo management.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
-          { name: 'Linux', meta: 'Server & Dev Environment', context: 'Command-line development, process management, and deployment environments.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
-          { name: 'VS Code', meta: 'Primary IDE', context: 'Configured debugging environments, linting rules, and multi-workspace tooling.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
-          { name: 'Streamlit', meta: 'Interactive AI Demos', context: 'Built rapid interactive web applications for AI and data visualization demos.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' }
+          { name: 'PyTest', context: 'Automated backend verification, route security testing, and integration tests in TeamFlow.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'Mutation Testing', context: 'Evaluated resilience and test quality of critical software verification suites.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
+          { name: 'Git & GitHub', context: 'Branch management, pull requests, CI/CD workflows, and disciplined commit histories.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
+          { name: 'Linux & VS Code', context: 'Command-line scripting, server environments, and multi-workspace developer tooling.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' }
         ]
       }
     ];
 
-    let activeCategoryId = 'ai-ml';
-    let selectedSkillName = 'PyTorch';
-
-    // --- 2. Central Motion & Physics Configuration ---
+    // --- 2. Motion & Physics Configuration ---
     const CONFIG = {
       collapseDurationMs: 140,
       shootDurationMs: 150,
@@ -1556,18 +1613,15 @@
     const introOverlay = document.getElementById('intro-overlay');
     const introBox = document.getElementById('intro-box');
 
-    const categoryAnchorsContainer = document.getElementById('category-anchors-container');
-    const childNodesContainer = document.getElementById('child-nodes-container');
-    const bloomDomainTitle = document.getElementById('bloom-domain-title');
-    const bloomEdgeBadge = document.getElementById('bloom-edge-badge');
-    const scpTag = document.getElementById('scp-tag');
-    const scpHeadline = document.getElementById('scp-headline');
-    const scpDesc = document.getElementById('scp-desc');
-    const scpActionBtn = document.getElementById('scp-action-btn');
+    const skillsRadialCanvas = document.getElementById('skills-radial-canvas');
+    const radialNodesMount = document.getElementById('radial-nodes-mount');
+    const skillsModalOverlay = document.getElementById('skills-modal-overlay');
+    const modalHeaderTag = document.getElementById('modal-header-tag');
+    const modalGroupTitle = document.getElementById('modal-group-title');
+    const modalSkillsList = document.getElementById('modal-skills-list');
 
-    // --- 5. Initialize Navigation & Interactive Skills Web ---
+    // --- 5. Initialize Navigation & Radial Web ---
     function init() {
-      // Build Navbar Buttons
       SCENES.forEach(s => {
         const btn = document.createElement('button');
         btn.className = `nav-btn ${s.id === currentSceneId ? 'active' : ''}`;
@@ -1577,7 +1631,11 @@
         navPillContainer.appendChild(btn);
       });
 
-      window.addEventListener('resize', resizeCanvas);
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+        positionRadialSkillsNodes();
+        renderSkillsRadialWeb();
+      });
       resizeCanvas();
 
       window.addEventListener('keydown', (e) => {
@@ -1585,12 +1643,13 @@
         if (num >= 1 && num <= SCENES.length) {
           requestNavigation(SCENES[num - 1].id);
         }
+        if (e.key === 'Escape') {
+          closeSkillsModal();
+        }
       });
 
-      // Build Interactive Skills Components
-      renderSkillsCategories();
-      selectCategory(activeCategoryId);
-
+      // Mount Radial Skills Nodes & Canvas Web
+      mountRadialSkillsNodes();
       updateDOMViews();
       positionEntities();
       playIntroSequence();
@@ -1601,99 +1660,140 @@
         introOverlay.style.display = 'none';
         return;
       }
-
-      setTimeout(() => {
-        if (introBox) introBox.classList.add('reveal');
-      }, 150);
-
+      setTimeout(() => { if (introBox) introBox.classList.add('reveal'); }, 150);
       setTimeout(() => {
         introOverlay.style.opacity = '0';
-        setTimeout(() => {
-          introOverlay.style.display = 'none';
-        }, 800);
+        setTimeout(() => { introOverlay.style.display = 'none'; }, 800);
       }, 1100);
     }
 
-    // --- 6. Interactive Skills Web Logic ---
-    function renderSkillsCategories() {
-      categoryAnchorsContainer.innerHTML = '';
-      SKILLS_TAXONOMY.forEach(cat => {
-        const btn = document.createElement('div');
-        btn.className = `cat-anchor-btn ${cat.id === activeCategoryId ? 'active' : ''}`;
-        btn.id = `cat-btn-${cat.id}`;
-        btn.onclick = () => selectCategory(cat.id);
-        btn.onmouseenter = () => selectCategory(cat.id);
+    // --- 6. Radial "Stuck On The Web" Skills Logic ---
+    function mountRadialSkillsNodes() {
+      radialNodesMount.innerHTML = '';
+      RADIAL_SKILLS_DATA.forEach(node => {
+        const el = document.createElement('div');
+        el.className = `web-stuck-node ${node.accentColor === 'red' ? 'accent-red' : ''}`;
+        el.id = `radial-node-${node.id}`;
+        el.onclick = (e) => {
+          e.stopPropagation();
+          openSkillsModal(node);
+        };
 
-        btn.innerHTML = `
-          <div class="cab-info">
-            <span class="cab-tag">${cat.tag}</span>
-            <span class="cab-name">${cat.name}</span>
+        el.innerHTML = `
+          <div class="wsn-badge-circle">
+            <div class="wsn-icon">${node.icon}</div>
+            <div class="wsn-label">${node.name}</div>
           </div>
-          <span class="cab-count">${cat.skills.length} SKILLS</span>
+          <div class="wsn-count-pill">${node.skills.length} SKILLS</div>
         `;
-        categoryAnchorsContainer.appendChild(btn);
+        radialNodesMount.appendChild(el);
+      });
+
+      positionRadialSkillsNodes();
+      renderSkillsRadialWeb();
+    }
+
+    function positionRadialSkillsNodes() {
+      const stage = document.getElementById('skills-web-stage');
+      if (!stage) return;
+      const rect = stage.getBoundingClientRect();
+      const cX = rect.width / 2;
+      const cY = rect.height / 2;
+
+      // Adjust radius based on screen size
+      const scaleFactor = Math.min(rect.width / 950, rect.height / 520, 1.0);
+
+      RADIAL_SKILLS_DATA.forEach(node => {
+        const el = document.getElementById(`radial-node-${node.id}`);
+        if (!el) return;
+
+        const rad = (node.angleDeg * Math.PI) / 180;
+        const currentRadius = node.radius * scaleFactor;
+        const posX = cX + Math.cos(rad) * (currentRadius * 1.35);
+        const posY = cY + Math.sin(rad) * (currentRadius * 0.95);
+
+        el.style.left = `${posX}px`;
+        el.style.top = `${posY}px`;
       });
     }
 
-    function selectCategory(catId) {
-      activeCategoryId = catId;
-      const catData = SKILLS_TAXONOMY.find(c => c.id === catId);
-      if (!catData) return;
+    function renderSkillsRadialWeb() {
+      const stage = document.getElementById('skills-web-stage');
+      if (!stage || !skillsRadialCanvas) return;
+      const rect = stage.getBoundingClientRect();
+      skillsRadialCanvas.width = rect.width;
+      skillsRadialCanvas.height = rect.height;
 
-      // Update Active Category Buttons
-      document.querySelectorAll('.cat-anchor-btn').forEach(b => b.classList.remove('active'));
-      const activeBtn = document.getElementById(`cat-btn-${catId}`);
-      if (activeBtn) activeBtn.classList.add('active');
+      const rCtx = skillsRadialCanvas.getContext('2d');
+      rCtx.clearRect(0, 0, rect.width, rect.height);
 
-      bloomDomainTitle.textContent = catData.name;
-      bloomEdgeBadge.textContent = `EDGE_HIERARCHY • ${catData.skills.length} TECHNOLOGIES`;
+      const cX = rect.width / 2;
+      const cY = rect.height / 2;
 
-      // Render Blooming Child Nodes with Spring Easing
-      childNodesContainer.innerHTML = '';
-      catData.skills.forEach((skill, idx) => {
-        const card = document.createElement('div');
-        card.className = `child-skill-card ${skill.name === selectedSkillName ? 'selected' : ''}`;
-        card.style.animation = `fadeSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) ${idx * 0.04}s both`;
-        card.onclick = () => selectSkill(skill);
+      // 1. Draw Concentric Spider-Web Circles
+      const rings = [75, 140, 205, 275, 345];
+      rCtx.lineWidth = 1.0;
+      rCtx.strokeStyle = 'rgba(0, 210, 255, 0.14)';
 
-        card.innerHTML = `
-          <div class="csc-name">${skill.name}</div>
-          <div class="csc-meta">${skill.meta}</div>
-        `;
-        childNodesContainer.appendChild(card);
+      rings.forEach(r => {
+        rCtx.beginPath();
+        rCtx.ellipse(cX, cY, r * 1.35, r * 0.95, 0, 0, Math.PI * 2);
+        rCtx.stroke();
       });
 
-      // Default select the first skill in category
-      if (catData.skills.length > 0) {
-        selectSkill(catData.skills[0]);
-      }
+      // 2. Draw Radial Web Strands connecting Center Hub to each Category Node
+      RADIAL_SKILLS_DATA.forEach(node => {
+        const el = document.getElementById(`radial-node-${node.id}`);
+        if (!el) return;
+
+        const rad = (node.angleDeg * Math.PI) / 180;
+        const nX = parseFloat(el.style.left) || (cX + Math.cos(rad) * 200);
+        const nY = parseFloat(el.style.top) || (cY + Math.sin(rad) * 200);
+
+        rCtx.beginPath();
+        rCtx.moveTo(cX, cY);
+        rCtx.lineTo(nX, nY);
+        rCtx.strokeStyle = node.accentColor === 'red' ? 'rgba(255, 42, 75, 0.45)' : 'rgba(0, 210, 255, 0.45)';
+        rCtx.lineWidth = 1.5;
+        rCtx.stroke();
+
+        // Subtle glowing anchor ring
+        rCtx.beginPath();
+        rCtx.arc(nX, nY, 6, 0, Math.PI * 2);
+        rCtx.fillStyle = node.accentColor === 'red' ? '#FF2A4B' : '#00D2FF';
+        rCtx.fill();
+      });
     }
 
-    function selectSkill(skill) {
-      selectedSkillName = skill.name;
+    // Modal Popup Box Handler
+    function openSkillsModal(groupData) {
+      modalHeaderTag.textContent = groupData.tag;
+      modalGroupTitle.textContent = `${groupData.icon} ${groupData.name}`;
 
-      // Update selected card state
-      document.querySelectorAll('.child-skill-card').forEach(c => {
-        const nameEl = c.querySelector('.csc-name');
-        if (nameEl && nameEl.textContent === skill.name) {
-          c.classList.add('selected');
-        } else {
-          c.classList.remove('selected');
-        }
+      modalSkillsList.innerHTML = '';
+      groupData.skills.forEach(skill => {
+        const item = document.createElement('div');
+        item.className = 'modal-skill-item';
+        item.innerHTML = `
+          <div class="msi-info">
+            <div class="msi-name">${skill.name}</div>
+            <div class="msi-context">${skill.context}</div>
+          </div>
+          ${skill.linkTo ? `
+            <button class="semantic-jump-btn" onclick="requestNavigation('${skill.linkTo}')">
+              <span>${skill.linkText || 'VIEW'}</span> &rarr;
+            </button>
+          ` : ''}
+        `;
+        modalSkillsList.appendChild(item);
       });
 
-      // Update Context Inspector
-      scpTag.textContent = `${activeCategoryId.toUpperCase()} // CONTEXT`;
-      scpHeadline.textContent = skill.name;
-      scpDesc.textContent = skill.context;
+      skillsModalOverlay.classList.add('active');
+    }
 
-      if (skill.linkTo) {
-        scpActionBtn.style.display = 'inline-flex';
-        scpActionBtn.querySelector('span').textContent = skill.linkText || `VIEW IN ${skill.linkTo.toUpperCase()}`;
-        scpActionBtn.onclick = () => requestNavigation(skill.linkTo);
-      } else {
-        scpActionBtn.style.display = 'none';
-      }
+    function closeSkillsModal(e) {
+      if (e) e.stopPropagation();
+      skillsModalOverlay.classList.remove('active');
     }
 
     function resizeCanvas() {
@@ -1721,10 +1821,18 @@
           }
         }
       });
+
+      if (currentSceneId === 'skills') {
+        setTimeout(() => {
+          positionRadialSkillsNodes();
+          renderSkillsRadialWeb();
+        }, 50);
+      }
     }
 
     // --- 7. Navigation Request Logic ---
     function requestNavigation(targetId) {
+      closeSkillsModal();
       if (targetId === currentSceneId && currentState === STATES.IDLE) return;
 
       targetSceneId = targetId;
