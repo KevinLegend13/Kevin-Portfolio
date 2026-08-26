@@ -58,11 +58,13 @@ Rather than treating Spider-Man motifs as static decorative illustrations or a g
 | **Phase 15** | **Implementation Integration & Completion** *(see [docs/implementation_integration.md](./docs/implementation_integration.md))* | *Completed* |
 | **Phase 16** | **Functional, Performance & Accessibility Testing** *(see [docs/testing_report.md](./docs/testing_report.md))* | *Completed* |
 | **Phase 17** | **Final Polish & Production Readiness** *(see [docs/final_polish.md](./docs/final_polish.md))* | *Completed* |
+| **Phase 18** | **Recruiter Readability & Information Hierarchy** *(see [docs/recruiter_readability.md](./docs/recruiter_readability.md))* | *Completed* |
+| **Phase 19** | Production Deployment & Release | *Not Started* |
 
 ---
 
 ## Current Status
-- **Stage**: Phase 17 Complete — Final visual polish, typography refinement, micro-interactions, responsive validation, and production readiness achieved. Production deployment has NOT been started.
+- **Stage**: Phase 18 Complete — Recruiter readability and information hierarchy refined, scannability enhanced, cognitive load reduced, and canonical LinkedIn URL verified.
 - **Active Prototype**:
   - [Runnable Navigation Prototype](./prototypes/navigation_system/index.html) (`http://localhost:4173/prototypes/navigation_system/index.html`)
 - **Documentation**:
