@@ -87,25 +87,27 @@
       left: 0;
       right: 0;
       height: 56px;
-      padding: 0 24px;
-      background: rgba(6, 8, 14, 0.92);
+      padding: 0 20px;
+      background: rgba(6, 8, 14, 0.94);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-subtle);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
       z-index: 200;
     }
 
     .brand-group {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      flex-shrink: 0;
     }
 
     .brand-logo {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border: 1.5px solid var(--accent-cyan);
       border-radius: 6px;
       display: flex;
@@ -113,17 +115,18 @@
       justify-content: center;
       font-family: var(--font-display);
       font-weight: 900;
-      font-size: 12px;
+      font-size: 13px;
       color: var(--accent-cyan);
       box-shadow: 0 0 12px var(--accent-cyan-glow);
     }
 
     .brand-title {
       font-family: var(--font-display);
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 800;
       letter-spacing: 0.04em;
       color: var(--text-primary);
+      white-space: nowrap;
     }
     .brand-title span {
       color: var(--accent-cyan);
@@ -139,23 +142,34 @@
 
     .nav-pills {
       display: flex;
-      gap: 7px;
+      gap: 6px;
       align-items: center;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 0;
+      max-width: 100%;
+    }
+    .nav-pills::-webkit-scrollbar {
+      display: none;
     }
 
     .nav-btn {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border-subtle);
       color: var(--text-muted);
-      padding: 6px 14px;
+      padding: 6px 12px;
       border-radius: 6px;
       font-size: 11px;
       font-family: var(--font-mono);
       font-weight: 700;
       cursor: pointer;
-      min-height: 34px;
-      min-width: 40px;
+      min-height: 36px;
+      min-width: 44px;
+      white-space: nowrap;
+      flex-shrink: 0;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      touch-action: manipulation;
     }
     .nav-btn:hover {
       color: #fff;
@@ -1602,24 +1616,417 @@
       margin: 0 2px;
     }
 
-    /* Responsive */
-    @media (max-width: 950px) {
+    /* Shared Multi-Column Grids */
+    .exp-deliverables-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 14px;
+      margin: 12px 0;
+    }
+    .res-eval-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .table-scroll-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      margin-top: 10px;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE BREAKPOINT STRATEGY (PHASE 14)
+       - Laptop: 900px – 1199px
+       - Tablet: 600px – 899px
+       - Mobile Portrait: < 600px
+       - Mobile Landscape: max-height 500px
+       ========================================================================== */
+
+    /* Laptop Breakpoint (900px – 1199px) */
+    @media (max-width: 1199px) {
       .full-page-frame {
-        width: 94vw;
-        height: 84vh;
-        padding: 18px 14px;
+        width: 88vw;
+        max-width: 940px;
+        height: 72vh;
+        max-height: 560px;
+        padding: 24px 20px;
       }
-      .arch-diagram-grid, .exp-flow-grid, .contact-actions-grid, .contact-domains-row { grid-template-columns: 1fr 1fr; }
-      .res-pipeline-track { grid-template-columns: 1fr 1fr; }
-      .research-grid-cards { grid-template-columns: 1fr; }
-      .skills-center-core { width: 140px; height: 140px; }
-      .scc-title { font-size: 20px; }
-      .wsn-badge-circle { min-width: 76px; max-width: 96px; padding: 5px 6px; }
-      .wsn-label { font-size: 9px; }
-      .about-lead-title, .exp-hero-title, .contact-hero-title { font-size: 32px; }
-      .about-triad-grid { grid-template-columns: 1fr; gap: 14px; }
-      .pillars-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-      #telemetry-hud { display: none; }
+      .hero-name {
+        font-size: clamp(28px, 4vw, 42px);
+      }
+      .pillars-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .arch-diagram-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+    }
+
+    /* Tablet Breakpoint (600px – 899px) */
+    @media (max-width: 899px) {
+      header {
+        padding: 0 16px;
+      }
+      .brand-title span {
+        display: none;
+      }
+      .nav-btn {
+        min-height: 44px;
+        padding: 8px 12px;
+        font-size: 10.5px;
+      }
+      .full-page-frame {
+        width: 92vw;
+        height: 78vh;
+        max-height: none;
+        padding: 20px 16px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .hero-name {
+        font-size: clamp(24px, 4.5vw, 34px);
+      }
+      .hero-tagline {
+        font-size: 12px;
+      }
+      .pillars-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .about-triad-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .arch-diagram-grid, .exp-flow-grid, .contact-actions-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .exp-deliverables-grid, .res-eval-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .res-pipeline-track {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .research-grid-cards {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .skills-web-stage {
+        height: 360px;
+      }
+      .skills-center-core {
+        width: 86px;
+        height: 86px;
+      }
+      .scc-title {
+        font-size: 13px;
+      }
+      .wsn-badge-circle {
+        min-width: 84px;
+        max-width: 112px;
+        padding: 5px 8px;
+      }
+      .wsn-label {
+        font-size: 9.5px;
+      }
+      .about-lead-title, .exp-hero-title, .contact-hero-title {
+        font-size: 26px;
+      }
+      .skills-popup-box {
+        width: 92vw;
+        max-width: 440px;
+        padding: 20px 18px;
+      }
+    }
+
+    /* Mobile Portrait Breakpoint (< 600px) */
+    @media (max-width: 599px) {
+      header {
+        height: 52px;
+        padding: 0 12px;
+        gap: 8px;
+      }
+      #world-viewport {
+        top: 52px;
+        height: calc(100vh - 52px);
+      }
+      .brand-title {
+        font-size: 12px;
+      }
+      .brand-title span {
+        display: none;
+      }
+      .brand-logo {
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
+      }
+      .nav-pills {
+        gap: 4px;
+        padding: 4px 0;
+      }
+      .nav-btn {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 8px 10px;
+        font-size: 10px;
+        border-radius: 6px;
+      }
+      .full-page-frame {
+        width: 95vw;
+        height: calc(100vh - 76px);
+        max-height: none;
+        padding: 14px 10px;
+        border-radius: 12px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .full-page-frame::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Home Page on Mobile */
+      .hero-top-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        margin-bottom: 8px;
+      }
+      .hero-name {
+        font-size: clamp(20px, 6.2vw, 26px);
+        margin-bottom: 6px;
+        line-height: 1.15;
+      }
+      .hero-tagline {
+        font-size: 11.5px;
+        line-height: 1.45;
+        margin-bottom: 8px;
+      }
+      .pillars-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin: 8px 0;
+      }
+      .pillar-card {
+        padding: 10px 12px;
+      }
+      .pillar-title {
+        font-size: 12px;
+      }
+      .pillar-desc {
+        font-size: 10px;
+        line-height: 1.35;
+      }
+      .home-footer-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .cta-button-group {
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+      }
+      .hero-cta-primary, .hero-cta-secondary {
+        width: 100%;
+        min-height: 44px;
+        justify-content: center;
+        font-size: 11px;
+      }
+
+      /* About Page on Mobile */
+      .about-lead-title, .exp-hero-title, .contact-hero-title {
+        font-size: 20px;
+        line-height: 1.2;
+      }
+      .about-lead-narrative {
+        font-size: 11.5px;
+        line-height: 1.45;
+        margin-bottom: 10px;
+      }
+      .about-triad-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .about-track-card {
+        padding: 12px 10px;
+      }
+      .track-body-text {
+        font-size: 10.5px;
+        line-height: 1.4;
+      }
+      .track-fact-box {
+        font-size: 9.5px;
+        padding: 6px 8px;
+      }
+      .about-semantic-links {
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 6px;
+      }
+      .semantic-jump-btn {
+        min-height: 44px;
+        font-size: 9px;
+        padding: 6px 10px;
+        flex: 1 1 calc(50% - 6px);
+        justify-content: center;
+      }
+
+      /* Skills Page on Mobile */
+      .skills-web-stage {
+        height: 330px;
+      }
+      .skills-center-core {
+        width: 74px;
+        height: 74px;
+      }
+      .scc-tag {
+        font-size: 6.5px;
+      }
+      .scc-title {
+        font-size: 11.5px;
+      }
+      .scc-sub {
+        font-size: 6.5px;
+      }
+      .wsn-badge-circle {
+        min-width: 72px;
+        max-width: 96px;
+        padding: 4px 6px;
+        border-radius: 8px;
+      }
+      .wsn-index-num {
+        font-size: 7px;
+        margin-bottom: 1px;
+      }
+      .wsn-label {
+        font-size: 8.5px;
+        line-height: 1.15;
+      }
+      .wsn-count-pill {
+        font-size: 6.5px;
+        padding: 1px 4px;
+      }
+      .skills-popup-box {
+        width: 94vw;
+        max-width: 380px;
+        padding: 16px 14px;
+      }
+      .modal-skill-title {
+        font-size: 18px;
+      }
+      .modal-context-body {
+        font-size: 11px;
+      }
+      .modal-redirect-btn {
+        min-height: 44px;
+        width: 100%;
+        justify-content: center;
+      }
+
+      /* Projects Page on Mobile */
+      .arch-diagram-grid {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+      .cs-hero-title {
+        font-size: 20px;
+      }
+      .cs-section-block {
+        padding: 12px 10px;
+        margin-bottom: 10px;
+      }
+      .cs-section-title {
+        font-size: 12px;
+      }
+      .cs-body-text {
+        font-size: 11px;
+        line-height: 1.45;
+      }
+
+      /* Research Page on Mobile */
+      .res-pipeline-track {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+      .research-grid-cards {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .res-card {
+        padding: 12px 10px;
+      }
+      .res-card-title {
+        font-size: 15px;
+      }
+      .res-matrix-table th, .res-matrix-table td {
+        padding: 6px 8px;
+        font-size: 9.5px;
+      }
+
+      /* Experience Page on Mobile */
+      .exp-flow-grid {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+      .exp-deliverables-grid, .res-eval-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .exp-node-card {
+        padding: 10px 12px;
+      }
+
+      /* Contact Page on Mobile */
+      .contact-actions-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .contact-action-card {
+        min-height: 52px;
+        padding: 12px 14px;
+      }
+      .contact-domains-strip {
+        flex-wrap: wrap;
+        gap: 4px;
+        padding: 6px 8px;
+      }
+      .cds-chip {
+        font-size: 9px;
+        padding: 2px 6px;
+      }
+
+      /* Key Hints Hidden on Mobile */
+      .key-hints {
+        display: none;
+      }
+    }
+
+    /* Mobile Landscape Optimization (max-height 500px) */
+    @media (max-height: 500px) and (orientation: landscape) {
+      header {
+        height: 46px;
+      }
+      #world-viewport {
+        top: 46px;
+        height: calc(100vh - 46px);
+      }
+      .full-page-frame {
+        height: calc(100vh - 60px);
+        padding: 12px 14px;
+      }
+      .skills-web-stage {
+        height: 250px;
+      }
     }
   </style>
 </head>
@@ -2059,7 +2466,7 @@
           </div>
 
           <!-- Section 02: Core Engineering Deliverables -->
-          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px; margin: 12px 0;">
+          <div class="exp-deliverables-grid">
             <div class="cs-section-block" style="padding: 16px 20px; border-color: rgba(168,85,247,0.25);">
               <div class="cs-sec-tag" style="color: var(--accent-venom-light);">02. TECHNICAL RESPONSIBILITIES</div>
               <div style="font-size: 12.5px; color: var(--text-muted); line-height: 1.6;">
@@ -2638,6 +3045,26 @@
         mousePos.x = -1000;
         mousePos.y = -1000;
       });
+      worldViewport.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches.length > 0) {
+          const rect = worldViewport.getBoundingClientRect();
+          mousePos.x = e.touches[0].clientX - rect.left;
+          mousePos.y = e.touches[0].clientY - rect.top;
+        }
+      }, { passive: true });
+      worldViewport.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches.length > 0) {
+          const rect = worldViewport.getBoundingClientRect();
+          mousePos.x = e.touches[0].clientX - rect.left;
+          mousePos.y = e.touches[0].clientY - rect.top;
+        }
+      }, { passive: true });
+      worldViewport.addEventListener('touchend', () => {
+        setTimeout(() => {
+          mousePos.x = -1000;
+          mousePos.y = -1000;
+        }, 300);
+      });
     }
 
     const AMBIENT_NODES = [
@@ -2841,12 +3268,18 @@
         navPillContainer.appendChild(btn);
       });
 
-      window.addEventListener('resize', () => {
+      const handleViewportResize = () => {
         resizeCanvas();
         renderSkillsWebLayer();
         if (currentSceneId === 'projects' && !activeCaseStudyId) {
           drawDanglingProjectsCanvas();
         }
+        positionEntities();
+      };
+
+      window.addEventListener('resize', handleViewportResize);
+      window.addEventListener('orientationchange', () => {
+        setTimeout(handleViewportResize, 160);
       });
       resizeCanvas();
 
@@ -3020,26 +3453,28 @@
         matBlock.innerHTML = `
           <div class="cs-sec-tag" style="color:var(--accent-magenta);">03. ARCHITECTURE & DATA MATRIX</div>
           <div class="cs-sec-title">Evaluated Model Frameworks & Subword Configurations</div>
-          <table class="res-matrix-table">
-            <thead>
-              <tr>
-                <th>Framework / Layer</th>
-                <th>Architecture Specs</th>
-                <th>Tokenizer / Grid Vocab</th>
-                <th>Primary Focus</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${res.matrix.map(row => `
+          <div class="table-scroll-wrapper">
+            <table class="res-matrix-table">
+              <thead>
                 <tr>
-                  <td><strong>${row.model}</strong></td>
-                  <td>${row.arch}</td>
-                  <td><span class="tech-chip" style="margin:0;">${row.vocab}</span></td>
-                  <td>${row.focus}</td>
+                  <th>Framework / Layer</th>
+                  <th>Architecture Specs</th>
+                  <th>Tokenizer / Grid Vocab</th>
+                  <th>Primary Focus</th>
                 </tr>
-              `).join('')}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                ${res.matrix.map(row => `
+                  <tr>
+                    <td><strong>${row.model}</strong></td>
+                    <td>${row.arch}</td>
+                    <td><span class="tech-chip" style="margin:0;">${row.vocab}</span></td>
+                    <td>${row.focus}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
         `;
         view.appendChild(matBlock);
 
@@ -3048,7 +3483,7 @@
         evalBlock.innerHTML = `
           <div class="cs-sec-tag" style="color:var(--accent-magenta);">04. FORMAL EVALUATION FRAMEWORK</div>
           <div class="cs-sec-title">Analytical Metrics & Verification Procedures</div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px;">
+          <div class="res-eval-grid">
             ${res.evalMethodology.map(em => `
               <div style="background:rgba(0,0,0,0.35); border-left:2px solid var(--accent-magenta); padding:10px 14px; border-radius:0 8px 8px 0;">
                 <div style="font-family:var(--font-mono); font-size:11px; font-weight:800; color:#FFFFFF; margin-bottom:3px;">${em.method}</div>
@@ -3708,12 +4143,18 @@
     }
 
     function resizeCanvas() {
+      const headerH = window.innerWidth < 600 ? 52 : 56;
+      const w = window.innerWidth;
+      const h = window.innerHeight - headerH;
+
       if (ambientCanvas) {
-        ambientCanvas.width = window.innerWidth;
-        ambientCanvas.height = window.innerHeight - 64;
+        ambientCanvas.width = w;
+        ambientCanvas.height = h;
       }
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight - 64;
+      if (canvas) {
+        canvas.width = w;
+        canvas.height = h;
+      }
     }
 
     function updateDOMViews() {
@@ -4272,16 +4713,24 @@
       camY += velY * dt;
     }
 
+    function getSpatialScale() {
+      if (window.innerWidth < 600) return 0.52;
+      if (window.innerWidth < 900) return 0.70;
+      if (window.innerWidth < 1200) return 0.86;
+      return 1.0;
+    }
+
     function positionEntities() {
       const centerX = window.innerWidth / 2;
       const centerY = (window.innerHeight - 56) / 2;
+      const sScale = getSpatialScale();
 
       SCENES.forEach(s => {
         const entity = document.getElementById(`entity-${s.id}`);
         const state = entityStates[s.id];
         if (entity && state) {
-          const posX = centerX + (s.x - camX);
-          const posY = centerY + (s.y - camY);
+          const posX = centerX + (s.x - camX) * sScale;
+          const posY = centerY + (s.y - camY) * sScale;
 
           entity.style.left = `${posX}px`;
           entity.style.top = `${posY}px`;
@@ -4308,12 +4757,13 @@
     function renderCanvasWeb() {
       const centerX = window.innerWidth / 2;
       const centerY = (window.innerHeight - 56) / 2;
+      const sScale = getSpatialScale();
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const worldToScreen = (wx, wy) => ({
-        x: centerX + (wx - camX),
-        y: centerY + (wy - camY)
+        x: centerX + (wx - camX) * sScale,
+        y: centerY + (wy - camY) * sScale
       });
 
       if (currentState !== STATES.IDLE && webOpacity > 0.01) {
