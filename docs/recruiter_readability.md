@@ -33,16 +33,20 @@ The goal was to **reduce cognitive load and improve recruiter scannability** whi
 
 ---
 
-## 4. Phase 18 LinkedIn URL Correction
+## 4. LinkedIn URL Correction
 
-- **Old URL**: `https://linkedin.com/in/kevin-prakash-b88286355` (Invalid / Obsolete)
-- **New Verified URL**: `https://www.linkedin.com/in/kevin-prakashj-98206a3b1/`
+- **Background**: The previous LinkedIn slug was incorrect.
+- **Source**: The verified profile URL was obtained directly from the user's LinkedIn profile under "Public profile & URL".
+- **Canonical URL**: `https://www.linkedin.com/in/kevin-prakashj-98206a3b1/`
 - **Files Updated**:
   1. `index.html`
   2. `prototypes/navigation_system/index.html`
   3. `scripts/validate_portfolio.js`
-- **Zero Remaining Occurrences**: Confirmed 0 matches for old slug `kevin-prakash-b88286355`.
-- **Link Behavior**: Preserved `target="_blank" rel="noopener noreferrer"`.
+- **Old URL Occurrences**: 0 (`kevin-prakash-b88286355` completely removed from repository).
+- **New URL Occurrences**: Verified across all 3 key files.
+- **Link Attributes**: Preserved `target="_blank" rel="noopener noreferrer"`.
+- **Validator Result**: 81 / 81 Tests Passed (0 Failures).
+- **Syntax Validation Result**: 0 Syntax/Reference Errors.
 - **Safety**: **Nothing pushed to GitHub or deployed to Netlify.**
 
 ---
