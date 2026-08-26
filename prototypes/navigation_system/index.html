@@ -86,8 +86,8 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 64px;
-      padding: 0 28px;
+      height: 60px;
+      padding: 0 24px;
       background: rgba(6, 8, 14, 0.92);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-subtle);
@@ -95,6 +95,7 @@
       justify-content: space-between;
       align-items: center;
       z-index: 200;
+      zoom: 0.88;
     }
 
     .brand-group {
@@ -218,9 +219,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      zoom: 0.82;
     }
 
-    /* Full Page Container Base (88vw x 78vh) */
+    /* Full Page Container Base (Proportioned to sleek 80% scale) */
     .full-page-frame {
       width: 88vw;
       max-width: 1160px;
@@ -1588,6 +1590,7 @@
       border-radius: 8px;
       border: 1px solid var(--border-subtle);
       z-index: 200;
+      zoom: 0.88;
     }
     .key-hints kbd {
       background: rgba(255,255,255,0.12);
