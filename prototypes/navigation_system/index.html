@@ -3790,7 +3790,7 @@
       const activeBtn = document.getElementById(`btn-nav-${targetId}`);
       if (activeBtn) activeBtn.classList.add('active');
 
-      teleRoute.textContent = `${currentSceneId} &rarr; ${targetSceneId}`;
+      if (teleRoute) teleRoute.textContent = `${currentSceneId} &rarr; ${targetSceneId}`;
 
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         SCENES.forEach(s => {
@@ -4051,7 +4051,7 @@
 
       frameCount++;
       if (now - lastFpsUpdate > 500) {
-        teleFps.textContent = `${Math.round((frameCount * 1000) / (now - lastFpsUpdate))} FPS`;
+        if (teleFps) teleFps.textContent = `${Math.round((frameCount * 1000) / (now - lastFpsUpdate))} FPS`;
         frameCount = 0;
         lastFpsUpdate = now;
       }
@@ -4176,7 +4176,7 @@
             entityStates[targetSceneId].vibX = currentVib;
             entityStates[targetSceneId].vibY = -currentVib * 0.5;
           }
-          teleVibe.textContent = `${currentVib.toFixed(1)} px`;
+          if (teleVibe) teleVibe.textContent = `${currentVib.toFixed(1)} px`;
 
           webOpacity = Math.max(0, 1.0 - impactPhase * 1.8);
 
@@ -4198,7 +4198,7 @@
             entityStates[targetSceneId].vibX = 0;
             entityStates[targetSceneId].vibY = 0;
           }
-          teleVibe.textContent = `0.0 px`;
+          if (teleVibe) teleVibe.textContent = `0.0 px`;
 
           if (settlePhase >= 1.0) {
             currentState = STATES.IDLE;
@@ -4238,7 +4238,7 @@
 
         case STATES.IDLE:
         default:
-          teleVibe.textContent = `0.0 px`;
+          if (teleVibe) teleVibe.textContent = `0.0 px`;
           break;
       }
 
