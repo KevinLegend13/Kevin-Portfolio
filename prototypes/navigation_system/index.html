@@ -337,6 +337,7 @@
       align-items: center;
       gap: 8px;
       transition: all 0.2s ease;
+      text-decoration: none;
     }
     .hero-cta-primary:hover { box-shadow: 0 0 20px var(--accent-cyan); transform: translateY(-1px); }
     .hero-cta-secondary {
@@ -350,6 +351,10 @@
       border: 1px solid var(--border-subtle);
       cursor: pointer;
       transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
     .hero-cta-secondary:hover { border-color: var(--accent-cyan); background: rgba(0, 210, 255, 0.1); }
     .home-telemetry-cue {
@@ -461,6 +466,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      text-decoration: none;
     }
     .semantic-jump-btn:hover {
       background: var(--accent-cyan);
@@ -1215,6 +1221,156 @@
       margin-bottom: 10px;
     }
 
+    /* =========================================================================
+       6. PHASE 11: CONTACT EXPERIENCE (TERMINAL SPIDER-WEB NODE)
+       ========================================================================= */
+    #page-contact {
+      background: linear-gradient(145deg, rgba(8, 14, 26, 0.97) 0%, rgba(14, 20, 36, 0.96) 100%);
+      border: 1.5px solid var(--accent-cyan);
+      box-shadow: 0 35px 100px rgba(0, 0, 0, 0.95), 0 0 75px var(--accent-cyan-glow);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+
+    .contact-hero-header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+    }
+
+    .contact-hero-title {
+      font-family: var(--font-display);
+      font-size: 46px;
+      font-weight: 900;
+      color: #FFFFFF;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin: 6px 0 8px 0;
+      background: linear-gradient(135deg, #FFFFFF 40%, #00D2FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .contact-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .contact-action-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1.5px solid rgba(0, 210, 255, 0.25);
+      border-radius: 14px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      cursor: pointer;
+      backdrop-filter: blur(16px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+    }
+    .contact-action-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      border-color: #FFFFFF;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9), 0 0 30px var(--accent-cyan);
+      background: rgba(0, 210, 255, 0.08);
+    }
+    .contact-action-card.flagship-action {
+      border-color: var(--accent-red);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7), 0 0 20px var(--accent-red-glow);
+    }
+    .contact-action-card.flagship-action:hover {
+      border-color: #FFFFFF;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9), 0 0 35px var(--accent-red);
+      background: rgba(255, 42, 75, 0.1);
+    }
+
+    .cac-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .contact-action-card.flagship-action .cac-tag { color: var(--accent-red); }
+    .cac-name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+      line-height: 1.15;
+    }
+    .cac-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+    .cac-cta-txt {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .contact-action-card.flagship-action .cac-cta-txt { color: var(--accent-red); }
+
+    .contact-domains-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .contact-domain-pill {
+      background: rgba(0, 0, 0, 0.4);
+      border-left: 2.5px solid var(--accent-cyan);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+    }
+    .cdp-title {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 2px;
+    }
+    .cdp-tech {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .copy-toast {
+      position: fixed;
+      top: 80px;
+      right: 28px;
+      background: #00D2FF;
+      color: #06080E;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 800;
+      padding: 8px 18px;
+      border-radius: 6px;
+      box-shadow: 0 0 25px var(--accent-cyan);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 600;
+    }
+    .copy-toast.reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* Chromatic Shadow Accents */
     .full-page-frame.chromatic-impact {
       border-color: #00D2FF;
@@ -1271,6 +1427,11 @@
       background: #0D0818;
       border: 2px solid var(--accent-venom);
       box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85), 0 0 25px var(--accent-venom-glow);
+    }
+    .node-contact-style {
+      background: #081224;
+      border: 2px solid var(--accent-cyan);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85), 0 0 30px var(--accent-cyan-glow);
     }
     .node-anchor-dot {
       position: absolute;
@@ -1441,14 +1602,14 @@
         height: 84vh;
         padding: 18px 14px;
       }
-      .arch-diagram-grid, .exp-flow-grid { grid-template-columns: 1fr 1fr; }
+      .arch-diagram-grid, .exp-flow-grid, .contact-actions-grid, .contact-domains-row { grid-template-columns: 1fr 1fr; }
       .res-pipeline-track { grid-template-columns: 1fr 1fr; }
       .research-grid-cards { grid-template-columns: 1fr; }
       .skills-center-core { width: 140px; height: 140px; }
       .scc-title { font-size: 20px; }
       .wsn-badge-circle { width: 68px; height: 68px; }
       .wsn-label { font-size: 9px; }
-      .about-lead-title, .exp-hero-title { font-size: 32px; }
+      .about-lead-title, .exp-hero-title, .contact-hero-title { font-size: 32px; }
       .about-triad-grid { grid-template-columns: 1fr; gap: 14px; }
       .pillars-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
       #telemetry-hud { display: none; }
@@ -1459,6 +1620,9 @@
 
   <div class="bg-grid-overlay"></div>
   <div class="bg-radial-glow"></div>
+
+  <!-- Toast Notification for Email Copy -->
+  <div id="copy-toast" class="copy-toast">EMAIL COPIED TO CLIPBOARD</div>
 
   <!-- Intro Entrance Sequence Layer -->
   <div id="intro-overlay">
@@ -1544,14 +1708,14 @@
               <button class="hero-cta-primary" onclick="requestNavigation('projects')">
                 <span>EXPLORE FLAGSHIP (TEAMFLOW)</span> &rarr;
               </button>
-              <button class="hero-cta-secondary" onclick="requestNavigation('experience')">
-                SYNCFUSION AI INTERNSHIP
+              <button class="hero-cta-secondary" onclick="requestNavigation('contact')">
+                LET'S CONNECT
               </button>
             </div>
             <div class="home-telemetry-cue">
               <span>LOCATION: <strong>VELLORE / CHENNAI</strong></span>
               <span>&bull;</span>
-              <span>NETWORK: <strong>SPIDER-WEB v9.0</strong></span>
+              <span>NETWORK: <strong>SPIDER-WEB v11.0</strong></span>
             </div>
           </div>
         </div>
@@ -1645,7 +1809,7 @@
               <button class="hero-cta-secondary" onclick="requestNavigation('home')">&larr; RETURN TO HOME</button>
               <button class="semantic-jump-btn" onclick="requestNavigation('experience')"><span>VIEW SYNCFUSION TENURE</span> &rarr;</button>
               <button class="semantic-jump-btn" onclick="requestNavigation('projects')"><span>VIEW FLAGSHIP (TEAMFLOW)</span> &rarr;</button>
-              <button class="semantic-jump-btn" onclick="requestNavigation('skills')"><span>SKILLS TAXONOMY</span> &rarr;</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('contact')"><span>GET IN TOUCH</span> &rarr;</button>
             </div>
             <div class="home-telemetry-cue">
               <span>NODE: <strong>01 // ABOUT IDENTITY</strong></span>
@@ -1709,7 +1873,7 @@
               <button class="hero-cta-secondary" id="skills-back-btn" onclick="handleSkillsBackAction()">&larr; RETURN TO HOME</button>
               <button class="semantic-jump-btn" onclick="requestNavigation('experience')"><span>SYNCFUSION STACK</span> &rarr;</button>
               <button class="semantic-jump-btn" onclick="requestNavigation('projects')"><span>CONNECT TO PROJECTS</span> &rarr;</button>
-              <button class="semantic-jump-btn" onclick="requestNavigation('about')"><span>ABOUT BACKGROUND</span> &rarr;</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('contact')"><span>CONTACT</span> &rarr;</button>
             </div>
             <div class="home-telemetry-cue">
               <span id="skills-layer-telemetry">LAYER: <strong>MACRO TAXONOMY (6 DOMAINS)</strong></span>
@@ -1757,8 +1921,8 @@
               <button class="semantic-jump-btn" onclick="requestNavigation('skills')">
                 <span>VIEW CONNECTED SKILLS</span> &rarr;
               </button>
-              <button class="semantic-jump-btn" onclick="requestNavigation('research')">
-                <span>EXPLORE RESEARCH</span> &rarr;
+              <button class="semantic-jump-btn" onclick="requestNavigation('contact')">
+                <span>REACH OUT</span> &rarr;
               </button>
             </div>
             <div class="home-telemetry-cue">
@@ -1808,8 +1972,8 @@
               <button class="semantic-jump-btn" onclick="requestNavigation('skills')">
                 <span>CONNECTED SKILLS</span> &rarr;
               </button>
-              <button class="semantic-jump-btn" onclick="requestNavigation('experience')">
-                <span>VIEW EXPERIENCE</span> &rarr;
+              <button class="semantic-jump-btn" onclick="requestNavigation('contact')">
+                <span>COLLABORATE</span> &rarr;
               </button>
             </div>
             <div class="home-telemetry-cue">
@@ -1918,10 +2082,138 @@
               <button class="hero-cta-secondary" onclick="requestNavigation('home')">&larr; RETURN TO HOME</button>
               <button class="semantic-jump-btn" onclick="requestNavigation('skills')"><span>VIEW CONNECTED SKILLS</span> &rarr;</button>
               <button class="semantic-jump-btn" onclick="requestNavigation('about')"><span>ABOUT BACKGROUND</span> &rarr;</button>
-              <button class="semantic-jump-btn" onclick="requestNavigation('projects')"><span>PROJECTS PLATFORMS</span> &rarr;</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('contact')"><span>FINAL CONTACT NODE</span> &rarr;</button>
             </div>
             <div class="home-telemetry-cue">
               <span>NODE: <strong>05 // SYNCFUSION TENURE</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =======================================================
+           NODE 06: CONTACT (FINAL TERMINAL SPIDER-WEB NODE)
+           ======================================================= -->
+      <div class="scene-entity" id="entity-contact">
+        <!-- Compact View -->
+        <div class="compact-node-view node-contact-style" id="compact-contact" onclick="requestNavigation('contact')">
+          <div class="node-anchor-dot" style="border-color: var(--accent-cyan); box-shadow: 0 0 14px var(--accent-cyan);"></div>
+          <div class="node-tag-txt">NODE_06 // TERMINAL</div>
+          <div class="node-title-txt">CONTACT</div>
+          <div class="node-status-txt">Let's Build Something &bull; Email &bull; GitHub &bull; Resume</div>
+        </div>
+        <!-- Full Page View -->
+        <div class="full-page-frame" id="page-contact" style="display: none;">
+          <div>
+            <!-- Top Header Row -->
+            <div class="hero-top-row">
+              <div class="hero-status-pill">
+                <span class="status-dot"></span>
+                FINAL TERMINAL NODE // CONTACT & COLLABORATION
+              </div>
+              <div class="hero-credentials-tag">
+                Chennai / Vellore, India &bull; <strong>Open to AI & Systems Engineering Roles</strong>
+              </div>
+            </div>
+
+            <!-- Hero Section -->
+            <div class="contact-hero-header">
+              <h2 class="contact-hero-title">Let’s Build Something Intelligent.</h2>
+              <p style="font-size: 14.5px; color: #E2E8F0; line-height: 1.55; max-width: 980px;">
+                Whether you're looking for an AI/ML engineer for multilingual NLP research, real-time computer vision models, or a full-stack engineer to build production systems with FastAPI and React, I'd love to connect.
+              </p>
+            </div>
+          </div>
+
+          <!-- Section 01: Interactive Contact Action Cards (4-Card Grid) -->
+          <div>
+            <div class="cs-sec-tag" style="margin-bottom: 8px;">01. DIRECT COMMUNICATION CHANNELS</div>
+            <div class="contact-actions-grid">
+              
+              <!-- 01: Email Direct -->
+              <div class="contact-action-card flagship-action" onclick="copyOrSendEmail('kevinprakashj@gmail.com')">
+                <div>
+                  <div class="cac-tag">PRIMARY CONTACT</div>
+                  <div class="cac-name">Email Direct</div>
+                  <div class="cac-desc">Direct email for engineering roles, research inquiries, and project collaborations.</div>
+                </div>
+                <div class="cac-cta-txt">
+                  <span>kevinprakashj@gmail.com</span> &rarr;
+                </div>
+              </div>
+
+              <!-- 02: GitHub -->
+              <a class="contact-action-card" href="https://github.com/KevinLegend13" target="_blank" rel="noopener noreferrer">
+                <div>
+                  <div class="cac-tag">CODE & REPOSITORIES</div>
+                  <div class="cac-name">GitHub Profile</div>
+                  <div class="cac-desc">Explore open-source repositories, TeamFlow commits, and computer vision codebases.</div>
+                </div>
+                <div class="cac-cta-txt">
+                  <span>github.com/KevinLegend13</span> &rarr;
+                </div>
+              </a>
+
+              <!-- 03: LinkedIn -->
+              <a class="contact-action-card" href="https://linkedin.com/in/kevin-prakash-j" target="_blank" rel="noopener noreferrer">
+                <div>
+                  <div class="cac-tag">PROFESSIONAL NETWORK</div>
+                  <div class="cac-name">LinkedIn</div>
+                  <div class="cac-desc">Connect for verified academic updates, engineering tenure, and technical posts.</div>
+                </div>
+                <div class="cac-cta-txt">
+                  <span>linkedin.com/in/kevin-prakash-j</span> &rarr;
+                </div>
+              </a>
+
+              <!-- 04: Resume / Profile -->
+              <a class="contact-action-card" href="Kevin_Portfolio_Master_Profile_v3_TeamFlow_Final.pdf" target="_blank" rel="noopener noreferrer">
+                <div>
+                  <div class="cac-tag">VERIFIED CREDENTIALS</div>
+                  <div class="cac-name">Curriculum Vitae</div>
+                  <div class="cac-desc">Download or view the verified master portfolio profile and academic track record.</div>
+                </div>
+                <div class="cac-cta-txt">
+                  <span>VIEW MASTER PROFILE PDF</span> &rarr;
+                </div>
+              </a>
+
+            </div>
+          </div>
+
+          <!-- Section 02: Core Engineering Domains -->
+          <div>
+            <div class="cs-sec-tag" style="margin-bottom: 6px;">02. ACTIVE ENGINEERING DOMAINS</div>
+            <div class="contact-domains-row">
+              <div class="contact-domain-pill">
+                <div class="cdp-title">AI / ML & NLP RESEARCH</div>
+                <div class="cdp-tech">PyTorch, mBERT, MuRIL, LaBSE, Sentence Embeddings</div>
+              </div>
+              <div class="contact-domain-pill">
+                <div class="cdp-title">FULL-STACK SYSTEMS</div>
+                <div class="cdp-tech">FastAPI, React, TypeScript, PostgreSQL 17, ASP.NET Core</div>
+              </div>
+              <div class="contact-domain-pill">
+                <div class="cdp-title">COMPUTER VISION</div>
+                <div class="cdp-tech">OpenCV, MediaPipe 21-Hand Landmarks, Gesture AI</div>
+              </div>
+              <div class="contact-domain-pill">
+                <div class="cdp-title">APPLIED DIGITAL TWINS</div>
+                <div class="cdp-tech">Knowledge Graphs, GraphRAG, ERA5 Climate Satellite Fusion</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Footer Row -->
+          <div class="home-footer-row" style="margin-top: 6px;">
+            <div class="about-semantic-links">
+              <button class="hero-cta-secondary" onclick="requestNavigation('home')">&larr; RETURN TO HOME</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('projects')"><span>PROJECTS (TEAMFLOW)</span> &rarr;</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('research')"><span>RESEARCH TRACKS</span> &rarr;</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('experience')"><span>SYNCFUSION TENURE</span> &rarr;</button>
+            </div>
+            <div class="home-telemetry-cue">
+              <span>TERMINAL NODE: <strong>06 // CONTACT & COLLABORATION</strong></span>
             </div>
           </div>
         </div>
@@ -1933,7 +2225,7 @@
 
   <!-- Keybinds Hint -->
   <div class="key-hints">
-    <span>Keys: <kbd>1</kbd> Home <kbd>2</kbd> About <kbd>3</kbd> Skills <kbd>4</kbd> Projects <kbd>5</kbd> Research <kbd>6</kbd> Experience</span>
+    <span>Keys: <kbd>1</kbd> Home <kbd>2</kbd> About <kbd>3</kbd> Skills <kbd>4</kbd> Projects <kbd>5</kbd> Research <kbd>6</kbd> Experience <kbd>7</kbd> Contact</span>
   </div>
 
   <!-- Live Telemetry HUD -->
@@ -2289,14 +2581,15 @@
       chromaticEnabled: true
     };
 
-    // --- 5. Multi-Node Spatial Geometry (6 NODES) ---
+    // --- 5. Multi-Node Spatial Geometry (7 NODES) ---
     const SCENES = [
       { id: 'home', index: 1, label: 'HOME', x: 0, y: 0 },
       { id: 'about', index: 2, label: 'ABOUT', x: -1100, y: -650 },
       { id: 'skills', index: 3, label: 'SKILLS', x: 1100, y: -650 },
       { id: 'projects', index: 4, label: 'PROJECTS', x: 1150, y: 650 },
       { id: 'research', index: 5, label: 'RESEARCH', x: -1150, y: 650 },
-      { id: 'experience', index: 6, label: 'EXPERIENCE', x: 0, y: 1050 }
+      { id: 'experience', index: 6, label: 'EXPERIENCE', x: 0, y: 1050 },
+      { id: 'contact', index: 7, label: 'CONTACT', x: 0, y: -1050 }
     ];
 
     const sceneMap = {};
@@ -2363,6 +2656,7 @@
     const teleFps = document.getElementById('tele-fps');
     const introOverlay = document.getElementById('intro-overlay');
     const introBox = document.getElementById('intro-box');
+    const copyToast = document.getElementById('copy-toast');
 
     const skillsRadialCanvas = document.getElementById('skills-radial-canvas');
     const radialNodesMount = document.getElementById('radial-nodes-mount');
@@ -2394,7 +2688,7 @@
     const researchBackBtn = document.getElementById('research-back-btn');
     const researchTelemetryStatus = document.getElementById('research-telemetry-status');
 
-    // --- 7. Initialize Navigation, Skills, Projects, Research, Experience ---
+    // --- 7. Initialize Navigation, Skills, Projects, Research, Experience, Contact ---
     function init() {
       SCENES.forEach(s => {
         const btn = document.createElement('button');
@@ -2444,6 +2738,27 @@
         introOverlay.style.opacity = '0';
         setTimeout(() => { introOverlay.style.display = 'none'; }, 800);
       }, 1100);
+    }
+
+    function copyOrSendEmail(email) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(email).then(() => {
+          showCopyToast(`COPIED: ${email}`);
+        }).catch(() => {
+          window.location.href = `mailto:${email}`;
+        });
+      } else {
+        window.location.href = `mailto:${email}`;
+      }
+    }
+
+    function showCopyToast(msg) {
+      if (!copyToast) return;
+      copyToast.textContent = msg;
+      copyToast.classList.add('reveal');
+      setTimeout(() => {
+        copyToast.classList.remove('reveal');
+      }, 2400);
     }
 
     // --- 8. RESEARCH LEVEL 1 HUB & LEVEL 2 INVESTIGATIONS ---
@@ -3201,13 +3516,11 @@
       const domain = SKILLS_DOMAINS.find(d => d.id === domainId);
       if (!domain) return;
 
-      // If we are currently in a sub-domain that is different, reset to macro first
       if (activeSubDomain && activeSubDomain.id !== domainId) {
         activeSubDomain = null;
         renderSkillsWebLayer();
       }
 
-      // If already in the target sub-domain
       if (activeSubDomain && activeSubDomain.id === domainId) {
         if (skillName) {
           const skill = domain.skills.find(s => s.name.toLowerCase().includes(skillName.toLowerCase()) || skillName.toLowerCase().includes(s.name.toLowerCase()));
@@ -3216,7 +3529,6 @@
         return;
       }
 
-      // Show macro skills web for a beat (~500ms), then spider-zoom into the target sub-domain
       setTimeout(() => {
         const nodes = document.querySelectorAll('.web-stuck-node');
         const domainIdx = SKILLS_DOMAINS.findIndex(d => d.id === domainId);
@@ -3224,7 +3536,6 @@
 
         spiderTransitionToDomain(domain, targetEl);
 
-        // After the sub-web blooms, automatically open the specific skill context popup
         if (skillName) {
           setTimeout(() => {
             const skill = domain.skills.find(s => s.name.toLowerCase().includes(skillName.toLowerCase()) || skillName.toLowerCase().includes(s.name.toLowerCase()));
@@ -3350,13 +3661,17 @@
       for (let i = 0; i < 20; i++) {
         const angle = Math.random() * Math.PI * 2;
         const speed = 2.5 + Math.random() * 5.5;
+        let pCol = Math.random() > 0.25 ? '#00D2FF' : '#FF2A4B';
+        if (targetSceneId === 'experience') pCol = '#A855F7';
+        if (targetSceneId === 'research') pCol = '#FF007A';
+
         sparks.push({
           x, y,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
           life: 1.0,
           decay: 0.035 + Math.random() * 0.035,
-          color: targetSceneId === 'experience' ? '#A855F7' : (Math.random() > 0.25 ? '#00D2FF' : '#FF2A4B')
+          color: pCol
         });
       }
     }
@@ -3627,6 +3942,7 @@
         let strokeCol = '#00D2FF';
         if (targetSceneId === 'research') strokeCol = '#FF007A';
         if (targetSceneId === 'experience') strokeCol = '#A855F7';
+        if (targetSceneId === 'contact') strokeCol = '#00D2FF';
 
         ctx.shadowColor = strokeCol;
         ctx.shadowBlur = currentState === STATES.TENSION ? 20 : 12;
@@ -3655,6 +3971,7 @@
           let dotCol = '#FF2A4B';
           if (targetSceneId === 'research') dotCol = '#FF007A';
           if (targetSceneId === 'experience') dotCol = '#C084FC';
+          if (targetSceneId === 'contact') dotCol = '#00D2FF';
 
           ctx.fillStyle = dotCol;
           ctx.beginPath();
