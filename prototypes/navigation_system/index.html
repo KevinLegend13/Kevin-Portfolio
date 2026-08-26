@@ -2096,17 +2096,17 @@
           </div>
 
           <div class="pillars-grid">
-            <div class="pillar-card" onclick="requestNavigation('research')">
+            <div class="pillar-card" onclick="navigateToResearchDirect('indic-nlp')">
               <div class="pillar-num">01 // AI & NLP RESEARCH</div>
               <div class="pillar-title">Indic NLP Embeddings</div>
               <div class="pillar-desc">Cross-lingual semantic alignment across Indic languages using mBERT, MuRIL, and LaBSE.</div>
             </div>
-            <div class="pillar-card" onclick="requestNavigation('projects')">
+            <div class="pillar-card" onclick="navigateToProjectDirect('teamflow')">
               <div class="pillar-num">02 // SYSTEMS ENGINEERING</div>
               <div class="pillar-title">TeamFlow Platform</div>
               <div class="pillar-desc">Full-stack project management with FastAPI, React, PostgreSQL 17, and RBAC security.</div>
             </div>
-            <div class="pillar-card" onclick="requestNavigation('projects')">
+            <div class="pillar-card" onclick="navigateToProjectDirect('isl-translator')">
               <div class="pillar-num">03 // COMPUTER VISION</div>
               <div class="pillar-title">ISL Gesture Translator</div>
               <div class="pillar-desc">Real-time sign language recognition with OpenCV and MediaPipe 21-hand landmark intelligence.</div>
@@ -2120,7 +2120,7 @@
 
           <div class="home-footer-row">
             <div class="cta-button-group">
-              <button class="hero-cta-primary" onclick="requestNavigation('projects')">
+              <button class="hero-cta-primary" onclick="navigateToProjectDirect('teamflow')">
                 <span>EXPLORE FLAGSHIP (TEAMFLOW)</span> &rarr;
               </button>
               <button class="hero-cta-secondary" onclick="requestNavigation('contact')">
@@ -2223,7 +2223,7 @@
             <div class="about-semantic-links">
               <button class="hero-cta-secondary" onclick="requestNavigation('home')">&larr; HOME</button>
               <button class="semantic-jump-btn" onclick="requestNavigation('experience')"><span>SYNCFUSION TENURE</span> &rarr;</button>
-              <button class="semantic-jump-btn" onclick="requestNavigation('projects')"><span>FLAGSHIP (TEAMFLOW)</span> &rarr;</button>
+              <button class="semantic-jump-btn" onclick="navigateToProjectDirect('teamflow')"><span>FLAGSHIP (TEAMFLOW)</span> &rarr;</button>
               <button class="semantic-jump-btn" onclick="requestNavigation('contact')"><span>GET IN TOUCH</span> &rarr;</button>
             </div>
             <div class="home-telemetry-cue">
@@ -4134,6 +4134,26 @@
 
         pendingDeepNavigation = { linkTo, targetEntityId };
         requestNavigation(linkTo);
+      }
+    }
+
+    function navigateToProjectDirect(projId) {
+      closeSkillsModal();
+      if (currentSceneId === 'projects' && currentState === STATES.IDLE) {
+        openProjectCaseStudy(projId);
+      } else {
+        pendingDeepNavigation = { linkTo: 'projects', targetEntityId: projId };
+        requestNavigation('projects');
+      }
+    }
+
+    function navigateToResearchDirect(resId) {
+      closeSkillsModal();
+      if (currentSceneId === 'research' && currentState === STATES.IDLE) {
+        openResearchInvestigation(resId);
+      } else {
+        pendingDeepNavigation = { linkTo: 'research', targetEntityId: resId };
+        requestNavigation('research');
       }
     }
 
