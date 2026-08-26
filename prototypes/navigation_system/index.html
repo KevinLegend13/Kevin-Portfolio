@@ -15,11 +15,12 @@
       --accent-red: #FF2A4B;
       --accent-cyan: #00D2FF;
       --accent-magenta: #FF007A;
-      --accent-amber: #FFB800;
+      --accent-venom: #A855F7;
+      --accent-venom-light: #C084FC;
       --accent-cyan-glow: rgba(0, 210, 255, 0.35);
       --accent-red-glow: rgba(255, 42, 75, 0.35);
       --accent-magenta-glow: rgba(255, 0, 122, 0.35);
-      --accent-amber-glow: rgba(255, 184, 0, 0.35);
+      --accent-venom-glow: rgba(168, 85, 247, 0.45);
       --text-primary: #F8FAFC;
       --text-muted: #94A3B8;
       --text-dim: #64748B;
@@ -27,7 +28,7 @@
       --border-cyan: rgba(0, 210, 255, 0.4);
       --border-red: rgba(255, 42, 75, 0.4);
       --border-magenta: rgba(255, 0, 122, 0.45);
-      --border-amber: rgba(255, 184, 0, 0.45);
+      --border-venom: rgba(168, 85, 247, 0.45);
       --font-display: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -1141,12 +1142,12 @@
     .res-matrix-table td strong { color: #FFFFFF; font-family: var(--font-mono); }
 
     /* =========================================================================
-       5. PHASE 10: EXPERIENCE (SYNCFUSION AI INTERNSHIP SHOWCASE)
+       5. PHASE 10: EXPERIENCE (VENOM SYMBIOTE THEME // SYNCFUSION INTERNSHIP)
        ========================================================================= */
     #page-experience {
-      background: radial-gradient(circle at 50% 20%, rgba(26, 20, 10, 0.98) 0%, rgba(10, 8, 4, 0.96) 100%);
-      border: 1.5px solid var(--accent-amber);
-      box-shadow: 0 35px 100px rgba(0, 0, 0, 0.92), 0 0 65px var(--accent-amber-glow);
+      background: radial-gradient(circle at 50% 20%, rgba(26, 12, 42, 0.98) 0%, rgba(6, 6, 12, 0.98) 100%);
+      border: 1.5px solid var(--accent-venom);
+      box-shadow: 0 35px 100px rgba(0, 0, 0, 0.95), 0 0 70px var(--accent-venom-glow);
       overflow-y: auto;
       scrollbar-width: none;
     }
@@ -1165,6 +1166,7 @@
       letter-spacing: -0.03em;
       line-height: 1.1;
       margin: 6px 0 6px 0;
+      text-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
     }
 
     .exp-timeline-badge {
@@ -1174,9 +1176,9 @@
       font-family: var(--font-mono);
       font-size: 11px;
       font-weight: 700;
-      color: var(--accent-amber);
-      background: rgba(255, 184, 0, 0.12);
-      border: 1px solid rgba(255, 184, 0, 0.3);
+      color: #E9D5FF;
+      background: rgba(168, 85, 247, 0.16);
+      border: 1px solid rgba(168, 85, 247, 0.4);
       padding: 4px 12px;
       border-radius: 6px;
       margin-bottom: 10px;
@@ -1190,17 +1192,24 @@
     }
 
     .exp-flow-node {
-      background: rgba(20, 16, 10, 0.9);
-      border: 1.5px solid rgba(255, 184, 0, 0.35);
+      background: rgba(14, 10, 24, 0.92);
+      border: 1.5px solid rgba(168, 85, 247, 0.35);
       border-radius: 10px;
       padding: 14px 12px;
       text-align: center;
       position: relative;
+      transition: all 0.2s ease;
+    }
+    .exp-flow-node:hover {
+      border-color: #FFFFFF;
+      box-shadow: 0 0 25px var(--accent-venom-glow);
+      transform: translateY(-2px);
     }
 
     .exp-timeline-card {
       background: rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      border-left: 3px solid var(--accent-venom);
       border-radius: 12px;
       padding: 14px 18px;
       margin-bottom: 10px;
@@ -1259,9 +1268,9 @@
       box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 0 25px var(--accent-magenta-glow);
     }
     .node-experience-style {
-      background: #241A0C;
-      border: 2px solid var(--accent-amber);
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 0 25px var(--accent-amber-glow);
+      background: #0D0818;
+      border: 2px solid var(--accent-venom);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85), 0 0 25px var(--accent-venom-glow);
     }
     .node-anchor-dot {
       position: absolute;
@@ -1812,23 +1821,23 @@
       </div>
 
       <!-- =======================================================
-           NODE 05: EXPERIENCE (SYNCFUSION AI INTERNSHIP SHOWCASE)
+           NODE 05: EXPERIENCE (VENOM SYMBIOTE THEME // SYNCFUSION TENURE)
            ======================================================= -->
       <div class="scene-entity" id="entity-experience">
         <!-- Compact View -->
         <div class="compact-node-view node-experience-style" id="compact-experience" onclick="requestNavigation('experience')">
-          <div class="node-anchor-dot" style="border-color: var(--accent-amber); box-shadow: 0 0 12px var(--accent-amber);"></div>
-          <div class="node-tag-txt" style="color: var(--accent-amber);">NODE_05 // TENURE</div>
+          <div class="node-anchor-dot" style="border-color: var(--accent-venom); box-shadow: 0 0 12px var(--accent-venom);"></div>
+          <div class="node-tag-txt" style="color: var(--accent-venom-light);">NODE_05 // TENURE</div>
           <div class="node-title-txt">EXPERIENCE</div>
           <div class="node-status-txt">Syncfusion AI Intern &bull; May–June 2026</div>
         </div>
-        <!-- Full Page View -->
+        <!-- Full Page View (Venom Symbiote Dark Violet & Chrome Gloss) -->
         <div class="full-page-frame" id="page-experience" style="display: none;">
           <div>
             <!-- Top Header Row -->
             <div class="hero-top-row">
-              <div class="hero-status-pill" style="color: var(--accent-amber); border-color: rgba(255,184,0,0.4); background: rgba(255,184,0,0.15);">
-                <span class="status-dot" style="background: var(--accent-amber); box-shadow: 0 0 8px var(--accent-amber);"></span>
+              <div class="hero-status-pill" style="color: var(--accent-venom-light); border-color: rgba(168,85,247,0.45); background: rgba(168,85,247,0.15);">
+                <span class="status-dot" style="background: var(--accent-venom); box-shadow: 0 0 8px var(--accent-venom);"></span>
                 INDUSTRY TENURE // ENTERPRISE SOFTWARE & AI
               </div>
               <div class="hero-credentials-tag">
@@ -1850,25 +1859,25 @@
 
           <!-- Section 01: Engineering Architecture Flow -->
           <div>
-            <div class="cs-sec-tag" style="color: var(--accent-amber); margin-bottom: 6px;">01. MULTI-TIER ENTERPRISE ARCHITECTURE</div>
+            <div class="cs-sec-tag" style="color: var(--accent-venom-light); margin-bottom: 6px;">01. MULTI-TIER ENTERPRISE ARCHITECTURE</div>
             <div class="exp-flow-grid">
               <div class="exp-flow-node" onclick="requestNavigation('skills')" style="cursor: pointer;">
-                <div class="anb-tier" style="color: var(--accent-amber);">TIER 01 // UI CLIENT</div>
+                <div class="anb-tier" style="color: var(--accent-venom-light);">TIER 01 // UI CLIENT</div>
                 <div class="anb-name">React + TypeScript</div>
                 <div class="anb-role">Modular UI component tree, type-safe state & reactive DOM.</div>
               </div>
               <div class="exp-flow-node">
-                <div class="anb-tier" style="color: var(--accent-amber);">TIER 02 // INTERFACE</div>
+                <div class="anb-tier" style="color: var(--accent-venom-light);">TIER 02 // INTERFACE</div>
                 <div class="anb-name">REST APIs</div>
                 <div class="anb-role">Structured HTTP endpoint contracts & payload validation.</div>
               </div>
               <div class="exp-flow-node" onclick="requestNavigation('skills')" style="cursor: pointer;">
-                <div class="anb-tier" style="color: var(--accent-amber);">TIER 03 // BACKEND</div>
+                <div class="anb-tier" style="color: var(--accent-venom-light);">TIER 03 // BACKEND</div>
                 <div class="anb-name">ASP.NET Core & C#</div>
                 <div class="anb-role">High-performance async services & controller business logic.</div>
               </div>
               <div class="exp-flow-node">
-                <div class="anb-tier" style="color: var(--accent-amber);">TIER 04 // SECURITY</div>
+                <div class="anb-tier" style="color: var(--accent-venom-light);">TIER 04 // SECURITY</div>
                 <div class="anb-name">RBAC Policies</div>
                 <div class="anb-role">Granular authorization boundaries & access verification.</div>
               </div>
@@ -1877,8 +1886,8 @@
 
           <!-- Section 02: Core Engineering Deliverables -->
           <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px; margin: 12px 0;">
-            <div class="cs-section-block" style="padding: 16px 20px;">
-              <div class="cs-sec-tag" style="color: var(--accent-amber);">02. TECHNICAL RESPONSIBILITIES</div>
+            <div class="cs-section-block" style="padding: 16px 20px; border-color: rgba(168,85,247,0.25);">
+              <div class="cs-sec-tag" style="color: var(--accent-venom-light);">02. TECHNICAL RESPONSIBILITIES</div>
               <div style="font-size: 12.5px; color: var(--text-muted); line-height: 1.6;">
                 &bull; <strong>Frontend Development:</strong> Built interactive web application features using React and TypeScript, adhering to enterprise design systems.<br>
                 &bull; <strong>Backend Services:</strong> Developed scalable server-side business logic and controllers utilizing ASP.NET Core and C#.<br>
@@ -1888,14 +1897,14 @@
             </div>
 
             <!-- Section 03: Concise Verified Timeline -->
-            <div class="cs-section-block" style="padding: 16px 20px;">
-              <div class="cs-sec-tag" style="color: var(--accent-amber);">03. TENURE TIMELINE</div>
+            <div class="cs-section-block" style="padding: 16px 20px; border-color: rgba(168,85,247,0.25);">
+              <div class="cs-sec-tag" style="color: var(--accent-venom-light);">03. TENURE TIMELINE</div>
               <div class="exp-timeline-card">
-                <div style="font-family: var(--font-mono); font-size: 10.5px; font-weight: 800; color: var(--accent-amber);">MAY 2026 // ONBOARDING & SETUP</div>
+                <div style="font-family: var(--font-mono); font-size: 10.5px; font-weight: 800; color: var(--accent-venom-light);">MAY 2026 // ONBOARDING & SETUP</div>
                 <div style="font-size: 11.5px; color: #CBD5E1; margin-top: 2px;">Environment onboarding, ASP.NET Core backend pipeline setup, and RBAC security boundary mapping.</div>
               </div>
               <div class="exp-timeline-card">
-                <div style="font-family: var(--font-mono); font-size: 10.5px; font-weight: 800; color: var(--accent-amber);">JUNE 2026 // FEATURE DELIVERY</div>
+                <div style="font-family: var(--font-mono); font-size: 10.5px; font-weight: 800; color: var(--accent-venom-light);">JUNE 2026 // FEATURE DELIVERY</div>
                 <div style="font-size: 11.5px; color: #CBD5E1; margin-top: 2px;">React/TypeScript feature integration, REST API verification, and enterprise code review delivery.</div>
               </div>
             </div>
@@ -2441,7 +2450,6 @@
       researchDynamicMount.innerHTML = '';
 
       if (!activeResearchId) {
-        // LEVEL 1: Scientific Investigation Hub
         researchDynamicMount.style.overflow = 'hidden';
         researchStatusPill.innerHTML = '<span class="status-dot" style="background:var(--accent-magenta); box-shadow:0 0 8px var(--accent-magenta);"></span> SCIENTIFIC INVESTIGATIONS // CLICK TO DIVE INTO DETAILED PIPELINE';
         researchBreadcrumb.textContent = 'Master Profile Ground Truth';
@@ -2477,7 +2485,6 @@
               </div>
             `).join('')}
 
-            <!-- Extensible Future Investigation Placeholder Slot -->
             <div class="research-hub-card extensible-card">
               <div>
                 <div class="rhc-tag" style="color: var(--text-dim);">FUTURE TRACK // EXTENSIBLE</div>
@@ -2496,7 +2503,6 @@
         researchDynamicMount.appendChild(hubStage);
 
       } else {
-        // LEVEL 2: Dedicated In-Depth Scientific Investigation View
         researchDynamicMount.style.overflowY = 'auto';
         researchDynamicMount.style.scrollbarWidth = 'none';
 
@@ -2511,7 +2517,6 @@
         const view = document.createElement('div');
         view.className = 'research-investigation-view';
 
-        // SECTION 01: HERO HEADER
         const heroBlock = document.createElement('div');
         heroBlock.className = 'cs-hero-header';
         heroBlock.innerHTML = `
@@ -2525,7 +2530,6 @@
         `;
         view.appendChild(heroBlock);
 
-        // SECTION 02: RESEARCH QUESTION & MOTIVATION
         const motBlock = document.createElement('div');
         motBlock.className = 'cs-section-block';
         motBlock.innerHTML = `
@@ -2535,7 +2539,6 @@
         `;
         view.appendChild(motBlock);
 
-        // SECTION 03: INTERACTIVE 6-STAGE METHODOLOGY PIPELINE
         const pipeBlock = document.createElement('div');
         pipeBlock.className = 'cs-section-block';
         pipeBlock.innerHTML = `
@@ -2553,7 +2556,6 @@
         `;
         view.appendChild(pipeBlock);
 
-        // SECTION 04: ARCHITECTURE & CORPORA MATRIX
         const matBlock = document.createElement('div');
         matBlock.className = 'cs-section-block';
         matBlock.innerHTML = `
@@ -2582,7 +2584,6 @@
         `;
         view.appendChild(matBlock);
 
-        // SECTION 05: FORMAL EVALUATION METHODOLOGY
         const evalBlock = document.createElement('div');
         evalBlock.className = 'cs-section-block';
         evalBlock.innerHTML = `
@@ -2599,7 +2600,6 @@
         `;
         view.appendChild(evalBlock);
 
-        // SECTION 06: SCIENTIFIC SIGNIFICANCE & CONTRIBUTION
         const takeBlock = document.createElement('div');
         takeBlock.className = 'cs-section-block';
         takeBlock.style.borderColor = 'rgba(255, 0, 122, 0.4)';
@@ -2610,7 +2610,6 @@
         `;
         view.appendChild(takeBlock);
 
-        // Next research investigation action
         const nextIdx = (RESEARCH_DATA.findIndex(r => r.id === activeResearchId) + 1) % RESEARCH_DATA.length;
         const nextRes = RESEARCH_DATA[nextIdx];
         const navRow = document.createElement('div');
@@ -3299,7 +3298,7 @@
           vy: Math.sin(angle) * speed,
           life: 1.0,
           decay: 0.035 + Math.random() * 0.035,
-          color: targetSceneId === 'experience' ? '#FFB800' : (Math.random() > 0.25 ? '#00D2FF' : '#FF2A4B')
+          color: targetSceneId === 'experience' ? '#A855F7' : (Math.random() > 0.25 ? '#00D2FF' : '#FF2A4B')
         });
       }
     }
@@ -3565,7 +3564,7 @@
         ctx.globalAlpha = webOpacity;
         let strokeCol = '#00D2FF';
         if (targetSceneId === 'research') strokeCol = '#FF007A';
-        if (targetSceneId === 'experience') strokeCol = '#FFB800';
+        if (targetSceneId === 'experience') strokeCol = '#A855F7';
 
         ctx.shadowColor = strokeCol;
         ctx.shadowBlur = currentState === STATES.TENSION ? 20 : 12;
@@ -3593,7 +3592,7 @@
 
           let dotCol = '#FF2A4B';
           if (targetSceneId === 'research') dotCol = '#FF007A';
-          if (targetSceneId === 'experience') dotCol = '#FFB800';
+          if (targetSceneId === 'experience') dotCol = '#C084FC';
 
           ctx.fillStyle = dotCol;
           ctx.beginPath();

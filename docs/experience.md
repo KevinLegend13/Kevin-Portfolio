@@ -1,14 +1,15 @@
 # Phase 10 — Experience Specification
-## Syncfusion Software Pvt. Ltd. // AI Internship Showcase
+## Syncfusion Software Pvt. Ltd. // AI Internship Showcase (Venom Symbiote Theme)
 
 ## 1. Overview & Verified Facts
-The **Experience** section documents Kevin Prakash J's industry tenure as an **AI Intern** at **Syncfusion Software Pvt. Ltd.** (May–June 2026), grounded strictly in the **Portfolio Master Profile (v3 TeamFlow Final)**.
+The **Experience** section documents Kevin Prakash J's industry tenure as an **AI Intern** at **Syncfusion Software Pvt. Ltd.** (May–June 2026), styled with a high-contrast **Venom Symbiote theme** (Deep Obsidian Black, Electric Symbiote Purple `#A855F7` / `#C084FC`, and Metallic Chrome White accents).
 
 ### Ground Truth Parameters
 - **Company**: Syncfusion Software Pvt. Ltd.
 - **Role**: AI Intern
 - **Duration**: May 2026 – June 2026
 - **Location**: Chennai / Enterprise Software Division
+- **Theme**: Venom Symbiote Obsidian & Electric Purple / Chrome Glow
 - **Core Technology Stack**:
   - `ASP.NET Core`
   - `React`
@@ -25,7 +26,7 @@ The **Experience** section documents Kevin Prakash J's industry tenure as an **A
 ┌─────────────────────────────────────────────────────────────┐
 │ LEVEL 1: COMPACT EXPERIENCE PREVIEW                         │
 │ - Node 05 // Spatial coordinate (x: 0, y: 1050)             │
-│ - Cyber Amber glowing anchor & status pill                  │
+│ - Venom Symbiote glowing purple anchor & status badge       │
 │ - Concise tagline: "Syncfusion AI Intern • May–June 2026"   │
 └──────────────────────────────┬──────────────────────────────┘
                                │
@@ -34,6 +35,7 @@ The **Experience** section documents Kevin Prakash J's industry tenure as an **A
                                ▼
 ┌─────────────────────────────────────────────────────────────┐
 │ LEVEL 2: DETAILED ENTERPRISE EXPERIENCE PAGE               │
+│ - Venom Symbiote dark glassmorphism container               │
 │ - Hero: Company, Role, Duration, and Overview               │
 │ - 4-Tier Enterprise Architecture Flow Diagram               │
 │   (React/TS → REST APIs → ASP.NET Core/C# → RBAC)           │
@@ -58,11 +60,3 @@ The **Experience** section documents Kevin Prakash J's industry tenure as an **A
 - **About Identity**: Direct link to the academic and engineering triad in Node 01.
 - **Projects**: Direct links to full-stack systems engineering platforms.
 - **Keyboard Shortcut**: Bound to key <kbd>6</kbd> for instant navigation.
-
----
-
-## 5. Verification Checklist
-- [x] Grounded strictly in `Kevin_Portfolio_Master_Profile_v3_TeamFlow_Final.pdf`.
-- [x] Zero fabricated product names, team size metrics, or unverified claims.
-- [x] Integrated into the 6-node spatial web layout with spring-damper camera physics.
-- [x] Verified running locally at `http://localhost:4173/prototypes/navigation_system/index.html`.
