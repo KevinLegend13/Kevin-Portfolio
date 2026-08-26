@@ -1861,20 +1861,22 @@
           <div>
             <div class="cs-sec-tag" style="color: var(--accent-venom-light); margin-bottom: 6px;">01. MULTI-TIER ENTERPRISE ARCHITECTURE</div>
             <div class="exp-flow-grid">
-              <div class="exp-flow-node" onclick="requestNavigation('skills')" style="cursor: pointer;">
+              <div class="exp-flow-node" onclick="navigateToSkillDirect('web-systems', 'React & Vite')" style="cursor: pointer;" title="Click to view React in Skills Web">
                 <div class="anb-tier" style="color: var(--accent-venom-light);">TIER 01 // UI CLIENT</div>
                 <div class="anb-name">React + TypeScript</div>
                 <div class="anb-role">Modular UI component tree, type-safe state & reactive DOM.</div>
+                <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--accent-venom-light); margin-top: 6px; font-weight: 700;">EXPLORE IN SKILLS &rarr;</div>
               </div>
               <div class="exp-flow-node">
                 <div class="anb-tier" style="color: var(--accent-venom-light);">TIER 02 // INTERFACE</div>
                 <div class="anb-name">REST APIs</div>
                 <div class="anb-role">Structured HTTP endpoint contracts & payload validation.</div>
               </div>
-              <div class="exp-flow-node" onclick="requestNavigation('skills')" style="cursor: pointer;">
+              <div class="exp-flow-node" onclick="navigateToSkillDirect('web-systems', 'ASP.NET Core')" style="cursor: pointer;" title="Click to view ASP.NET Core in Skills Web">
                 <div class="anb-tier" style="color: var(--accent-venom-light);">TIER 03 // BACKEND</div>
                 <div class="anb-name">ASP.NET Core & C#</div>
                 <div class="anb-role">High-performance async services & controller business logic.</div>
+                <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--accent-venom-light); margin-top: 6px; font-weight: 700;">EXPLORE IN SKILLS &rarr;</div>
               </div>
               <div class="exp-flow-node">
                 <div class="anb-tier" style="color: var(--accent-venom-light);">TIER 04 // SECURITY</div>
@@ -3178,6 +3180,62 @@
       skillsModalOverlay.classList.add('active');
     }
 
+    let pendingSkillNavigation = null;
+
+    function navigateToSkillDirect(domainId, skillName = null) {
+      closeSkillsModal();
+      pendingSkillNavigation = { domainId, skillName };
+
+      if (currentSceneId === 'skills' && currentState === STATES.IDLE) {
+        executePendingSkillTransition();
+      } else {
+        requestNavigation('skills');
+      }
+    }
+
+    function executePendingSkillTransition() {
+      if (!pendingSkillNavigation) return;
+      const { domainId, skillName } = pendingSkillNavigation;
+      pendingSkillNavigation = null;
+
+      const domain = SKILLS_DOMAINS.find(d => d.id === domainId);
+      if (!domain) return;
+
+      // If we are currently in a sub-domain that is different, reset to macro first
+      if (activeSubDomain && activeSubDomain.id !== domainId) {
+        activeSubDomain = null;
+        renderSkillsWebLayer();
+      }
+
+      // If already in the target sub-domain
+      if (activeSubDomain && activeSubDomain.id === domainId) {
+        if (skillName) {
+          const skill = domain.skills.find(s => s.name.toLowerCase().includes(skillName.toLowerCase()) || skillName.toLowerCase().includes(s.name.toLowerCase()));
+          if (skill) openSkillContext(skill);
+        }
+        return;
+      }
+
+      // Show macro skills web for a beat (~500ms), then spider-zoom into the target sub-domain
+      setTimeout(() => {
+        const nodes = document.querySelectorAll('.web-stuck-node');
+        const domainIdx = SKILLS_DOMAINS.findIndex(d => d.id === domainId);
+        const targetEl = nodes[domainIdx] || null;
+
+        spiderTransitionToDomain(domain, targetEl);
+
+        // After the sub-web blooms, automatically open the specific skill context popup
+        if (skillName) {
+          setTimeout(() => {
+            const skill = domain.skills.find(s => s.name.toLowerCase().includes(skillName.toLowerCase()) || skillName.toLowerCase().includes(s.name.toLowerCase()));
+            if (skill) {
+              openSkillContext(skill);
+            }
+          }, 380);
+        }
+      }, 550);
+    }
+
     function redirectFromSkill() {
       if (selectedSkillData && selectedSkillData.linkTo) {
         closeSkillsModal();
@@ -3462,6 +3520,10 @@
             currentSceneId = targetSceneId;
             shootProgress = 0;
             webOpacity = 1.0;
+
+            if (currentSceneId === 'skills' && pendingSkillNavigation) {
+              executePendingSkillTransition();
+            }
           }
           break;
 
