@@ -463,7 +463,7 @@
     }
 
     /* =========================================================================
-       2. RADIAL SPIDER-WEB SKILLS EXPERIENCE (OCTOPUS / STUCK-ON-THE-WEB STYLE)
+       2. NESTED SPIDER-WEB ZOOM SKILLS EXPERIENCE (MACRO & SUB-WEB LAYERS)
        ========================================================================= */
     #page-skills {
       background: radial-gradient(circle at 50% 50%, rgba(14, 25, 45, 0.98) 0%, rgba(6, 10, 18, 0.96) 100%);
@@ -493,7 +493,7 @@
       z-index: 1;
     }
 
-    /* Central "SKILLS" Monumental Web Core */
+    /* Central "SKILLS" / Sub-Domain Web Core */
     .skills-center-core {
       position: absolute;
       top: 50%;
@@ -512,23 +512,33 @@
       justify-content: center;
       box-shadow: 0 0 45px var(--accent-cyan-glow), inset 0 0 25px rgba(0, 210, 255, 0.2);
       backdrop-filter: blur(16px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .skills-center-core.sub-active {
+      border-color: var(--accent-red);
+      box-shadow: 0 0 45px var(--accent-red-glow), inset 0 0 25px rgba(255, 42, 75, 0.2);
     }
     .scc-tag {
       font-family: var(--font-mono);
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 800;
       color: var(--accent-cyan);
       letter-spacing: 0.15em;
       margin-bottom: 2px;
+      text-transform: uppercase;
+    }
+    .skills-center-core.sub-active .scc-tag {
+      color: var(--accent-red);
     }
     .scc-title {
       font-family: var(--font-display);
-      font-size: 34px;
+      font-size: 26px;
       font-weight: 900;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
       color: #FFFFFF;
       text-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
-      line-height: 1.0;
+      line-height: 1.05;
+      padding: 0 10px;
     }
     .scc-sub {
       font-family: var(--font-mono);
@@ -538,13 +548,13 @@
       letter-spacing: 0.06em;
     }
 
-    /* Radial Nodes Stuck Along the Web Strands */
+    /* Stuck On Web Nodes */
     .web-stuck-node {
       position: absolute;
       z-index: 20;
       transform: translate(-50%, -50%);
       cursor: pointer;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -552,7 +562,7 @@
       user-select: none;
     }
     .web-stuck-node:hover {
-      transform: translate(-50%, -50%) scale(1.14);
+      transform: translate(-50%, -50%) scale(1.15);
     }
 
     .wsn-badge-circle {
@@ -586,9 +596,16 @@
       background: rgba(255, 42, 75, 0.2);
     }
 
-    .wsn-icon {
-      font-size: 18px;
-      margin-bottom: 2px;
+    .wsn-index-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      letter-spacing: 0.1em;
+      margin-bottom: 1px;
+    }
+    .web-stuck-node.accent-red .wsn-index-num {
+      color: var(--accent-red);
     }
     .wsn-label {
       font-family: var(--font-display);
@@ -614,7 +631,7 @@
       border-color: rgba(255, 42, 75, 0.35);
     }
 
-    /* Centered Modal Popup Box for Selected Skill Group */
+    /* Centered Modal Context Popup for Specific Skill Node */
     .skills-modal-overlay {
       position: absolute;
       inset: 0;
@@ -635,8 +652,7 @@
 
     .skills-popup-box {
       width: 90vw;
-      max-width: 660px;
-      max-height: 80vh;
+      max-width: 580px;
       background: linear-gradient(145deg, #0D1527 0%, #151F36 100%);
       border: 2px solid var(--accent-cyan);
       border-radius: 20px;
@@ -646,15 +662,12 @@
       transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      overflow-y: auto;
-      scrollbar-width: none;
+      gap: 16px;
       position: relative;
     }
     .skills-modal-overlay.active .skills-popup-box {
       transform: scale(1);
     }
-    .skills-popup-box::-webkit-scrollbar { display: none; }
 
     .modal-close-btn {
       position: absolute;
@@ -685,50 +698,28 @@
       font-weight: 700;
       color: var(--accent-cyan);
       letter-spacing: 0.12em;
-      margin-bottom: 4px;
       text-transform: uppercase;
     }
-    .modal-group-title {
+    .modal-skill-title {
       font-family: var(--font-display);
-      font-size: 30px;
+      font-size: 32px;
       font-weight: 900;
       color: #FFFFFF;
       letter-spacing: -0.02em;
-      margin-bottom: 16px;
     }
 
-    .modal-skills-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 20px;
+    .modal-context-body {
+      background: rgba(0, 0, 0, 0.4);
+      border-left: 3px solid var(--accent-cyan);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 18px;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #E2E8F0;
     }
-    .modal-skill-item {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 10px;
-      padding: 12px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .msi-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      max-width: 420px;
-    }
-    .msi-name {
-      font-size: 14.5px;
-      font-weight: 800;
+    .modal-context-body strong {
       color: #FFFFFF;
     }
-    .msi-context {
-      font-size: 11.5px;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-    .msi-context strong { color: var(--accent-cyan); }
 
     /* Chromatic Shadow Accents */
     .full-page-frame.chromatic-impact {
@@ -1007,7 +998,7 @@
         padding: 20px 16px;
       }
       .skills-center-core { width: 140px; height: 140px; }
-      .scc-title { font-size: 26px; }
+      .scc-title { font-size: 20px; }
       .wsn-badge-circle { width: 68px; height: 68px; }
       .wsn-label { font-size: 9px; }
       .about-lead-title { font-size: 32px; }
@@ -1116,7 +1107,7 @@
             <div class="home-telemetry-cue">
               <span>LOCATION: <strong>VELLORE / CHENNAI</strong></span>
               <span>&bull;</span>
-              <span>NETWORK: <strong>SPIDER-WEB v8.2</strong></span>
+              <span>NETWORK: <strong>SPIDER-WEB v8.3</strong></span>
             </div>
           </div>
         </div>
@@ -1221,7 +1212,7 @@
       </div>
 
       <!-- =======================================================
-           NODE 02: SKILLS (RADIAL SPIDER-WEB "STUCK ON WEB" EXPERIENCE)
+           NODE 02: SKILLS (NESTED ZOOMING SPIDER-WEB TAXONOMY)
            ======================================================= -->
       <div class="scene-entity" id="entity-skills">
         <!-- Compact View -->
@@ -1231,15 +1222,15 @@
           <div class="node-title-txt">SKILLS</div>
           <div class="node-status-txt">AI/ML &bull; OpenCV &bull; FastAPI &bull; React &bull; SQL</div>
         </div>
-        <!-- Full Radial Skills Web View -->
+        <!-- Full Nested Skills Web View -->
         <div class="full-page-frame" id="page-skills" style="display: none;">
           
           <div class="hero-top-row" style="z-index: 30; position: relative;">
-            <div class="hero-status-pill">
+            <div class="hero-status-pill" id="skills-status-pill">
               <span class="status-dot"></span>
-              LIVING SPIDER-WEB TAXONOMY // CLICK ANY NODE FOR DETAILS
+              SPIDER-WEB TAXONOMY // SELECT DOMAIN TO DIVE INTO SUB-WEB
             </div>
-            <div class="hero-credentials-tag">
+            <div class="hero-credentials-tag" id="skills-sub-breadcrumb">
               Master Profile Ground Truth
             </div>
           </div>
@@ -1248,38 +1239,37 @@
           <div class="skills-web-stage" id="skills-web-stage">
             <canvas id="skills-radial-canvas"></canvas>
 
-            <!-- Center Monumental "SKILLS" Hub -->
+            <!-- Center Dynamic Web Core (Switches between "SKILLS" and Selected Category) -->
             <div class="skills-center-core" id="skills-center-core">
-              <div class="scc-tag">TAXONOMY // CORE</div>
-              <div class="scc-title">SKILLS</div>
-              <div class="scc-sub">6 RADIAL DOMAINS</div>
+              <div class="scc-tag" id="scc-tag">TAXONOMY // CORE</div>
+              <div class="scc-title" id="scc-title">SKILLS</div>
+              <div class="scc-sub" id="scc-sub">6 RADIAL DOMAINS</div>
             </div>
 
-            <!-- Dynamic 6 Stuck-on-the-Web Category Nodes -->
+            <!-- Dynamic Stuck-on-the-Web Nodes Container -->
             <div id="radial-nodes-mount" style="position: absolute; inset: 0; pointer-events: none;"></div>
 
-            <!-- Centered Modal Popup Box for Skills Details -->
+            <!-- Centered Modal Context Popup for Specific Skill Node -->
             <div class="skills-modal-overlay" id="skills-modal-overlay" onclick="closeSkillsModal(event)">
               <div class="skills-popup-box" id="skills-popup-box" onclick="event.stopPropagation()">
                 <button class="modal-close-btn" onclick="closeSkillsModal(event)">&times;</button>
                 
                 <div>
-                  <div class="modal-header-tag" id="modal-header-tag">DOMAIN // 01</div>
-                  <h3 class="modal-group-title" id="modal-group-title">AI / ML & NLP</h3>
-                  
-                  <!-- List of Skills in this Group -->
-                  <div class="modal-skills-list" id="modal-skills-list">
-                    <!-- Populated dynamically in JS -->
-                  </div>
+                  <div class="modal-header-tag" id="modal-header-tag">TECHNOLOGY // ROLE</div>
+                  <h3 class="modal-skill-title" id="modal-skill-title">PyTorch</h3>
                 </div>
 
-                <div class="home-footer-row" style="padding-top: 14px; margin-top: 10px;">
+                <div class="modal-context-body" id="modal-context-body">
+                  Used in Indic Multilingual NLP sentence embedding experiments and cross-lingual alignment models.
+                </div>
+
+                <div class="home-footer-row" style="padding-top: 14px; margin-top: 6px;">
                   <button class="hero-cta-secondary" onclick="closeSkillsModal(event)">
-                    &larr; BACK TO SKILLS WEB
+                    &larr; BACK TO WEB
                   </button>
-                  <div class="home-telemetry-cue" id="modal-telemetry-cue">
-                    <span>SOURCE: <strong>MASTER PROFILE V3</strong></span>
-                  </div>
+                  <button class="hero-cta-primary" id="modal-redirect-btn" onclick="redirectFromSkill()">
+                    <span>EXPLORE IN SECTION</span> &rarr;
+                  </button>
                 </div>
               </div>
             </div>
@@ -1288,12 +1278,14 @@
 
           <div class="home-footer-row" style="z-index: 30; position: relative;">
             <div class="about-semantic-links">
-              <button class="hero-cta-secondary" onclick="requestNavigation('home')">&larr; RETURN TO HOME</button>
+              <button class="hero-cta-secondary" id="skills-back-btn" onclick="handleSkillsBackAction()">
+                &larr; RETURN TO HOME
+              </button>
               <button class="semantic-jump-btn" onclick="requestNavigation('projects')"><span>CONNECT TO PROJECTS</span> &rarr;</button>
               <button class="semantic-jump-btn" onclick="requestNavigation('about')"><span>ABOUT BACKGROUND</span> &rarr;</button>
             </div>
             <div class="home-telemetry-cue">
-              <span>NODE: <strong>02 // SPIDER-WEB TAXONOMY</strong></span>
+              <span id="skills-layer-telemetry">LAYER: <strong>MACRO TAXONOMY (6 DOMAINS)</strong></span>
             </div>
           </div>
 
@@ -1430,97 +1422,101 @@
 
   <script>
     // --- 1. Master Skills Taxonomy Data Grounded in Master Profile ---
-    const RADIAL_SKILLS_DATA = [
+    const SKILLS_DOMAINS = [
       {
         id: 'ai-ml',
         name: 'AI / ML & NLP',
         tag: 'DOMAIN // 01',
-        icon: '🧠',
+        numStr: '01',
         accentColor: 'cyan',
         posXPercent: 18,
         posYPercent: 24,
         skills: [
-          { name: 'PyTorch', context: 'Used in Indic Multilingual NLP sentence embedding experiments and cross-lingual alignment models.', linkTo: 'research', linkText: 'VIEW RESEARCH' },
-          { name: 'TensorFlow', context: 'Used for neural modeling pipelines and comparative benchmark training.', linkTo: 'research', linkText: 'VIEW RESEARCH' },
-          { name: 'Hugging Face', context: 'Used for tokenizer pipelines, mBERT, MuRIL, and multilingual sentence transformers.', linkTo: 'research', linkText: 'VIEW RESEARCH' },
-          { name: 'LangChain & Ollama', context: 'Used for retrieval-augmented generation and local LLM inference workflows.', linkTo: 'projects', linkText: 'VIEW PROJECTS' },
-          { name: 'NLP & LLMs', context: 'Sentence embeddings, cross-lingual semantic alignment, and GraphRAG reasoning.', linkTo: 'research', linkText: 'VIEW RESEARCH' }
+          { name: 'PyTorch', numStr: '01', posXPercent: 18, posYPercent: 22, context: 'Used in Indic Multilingual NLP sentence embedding experiments and cross-lingual alignment models.', linkTo: 'research', linkText: 'EXPLORE IN RESEARCH' },
+          { name: 'TensorFlow', numStr: '02', posXPercent: 50, posYPercent: 12, context: 'Used for neural modeling pipelines and comparative benchmark training.', linkTo: 'research', linkText: 'EXPLORE IN RESEARCH' },
+          { name: 'Hugging Face', numStr: '03', posXPercent: 82, posYPercent: 22, context: 'Used for tokenizer pipelines, mBERT, MuRIL, and multilingual sentence transformers.', linkTo: 'research', linkText: 'EXPLORE IN RESEARCH' },
+          { name: 'LangChain & Ollama', numStr: '04', posXPercent: 82, posYPercent: 78, context: 'Used for retrieval-augmented generation and local LLM inference workflows.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
+          { name: 'NLP & LLMs', numStr: '05', posXPercent: 18, posYPercent: 78, context: 'Sentence embeddings, cross-lingual semantic alignment, and GraphRAG reasoning.', linkTo: 'research', linkText: 'EXPLORE IN RESEARCH' }
         ]
       },
       {
         id: 'vision',
         name: 'Computer Vision',
         tag: 'DOMAIN // 02',
-        icon: '👁️',
+        numStr: '02',
         accentColor: 'red',
         posXPercent: 50,
         posYPercent: 12,
         skills: [
-          { name: 'OpenCV', context: 'Real-time video frame acquisition, filtering, contour isolation, and image processing.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' },
-          { name: 'MediaPipe', context: 'High-precision 21 3D hand landmark coordinate tracking for real-time sign recognition.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' },
-          { name: 'Gesture Recognition', context: 'Machine-learning spatial classification translating gestures into real-time speech.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' }
+          { name: 'OpenCV', numStr: '01', posXPercent: 22, posYPercent: 25, context: 'Real-time video frame acquisition, filtering, contour isolation, and image processing.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' },
+          { name: 'MediaPipe', numStr: '02', posXPercent: 50, posYPercent: 88, context: 'High-precision 21 3D hand landmark coordinate tracking for real-time sign recognition.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' },
+          { name: 'Gesture Recognition', numStr: '03', posXPercent: 78, posYPercent: 25, context: 'Machine-learning spatial classification translating gestures into real-time speech.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' }
         ]
       },
       {
         id: 'web-systems',
         name: 'Web & Systems',
         tag: 'DOMAIN // 03',
-        icon: '⚡',
+        numStr: '03',
         accentColor: 'cyan',
         posXPercent: 82,
         posYPercent: 24,
         skills: [
-          { name: 'FastAPI (Python)', context: 'Engineered flagship TeamFlow async backend with Pydantic schemas and dependency injection.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'React & Vite', context: 'Engineered modular component hierarchy and responsive state management for TeamFlow platform.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'TypeScript & JavaScript', context: 'Strict type safety across frontend models, API contracts, and async network calls.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'ASP.NET Core & C#', context: 'Enterprise feature development and RBAC authorization during Syncfusion AI Internship.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
-          { name: 'Flask & REST APIs', context: 'Stateless JSON endpoints, CORS security, and database integration in MyKitchen planner.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' }
+          { name: 'FastAPI', numStr: '01', posXPercent: 18, posYPercent: 22, context: 'Engineered flagship TeamFlow async backend with Pydantic schemas and dependency injection.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'React & Vite', numStr: '02', posXPercent: 50, posYPercent: 12, context: 'Engineered modular component hierarchy and responsive state management for TeamFlow platform.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'TypeScript', numStr: '03', posXPercent: 82, posYPercent: 22, context: 'Strict type safety across frontend models, API contracts, and async network calls.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'ASP.NET Core', numStr: '04', posXPercent: 82, posYPercent: 78, context: 'Enterprise feature development and RBAC authorization during Syncfusion AI Internship.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
+          { name: 'Flask & REST APIs', numStr: '05', posXPercent: 18, posYPercent: 78, context: 'Stateless JSON endpoints, CORS security, and database integration in MyKitchen planner.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' }
         ]
       },
       {
         id: 'databases',
         name: 'Databases',
         tag: 'DOMAIN // 04',
-        icon: '🗄️',
+        numStr: '04',
         accentColor: 'red',
         posXPercent: 82,
         posYPercent: 76,
         skills: [
-          { name: 'PostgreSQL 17.11', context: 'Primary relational database for TeamFlow; foreign keys, cascades, and indexed queries.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'SQLAlchemy 2.x', context: 'Declarative async ORM models, session handling, and transaction boundaries in FastAPI.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'MySQL', context: 'Relational data modeling, ACID transactions, and structured query optimization.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' }
+          { name: 'PostgreSQL 17.11', numStr: '01', posXPercent: 22, posYPercent: 28, context: 'Primary relational database for TeamFlow; foreign keys, cascades, and indexed queries.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'SQLAlchemy 2.x', numStr: '02', posXPercent: 78, posYPercent: 28, context: 'Declarative async ORM models, session handling, and transaction boundaries in FastAPI.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'MySQL', numStr: '03', posXPercent: 50, posYPercent: 86, context: 'Relational data modeling, ACID transactions, and structured query optimization.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' }
         ]
       },
       {
         id: 'languages',
         name: 'Programming',
         tag: 'DOMAIN // 05',
-        icon: '💻',
+        numStr: '05',
         accentColor: 'cyan',
         posXPercent: 50,
         posYPercent: 88,
         skills: [
-          { name: 'Python', context: 'Primary language across PyTorch research, FastAPI backends, and one-shot data scripts.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
-          { name: 'Java', context: 'Object-oriented programming, data structures, and algorithmic software design.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
-          { name: 'C & C++', context: 'Low-level memory management concepts, computing fundamentals, and algorithms.', linkTo: 'about', linkText: 'VIEW IN ABOUT' }
+          { name: 'Python', numStr: '01', posXPercent: 22, posYPercent: 28, context: 'Primary language across PyTorch research, FastAPI backends, and one-shot data scripts.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
+          { name: 'Java', numStr: '02', posXPercent: 78, posYPercent: 28, context: 'Object-oriented programming, data structures, and algorithmic software design.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
+          { name: 'C & C++', numStr: '03', posXPercent: 50, posYPercent: 86, context: 'Low-level memory management concepts, computing fundamentals, and algorithms.', linkTo: 'about', linkText: 'VIEW IN ABOUT' }
         ]
       },
       {
         id: 'testing-tools',
         name: 'Testing & Tools',
         tag: 'DOMAIN // 06',
-        icon: '🛠️',
+        numStr: '06',
         accentColor: 'cyan',
         posXPercent: 18,
         posYPercent: 76,
         skills: [
-          { name: 'PyTest', context: 'Automated backend verification, route security testing, and integration tests in TeamFlow.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'Mutation Testing', context: 'Evaluated resilience and test quality of critical software verification suites.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
-          { name: 'Git & GitHub', context: 'Branch management, pull requests, CI/CD workflows, and disciplined commit histories.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
-          { name: 'Linux & VS Code', context: 'Command-line scripting, server environments, and multi-workspace developer tooling.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' }
+          { name: 'PyTest', numStr: '01', posXPercent: 20, posYPercent: 25, context: 'Automated backend verification, route security testing, and integration tests in TeamFlow.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'Mutation Testing', numStr: '02', posXPercent: 80, posYPercent: 25, context: 'Evaluated resilience and test quality of critical software verification suites.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
+          { name: 'Git & GitHub', numStr: '03', posXPercent: 80, posYPercent: 75, context: 'Branch management, pull requests, CI/CD workflows, and disciplined commit histories.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
+          { name: 'Linux & VS Code', numStr: '04', posXPercent: 20, posYPercent: 75, context: 'Command-line scripting, server environments, and multi-workspace developer tooling.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' }
         ]
       }
     ];
+
+    // Current Skills View State: null = Macro 6-Domain Web; domain object = Zoomed Sub-Web
+    let activeSubDomain = null;
+    let selectedSkillData = null;
 
     // --- 2. Motion & Physics Configuration ---
     const CONFIG = {
@@ -1614,12 +1610,22 @@
 
     const skillsRadialCanvas = document.getElementById('skills-radial-canvas');
     const radialNodesMount = document.getElementById('radial-nodes-mount');
+    const skillsCenterCore = document.getElementById('skills-center-core');
+    const sccTag = document.getElementById('scc-tag');
+    const sccTitle = document.getElementById('scc-title');
+    const sccSub = document.getElementById('scc-sub');
+    const skillsStatusPill = document.getElementById('skills-status-pill');
+    const skillsSubBreadcrumb = document.getElementById('skills-sub-breadcrumb');
+    const skillsBackBtn = document.getElementById('skills-back-btn');
+    const skillsLayerTelemetry = document.getElementById('skills-layer-telemetry');
+
     const skillsModalOverlay = document.getElementById('skills-modal-overlay');
     const modalHeaderTag = document.getElementById('modal-header-tag');
-    const modalGroupTitle = document.getElementById('modal-group-title');
-    const modalSkillsList = document.getElementById('modal-skills-list');
+    const modalSkillTitle = document.getElementById('modal-skill-title');
+    const modalContextBody = document.getElementById('modal-context-body');
+    const modalRedirectBtn = document.getElementById('modal-redirect-btn');
 
-    // --- 5. Initialize Navigation & Radial Web ---
+    // --- 5. Initialize Navigation & Nested Web ---
     function init() {
       SCENES.forEach(s => {
         const btn = document.createElement('button');
@@ -1632,7 +1638,7 @@
 
       window.addEventListener('resize', () => {
         resizeCanvas();
-        renderSkillsRadialWeb();
+        renderSkillsWebLayer();
       });
       resizeCanvas();
 
@@ -1646,8 +1652,7 @@
         }
       });
 
-      // Mount Radial Skills Nodes & Canvas Web
-      mountRadialSkillsNodes();
+      renderSkillsWebLayer();
       updateDOMViews();
       positionEntities();
       playIntroSequence();
@@ -1665,36 +1670,101 @@
       }, 1100);
     }
 
-    // --- 6. Radial "Stuck On The Web" Skills Logic ---
-    function mountRadialSkillsNodes() {
+    // --- 6. Nested Spider-Web Zoom Navigation System ---
+    function renderSkillsWebLayer() {
       radialNodesMount.innerHTML = '';
-      RADIAL_SKILLS_DATA.forEach(node => {
-        const el = document.createElement('div');
-        el.className = `web-stuck-node ${node.accentColor === 'red' ? 'accent-red' : ''}`;
-        el.id = `radial-node-${node.id}`;
-        el.style.left = `${node.posXPercent}%`;
-        el.style.top = `${node.posYPercent}%`;
-        el.style.pointerEvents = 'auto';
 
-        el.onclick = (e) => {
-          e.stopPropagation();
-          openSkillsModal(node);
-        };
+      if (!activeSubDomain) {
+        // LAYER 1: MACRO 6-DOMAIN WEB
+        skillsCenterCore.className = 'skills-center-core';
+        sccTag.textContent = 'TAXONOMY // CORE';
+        sccTitle.textContent = 'SKILLS';
+        sccSub.textContent = '6 RADIAL DOMAINS';
 
-        el.innerHTML = `
-          <div class="wsn-badge-circle">
-            <div class="wsn-icon">${node.icon}</div>
-            <div class="wsn-label">${node.name}</div>
-          </div>
-          <div class="wsn-count-pill">${node.skills.length} SKILLS</div>
-        `;
-        radialNodesMount.appendChild(el);
-      });
+        skillsStatusPill.innerHTML = '<span class="status-dot"></span> SPIDER-WEB TAXONOMY // CLICK ANY DOMAIN TO DIVE INTO SUB-WEB';
+        skillsSubBreadcrumb.textContent = 'Master Profile Ground Truth';
+        skillsBackBtn.textContent = '← RETURN TO HOME';
+        skillsLayerTelemetry.innerHTML = 'LAYER: <strong>MACRO TAXONOMY (6 DOMAINS)</strong>';
 
-      renderSkillsRadialWeb();
+        // Render 6 Domain Nodes
+        SKILLS_DOMAINS.forEach(domain => {
+          const el = document.createElement('div');
+          el.className = `web-stuck-node ${domain.accentColor === 'red' ? 'accent-red' : ''}`;
+          el.style.left = `${domain.posXPercent}%`;
+          el.style.top = `${domain.posYPercent}%`;
+          el.style.pointerEvents = 'auto';
+
+          el.onclick = (e) => {
+            e.stopPropagation();
+            zoomIntoDomain(domain);
+          };
+
+          el.innerHTML = `
+            <div class="wsn-badge-circle">
+              <div class="wsn-index-num">${domain.numStr}</div>
+              <div class="wsn-label">${domain.name}</div>
+            </div>
+            <div class="wsn-count-pill">${domain.skills.length} SKILLS</div>
+          `;
+          radialNodesMount.appendChild(el);
+        });
+
+      } else {
+        // LAYER 2: ZOOMED SUB-WEB FOR SPECIFIC DOMAIN
+        skillsCenterCore.className = 'skills-center-core sub-active';
+        sccTag.textContent = activeSubDomain.tag;
+        sccTitle.textContent = activeSubDomain.name;
+        sccSub.textContent = `${activeSubDomain.skills.length} CONNECTED SKILLS`;
+
+        skillsStatusPill.innerHTML = `<span class="status-dot" style="background: var(--accent-red); box-shadow: 0 0 8px var(--accent-red);"></span> SUB-WEB // ${activeSubDomain.name} // CLICK SKILL FOR CONTEXT`;
+        skillsSubBreadcrumb.textContent = `SKILLS → ${activeSubDomain.name}`;
+        skillsBackBtn.textContent = '← BACK TO ALL SKILLS';
+        skillsLayerTelemetry.innerHTML = `SUB-DOMAIN: <strong>${activeSubDomain.name.toUpperCase()}</strong>`;
+
+        // Render Individual Skills in Sub-Web
+        activeSubDomain.skills.forEach(skill => {
+          const el = document.createElement('div');
+          el.className = `web-stuck-node ${activeSubDomain.accentColor === 'red' ? 'accent-red' : ''}`;
+          el.style.left = `${skill.posXPercent}%`;
+          el.style.top = `${skill.posYPercent}%`;
+          el.style.pointerEvents = 'auto';
+
+          el.onclick = (e) => {
+            e.stopPropagation();
+            openSkillContext(skill);
+          };
+
+          el.innerHTML = `
+            <div class="wsn-badge-circle">
+              <div class="wsn-index-num">${skill.numStr}</div>
+              <div class="wsn-label">${skill.name}</div>
+            </div>
+            <div class="wsn-count-pill">VIEW CONTEXT</div>
+          `;
+          radialNodesMount.appendChild(el);
+        });
+      }
+
+      drawRadialSpiderCanvas();
     }
 
-    function renderSkillsRadialWeb() {
+    function zoomIntoDomain(domain) {
+      activeSubDomain = domain;
+      renderSkillsWebLayer();
+    }
+
+    function handleSkillsBackAction() {
+      if (activeSubDomain) {
+        // Return from sub-web to macro 6-domain web
+        activeSubDomain = null;
+        renderSkillsWebLayer();
+      } else {
+        // Return to Home
+        requestNavigation('home');
+      }
+    }
+
+    function drawRadialSpiderCanvas() {
       const stage = document.getElementById('skills-web-stage');
       if (!stage || !skillsRadialCanvas) return;
       const rect = stage.getBoundingClientRect();
@@ -1710,19 +1780,19 @@
       const cX = w / 2;
       const cY = h / 2;
 
-      // 1. Draw 12 Radial Spokes shooting out like a Spider Web
+      // 1. Draw 12 Radial Spider Web Spokes
       const spokes = 12;
       rCtx.lineWidth = 1.2;
       for (let i = 0; i < spokes; i++) {
         const angle = (i * Math.PI * 2) / spokes;
-        rCtx.strokeStyle = 'rgba(0, 210, 255, 0.22)';
+        rCtx.strokeStyle = activeSubDomain ? 'rgba(255, 42, 75, 0.22)' : 'rgba(0, 210, 255, 0.22)';
         rCtx.beginPath();
         rCtx.moveTo(cX, cY);
         rCtx.lineTo(cX + Math.cos(angle) * (w * 0.65), cY + Math.sin(angle) * (h * 0.75));
         rCtx.stroke();
       }
 
-      // 2. Draw Concentric Web Spirals with Realistic Inward Droop Curves
+      // 2. Draw Concentric Web Spirals with Woven Sag Curves
       const rings = [60, 110, 160, 215, 275, 340];
       rings.forEach((r, rIdx) => {
         rCtx.strokeStyle = rIdx % 2 === 0 ? 'rgba(0, 210, 255, 0.35)' : 'rgba(255, 42, 75, 0.3)';
@@ -1740,7 +1810,6 @@
           const p2x = cX + Math.cos(a2) * (r * 1.35);
           const p2y = cY + Math.sin(a2) * (r * 0.95);
 
-          // Sag towards center like real woven web threads
           const sagDist = r * 0.85;
           const midX = cX + Math.cos(aMid) * (sagDist * 1.35);
           const midY = cY + Math.sin(aMid) * (sagDist * 0.95);
@@ -1751,17 +1820,18 @@
         rCtx.stroke();
       });
 
-      // 3. Connect Center Hub directly to each Stuck-on-Web Category Node
-      RADIAL_SKILLS_DATA.forEach(node => {
+      // 3. Connect Center Hub directly to each visible node
+      const currentNodes = activeSubDomain ? activeSubDomain.skills : SKILLS_DOMAINS;
+      currentNodes.forEach(node => {
         const nX = (node.posXPercent / 100) * w;
         const nY = (node.posYPercent / 100) * h;
 
         rCtx.beginPath();
         rCtx.moveTo(cX, cY);
         rCtx.lineTo(nX, nY);
-        rCtx.strokeStyle = node.accentColor === 'red' ? '#FF2A4B' : '#00D2FF';
+        rCtx.strokeStyle = (activeSubDomain?.accentColor === 'red' || node.accentColor === 'red') ? '#FF2A4B' : '#00D2FF';
         rCtx.lineWidth = 2.0;
-        rCtx.shadowColor = node.accentColor === 'red' ? '#FF2A4B' : '#00D2FF';
+        rCtx.shadowColor = (activeSubDomain?.accentColor === 'red' || node.accentColor === 'red') ? '#FF2A4B' : '#00D2FF';
         rCtx.shadowBlur = 10;
         rCtx.stroke();
         rCtx.shadowBlur = 0;
@@ -1774,30 +1844,28 @@
       });
     }
 
-    // Modal Popup Box Handler
-    function openSkillsModal(groupData) {
-      modalHeaderTag.textContent = groupData.tag;
-      modalGroupTitle.textContent = `${groupData.icon} ${groupData.name}`;
+    // Modal Skill Context Handler
+    function openSkillContext(skill) {
+      selectedSkillData = skill;
+      modalHeaderTag.textContent = `${activeSubDomain.name} // TECHNOLOGY`;
+      modalSkillTitle.textContent = skill.name;
+      modalContextBody.innerHTML = `<strong>WHERE I HAVE USED IT:</strong><br>${skill.context}`;
 
-      modalSkillsList.innerHTML = '';
-      groupData.skills.forEach(skill => {
-        const item = document.createElement('div');
-        item.className = 'modal-skill-item';
-        item.innerHTML = `
-          <div class="msi-info">
-            <div class="msi-name">${skill.name}</div>
-            <div class="msi-context">${skill.context}</div>
-          </div>
-          ${skill.linkTo ? `
-            <button class="semantic-jump-btn" onclick="requestNavigation('${skill.linkTo}')">
-              <span>${skill.linkText || 'VIEW'}</span> &rarr;
-            </button>
-          ` : ''}
-        `;
-        modalSkillsList.appendChild(item);
-      });
+      if (skill.linkTo) {
+        modalRedirectBtn.style.display = 'inline-flex';
+        modalRedirectBtn.querySelector('span').textContent = skill.linkText || `VIEW IN ${skill.linkTo.toUpperCase()}`;
+      } else {
+        modalRedirectBtn.style.display = 'none';
+      }
 
       skillsModalOverlay.classList.add('active');
+    }
+
+    function redirectFromSkill() {
+      if (selectedSkillData && selectedSkillData.linkTo) {
+        closeSkillsModal();
+        requestNavigation(selectedSkillData.linkTo);
+      }
     }
 
     function closeSkillsModal(e) {
@@ -1832,7 +1900,7 @@
       });
 
       if (currentSceneId === 'skills') {
-        setTimeout(renderSkillsRadialWeb, 60);
+        setTimeout(renderSkillsWebLayer, 60);
       }
     }
 
