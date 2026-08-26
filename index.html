@@ -4185,10 +4185,14 @@
           if (compactEl) compactEl.style.display = 'none';
           if (pageEl) {
             pageEl.style.display = 'flex';
+            pageEl.scrollTop = 0;
             pageEl.style.opacity = (currentState === STATES.IDLE ? 1.0 : (state.opacity || 1.0)).toFixed(2);
           }
         } else {
-          if (pageEl) pageEl.style.display = 'none';
+          if (pageEl) {
+            pageEl.style.display = 'none';
+            pageEl.scrollTop = 0;
+          }
           if (compactEl) {
             compactEl.style.display = 'flex';
             compactEl.style.opacity = (state.opacity || 1.0).toFixed(2);
@@ -4210,6 +4214,10 @@
     // --- 11. Navigation Request Logic ---
     function requestNavigation(targetId) {
       closeSkillsModal();
+
+      document.querySelectorAll('.full-page-frame').forEach(f => {
+        f.scrollTop = 0;
+      });
 
       if (targetId === 'projects') {
         activeCaseStudyId = null;
@@ -4663,7 +4671,10 @@
             updateDOMViews();
 
             const finalPage = document.getElementById(`page-${targetSceneId}`);
-            if (finalPage) finalPage.style.opacity = '1.0';
+            if (finalPage) {
+              finalPage.style.opacity = '1.0';
+              finalPage.scrollTop = 0;
+            }
 
             if (currentSceneId === 'skills' && pendingSkillNavigation) {
               executePendingSkillTransition();
