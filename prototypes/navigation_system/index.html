@@ -191,7 +191,7 @@
     }
 
     /* =========================================================================
-       1. FULL PAGE VIEW CONTAINER BASE (88vw x 78vh)
+       1. FULL PAGE CONTAINER BASE (88vw x 78vh)
        ========================================================================= */
     .full-page-frame {
       width: 88vw;
@@ -200,7 +200,7 @@
       max-height: 680px;
       border-radius: 24px;
       backdrop-filter: blur(28px);
-      padding: 38px 46px;
+      padding: 36px 44px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -359,15 +359,12 @@
     }
     .home-telemetry-cue strong { color: #fff; }
 
-    /* =========================================================================
-       2. FULL ABOUT EXPERIENCE (DEEP EDITORIAL & TRIAD ARCHITECTURE)
-       ========================================================================= */
+    /* About Specific Styling */
     #page-about {
       background: linear-gradient(145deg, rgba(20, 14, 30, 0.97) 0%, rgba(32, 20, 48, 0.95) 100%);
       border: 1.5px solid var(--border-red);
       box-shadow: 0 35px 100px rgba(0, 0, 0, 0.92), 0 0 60px var(--accent-red-glow);
     }
-
     .about-lead-header {
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       padding-bottom: 16px;
@@ -388,15 +385,12 @@
       color: #E2E8F0;
       max-width: 960px;
     }
-
-    /* 3-Column Ground Truth Track Layout */
     .about-triad-grid {
       display: grid;
       grid-template-columns: 1.15fr 1.15fr 1fr;
       gap: 18px;
       margin-bottom: 20px;
     }
-
     .about-track-card {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -411,7 +405,6 @@
       border-color: rgba(255, 42, 75, 0.35);
       background: rgba(255, 42, 75, 0.04);
     }
-
     .track-header-tag {
       font-family: var(--font-mono);
       font-size: 10.5px;
@@ -434,7 +427,6 @@
       color: var(--text-muted);
       margin-bottom: 14px;
     }
-
     .track-fact-box {
       background: rgba(0, 0, 0, 0.35);
       border-left: 2px solid var(--accent-red);
@@ -446,8 +438,6 @@
       line-height: 1.5;
     }
     .track-fact-box strong { color: #fff; }
-
-    /* Interactive Semantic Link Row */
     .about-semantic-links {
       display: flex;
       gap: 12px;
@@ -474,6 +464,218 @@
       box-shadow: 0 0 15px var(--accent-cyan-glow);
     }
 
+    /* =========================================================================
+       2. FULL INTERACTIVE SKILLS EXPERIENCE (BLOOMING LIVING WEB)
+       ========================================================================= */
+    #page-skills {
+      background: linear-gradient(145deg, rgba(10, 18, 30, 0.97) 0%, rgba(16, 28, 48, 0.95) 100%);
+      border: 1.5px solid var(--border-cyan);
+      box-shadow: 0 35px 100px rgba(0, 0, 0, 0.92), 0 0 60px var(--accent-cyan-glow);
+    }
+
+    .skills-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+    .skills-main-title {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: #FFFFFF;
+      margin-top: 4px;
+    }
+
+    /* Two-Panel Interactive Skills Layout (40% Categories / 60% Blooming Detail) */
+    .skills-interactive-layout {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 24px;
+      height: calc(100% - 130px);
+      min-height: 380px;
+    }
+
+    /* Left Pane: Category Parent Anchors */
+    .category-anchors-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    .cat-anchor-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 14px 18px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cat-anchor-btn:hover {
+      background: rgba(0, 210, 255, 0.06);
+      border-color: rgba(0, 210, 255, 0.35);
+      transform: translateX(4px);
+    }
+    .cat-anchor-btn.active {
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.15) 0%, rgba(255, 42, 75, 0.12) 100%);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.2);
+    }
+
+    .cab-info { display: flex; flex-direction: column; gap: 2px; }
+    .cab-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      letter-spacing: 0.08em;
+    }
+    .cat-anchor-btn.active .cab-tag { color: var(--accent-red); }
+    .cab-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+    .cab-count {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .cat-anchor-btn.active .cab-count {
+      color: #fff;
+      border-color: var(--accent-cyan);
+      background: rgba(0, 210, 255, 0.2);
+    }
+
+    /* Right Pane: Blooming Child Web Grid & Inspector */
+    .skills-bloom-container {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .bloom-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .bloom-domain-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 900;
+      color: #FFFFFF;
+    }
+    .bloom-edge-badge {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--accent-cyan);
+      background: rgba(0, 210, 255, 0.1);
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 210, 255, 0.3);
+    }
+
+    /* Child Nodes Bloom Grid */
+    .child-nodes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .child-skill-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 80px;
+    }
+    .child-skill-card:hover, .child-skill-card.selected {
+      background: rgba(0, 210, 255, 0.08);
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-cyan-glow);
+    }
+    .child-skill-card.selected {
+      border-color: var(--accent-red);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-red-glow);
+    }
+
+    .csc-name {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+    }
+    .csc-meta {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--text-muted);
+    }
+
+    /* Contextual Inspector Panel for Selected Skill */
+    .skill-context-panel {
+      background: rgba(11, 16, 28, 0.9);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .scp-left {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .scp-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      letter-spacing: 0.1em;
+    }
+    .scp-headline {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+    .scp-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      max-width: 480px;
+    }
+
     /* Chromatic Shadow Accents */
     .full-page-frame.chromatic-impact {
       border-color: #00D2FF;
@@ -484,13 +686,7 @@
       text-shadow: -4px 0 rgba(255, 42, 75, 0.9), 4px 0 rgba(0, 210, 255, 0.9);
     }
 
-    /* =========================================================================
-       3. OTHER SECTION FULL PAGES (SKILLS, PROJECTS, RESEARCH)
-       ========================================================================= */
-    #page-skills {
-      background: linear-gradient(135deg, rgba(14, 25, 40, 0.96) 0%, rgba(20, 35, 55, 0.94) 100%);
-      border: 1.5px solid var(--border-cyan);
-    }
+    /* Projects & Research Generic Full Page Frames */
     #page-projects {
       background: linear-gradient(135deg, rgba(15, 28, 35, 0.96) 0%, rgba(25, 42, 50, 0.94) 100%);
       border: 1.5px solid #00F0FF;
@@ -499,7 +695,6 @@
       background: linear-gradient(135deg, rgba(28, 16, 28, 0.96) 0%, rgba(45, 22, 45, 0.94) 100%);
       border: 1.5px solid #FF007A;
     }
-
     .page-title-huge {
       font-family: var(--font-display);
       font-size: 52px;
@@ -547,7 +742,7 @@
     }
 
     /* =========================================================================
-       4. COMPACT NODE VIEW (SPATIAL NETWORK PORTALS)
+       3. COMPACT NODE VIEW (SPATIAL NETWORK PORTALS)
        ========================================================================= */
     .compact-node-view {
       width: 260px;
@@ -762,8 +957,11 @@
       .full-page-frame {
         width: 94vw;
         height: 84vh;
-        padding: 28px 24px;
+        padding: 24px 20px;
       }
+      .skills-interactive-layout { grid-template-columns: 1fr; height: auto; }
+      .category-anchors-list { flex-direction: row; flex-wrap: wrap; }
+      .cat-anchor-btn { flex: 1 1 45%; }
       .about-lead-title { font-size: 32px; }
       .about-triad-grid { grid-template-columns: 1fr; gap: 14px; }
       .pillars-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -870,7 +1068,7 @@
             <div class="home-telemetry-cue">
               <span>LOCATION: <strong>VELLORE / CHENNAI</strong></span>
               <span>&bull;</span>
-              <span>NETWORK: <strong>SPIDER-WEB v6</strong></span>
+              <span>NETWORK: <strong>SPIDER-WEB v7</strong></span>
             </div>
           </div>
         </div>
@@ -890,7 +1088,6 @@
         <!-- Full Detailed About Page -->
         <div class="full-page-frame" id="page-about" style="display: none;">
           <div>
-            <!-- Header Row -->
             <div class="hero-top-row about-lead-header">
               <div>
                 <div class="hero-status-pill" style="color: var(--accent-red); border-color: rgba(255,42,75,0.4); background: rgba(255,42,75,0.15);">
@@ -904,7 +1101,6 @@
               </div>
             </div>
 
-            <!-- Lead Narrative -->
             <p class="about-lead-narrative">
               I am an AI/ML-focused software engineer and researcher currently in my fourth year of Computer Science & Engineering at VIT Vellore (CGPA 8.72/10). 
               My work is defined by three interconnected strengths: <strong>algorithmic AI/ML research depth</strong>, <strong>real-time computer vision</strong>, and <strong>robust software systems engineering</strong>. 
@@ -914,7 +1110,6 @@
 
           <!-- 3 Ground Truth Tracks Grid -->
           <div class="about-triad-grid">
-            <!-- Track 1: Academic & Industry Journey -->
             <div class="about-track-card">
               <div>
                 <div class="track-header-tag">01. ACADEMIC & ENTERPRISE JOURNEY</div>
@@ -930,7 +1125,6 @@
               </div>
             </div>
 
-            <!-- Track 2: The Engineering Triad -->
             <div class="about-track-card">
               <div>
                 <div class="track-header-tag">02. TRIAD OF STRENGTHS</div>
@@ -947,7 +1141,6 @@
               </div>
             </div>
 
-            <!-- Track 3: Research & Workflow Rigor -->
             <div class="about-track-card">
               <div>
                 <div class="track-header-tag">03. RESEARCH & METHODOLOGY</div>
@@ -965,21 +1158,12 @@
             </div>
           </div>
 
-          <!-- Bottom Actions & Semantic Cross-Links -->
           <div class="home-footer-row">
             <div class="about-semantic-links">
-              <button class="hero-cta-secondary" onclick="requestNavigation('home')">
-                &larr; RETURN TO HOME
-              </button>
-              <button class="semantic-jump-btn" onclick="requestNavigation('projects')">
-                <span>VIEW FLAGSHIP (TEAMFLOW)</span> &rarr;
-              </button>
-              <button class="semantic-jump-btn" onclick="requestNavigation('skills')">
-                <span>SKILLS TAXONOMY</span> &rarr;
-              </button>
-              <button class="semantic-jump-btn" onclick="requestNavigation('research')">
-                <span>RESEARCH INVESTIGATIONS</span> &rarr;
-              </button>
+              <button class="hero-cta-secondary" onclick="requestNavigation('home')">&larr; RETURN TO HOME</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('projects')"><span>VIEW FLAGSHIP (TEAMFLOW)</span> &rarr;</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('skills')"><span>SKILLS TAXONOMY</span> &rarr;</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('research')"><span>RESEARCH INVESTIGATIONS</span> &rarr;</button>
             </div>
             <div class="home-telemetry-cue">
               <span>NODE: <strong>01 // ABOUT IDENTITY</strong></span>
@@ -989,7 +1173,7 @@
       </div>
 
       <!-- =======================================================
-           NODE 02: SKILLS (LIVING TECHNOLOGY NETWORK)
+           NODE 02: SKILLS (INTERACTIVE LIVING SKILLS WEB)
            ======================================================= -->
       <div class="scene-entity" id="entity-skills">
         <!-- Compact View -->
@@ -997,43 +1181,73 @@
           <div class="node-anchor-dot"></div>
           <div class="node-tag-txt">NODE_02 // TAXONOMY</div>
           <div class="node-title-txt">SKILLS</div>
-          <div class="node-status-txt">PyTorch &bull; FastAPI &bull; OpenCV</div>
+          <div class="node-status-txt">AI/ML &bull; OpenCV &bull; FastAPI &bull; React &bull; SQL</div>
         </div>
-        <!-- Full Page View -->
+        <!-- Full Interactive Skills Web View -->
         <div class="full-page-frame" id="page-skills" style="display: none;">
           <div>
-            <div class="hero-top-row">
-              <div class="hero-status-pill">
-                <span class="status-dot"></span>
-                VERIFIED SKILLS TAXONOMY
+            <div class="skills-header-bar">
+              <div>
+                <div class="hero-status-pill">
+                  <span class="status-dot"></span>
+                  LIVING SKILLS TAXONOMY // INTERACTIVE WEB
+                </div>
+                <h2 class="skills-main-title">Interactive Skills Web</h2>
               </div>
-              <div class="hero-credentials-tag">Master Profile Ground Truth</div>
+              <div class="hero-credentials-tag">
+                Hover or Click Categories to Bloom Child Technology Nodes
+              </div>
             </div>
-            <h1 class="page-title-huge">Skills & Technologies</h1>
-            <p class="page-lead-desc">
-              Living constellation of confirmed competencies spanning AI/ML frameworks, modern web platforms, computer vision, and backend data stores.
-            </p>
+
+            <!-- Two-Panel Layout (40% Categories / 60% Blooming Grid & Context) -->
+            <div class="skills-interactive-layout">
+              
+              <!-- Left: Category Parent Anchors -->
+              <div class="category-anchors-list" id="category-anchors-container">
+                <!-- Rendered dynamically in JS -->
+              </div>
+
+              <!-- Right: Blooming Child Skills Web & Context Inspector -->
+              <div class="skills-bloom-container">
+                <div>
+                  <div class="bloom-header-row">
+                    <div class="bloom-domain-title" id="bloom-domain-title">AI / ML & LLMs</div>
+                    <div class="bloom-edge-badge" id="bloom-edge-badge">EDGE_HIERARCHY &bull; 8 TECHNOLOGIES</div>
+                  </div>
+
+                  <!-- Blooming Child Cards Grid -->
+                  <div class="child-nodes-grid" id="child-nodes-container">
+                    <!-- Populated dynamically in JS -->
+                  </div>
+                </div>
+
+                <!-- Skill Context & Relationship Inspector -->
+                <div class="skill-context-panel" id="skill-context-panel">
+                  <div class="scp-left">
+                    <div class="scp-tag" id="scp-tag">SELECTED TECHNOLOGY CONTEXT</div>
+                    <div class="scp-headline" id="scp-headline">PyTorch</div>
+                    <div class="scp-desc" id="scp-desc">Deep learning model training and sentence embedding alignment experiments across Indic language pairs.</div>
+                  </div>
+                  <div id="scp-action-container">
+                    <button class="semantic-jump-btn" id="scp-action-btn" onclick="requestNavigation('research')">
+                      <span>EXPLORE IN RESEARCH</span> &rarr;
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
-          <div class="page-content-grid">
-            <div class="content-box">
-              <div class="cb-tag">AI / ML & LLMS</div>
-              <div class="cb-title">Deep Learning & NLP</div>
-              <div class="cb-text">PyTorch, TensorFlow, Hugging Face, LangChain, Ollama, Prompt Engineering, NLP, LLMs, Sentence Embeddings.</div>
-            </div>
-            <div class="content-box">
-              <div class="cb-tag">SYSTEMS & WEB</div>
-              <div class="cb-title">Full-Stack Platforms</div>
-              <div class="cb-text">React, TypeScript, JavaScript, HTML/CSS, Tailwind CSS, FastAPI, Flask, ASP.NET Core, C#, REST APIs.</div>
-            </div>
-            <div class="content-box">
-              <div class="cb-tag">DATA & TOOLS</div>
-              <div class="cb-title">Databases & Testing</div>
-              <div class="cb-text">PostgreSQL 17.11, MySQL, SQLAlchemy 2.x, PyTest, Mutation Testing, Git, Linux, OpenCV, MediaPipe.</div>
-            </div>
-          </div>
+
           <div class="home-footer-row">
-            <button class="hero-cta-secondary" onclick="requestNavigation('home')">&larr; RETURN TO HOME</button>
-            <div class="home-telemetry-cue">NODE_02 // SKILLS NETWORK</div>
+            <div class="about-semantic-links">
+              <button class="hero-cta-secondary" onclick="requestNavigation('home')">&larr; RETURN TO HOME</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('projects')"><span>CONNECT TO PROJECTS (TEAMFLOW)</span> &rarr;</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('about')"><span>ABOUT BACKGROUND</span> &rarr;</button>
+            </div>
+            <div class="home-telemetry-cue">
+              <span>NODE: <strong>02 // LIVING SKILLS WEB</strong></span>
+            </div>
           </div>
         </div>
       </div>
@@ -1070,12 +1284,12 @@
               <div class="cb-title">TeamFlow Platform</div>
               <div class="cb-text">React + TypeScript + Vite frontend with FastAPI backend, PostgreSQL 17.11, JWT/RBAC security, and Kanban task management.</div>
             </div>
-            <div class="content-box">
+            <div class="content-box" style="border-color: rgba(0,240,255,0.35);">
               <div class="cb-tag" style="color: #00F0FF;">COMPUTER VISION</div>
               <div class="cb-title">ISL Gesture Translator</div>
               <div class="cb-text">Camera input pipeline using OpenCV and MediaPipe 21-hand landmark tracking for real-time sign language recognition and speech output.</div>
             </div>
-            <div class="content-box">
+            <div class="content-box" style="border-color: rgba(0,240,255,0.35);">
               <div class="cb-tag" style="color: #00F0FF;">MULTIMODAL AI</div>
               <div class="cb-title">One Health / Avian AI</div>
               <div class="cb-text">Predictive surveillance engine fusing climate/satellite data with Knowledge Graphs and agentic GraphRAG reasoning.</div>
@@ -1167,23 +1381,108 @@
   </div>
 
   <script>
-    // --- 1. Central Motion & Physics Configuration ---
+    // --- 1. Master Skills Taxonomy Data Grounded in Master Profile ---
+    const SKILLS_TAXONOMY = [
+      {
+        id: 'ai-ml',
+        name: 'AI / ML & NLP',
+        tag: 'DOMAIN // 01',
+        description: 'Neural architectures, transformer embeddings, and LLM reasoning pipelines.',
+        skills: [
+          { name: 'PyTorch', meta: 'Deep Learning & NLP', context: 'Used in Indic NLP Embeddings research and neural model evaluation.', linkTo: 'research', linkText: 'EXPLORE IN RESEARCH' },
+          { name: 'TensorFlow', meta: 'Neural Modeling', context: 'Used for neural network experimentation and baseline model comparisons.', linkTo: 'research', linkText: 'EXPLORE IN RESEARCH' },
+          { name: 'Hugging Face', meta: 'Transformers & Datasets', context: 'Integrated for tokenizers, mBERT, MuRIL, and multilingual sentence transformers.', linkTo: 'research', linkText: 'EXPLORE IN RESEARCH' },
+          { name: 'LangChain', meta: 'Agentic LLM Pipelines', context: 'Engineered retrieval-augmented generation and reasoning workflows in AI projects.', linkTo: 'projects', linkText: 'VIEW AI PROJECTS' },
+          { name: 'Ollama', meta: 'Local Model Inference', context: 'Utilized for local LLM inference, embedding extraction, and prompt evaluations.', linkTo: 'projects', linkText: 'VIEW AI PROJECTS' },
+          { name: 'Prompt Engineering', meta: 'Instruction Tuning', context: 'Structured prompt design for few-shot reasoning, summarization, and data extraction.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
+          { name: 'NLP & LLMs', meta: 'Representation Learning', context: 'Semantic affinity, graph modularity, cross-lingual alignment, and bitext retrieval.', linkTo: 'research', linkText: 'EXPLORE IN RESEARCH' }
+        ]
+      },
+      {
+        id: 'vision',
+        name: 'Computer Vision',
+        tag: 'DOMAIN // 02',
+        description: 'Real-time camera pipelines, hand landmark intelligence, and gesture recognition.',
+        skills: [
+          { name: 'OpenCV', meta: 'Image Processing & Video', context: 'Core vision engine for real-time video capture, filtering, and contour processing.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' },
+          { name: 'MediaPipe', meta: '21-Hand Landmark AI', context: 'Extracted high-precision 21 3D hand coordinates for real-time sign recognition.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' },
+          { name: 'Gesture Recognition', meta: 'Spatial Classification', context: 'Machine-learning classification of hand gestures translated to text and speech.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' }
+        ]
+      },
+      {
+        id: 'web-systems',
+        name: 'Web & Systems',
+        tag: 'DOMAIN // 03',
+        description: 'Production full-stack engineering, enterprise frameworks, and secure REST APIs.',
+        skills: [
+          { name: 'React', meta: 'Frontend Architecture', context: 'Engineered modern component systems for TeamFlow and Syncfusion enterprise apps.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'TypeScript', meta: 'Type-Safe Systems', context: 'Strict typing across frontend React components, API schemas, and state contracts.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'FastAPI', meta: 'High-Speed Python Backend', context: 'Flagship TeamFlow backend with async routers, dependencies, and Pydantic validation.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'ASP.NET Core', meta: 'Enterprise C# Backend', context: 'Enterprise feature development during Syncfusion AI Internship with RBAC security.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
+          { name: 'C#', meta: 'Object-Oriented Systems', context: 'Backend service development and API routing during Syncfusion internship.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
+          { name: 'Flask', meta: 'Lightweight Web Framework', context: 'Engineered full-stack service architecture for MyKitchen planner application.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
+          { name: 'Tailwind CSS', meta: 'Utility-First Styling', context: 'Engineered responsive UI components with clean design systems.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
+          { name: 'REST APIs', meta: 'API Design & Protocols', context: 'Designed stateless JSON endpoints, JWT bearer auth, and CORS security layers.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' }
+        ]
+      },
+      {
+        id: 'languages',
+        name: 'Programming Languages',
+        tag: 'DOMAIN // 04',
+        description: 'Core languages for systems, algorithms, research modeling, and automation.',
+        skills: [
+          { name: 'Python', meta: 'Primary Engineering Language', context: 'Extensive use across PyTorch research, FastAPI backends, and data pipelines.', linkTo: 'projects', linkText: 'VIEW PROJECTS' },
+          { name: 'Java', meta: 'OOP & Systems Rigor', context: 'Core object-oriented programming, data structures, and algorithmic foundations.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
+          { name: 'C / C++', meta: 'Low-Level Computing', context: 'Systems programming, memory management principles, and algorithmic problem-solving.', linkTo: 'about', linkText: 'VIEW IN ABOUT' }
+        ]
+      },
+      {
+        id: 'databases',
+        name: 'Databases & Storage',
+        tag: 'DOMAIN // 05',
+        description: 'Relational data integrity, schema design, and ORM query optimization.',
+        skills: [
+          { name: 'PostgreSQL 17.11', meta: 'Primary Relational Database', context: 'Configured relational schema, foreign keys, cascades, and indexes for TeamFlow.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'MySQL', meta: 'Relational Database', context: 'Structured database schema design and relational data operations.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
+          { name: 'SQLAlchemy 2.x', meta: 'Python Async ORM', context: 'Declarative database models, session lifecycle, and transaction management in FastAPI.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' }
+        ]
+      },
+      {
+        id: 'testing-tools',
+        name: 'Testing & Ecosystem',
+        tag: 'DOMAIN // 06',
+        description: 'Automated verification, mutation testing, version control, and Linux workflows.',
+        skills: [
+          { name: 'PyTest', meta: 'Automated Test Suites', context: 'Comprehensive backend testing for TeamFlow API endpoints and authentication.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'Mutation Testing', meta: 'Test Quality Analysis', context: 'Evaluated test suite resilience and fault detection capabilities.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
+          { name: 'Git & GitHub', meta: 'Version Control & CI/CD', context: 'Branching strategies, incremental commits, code reviews, and repo management.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
+          { name: 'Linux', meta: 'Server & Dev Environment', context: 'Command-line development, process management, and deployment environments.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
+          { name: 'VS Code', meta: 'Primary IDE', context: 'Configured debugging environments, linting rules, and multi-workspace tooling.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
+          { name: 'Streamlit', meta: 'Interactive AI Demos', context: 'Built rapid interactive web applications for AI and data visualization demos.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' }
+        ]
+      }
+    ];
+
+    let activeCategoryId = 'ai-ml';
+    let selectedSkillName = 'PyTorch';
+
+    // --- 2. Central Motion & Physics Configuration ---
     const CONFIG = {
-      collapseDurationMs: 140,   // Full scene shrinks down into compact node
-      shootDurationMs: 150,      // Web shoots between compact nodes
-      tensionDurationMs: 80,     // Tension hold
-      springK: 440,              // Camera travel stiffness
-      springC: 26,               // Damping
-      mass: 1.0,                 // Inertial mass
-      expansionDurationMs: 160,  // Compact node dynamically expands into full scene
-      expansionPeakScale: 1.06,  // Arrival overshoot scale
-      impactDurationMs: 75,      // Impact vibration duration
-      impactVibAmp: 3.5,         // Peak vibration (px)
-      settleDurationMs: 130,     // Settle to 1.00x
+      collapseDurationMs: 140,
+      shootDurationMs: 150,
+      tensionDurationMs: 80,
+      springK: 440,
+      springC: 26,
+      mass: 1.0,
+      expansionDurationMs: 160,
+      expansionPeakScale: 1.06,
+      impactDurationMs: 75,
+      impactVibAmp: 3.5,
+      settleDurationMs: 130,
       chromaticEnabled: true
     };
 
-    // --- 2. Multi-Node Spatial Geometry ---
+    // --- 3. Multi-Node Spatial Geometry ---
     const SCENES = [
       { id: 'home', index: 1, label: 'HOME', x: 0, y: 0 },
       { id: 'about', index: 2, label: 'ABOUT', x: -1100, y: -650 },
@@ -1195,7 +1494,7 @@
     const sceneMap = {};
     SCENES.forEach(s => sceneMap[s.id] = s);
 
-    // --- 3. 10-Stage Finite State Machine ---
+    // --- 4. 10-Stage Finite State Machine ---
     const STATES = {
       IDLE: 'IDLE',
       COLLAPSING: 'COLLAPSING',
@@ -1257,8 +1556,18 @@
     const introOverlay = document.getElementById('intro-overlay');
     const introBox = document.getElementById('intro-box');
 
-    // --- 4. Initialize Navigation & Canvas ---
+    const categoryAnchorsContainer = document.getElementById('category-anchors-container');
+    const childNodesContainer = document.getElementById('child-nodes-container');
+    const bloomDomainTitle = document.getElementById('bloom-domain-title');
+    const bloomEdgeBadge = document.getElementById('bloom-edge-badge');
+    const scpTag = document.getElementById('scp-tag');
+    const scpHeadline = document.getElementById('scp-headline');
+    const scpDesc = document.getElementById('scp-desc');
+    const scpActionBtn = document.getElementById('scp-action-btn');
+
+    // --- 5. Initialize Navigation & Interactive Skills Web ---
     function init() {
+      // Build Navbar Buttons
       SCENES.forEach(s => {
         const btn = document.createElement('button');
         btn.className = `nav-btn ${s.id === currentSceneId ? 'active' : ''}`;
@@ -1277,6 +1586,10 @@
           requestNavigation(SCENES[num - 1].id);
         }
       });
+
+      // Build Interactive Skills Components
+      renderSkillsCategories();
+      selectCategory(activeCategoryId);
 
       updateDOMViews();
       positionEntities();
@@ -1299,6 +1612,88 @@
           introOverlay.style.display = 'none';
         }, 800);
       }, 1100);
+    }
+
+    // --- 6. Interactive Skills Web Logic ---
+    function renderSkillsCategories() {
+      categoryAnchorsContainer.innerHTML = '';
+      SKILLS_TAXONOMY.forEach(cat => {
+        const btn = document.createElement('div');
+        btn.className = `cat-anchor-btn ${cat.id === activeCategoryId ? 'active' : ''}`;
+        btn.id = `cat-btn-${cat.id}`;
+        btn.onclick = () => selectCategory(cat.id);
+        btn.onmouseenter = () => selectCategory(cat.id);
+
+        btn.innerHTML = `
+          <div class="cab-info">
+            <span class="cab-tag">${cat.tag}</span>
+            <span class="cab-name">${cat.name}</span>
+          </div>
+          <span class="cab-count">${cat.skills.length} SKILLS</span>
+        `;
+        categoryAnchorsContainer.appendChild(btn);
+      });
+    }
+
+    function selectCategory(catId) {
+      activeCategoryId = catId;
+      const catData = SKILLS_TAXONOMY.find(c => c.id === catId);
+      if (!catData) return;
+
+      // Update Active Category Buttons
+      document.querySelectorAll('.cat-anchor-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`cat-btn-${catId}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      bloomDomainTitle.textContent = catData.name;
+      bloomEdgeBadge.textContent = `EDGE_HIERARCHY • ${catData.skills.length} TECHNOLOGIES`;
+
+      // Render Blooming Child Nodes with Spring Easing
+      childNodesContainer.innerHTML = '';
+      catData.skills.forEach((skill, idx) => {
+        const card = document.createElement('div');
+        card.className = `child-skill-card ${skill.name === selectedSkillName ? 'selected' : ''}`;
+        card.style.animation = `fadeSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) ${idx * 0.04}s both`;
+        card.onclick = () => selectSkill(skill);
+
+        card.innerHTML = `
+          <div class="csc-name">${skill.name}</div>
+          <div class="csc-meta">${skill.meta}</div>
+        `;
+        childNodesContainer.appendChild(card);
+      });
+
+      // Default select the first skill in category
+      if (catData.skills.length > 0) {
+        selectSkill(catData.skills[0]);
+      }
+    }
+
+    function selectSkill(skill) {
+      selectedSkillName = skill.name;
+
+      // Update selected card state
+      document.querySelectorAll('.child-skill-card').forEach(c => {
+        const nameEl = c.querySelector('.csc-name');
+        if (nameEl && nameEl.textContent === skill.name) {
+          c.classList.add('selected');
+        } else {
+          c.classList.remove('selected');
+        }
+      });
+
+      // Update Context Inspector
+      scpTag.textContent = `${activeCategoryId.toUpperCase()} // CONTEXT`;
+      scpHeadline.textContent = skill.name;
+      scpDesc.textContent = skill.context;
+
+      if (skill.linkTo) {
+        scpActionBtn.style.display = 'inline-flex';
+        scpActionBtn.querySelector('span').textContent = skill.linkText || `VIEW IN ${skill.linkTo.toUpperCase()}`;
+        scpActionBtn.onclick = () => requestNavigation(skill.linkTo);
+      } else {
+        scpActionBtn.style.display = 'none';
+      }
     }
 
     function resizeCanvas() {
@@ -1328,7 +1723,7 @@
       });
     }
 
-    // --- 5. Navigation Request Logic ---
+    // --- 7. Navigation Request Logic ---
     function requestNavigation(targetId) {
       if (targetId === currentSceneId && currentState === STATES.IDLE) return;
 
@@ -1387,7 +1782,7 @@
       }
     }
 
-    // --- 6. Physics & Animation Main Loop ---
+    // --- 8. Physics & State Machine Loop ---
     let lastTime = performance.now();
     let frameCount = 0;
     let lastFpsUpdate = performance.now();
@@ -1417,7 +1812,6 @@
       switch (currentState) {
         case STATES.COLLAPSING:
           collapsePhase = Math.min(elapsed / CONFIG.collapseDurationMs, 1.0);
-          // Departing full page visibly collapses (1.00x -> 0.20x)
           const easeCollapse = Math.pow(collapsePhase, 2);
           if (entityStates[currentSceneId]) {
             entityStates[currentSceneId].scale = 1.0 - easeCollapse * 0.80; // 1.00 -> 0.20
@@ -1479,10 +1873,9 @@
           const distToTarget = Math.hypot(targetCamX - camX, targetCamY - camY);
           webSag = Math.max(0, webSag - dt * 50);
 
-          // Approaching destination compact node threshold
           if (distToTarget < 25.0) {
             entityStates[targetSceneId].mode = 'full';
-            entityStates[targetSceneId].scale = 0.20; // Starts expanding from compact scale
+            entityStates[targetSceneId].scale = 0.20;
             entityStates[targetSceneId].opacity = 0.65;
             updateDOMViews();
 
@@ -1493,7 +1886,6 @@
 
         case STATES.ARRIVAL_EXPANSION:
           expansionPhase = Math.min(elapsed / CONFIG.expansionDurationMs, 1.0);
-          // Target compact node expands dynamically into big full page (0.20x -> 1.06x)
           const easeExp = 1 - Math.pow(1 - expansionPhase, 3);
           if (entityStates[targetSceneId]) {
             entityStates[targetSceneId].scale = 0.20 + (CONFIG.expansionPeakScale - 0.20) * easeExp;
@@ -1615,7 +2007,7 @@
       }
     }
 
-    // --- 7. Canvas Web Vector Rendering ---
+    // --- 9. Canvas Web Vector Rendering ---
     function renderCanvasWeb() {
       const centerX = window.innerWidth / 2;
       const centerY = (window.innerHeight - 64) / 2;
