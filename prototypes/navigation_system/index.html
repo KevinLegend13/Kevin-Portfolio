@@ -198,7 +198,7 @@
       max-height: 680px;
       border-radius: 24px;
       backdrop-filter: blur(28px);
-      padding: 32px 40px;
+      padding: 30px 38px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -721,126 +721,142 @@
     .modal-context-body strong { color: #FFFFFF; }
 
     /* =========================================================================
-       3. PROJECTS & CASE STUDIES SYSTEM (LEVEL 1 GRID & LEVEL 2 DETAILED STUDIES)
+       3. SUSPENDED SPIDER-WEB LEVEL 1 & FULL LEVEL 2 CASE STUDIES
        ========================================================================= */
     #page-projects {
-      background: linear-gradient(145deg, rgba(10, 20, 28, 0.98) 0%, rgba(16, 32, 42, 0.96) 100%);
+      background: radial-gradient(circle at 50% 30%, rgba(12, 24, 38, 0.98) 0%, rgba(6, 10, 18, 0.96) 100%);
       border: 1.5px solid #00F0FF;
       box-shadow: 0 35px 100px rgba(0, 0, 0, 0.92), 0 0 60px rgba(0, 240, 255, 0.25);
+      overflow: hidden;
+      position: relative;
     }
 
-    /* LEVEL 1: Projects Discovery Grid */
-    .projects-grid-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 16px 0 20px 0;
-      overflow-y: auto;
-      scrollbar-width: none;
+    /* LEVEL 1: Dangling Spider-Web Canvas & Suspended Nodes */
+    .projects-dangling-stage {
+      position: relative;
+      width: 100%;
+      height: 490px;
+      overflow: hidden;
     }
-    .projects-grid-container::-webkit-scrollbar { display: none; }
 
-    .project-preview-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(0, 240, 255, 0.2);
-      border-radius: 14px;
-      padding: 20px;
+    #projects-dangling-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .dangling-project-node {
+      position: absolute;
+      z-index: 20;
+      transform: translate(-50%, 0);
+      cursor: pointer;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
-      position: relative;
-      min-height: 220px;
+      align-items: center;
+      user-select: none;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+      animation: spiderBobbing 4s ease-in-out infinite;
     }
-    .project-preview-card:hover {
-      background: rgba(0, 240, 255, 0.08);
-      border-color: #00F0FF;
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 240, 255, 0.25);
-    }
-    .project-preview-card.flagship-card {
-      border-color: rgba(255, 42, 75, 0.4);
-      background: linear-gradient(135deg, rgba(255, 42, 75, 0.08) 0%, rgba(11, 16, 28, 0.6) 100%);
-    }
-    .project-preview-card.flagship-card:hover {
-      border-color: var(--accent-red);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 30px var(--accent-red-glow);
+    @keyframes spiderBobbing {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, 7px); }
     }
 
-    .ppc-header {
+    .dangling-project-node:hover {
+      animation-play-state: paused;
+      transform: translate(-50%, -4px) scale(1.08);
+    }
+
+    .dpn-silk-thread {
+      width: 1.5px;
+      background: linear-gradient(to bottom, rgba(0, 240, 255, 0.4), #00F0FF);
+      box-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+      margin-bottom: 0px;
+    }
+
+    .dpn-card-box {
+      width: 195px;
+      background: rgba(11, 18, 30, 0.96);
+      border: 1.5px solid #00F0FF;
+      border-radius: 12px;
+      padding: 12px 14px;
+      text-align: left;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85), 0 0 20px rgba(0, 240, 255, 0.25);
+      backdrop-filter: blur(16px);
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .dangling-project-node:hover .dpn-card-box {
+      border-color: #FFFFFF;
+      background: rgba(16, 28, 48, 0.98);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.95), 0 0 30px #00F0FF;
+    }
+    .dangling-project-node.flagship-node .dpn-card-box {
+      border-color: var(--accent-red);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85), 0 0 25px var(--accent-red-glow);
+    }
+    .dangling-project-node.flagship-node:hover .dpn-card-box {
+      border-color: #FFFFFF;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.95), 0 0 35px var(--accent-red);
+    }
+
+    .dpn-top-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
-    .ppc-domain-badge {
+    .dpn-num-tag {
       font-family: var(--font-mono);
       font-size: 9.5px;
       font-weight: 800;
       color: #00F0FF;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
     }
-    .project-preview-card.flagship-card .ppc-domain-badge { color: var(--accent-red); }
-    .ppc-flagship-tag {
+    .dangling-project-node.flagship-node .dpn-num-tag { color: var(--accent-red); }
+    .dpn-badge {
       font-family: var(--font-mono);
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 800;
       color: #FFFFFF;
       background: var(--accent-red);
-      padding: 2px 7px;
-      border-radius: 4px;
-      letter-spacing: 0.08em;
+      padding: 1.5px 5px;
+      border-radius: 3px;
     }
-    .ppc-title {
+    .dpn-title {
       font-family: var(--font-display);
-      font-size: 20px;
+      font-size: 14.5px;
       font-weight: 900;
       color: #FFFFFF;
-      margin-bottom: 6px;
       letter-spacing: -0.01em;
+      line-height: 1.15;
+      margin-bottom: 4px;
     }
-    .ppc-desc {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 14px;
-    }
-    .ppc-tech-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-    .tech-chip {
-      font-family: var(--font-mono);
+    .dpn-sub-text {
       font-size: 10px;
-      color: #CBD5E1;
-      background: rgba(255, 255, 255, 0.06);
-      padding: 3px 8px;
-      border-radius: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      line-height: 1.35;
+      margin-bottom: 8px;
     }
-    .ppc-cta-btn {
+    .dpn-cta-txt {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 9.5px;
       font-weight: 800;
       color: #00F0FF;
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 6px;
-      transition: gap 0.2s ease;
+      gap: 4px;
     }
-    .project-preview-card:hover .ppc-cta-btn { gap: 10px; color: #FFFFFF; }
-    .project-preview-card.flagship-card .ppc-cta-btn { color: var(--accent-red); }
-    .project-preview-card.flagship-card:hover .ppc-cta-btn { color: #FFFFFF; }
+    .dangling-project-node.flagship-node .dpn-cta-txt { color: var(--accent-red); }
 
     /* LEVEL 2: Full Detailed Case Study Page View */
     .case-study-view-container {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 22px;
       padding-right: 6px;
     }
 
@@ -892,7 +908,6 @@
     }
     .cs-sec-body strong { color: #FFFFFF; }
 
-    /* Interactive Architecture Diagram Motif */
     .arch-diagram-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -925,6 +940,18 @@
       font-size: 11px;
       color: var(--text-muted);
       line-height: 1.3;
+    }
+
+    .tech-chip {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: #CBD5E1;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: inline-block;
+      margin: 2px;
     }
 
     /* Chromatic Shadow Accents */
@@ -1199,7 +1226,6 @@
         height: 84vh;
         padding: 20px 16px;
       }
-      .projects-grid-container { grid-template-columns: 1fr; }
       .arch-diagram-grid { grid-template-columns: 1fr 1fr; }
       .skills-center-core { width: 140px; height: 140px; }
       .scc-title { font-size: 20px; }
@@ -1274,7 +1300,6 @@
             </p>
           </div>
 
-          <!-- 4 Core Disciplines Grid -->
           <div class="pillars-grid">
             <div class="pillar-card" onclick="requestNavigation('research')">
               <div class="pillar-num">01 // AI & NLP RESEARCH</div>
@@ -1298,7 +1323,6 @@
             </div>
           </div>
 
-          <!-- Footer Actions & Telemetry -->
           <div class="home-footer-row">
             <div class="cta-button-group">
               <button class="hero-cta-primary" onclick="requestNavigation('projects')">
@@ -1311,7 +1335,7 @@
             <div class="home-telemetry-cue">
               <span>LOCATION: <strong>VELLORE / CHENNAI</strong></span>
               <span>&bull;</span>
-              <span>NETWORK: <strong>SPIDER-WEB v8.5</strong></span>
+              <span>NETWORK: <strong>SPIDER-WEB v8.6</strong></span>
             </div>
           </div>
         </div>
@@ -1351,7 +1375,6 @@
             </p>
           </div>
 
-          <!-- 3 Ground Truth Tracks Grid -->
           <div class="about-triad-grid">
             <div class="about-track-card">
               <div>
@@ -1479,7 +1502,7 @@
       </div>
 
       <!-- =======================================================
-           NODE 03: PROJECTS (LEVEL 1 DISCOVERY & LEVEL 2 FULL CASE STUDIES)
+           NODE 03: PROJECTS (SUSPENDED SPIDER-WEB & DEDICATED CASE STUDIES)
            ======================================================= -->
       <div class="scene-entity" id="entity-projects">
         <!-- Compact View -->
@@ -1489,14 +1512,14 @@
           <div class="node-title-txt">PROJECTS</div>
           <div class="node-status-txt">TeamFlow &bull; ISL Translator &bull; One Health</div>
         </div>
-        <!-- Full Page View (Switches between Level 1 Grid & Level 2 Case Study) -->
+        <!-- Full Page View (Switches between Suspended Dangling Web & Full Case Study) -->
         <div class="full-page-frame" id="page-projects" style="display: none;">
           
           <!-- Top Header Row -->
           <div class="hero-top-row" id="projects-header-row">
             <div class="hero-status-pill" id="projects-status-pill" style="color: #00F0FF; border-color: rgba(0,240,255,0.4); background: rgba(0,240,255,0.15);">
               <span class="status-dot" style="background: #00F0FF; box-shadow: 0 0 8px #00F0FF;"></span>
-              ENGINEERING SYSTEMS // 6 CONFIRMED CASE STUDIES
+              SUSPENDED SPIDER-WEB // CLICK ANY DANGLING PROJECT
             </div>
             <div class="hero-credentials-tag" id="projects-breadcrumb">
               Master Profile Source of Truth
@@ -1505,7 +1528,7 @@
 
           <!-- Dynamic Projects Content View Container -->
           <div id="projects-dynamic-mount" style="flex: 1; overflow-y: auto; scrollbar-width: none;">
-            <!-- Rendered in JS: Level 1 Grid or Level 2 Dedicated Case Study -->
+            <!-- Rendered in JS: Dangling Spider-Web Stage or Level 2 Dedicated Case Study -->
           </div>
 
           <!-- Bottom Footer Row -->
@@ -1522,7 +1545,7 @@
               </button>
             </div>
             <div class="home-telemetry-cue">
-              <span id="projects-telemetry-status">VIEW: <strong>LEVEL 1 DISCOVERY GRID</strong></span>
+              <span id="projects-telemetry-status">VIEW: <strong>SUSPENDED SPIDER-WEB</strong></span>
             </div>
           </div>
 
@@ -1609,15 +1632,17 @@
 
   <script>
     // --- 1. Master Projects Ground Truth Data from Master Profile ---
+    // Positions correspond to organic hanging points on the suspended spider web
     const PROJECTS_DATA = [
       {
         id: 'teamflow',
         isFlagship: true,
+        numStr: '01',
         title: 'TeamFlow',
-        domain: 'FULL-STACK SYSTEMS & COLLABORATION',
+        domain: 'FULL-STACK SYSTEMS',
         tagline: 'High-performance team workspace featuring FastAPI, React + TypeScript + Vite, PostgreSQL 17.11, JWT/RBAC security, and dynamic Kanban workflow state machines.',
-        desc: 'Engineered an end-to-end task and team workflow management system addressing multi-user permission boundaries, real-time board updates, and relational data integrity.',
-        tech: ['FastAPI', 'React', 'TypeScript', 'Vite', 'PostgreSQL 17.11', 'SQLAlchemy 2.x', 'JWT', 'RBAC', 'PyTest'],
+        desc: 'FastAPI, React + TypeScript, PostgreSQL 17.11 & RBAC security.',
+        tech: ['FastAPI', 'React', 'TypeScript', 'PostgreSQL 17.11', 'SQLAlchemy 2.x', 'JWT', 'RBAC', 'PyTest'],
         problem: 'Distributed engineering teams often suffer from permission drift, brittle REST APIs with uncontrolled payload schemas, and monolithic state desynchronization in collaborative Kanban boards.',
         architecture: [
           { tier: 'FRONTEND CLIENT', name: 'React + TS + Vite', role: 'Optimistic Kanban UI, modular component tree, strict type contracts.' },
@@ -1629,15 +1654,21 @@
         kanban: 'Interactive Kanban board with fluid drag-and-drop state transitions, optimistic client updates with automated rollback on network failure, and audit timestamps.',
         database: 'Relational schema in PostgreSQL 17.11 defining Users, Workspaces, Projects, Task Columns, and Audit Logs with strict constraints and SQLAlchemy 2.0 async sessions.',
         testing: 'Automated test suite using PyTest verifying endpoint status codes, unauthorized token rejections, role privilege boundaries, and database rollback behaviors.',
-        takeaways: 'Demonstrates end-to-end full-stack software mastery, API contract rigor, production relational database engineering, and security-first system design.'
+        takeaways: 'Demonstrates end-to-end full-stack software mastery, API contract rigor, production relational database engineering, and security-first system design.',
+        // Dangling coordinate on the suspended spider web:
+        anchorXPercent: 50,
+        anchorYPercent: 32,
+        threadLength: 75,
+        delayBob: '0s'
       },
       {
         id: 'isl-translator',
         isFlagship: false,
-        title: 'Indian Sign Language Translator',
-        domain: 'COMPUTER VISION & ACCESSIBILITY AI',
+        numStr: '02',
+        title: 'ISL Gesture Translator',
+        domain: 'COMPUTER VISION AI',
         tagline: 'Real-time gesture recognition system tracking 21 3D hand coordinates via OpenCV and MediaPipe with instantaneous text and speech translation.',
-        desc: 'Bridges communication gaps for the speech and hearing impaired using high-frame-rate computer vision and spatial machine learning classification.',
+        desc: 'OpenCV & MediaPipe 21 hand landmarks tracking.',
         tech: ['Python', 'OpenCV', 'MediaPipe', 'Gesture Recognition', 'Speech Synthesis'],
         problem: 'Real-time gesture translation frequently fails in variable lighting conditions and requires high computational overhead that hinders accessible deployment.',
         architecture: [
@@ -1646,15 +1677,20 @@
           { tier: 'CLASSIFICATION', name: 'ML Classifier', role: 'Dynamic geometric distance and angle matching for gesture lexicon.' },
           { tier: 'ACCESSIBILITY OUTPUT', name: 'Speech & Text UI', role: 'Instant audio vocalization and text subtitle display.' }
         ],
-        takeaways: 'Demonstrates computer vision pipeline expertise, real-time spatial geometry processing, and practical accessibility engineering.'
+        takeaways: 'Demonstrates computer vision pipeline expertise, real-time spatial geometry processing, and practical accessibility engineering.',
+        anchorXPercent: 18,
+        anchorYPercent: 22,
+        threadLength: 60,
+        delayBob: '0.8s'
       },
       {
         id: 'onehealth-ai',
         isFlagship: false,
-        title: 'One Health / Avian AI Digital Twin',
-        domain: 'MULTIMODAL AI & GLOBAL HEALTH SECURITY',
+        numStr: '03',
+        title: 'One Health / Avian AI',
+        domain: 'MULTIMODAL AI & GRAPH',
         tagline: 'Digital Twin and predictive intelligence platform fusing climate, satellite, and surveillance datasets with Knowledge Graphs and GraphRAG reasoning.',
-        desc: 'Advanced predictive modeling engine for avian influenza outbreak forecasting and multimodal decision intelligence.',
+        desc: 'Knowledge Graphs, GraphRAG reasoning & ERA5 satellite fusion.',
         tech: ['Python', 'GraphRAG', 'Knowledge Graphs', 'ERA5 Weather', 'MODIS Satellite', 'Agentic AI'],
         problem: 'Zoonotic disease outbreaks require synthesizing disconnected spatial, meteorological, and veterinary datasets that traditional statistical models fail to correlate.',
         architecture: [
@@ -1663,15 +1699,20 @@
           { tier: 'REASONING ENGINE', name: 'GraphRAG & Agents', role: 'Context-augmented graph traversal and risk prediction reasoning.' },
           { tier: 'EXPLAINABILITY', name: 'Surveillance Dashboard', role: 'Spatiotemporal heatmaps and audit-ready decision trails.' }
         ],
-        takeaways: 'Demonstrates advanced AI research capability, GraphRAG reasoning architectures, and cross-domain data fusion for high-impact decision support.'
+        takeaways: 'Demonstrates advanced AI research capability, GraphRAG reasoning architectures, and cross-domain data fusion for high-impact decision support.',
+        anchorXPercent: 82,
+        anchorYPercent: 22,
+        threadLength: 90,
+        delayBob: '1.6s'
       },
       {
         id: 'mykitchen',
         isFlagship: false,
+        numStr: '04',
         title: 'MyKitchen',
-        domain: 'WEB APPLICATION & RECIPE PLANNER',
+        domain: 'WEB APPLICATION',
         tagline: 'Full-stack meal planning and grocery inventory management application with REST APIs and responsive web interfaces.',
-        desc: 'Structured meal preparation system with inventory tracking, dietary filtering, and automated grocery list generation.',
+        desc: 'Flask REST APIs, inventory tracking & meal planning.',
         tech: ['Flask', 'Python', 'REST APIs', 'PostgreSQL', 'HTML5 / CSS3', 'JavaScript'],
         problem: 'Home cooking workflows suffer from disorganized ingredient tracking, food waste, and lack of recipe nutritional scaling.',
         architecture: [
@@ -1679,15 +1720,20 @@
           { tier: 'BACKEND SERVICES', name: 'Flask REST API', role: 'CRUD operations, dietary calculations, and authentication routes.' },
           { tier: 'DATA STORE', name: 'Relational DB', role: 'Ingredient tables, pantry inventories, and recipe association schemas.' }
         ],
-        takeaways: 'Demonstrates full-stack web service development, clean API design, and intuitive user experience engineering.'
+        takeaways: 'Demonstrates full-stack web service development, clean API design, and intuitive user experience engineering.',
+        anchorXPercent: 30,
+        anchorYPercent: 44,
+        threadLength: 85,
+        delayBob: '1.2s'
       },
       {
         id: 'ai-email-summarizer',
         isFlagship: false,
-        title: 'AI-Based Email Summarizer',
-        domain: 'NLP & APPLIED LLM PRODUCTIVITY',
+        numStr: '05',
+        title: 'AI Email Summarizer',
+        domain: 'NLP & LLM AUTOMATION',
         tagline: 'Intelligent email digestion system utilizing LangChain, prompt engineering, and LLMs for automated action-item extraction.',
-        desc: 'Automates inbox processing by converting verbose email threads into structured executive briefings and categorized tasks.',
+        desc: 'LangChain, prompt engineering & Ollama LLM triage.',
         tech: ['Python', 'LangChain', 'Ollama', 'NLP', 'Prompt Engineering', 'LLMs'],
         problem: 'Enterprise communication overload leads to missed action items and hours lost triaging redundant email threads.',
         architecture: [
@@ -1695,15 +1741,20 @@
           { tier: 'CHAIN PIPELINE', name: 'LangChain Orchestrator', role: 'Prompt template execution with few-shot context injection.' },
           { tier: 'LLM INFERENCE', name: 'Neural Model Layer', role: 'Extracts summary, urgency rating, and structured action items.' }
         ],
-        takeaways: 'Demonstrates prompt engineering mastery, LLM pipeline orchestration, and practical natural language automation.'
+        takeaways: 'Demonstrates prompt engineering mastery, LLM pipeline orchestration, and practical natural language automation.',
+        anchorXPercent: 70,
+        anchorYPercent: 44,
+        threadLength: 70,
+        delayBob: '2.4s'
       },
       {
         id: 'aws-attendance',
         isFlagship: false,
+        numStr: '06',
         title: 'AWS Attendance System',
-        domain: 'CLOUD INFRASTRUCTURE & AUTOMATION',
+        domain: 'CLOUD & SERVERLESS',
         tagline: 'Cloud-native attendance and identity tracking platform utilizing AWS serverless services and secure database logging.',
-        desc: 'Scalable attendance verification architecture designed for low latency and automated record reconciliation.',
+        desc: 'AWS Cloud, API Gateway & immutable audit logging.',
         tech: ['AWS Cloud', 'Python', 'REST APIs', 'Cloud Logging', 'IAM Security'],
         problem: 'Manual attendance logging in large institutions causes administrative bottlenecks and data tampering vulnerabilities.',
         architecture: [
@@ -1711,7 +1762,11 @@
           { tier: 'COMPUTE LAYER', name: 'AWS Cloud Engine', role: 'Event-driven timestamp verification and anomaly checking.' },
           { tier: 'LOG STORE', name: 'Cloud Database', role: 'Immutable attendance logs and automated daily reconciliation reports.' }
         ],
-        takeaways: 'Demonstrates cloud service integration, serverless mindset, and secure infrastructure operations.'
+        takeaways: 'Demonstrates cloud service integration, serverless mindset, and secure infrastructure operations.',
+        anchorXPercent: 50,
+        anchorYPercent: 58,
+        threadLength: 95,
+        delayBob: '3.0s'
       }
     ];
 
@@ -1942,6 +1997,9 @@
       window.addEventListener('resize', () => {
         resizeCanvas();
         renderSkillsWebLayer();
+        if (currentSceneId === 'projects' && !activeCaseStudyId) {
+          drawDanglingProjectsCanvas();
+        }
       });
       resizeCanvas();
 
@@ -1952,6 +2010,7 @@
         }
         if (e.key === 'Escape') {
           closeSkillsModal();
+          if (activeCaseStudyId) closeProjectCaseStudy();
         }
       });
 
@@ -1974,48 +2033,54 @@
       }, 1100);
     }
 
-    // --- 6. Projects Discovery (Level 1) & Full Case Studies (Level 2) ---
+    // --- 6. Suspended Spider-Web (Level 1) & Full Case Studies (Level 2) ---
     function renderProjectsView() {
       projectsDynamicMount.innerHTML = '';
 
       if (!activeCaseStudyId) {
-        // LEVEL 1: Projects Discovery Grid
-        projectsStatusPill.innerHTML = '<span class="status-dot" style="background:#00F0FF; box-shadow:0 0 8px #00F0FF;"></span> ENGINEERING SYSTEMS // 6 CONFIRMED CASE STUDIES';
+        // LEVEL 1: Suspended Dangling Spider-Web Stage
+        projectsStatusPill.innerHTML = '<span class="status-dot" style="background:#00F0FF; box-shadow:0 0 8px #00F0FF;"></span> SUSPENDED SPIDER-WEB // CLICK ANY DANGLING PROJECT';
         projectsBreadcrumb.textContent = 'Master Profile Source of Truth';
         projectsBackBtn.textContent = '← RETURN TO HOME';
-        projectsTelemetryStatus.innerHTML = 'VIEW: <strong>LEVEL 1 DISCOVERY GRID</strong>';
+        projectsTelemetryStatus.innerHTML = 'VIEW: <strong>SUSPENDED SPIDER-WEB</strong>';
 
-        const grid = document.createElement('div');
-        grid.className = 'projects-grid-container';
+        const stage = document.createElement('div');
+        stage.className = 'projects-dangling-stage';
+        stage.id = 'projects-dangling-stage';
 
+        const dCanvas = document.createElement('canvas');
+        dCanvas.id = 'projects-dangling-canvas';
+        stage.appendChild(dCanvas);
+
+        // Mount Dangling Project Nodes
         PROJECTS_DATA.forEach(proj => {
-          const card = document.createElement('div');
-          card.className = `project-preview-card ${proj.isFlagship ? 'flagship-card' : ''}`;
-          card.onclick = () => openProjectCaseStudy(proj.id);
+          const node = document.createElement('div');
+          node.className = `dangling-project-node ${proj.isFlagship ? 'flagship-node' : ''}`;
+          node.style.left = `${proj.anchorXPercent}%`;
+          node.style.top = `${proj.anchorYPercent}%`;
+          node.style.animationDelay = proj.delayBob;
 
-          card.innerHTML = `
-            <div>
-              <div class="ppc-header">
-                <span class="ppc-domain-badge">${proj.domain}</span>
-                ${proj.isFlagship ? '<span class="ppc-flagship-tag">FLAGSHIP</span>' : ''}
+          node.onclick = () => openProjectCaseStudy(proj.id);
+
+          node.innerHTML = `
+            <div class="dpn-silk-thread" style="height: ${proj.threadLength}px;"></div>
+            <div class="dpn-card-box">
+              <div class="dpn-top-row">
+                <span class="dpn-num-tag">PROJECT_${proj.numStr}</span>
+                ${proj.isFlagship ? '<span class="dpn-badge">FLAGSHIP</span>' : ''}
               </div>
-              <h3 class="ppc-title">${proj.title}</h3>
-              <p class="ppc-desc">${proj.desc}</p>
-            </div>
-            <div>
-              <div class="ppc-tech-pills">
-                ${proj.tech.slice(0, 4).map(t => `<span class="tech-chip">${t}</span>`).join('')}
-                ${proj.tech.length > 4 ? `<span class="tech-chip">+${proj.tech.length - 4}</span>` : ''}
-              </div>
-              <div class="ppc-cta-btn">
-                <span>OPEN FULL CASE STUDY</span> &rarr;
+              <div class="dpn-title">${proj.title}</div>
+              <div class="dpn-sub-text">${proj.desc}</div>
+              <div class="dpn-cta-txt">
+                <span>OPEN CASE STUDY</span> &rarr;
               </div>
             </div>
           `;
-          grid.appendChild(card);
+          stage.appendChild(node);
         });
 
-        projectsDynamicMount.appendChild(grid);
+        projectsDynamicMount.appendChild(stage);
+        setTimeout(drawDanglingProjectsCanvas, 40);
 
       } else {
         // LEVEL 2: Dedicated Full Case Study Experience
@@ -2034,10 +2099,10 @@
         const heroBlock = document.createElement('div');
         heroBlock.className = 'cs-hero-header';
         heroBlock.innerHTML = `
-          <div class="ppc-domain-badge" style="margin-bottom: 4px;">${proj.domain} ${proj.isFlagship ? '• FLAGSHIP SOFTWARE CASE STUDY' : ''}</div>
+          <div class="ppc-domain-badge" style="margin-bottom: 4px; color:#00F0FF; font-family:var(--font-mono); font-size:10px; font-weight:800; letter-spacing:0.1em;">${proj.domain} ${proj.isFlagship ? '• FLAGSHIP SOFTWARE CASE STUDY' : ''}</div>
           <h2 class="cs-hero-title">${proj.title}</h2>
           <p class="cs-hero-tagline">${proj.tagline}</p>
-          <div class="ppc-tech-pills" style="margin-top: 14px;">
+          <div style="margin-top: 14px;">
             ${proj.tech.map(t => `<span class="tech-chip" style="border-color:rgba(0,240,255,0.25);">${t}</span>`).join('')}
           </div>
         `;
@@ -2075,7 +2140,6 @@
 
         // FLAGSHIP SPECIFIC SECTIONS: SECURITY, KANBAN, DB, TESTING
         if (proj.isFlagship) {
-          // Security / RBAC
           const secBlock = document.createElement('div');
           secBlock.className = 'cs-section-block';
           secBlock.innerHTML = `
@@ -2085,7 +2149,6 @@
           `;
           view.appendChild(secBlock);
 
-          // Dynamic Kanban Workflow
           const kanbanBlock = document.createElement('div');
           kanbanBlock.className = 'cs-section-block';
           kanbanBlock.innerHTML = `
@@ -2095,7 +2158,6 @@
           `;
           view.appendChild(kanbanBlock);
 
-          // PostgreSQL & Data Integrity
           const dbBlock = document.createElement('div');
           dbBlock.className = 'cs-section-block';
           dbBlock.innerHTML = `
@@ -2105,7 +2167,6 @@
           `;
           view.appendChild(dbBlock);
 
-          // PyTest Testing Suite
           const testBlock = document.createElement('div');
           testBlock.className = 'cs-section-block';
           testBlock.innerHTML = `
@@ -2116,7 +2177,7 @@
           view.appendChild(testBlock);
         }
 
-        // SECTION 09 / FINAL — ENGINEERING TAKEAWAYS
+        // SECTION FINAL — ENGINEERING TAKEAWAYS
         const takeBlock = document.createElement('div');
         takeBlock.className = 'cs-section-block';
         takeBlock.style.borderColor = 'rgba(0, 240, 255, 0.35)';
@@ -2145,6 +2206,109 @@
 
         projectsDynamicMount.appendChild(view);
       }
+    }
+
+    // Draw the suspended spider-web based on the user's reference drawing
+    function drawDanglingProjectsCanvas() {
+      const stage = document.getElementById('projects-dangling-stage');
+      const dCanvas = document.getElementById('projects-dangling-canvas');
+      if (!stage || !dCanvas) return;
+
+      const rect = stage.getBoundingClientRect();
+      const w = rect.width || 1000;
+      const h = rect.height || 490;
+
+      dCanvas.width = w;
+      dCanvas.height = h;
+
+      const pCtx = dCanvas.getContext('2d');
+      pCtx.clearRect(0, 0, w, h);
+
+      // 1. Two large upper anchor suspension threads drooping to a center high web
+      pCtx.strokeStyle = 'rgba(0, 240, 255, 0.35)';
+      pCtx.lineWidth = 2.0;
+
+      // Left Bridge Line
+      pCtx.beginPath();
+      pCtx.moveTo(w * 0.02, h * 0.02);
+      pCtx.quadraticCurveTo(w * 0.28, h * 0.12, w * 0.5, h * 0.18);
+      pCtx.stroke();
+
+      // Right Bridge Line
+      pCtx.beginPath();
+      pCtx.moveTo(w * 0.98, h * 0.02);
+      pCtx.quadraticCurveTo(w * 0.72, h * 0.12, w * 0.5, h * 0.18);
+      pCtx.stroke();
+
+      // Horizontal Cross Line
+      pCtx.beginPath();
+      pCtx.moveTo(w * 0.12, h * 0.24);
+      pCtx.lineTo(w * 0.88, h * 0.24);
+      pCtx.strokeStyle = 'rgba(0, 240, 255, 0.25)';
+      pCtx.stroke();
+
+      // 2. Suspended Web Radial Spokes hanging downward
+      const spokes = 10;
+      const centerWebX = w * 0.5;
+      const centerWebY = h * 0.20;
+
+      for (let i = 0; i < spokes; i++) {
+        const angle = Math.PI * 0.15 + (i * Math.PI * 0.70) / (spokes - 1);
+        const radius = h * 0.70;
+        const endX = centerWebX + Math.cos(angle) * (w * 0.42);
+        const endY = centerWebY + Math.sin(angle) * radius;
+
+        pCtx.beginPath();
+        pCtx.moveTo(centerWebX, centerWebY);
+        pCtx.lineTo(endX, endY);
+        pCtx.strokeStyle = 'rgba(0, 240, 255, 0.28)';
+        pCtx.lineWidth = 1.2;
+        pCtx.stroke();
+      }
+
+      // 3. Concentric Sagging Spiral Webs (Drooping downwards like the reference)
+      const rings = [35, 70, 110, 160, 210, 260];
+      rings.forEach((r, rIdx) => {
+        pCtx.strokeStyle = rIdx % 2 === 0 ? 'rgba(0, 240, 255, 0.35)' : 'rgba(255, 42, 75, 0.3)';
+        pCtx.lineWidth = 1.2;
+
+        pCtx.beginPath();
+        for (let i = 0; i < spokes - 1; i++) {
+          const a1 = Math.PI * 0.15 + (i * Math.PI * 0.70) / (spokes - 1);
+          const a2 = Math.PI * 0.15 + ((i + 1) * Math.PI * 0.70) / (spokes - 1);
+          const aMid = (a1 + a2) / 2;
+
+          const p1x = centerWebX + Math.cos(a1) * (r * 1.5);
+          const p1y = centerWebY + Math.sin(a1) * (r * 0.85);
+
+          const p2x = centerWebX + Math.cos(a2) * (r * 1.5);
+          const p2y = centerWebY + Math.sin(a2) * (r * 0.85);
+
+          // Sagging drooping curve downwards
+          const sagDist = r * 0.72;
+          const midX = centerWebX + Math.cos(aMid) * (sagDist * 1.5);
+          const midY = centerWebY + Math.sin(aMid) * (sagDist * 0.85) + 12;
+
+          if (i === 0) pCtx.moveTo(p1x, p1y);
+          pCtx.quadraticCurveTo(midX, midY, p2x, p2y);
+        }
+        pCtx.stroke();
+      });
+
+      // 4. Anchor points for each project node on the web
+      PROJECTS_DATA.forEach(proj => {
+        const ax = (proj.anchorXPercent / 100) * w;
+        const ay = (proj.anchorYPercent / 100) * h;
+
+        // Anchor node glowing bead on web
+        pCtx.beginPath();
+        pCtx.arc(ax, ay, 4.5, 0, Math.PI * 2);
+        pCtx.fillStyle = proj.isFlagship ? '#FF2A4B' : '#00F0FF';
+        pCtx.shadowColor = proj.isFlagship ? '#FF2A4B' : '#00F0FF';
+        pCtx.shadowBlur = 10;
+        pCtx.fill();
+        pCtx.shadowBlur = 0;
+      });
     }
 
     function openProjectCaseStudy(projId) {
