@@ -508,11 +508,11 @@
     .skills-web-stage {
       position: relative;
       width: 100%;
-      height: 380px;
+      height: 410px;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow: visible;
     }
     #skills-radial-canvas {
       position: absolute;
@@ -533,8 +533,8 @@
       background: rgba(11, 16, 28, 0.95);
       border: 2px solid var(--accent-cyan);
       border-radius: 50%;
-      width: 110px;
-      height: 110px;
+      width: 96px;
+      height: 96px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -555,7 +555,7 @@
     }
     .scc-tag {
       font-family: var(--font-mono);
-      font-size: 8px;
+      font-size: 7.5px;
       font-weight: 800;
       color: var(--accent-cyan);
       letter-spacing: 0.12em;
@@ -565,18 +565,18 @@
     .skills-center-core.sub-active .scc-tag { color: var(--accent-red); }
     .scc-title {
       font-family: var(--font-display);
-      font-size: 16px;
+      font-size: 14.5px;
       font-weight: 900;
       letter-spacing: 0.03em;
       color: #FFFFFF;
       text-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
       line-height: 1.05;
-      padding: 0 6px;
+      padding: 0 4px;
     }
     .skills-center-core.sub-active .scc-title { text-shadow: 0 0 20px rgba(255, 42, 75, 0.8); }
     .scc-sub {
       font-family: var(--font-mono);
-      font-size: 8px;
+      font-size: 7.5px;
       color: var(--text-muted);
       margin-top: 2px;
       letter-spacing: 0.05em;
@@ -594,12 +594,13 @@
       text-align: center;
       user-select: none;
     }
-    .web-stuck-node:hover { transform: translate(-50%, -50%) scale(1.12); }
+    .web-stuck-node:hover { transform: translate(-50%, -50%) scale(1.10); }
     .wsn-badge-circle {
-      min-width: 82px;
-      max-width: 104px;
-      padding: 6px 8px;
-      border-radius: 12px;
+      min-width: 96px;
+      max-width: 132px;
+      width: max-content;
+      padding: 6px 12px;
+      border-radius: 10px;
       background: rgba(11, 16, 28, 0.94);
       border: 1.5px solid var(--accent-cyan);
       display: flex;
@@ -635,15 +636,14 @@
     }
     .web-stuck-node.accent-red .wsn-index-num { color: var(--accent-red); }
     .wsn-label {
-      font-family: var(--font-display);
-      font-size: 10px;
+      font-family: var(--font-sans);
+      font-size: 10.5px;
       font-weight: 800;
       color: #FFFFFF;
-      letter-spacing: 0.01em;
-      line-height: 1.2;
+      letter-spacing: 0.02em;
+      line-height: 1.25;
       text-align: center;
-      white-space: normal;
-      word-break: normal;
+      white-space: nowrap;
     }
     .wsn-count-pill {
       font-family: var(--font-mono);
@@ -2440,14 +2440,14 @@
         tag: 'DOMAIN // 01',
         numStr: '01',
         accentColor: 'cyan',
-        posXPercent: 20,
-        posYPercent: 27,
+        posXPercent: 16,
+        posYPercent: 24,
         skills: [
-          { name: 'PyTorch', numStr: '01', posXPercent: 20, posYPercent: 26, context: 'Used in Indic Multilingual NLP sentence embedding experiments and cross-lingual alignment models.', linkTo: 'research', targetEntityId: 'indic-nlp', linkText: 'EXPLORE IN RESEARCH' },
-          { name: 'TensorFlow', numStr: '02', posXPercent: 50, posYPercent: 20, context: 'Used for neural modeling pipelines and comparative benchmark training.', linkTo: 'research', targetEntityId: 'indic-nlp', linkText: 'EXPLORE IN RESEARCH' },
-          { name: 'Hugging Face', numStr: '03', posXPercent: 80, posYPercent: 26, context: 'Used for tokenizer pipelines, mBERT, MuRIL, and multilingual sentence transformers.', linkTo: 'research', targetEntityId: 'indic-nlp', linkText: 'EXPLORE IN RESEARCH' },
-          { name: 'LangChain & Ollama', numStr: '04', posXPercent: 80, posYPercent: 74, context: 'Used for retrieval-augmented generation and local LLM inference workflows.', linkTo: 'projects', targetEntityId: 'ai-email-summarizer', linkText: 'VIEW IN EMAIL SUMMARIZER' },
-          { name: 'NLP & LLMs', numStr: '05', posXPercent: 20, posYPercent: 74, context: 'Sentence embeddings, cross-lingual semantic alignment, and GraphRAG reasoning.', linkTo: 'research', targetEntityId: 'indic-nlp', linkText: 'EXPLORE IN RESEARCH' }
+          { name: 'PyTorch', numStr: '01', posXPercent: 18, posYPercent: 24, context: 'Used in Indic Multilingual NLP sentence embedding experiments and cross-lingual alignment models.', linkTo: 'research', targetEntityId: 'indic-nlp', linkText: 'EXPLORE IN RESEARCH' },
+          { name: 'TensorFlow', numStr: '02', posXPercent: 50, posYPercent: 15, context: 'Used for neural modeling pipelines and comparative benchmark training.', linkTo: 'research', targetEntityId: 'indic-nlp', linkText: 'EXPLORE IN RESEARCH' },
+          { name: 'Hugging Face', numStr: '03', posXPercent: 82, posYPercent: 24, context: 'Used for tokenizer pipelines, mBERT, MuRIL, and multilingual sentence transformers.', linkTo: 'research', targetEntityId: 'indic-nlp', linkText: 'EXPLORE IN RESEARCH' },
+          { name: 'LangChain & Ollama', numStr: '04', posXPercent: 82, posYPercent: 76, context: 'Used for retrieval-augmented generation and local LLM inference workflows.', linkTo: 'projects', targetEntityId: 'ai-email-summarizer', linkText: 'VIEW IN EMAIL SUMMARIZER' },
+          { name: 'NLP & LLMs', numStr: '05', posXPercent: 18, posYPercent: 76, context: 'Sentence embeddings, cross-lingual semantic alignment, and GraphRAG reasoning.', linkTo: 'research', targetEntityId: 'indic-nlp', linkText: 'EXPLORE IN RESEARCH' }
         ]
       },
       {
@@ -2457,11 +2457,11 @@
         numStr: '02',
         accentColor: 'red',
         posXPercent: 50,
-        posYPercent: 20,
+        posYPercent: 15,
         skills: [
-          { name: 'OpenCV', numStr: '01', posXPercent: 24, posYPercent: 30, context: 'Real-time video frame acquisition, filtering, contour isolation, and image processing.', linkTo: 'projects', targetEntityId: 'isl-translator', linkText: 'VIEW ISL TRANSLATOR' },
-          { name: 'MediaPipe', numStr: '02', posXPercent: 50, posYPercent: 78, context: 'High-precision 21 3D hand landmark coordinate tracking for real-time sign recognition.', linkTo: 'projects', targetEntityId: 'isl-translator', linkText: 'VIEW ISL TRANSLATOR' },
-          { name: 'Gesture Recognition', numStr: '03', posXPercent: 76, posYPercent: 30, context: 'Machine-learning spatial classification translating gestures into real-time speech.', linkTo: 'projects', targetEntityId: 'isl-translator', linkText: 'VIEW ISL TRANSLATOR' }
+          { name: 'OpenCV', numStr: '01', posXPercent: 22, posYPercent: 28, context: 'Real-time video frame acquisition, filtering, contour isolation, and image processing.', linkTo: 'projects', targetEntityId: 'isl-translator', linkText: 'VIEW ISL TRANSLATOR' },
+          { name: 'MediaPipe', numStr: '02', posXPercent: 50, posYPercent: 82, context: 'High-precision 21 3D hand landmark coordinate tracking for real-time sign recognition.', linkTo: 'projects', targetEntityId: 'isl-translator', linkText: 'VIEW ISL TRANSLATOR' },
+          { name: 'Gesture Recognition', numStr: '03', posXPercent: 78, posYPercent: 28, context: 'Machine-learning spatial classification translating gestures into real-time speech.', linkTo: 'projects', targetEntityId: 'isl-translator', linkText: 'VIEW ISL TRANSLATOR' }
         ]
       },
       {
@@ -2470,14 +2470,14 @@
         tag: 'DOMAIN // 03',
         numStr: '03',
         accentColor: 'cyan',
-        posXPercent: 80,
-        posYPercent: 27,
+        posXPercent: 84,
+        posYPercent: 24,
         skills: [
-          { name: 'FastAPI', numStr: '01', posXPercent: 20, posYPercent: 26, context: 'Engineered flagship TeamFlow async backend with Pydantic schemas and dependency injection.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'React & Vite', numStr: '02', posXPercent: 50, posYPercent: 20, context: 'Engineered modular component hierarchy and responsive state management for TeamFlow platform.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'TypeScript', numStr: '03', posXPercent: 80, posYPercent: 26, context: 'Strict type safety across frontend models, API contracts, and async network calls.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'ASP.NET Core', numStr: '04', posXPercent: 80, posYPercent: 74, context: 'Enterprise feature development and RBAC authorization during Syncfusion AI Internship.', linkTo: 'experience', targetEntityId: null, linkText: 'VIEW IN EXPERIENCE' },
-          { name: 'Flask & REST APIs', numStr: '05', posXPercent: 20, posYPercent: 74, context: 'Stateless JSON endpoints, CORS security, and database integration in MyKitchen planner.', linkTo: 'projects', targetEntityId: 'mykitchen', linkText: 'VIEW IN MYKITCHEN' }
+          { name: 'FastAPI', numStr: '01', posXPercent: 18, posYPercent: 24, context: 'Engineered flagship TeamFlow async backend with Pydantic schemas and dependency injection.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'React & Vite', numStr: '02', posXPercent: 50, posYPercent: 15, context: 'Engineered modular component hierarchy and responsive state management for TeamFlow platform.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'TypeScript', numStr: '03', posXPercent: 82, posYPercent: 24, context: 'Strict type safety across frontend models, API contracts, and async network calls.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'ASP.NET Core', numStr: '04', posXPercent: 82, posYPercent: 76, context: 'Enterprise feature development and RBAC authorization during Syncfusion AI Internship.', linkTo: 'experience', targetEntityId: null, linkText: 'VIEW IN EXPERIENCE' },
+          { name: 'Flask & REST APIs', numStr: '05', posXPercent: 18, posYPercent: 76, context: 'Stateless JSON endpoints, CORS security, and database integration in MyKitchen planner.', linkTo: 'projects', targetEntityId: 'mykitchen', linkText: 'VIEW IN MYKITCHEN' }
         ]
       },
       {
@@ -2486,12 +2486,12 @@
         tag: 'DOMAIN // 04',
         numStr: '04',
         accentColor: 'red',
-        posXPercent: 80,
-        posYPercent: 73,
+        posXPercent: 84,
+        posYPercent: 76,
         skills: [
-          { name: 'PostgreSQL 17.11', numStr: '01', posXPercent: 24, posYPercent: 30, context: 'Primary relational database for TeamFlow; foreign keys, cascades, and indexed queries.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'SQLAlchemy 2.x', numStr: '02', posXPercent: 76, posYPercent: 30, context: 'Declarative async ORM models, session handling, and transaction boundaries in FastAPI.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'MySQL', numStr: '03', posXPercent: 50, posYPercent: 76, context: 'Relational data modeling, ACID transactions, and structured query optimization.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN PROJECTS' }
+          { name: 'PostgreSQL 17.11', numStr: '01', posXPercent: 22, posYPercent: 28, context: 'Primary relational database for TeamFlow; foreign keys, cascades, and indexed queries.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'SQLAlchemy 2.x', numStr: '02', posXPercent: 78, posYPercent: 28, context: 'Declarative async ORM models, session handling, and transaction boundaries in FastAPI.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'MySQL', numStr: '03', posXPercent: 50, posYPercent: 80, context: 'Relational data modeling, ACID transactions, and structured query optimization.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN PROJECTS' }
         ]
       },
       {
@@ -2501,11 +2501,11 @@
         numStr: '05',
         accentColor: 'cyan',
         posXPercent: 50,
-        posYPercent: 80,
+        posYPercent: 85,
         skills: [
-          { name: 'Python', numStr: '01', posXPercent: 24, posYPercent: 30, context: 'Primary language across PyTorch research, FastAPI backends, and one-shot data scripts.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN PROJECTS' },
-          { name: 'Java', numStr: '02', posXPercent: 76, posYPercent: 30, context: 'Object-oriented programming, data structures, and algorithmic software design.', linkTo: 'about', targetEntityId: null, linkText: 'VIEW IN ABOUT' },
-          { name: 'C & C++', numStr: '03', posXPercent: 50, posYPercent: 76, context: 'Low-level memory management concepts, computing fundamentals, and algorithms.', linkTo: 'about', targetEntityId: null, linkText: 'VIEW IN ABOUT' }
+          { name: 'Python', numStr: '01', posXPercent: 22, posYPercent: 28, context: 'Primary language across PyTorch research, FastAPI backends, and one-shot data scripts.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN PROJECTS' },
+          { name: 'Java', numStr: '02', posXPercent: 78, posYPercent: 28, context: 'Object-oriented programming, data structures, and algorithmic software design.', linkTo: 'about', targetEntityId: null, linkText: 'VIEW IN ABOUT' },
+          { name: 'C & C++', numStr: '03', posXPercent: 50, posYPercent: 80, context: 'Low-level memory management concepts, computing fundamentals, and algorithms.', linkTo: 'about', targetEntityId: null, linkText: 'VIEW IN ABOUT' }
         ]
       },
       {
@@ -2514,13 +2514,13 @@
         tag: 'DOMAIN // 06',
         numStr: '06',
         accentColor: 'cyan',
-        posXPercent: 20,
-        posYPercent: 73,
+        posXPercent: 16,
+        posYPercent: 76,
         skills: [
-          { name: 'PyTest', numStr: '01', posXPercent: 24, posYPercent: 28, context: 'Automated backend verification, route security testing, and integration tests in TeamFlow.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'Mutation Testing', numStr: '02', posXPercent: 76, posYPercent: 28, context: 'Evaluated resilience and test quality of critical software verification suites.', linkTo: 'about', targetEntityId: null, linkText: 'VIEW IN ABOUT' },
-          { name: 'Git & GitHub', numStr: '03', posXPercent: 76, posYPercent: 72, context: 'Branch management, pull requests, CI/CD workflows, and disciplined commit histories.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN PROJECTS' },
-          { name: 'Linux & VS Code', numStr: '04', posXPercent: 24, posYPercent: 72, context: 'Command-line scripting, server environments, and multi-workspace developer tooling.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN PROJECTS' }
+          { name: 'PyTest', numStr: '01', posXPercent: 22, posYPercent: 26, context: 'Automated backend verification, route security testing, and integration tests in TeamFlow.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN TEAMFLOW' },
+          { name: 'Mutation Testing', numStr: '02', posXPercent: 78, posYPercent: 26, context: 'Evaluated resilience and test quality of critical software verification suites.', linkTo: 'about', targetEntityId: null, linkText: 'VIEW IN ABOUT' },
+          { name: 'Git & GitHub', numStr: '03', posXPercent: 78, posYPercent: 76, context: 'Branch management, pull requests, CI/CD workflows, and disciplined commit histories.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN PROJECTS' },
+          { name: 'Linux & VS Code', numStr: '04', posXPercent: 22, posYPercent: 76, context: 'Command-line scripting, server environments, and multi-workspace developer tooling.', linkTo: 'projects', targetEntityId: 'teamflow', linkText: 'VIEW IN PROJECTS' }
         ]
       }
     ];
