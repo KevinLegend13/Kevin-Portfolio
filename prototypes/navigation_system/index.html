@@ -34,7 +34,18 @@
       --font-mono: 'JetBrains Mono', monospace;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
+    }
+    *::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
 
     body {
       background: var(--bg-void);
@@ -45,6 +56,8 @@
       height: 100vh;
       user-select: none;
       -webkit-font-smoothing: antialiased;
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
     }
 
     /* Ambient Background Layer */
@@ -1555,48 +1568,9 @@
       letter-spacing: 0.2em;
     }
 
-    /* Telemetry HUD */
+    /* Telemetry HUD (Hidden per user request) */
     #telemetry-hud {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 260px;
-      background: rgba(11, 16, 28, 0.95);
-      border: 1px solid rgba(0, 210, 255, 0.3);
-      border-radius: 10px;
-      padding: 14px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      z-index: 200;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-    }
-    .hud-header {
-      display: flex;
-      justify-content: space-between;
-      color: var(--accent-cyan);
-      font-weight: 700;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      padding-bottom: 6px;
-      margin-bottom: 8px;
-    }
-    .hud-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 4px;
-      color: var(--text-muted);
-    }
-    .hud-val { color: #FFFFFF; font-weight: 600; }
-    .hud-badge {
-      background: rgba(0, 210, 255, 0.2);
-      color: var(--accent-cyan);
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-weight: bold;
-    }
-    .hud-badge.active-anim {
-      background: rgba(255, 42, 75, 0.3);
-      color: var(--accent-red);
+      display: none !important;
     }
 
     /* Key Hints */
@@ -4302,6 +4276,7 @@
     }
 
     function updateTelemetry() {
+      if (!teleState) return;
       teleState.textContent = currentState;
       if (currentState !== STATES.IDLE) {
         teleState.className = 'hud-badge active-anim';
@@ -4309,7 +4284,7 @@
         teleState.className = 'hud-badge';
       }
       const activeState = entityStates[targetSceneId || currentSceneId];
-      if (activeState) {
+      if (activeState && teleScale) {
         teleScale.textContent = `${activeState.scale.toFixed(2)}x (${activeState.mode.toUpperCase()})`;
       }
     }
