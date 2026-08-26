@@ -3023,11 +3023,6 @@
     const ctx = canvas.getContext('2d');
     const worldViewport = document.getElementById('world-viewport');
     const navPillContainer = document.getElementById('nav-pill-container');
-    const teleState = document.getElementById('tele-state');
-    const teleRoute = document.getElementById('tele-route');
-    const teleScale = document.getElementById('tele-scale');
-    const teleVibe = document.getElementById('tele-vibe');
-    const teleFps = document.getElementById('tele-fps');
     const introOverlay = document.getElementById('intro-overlay');
     const introBox = document.getElementById('intro-box');
     const copyToast = document.getElementById('copy-toast');
@@ -4641,7 +4636,6 @@
             entityStates[targetSceneId].vibX = currentVib;
             entityStates[targetSceneId].vibY = -currentVib * 0.5;
           }
-          if (teleVibe) teleVibe.textContent = `${currentVib.toFixed(1)} px`;
 
           webOpacity = Math.max(0, 1.0 - impactPhase * 1.8);
 
@@ -4663,7 +4657,6 @@
             entityStates[targetSceneId].vibX = 0;
             entityStates[targetSceneId].vibY = 0;
           }
-          if (teleVibe) teleVibe.textContent = `0.0 px`;
 
           if (settlePhase >= 1.0) {
             currentState = STATES.IDLE;
@@ -4703,11 +4696,8 @@
 
         case STATES.IDLE:
         default:
-          if (teleVibe) teleVibe.textContent = `0.0 px`;
           break;
       }
-
-      updateTelemetry();
     }
 
     function updateCameraPhysics(dt) {
@@ -4757,20 +4747,6 @@
           entity.style.transform = `translate(-50%, -50%) scale(${state.scale.toFixed(3)}) translate(${state.vibX.toFixed(1)}px, ${state.vibY.toFixed(1)}px)`;
         }
       });
-    }
-
-    function updateTelemetry() {
-      if (!teleState) return;
-      teleState.textContent = currentState;
-      if (currentState !== STATES.IDLE) {
-        teleState.className = 'hud-badge active-anim';
-      } else {
-        teleState.className = 'hud-badge';
-      }
-      const activeState = entityStates[targetSceneId || currentSceneId];
-      if (activeState && teleScale) {
-        teleScale.textContent = `${activeState.scale.toFixed(2)}x (${activeState.mode.toUpperCase()})`;
-      }
     }
 
     // --- 13. Canvas Web Vector Rendering ---
