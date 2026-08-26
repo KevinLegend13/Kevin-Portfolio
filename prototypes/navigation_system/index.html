@@ -198,7 +198,7 @@
       max-height: 680px;
       border-radius: 24px;
       backdrop-filter: blur(28px);
-      padding: 30px 38px;
+      padding: 28px 36px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -731,11 +731,11 @@
       position: relative;
     }
 
-    /* LEVEL 1: Dangling Spider-Web Canvas & Suspended Nodes */
+    /* LEVEL 1: Full-Stage Dangling Spider-Web Canvas & Suspended Nodes */
     .projects-dangling-stage {
       position: relative;
       width: 100%;
-      height: 490px;
+      height: 520px;
       overflow: hidden;
     }
 
@@ -759,33 +759,33 @@
       align-items: center;
       user-select: none;
       transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
-      animation: spiderBobbing 4s ease-in-out infinite;
+      animation: spiderBobbing 4.5s ease-in-out infinite;
     }
     @keyframes spiderBobbing {
       0%, 100% { transform: translate(-50%, 0); }
-      50% { transform: translate(-50%, 7px); }
+      50% { transform: translate(-50%, 9px); }
     }
 
     .dangling-project-node:hover {
       animation-play-state: paused;
-      transform: translate(-50%, -4px) scale(1.08);
+      transform: translate(-50%, -6px) scale(1.08);
     }
 
     .dpn-silk-thread {
-      width: 1.5px;
-      background: linear-gradient(to bottom, rgba(0, 240, 255, 0.4), #00F0FF);
-      box-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(0, 240, 255, 0.35), #00F0FF);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
       margin-bottom: 0px;
     }
 
     .dpn-card-box {
-      width: 195px;
+      width: 232px;
       background: rgba(11, 18, 30, 0.96);
       border: 1.5px solid #00F0FF;
-      border-radius: 12px;
-      padding: 12px 14px;
+      border-radius: 14px;
+      padding: 14px 16px;
       text-align: left;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85), 0 0 20px rgba(0, 240, 255, 0.25);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 240, 255, 0.25);
       backdrop-filter: blur(16px);
       transition: all 0.2s ease;
       position: relative;
@@ -793,62 +793,64 @@
     .dangling-project-node:hover .dpn-card-box {
       border-color: #FFFFFF;
       background: rgba(16, 28, 48, 0.98);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.95), 0 0 30px #00F0FF;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.95), 0 0 35px #00F0FF;
     }
     .dangling-project-node.flagship-node .dpn-card-box {
       border-color: var(--accent-red);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85), 0 0 25px var(--accent-red-glow);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.9), 0 0 30px var(--accent-red-glow);
     }
     .dangling-project-node.flagship-node:hover .dpn-card-box {
       border-color: #FFFFFF;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.95), 0 0 35px var(--accent-red);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.95), 0 0 40px var(--accent-red);
     }
 
     .dpn-top-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
     .dpn-num-tag {
       font-family: var(--font-mono);
-      font-size: 9.5px;
+      font-size: 11px;
       font-weight: 800;
       color: #00F0FF;
+      letter-spacing: 0.08em;
     }
     .dangling-project-node.flagship-node .dpn-num-tag { color: var(--accent-red); }
     .dpn-badge {
       font-family: var(--font-mono);
-      font-size: 8.5px;
+      font-size: 9.5px;
       font-weight: 800;
       color: #FFFFFF;
       background: var(--accent-red);
-      padding: 1.5px 5px;
-      border-radius: 3px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
     }
     .dpn-title {
       font-family: var(--font-display);
-      font-size: 14.5px;
+      font-size: 17.5px;
       font-weight: 900;
       color: #FFFFFF;
       letter-spacing: -0.01em;
       line-height: 1.15;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
     .dpn-sub-text {
-      font-size: 10px;
-      color: var(--text-muted);
-      line-height: 1.35;
-      margin-bottom: 8px;
+      font-size: 12px;
+      color: #CBD5E1;
+      line-height: 1.45;
+      margin-bottom: 10px;
     }
     .dpn-cta-txt {
       font-family: var(--font-mono);
-      font-size: 9.5px;
+      font-size: 11px;
       font-weight: 800;
       color: #00F0FF;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
     }
     .dangling-project-node.flagship-node .dpn-cta-txt { color: var(--accent-red); }
 
@@ -1335,7 +1337,7 @@
             <div class="home-telemetry-cue">
               <span>LOCATION: <strong>VELLORE / CHENNAI</strong></span>
               <span>&bull;</span>
-              <span>NETWORK: <strong>SPIDER-WEB v8.6</strong></span>
+              <span>NETWORK: <strong>SPIDER-WEB v8.7</strong></span>
             </div>
           </div>
         </div>
@@ -1502,7 +1504,7 @@
       </div>
 
       <!-- =======================================================
-           NODE 03: PROJECTS (SUSPENDED SPIDER-WEB & DEDICATED CASE STUDIES)
+           NODE 03: PROJECTS (FULL-STAGE SUSPENDED SPIDER-WEB & CASE STUDIES)
            ======================================================= -->
       <div class="scene-entity" id="entity-projects">
         <!-- Compact View -->
@@ -1512,7 +1514,7 @@
           <div class="node-title-txt">PROJECTS</div>
           <div class="node-status-txt">TeamFlow &bull; ISL Translator &bull; One Health</div>
         </div>
-        <!-- Full Page View (Switches between Suspended Dangling Web & Full Case Study) -->
+        <!-- Full Page View (Switches between Full Suspended Spider-Web & Full Case Study) -->
         <div class="full-page-frame" id="page-projects" style="display: none;">
           
           <!-- Top Header Row -->
@@ -1632,7 +1634,7 @@
 
   <script>
     // --- 1. Master Projects Ground Truth Data from Master Profile ---
-    // Positions correspond to organic hanging points on the suspended spider web
+    // Spread across the full viewport width and height of the suspended spider-web
     const PROJECTS_DATA = [
       {
         id: 'teamflow',
@@ -1655,10 +1657,9 @@
         database: 'Relational schema in PostgreSQL 17.11 defining Users, Workspaces, Projects, Task Columns, and Audit Logs with strict constraints and SQLAlchemy 2.0 async sessions.',
         testing: 'Automated test suite using PyTest verifying endpoint status codes, unauthorized token rejections, role privilege boundaries, and database rollback behaviors.',
         takeaways: 'Demonstrates end-to-end full-stack software mastery, API contract rigor, production relational database engineering, and security-first system design.',
-        // Dangling coordinate on the suspended spider web:
         anchorXPercent: 50,
-        anchorYPercent: 32,
-        threadLength: 75,
+        anchorYPercent: 30,
+        threadLength: 65,
         delayBob: '0s'
       },
       {
@@ -1678,9 +1679,9 @@
           { tier: 'ACCESSIBILITY OUTPUT', name: 'Speech & Text UI', role: 'Instant audio vocalization and text subtitle display.' }
         ],
         takeaways: 'Demonstrates computer vision pipeline expertise, real-time spatial geometry processing, and practical accessibility engineering.',
-        anchorXPercent: 18,
-        anchorYPercent: 22,
-        threadLength: 60,
+        anchorXPercent: 15,
+        anchorYPercent: 18,
+        threadLength: 55,
         delayBob: '0.8s'
       },
       {
@@ -1700,9 +1701,9 @@
           { tier: 'EXPLAINABILITY', name: 'Surveillance Dashboard', role: 'Spatiotemporal heatmaps and audit-ready decision trails.' }
         ],
         takeaways: 'Demonstrates advanced AI research capability, GraphRAG reasoning architectures, and cross-domain data fusion for high-impact decision support.',
-        anchorXPercent: 82,
-        anchorYPercent: 22,
-        threadLength: 90,
+        anchorXPercent: 85,
+        anchorYPercent: 18,
+        threadLength: 75,
         delayBob: '1.6s'
       },
       {
@@ -1721,9 +1722,9 @@
           { tier: 'DATA STORE', name: 'Relational DB', role: 'Ingredient tables, pantry inventories, and recipe association schemas.' }
         ],
         takeaways: 'Demonstrates full-stack web service development, clean API design, and intuitive user experience engineering.',
-        anchorXPercent: 30,
-        anchorYPercent: 44,
-        threadLength: 85,
+        anchorXPercent: 26,
+        anchorYPercent: 42,
+        threadLength: 70,
         delayBob: '1.2s'
       },
       {
@@ -1742,9 +1743,9 @@
           { tier: 'LLM INFERENCE', name: 'Neural Model Layer', role: 'Extracts summary, urgency rating, and structured action items.' }
         ],
         takeaways: 'Demonstrates prompt engineering mastery, LLM pipeline orchestration, and practical natural language automation.',
-        anchorXPercent: 70,
-        anchorYPercent: 44,
-        threadLength: 70,
+        anchorXPercent: 74,
+        anchorYPercent: 42,
+        threadLength: 60,
         delayBob: '2.4s'
       },
       {
@@ -1764,8 +1765,8 @@
         ],
         takeaways: 'Demonstrates cloud service integration, serverless mindset, and secure infrastructure operations.',
         anchorXPercent: 50,
-        anchorYPercent: 58,
-        threadLength: 95,
+        anchorYPercent: 55,
+        threadLength: 85,
         delayBob: '3.0s'
       }
     ];
@@ -2038,7 +2039,7 @@
       projectsDynamicMount.innerHTML = '';
 
       if (!activeCaseStudyId) {
-        // LEVEL 1: Suspended Dangling Spider-Web Stage
+        // LEVEL 1: Full Suspended Dangling Spider-Web Stage
         projectsStatusPill.innerHTML = '<span class="status-dot" style="background:#00F0FF; box-shadow:0 0 8px #00F0FF;"></span> SUSPENDED SPIDER-WEB // CLICK ANY DANGLING PROJECT';
         projectsBreadcrumb.textContent = 'Master Profile Source of Truth';
         projectsBackBtn.textContent = '← RETURN TO HOME';
@@ -2099,7 +2100,7 @@
         const heroBlock = document.createElement('div');
         heroBlock.className = 'cs-hero-header';
         heroBlock.innerHTML = `
-          <div class="ppc-domain-badge" style="margin-bottom: 4px; color:#00F0FF; font-family:var(--font-mono); font-size:10px; font-weight:800; letter-spacing:0.1em;">${proj.domain} ${proj.isFlagship ? '• FLAGSHIP SOFTWARE CASE STUDY' : ''}</div>
+          <div class="ppc-domain-badge" style="margin-bottom: 4px; color:#00F0FF; font-family:var(--font-mono); font-size:10.5px; font-weight:800; letter-spacing:0.1em;">${proj.domain} ${proj.isFlagship ? '• FLAGSHIP SOFTWARE CASE STUDY' : ''}</div>
           <h2 class="cs-hero-title">${proj.title}</h2>
           <p class="cs-hero-tagline">${proj.tagline}</p>
           <div style="margin-top: 14px;">
@@ -2208,15 +2209,15 @@
       }
     }
 
-    // Draw the suspended spider-web based on the user's reference drawing
+    // Draw the full-stage suspended spider-web filling the entire canvas
     function drawDanglingProjectsCanvas() {
       const stage = document.getElementById('projects-dangling-stage');
       const dCanvas = document.getElementById('projects-dangling-canvas');
       if (!stage || !dCanvas) return;
 
       const rect = stage.getBoundingClientRect();
-      const w = rect.width || 1000;
-      const h = rect.height || 490;
+      const w = rect.width || 1080;
+      const h = rect.height || 520;
 
       dCanvas.width = w;
       dCanvas.height = h;
@@ -2224,70 +2225,74 @@
       const pCtx = dCanvas.getContext('2d');
       pCtx.clearRect(0, 0, w, h);
 
-      // 1. Two large upper anchor suspension threads drooping to a center high web
-      pCtx.strokeStyle = 'rgba(0, 240, 255, 0.35)';
-      pCtx.lineWidth = 2.0;
+      // 1. Full-Stage Outer Anchor Suspension Lines connecting to top corners
+      pCtx.strokeStyle = 'rgba(0, 240, 255, 0.32)';
+      pCtx.lineWidth = 1.8;
 
-      // Left Bridge Line
+      // Left Bridge Line from top-left
       pCtx.beginPath();
-      pCtx.moveTo(w * 0.02, h * 0.02);
-      pCtx.quadraticCurveTo(w * 0.28, h * 0.12, w * 0.5, h * 0.18);
+      pCtx.moveTo(0, 0);
+      pCtx.quadraticCurveTo(w * 0.25, h * 0.12, w * 0.5, h * 0.16);
       pCtx.stroke();
 
-      // Right Bridge Line
+      // Right Bridge Line from top-right
       pCtx.beginPath();
-      pCtx.moveTo(w * 0.98, h * 0.02);
-      pCtx.quadraticCurveTo(w * 0.72, h * 0.12, w * 0.5, h * 0.18);
+      pCtx.moveTo(w, 0);
+      pCtx.quadraticCurveTo(w * 0.75, h * 0.12, w * 0.5, h * 0.16);
       pCtx.stroke();
 
-      // Horizontal Cross Line
+      // Broad Outer Anchor Strands stretching to the bottom and side walls
       pCtx.beginPath();
-      pCtx.moveTo(w * 0.12, h * 0.24);
-      pCtx.lineTo(w * 0.88, h * 0.24);
-      pCtx.strokeStyle = 'rgba(0, 240, 255, 0.25)';
+      pCtx.moveTo(0, h * 0.35);
+      pCtx.quadraticCurveTo(w * 0.22, h * 0.32, w * 0.5, h * 0.16);
       pCtx.stroke();
 
-      // 2. Suspended Web Radial Spokes hanging downward
-      const spokes = 10;
+      pCtx.beginPath();
+      pCtx.moveTo(w, h * 0.35);
+      pCtx.quadraticCurveTo(w * 0.78, h * 0.32, w * 0.5, h * 0.16);
+      pCtx.stroke();
+
+      // 2. Full Radial Spokes emanating downward and outward across the whole viewport
+      const spokes = 14;
       const centerWebX = w * 0.5;
-      const centerWebY = h * 0.20;
+      const centerWebY = h * 0.16;
 
       for (let i = 0; i < spokes; i++) {
-        const angle = Math.PI * 0.15 + (i * Math.PI * 0.70) / (spokes - 1);
-        const radius = h * 0.70;
-        const endX = centerWebX + Math.cos(angle) * (w * 0.42);
+        const angle = Math.PI * 0.06 + (i * Math.PI * 0.88) / (spokes - 1);
+        const radius = h * 0.92;
+        const endX = centerWebX + Math.cos(angle) * (w * 0.55);
         const endY = centerWebY + Math.sin(angle) * radius;
 
         pCtx.beginPath();
         pCtx.moveTo(centerWebX, centerWebY);
         pCtx.lineTo(endX, endY);
-        pCtx.strokeStyle = 'rgba(0, 240, 255, 0.28)';
+        pCtx.strokeStyle = 'rgba(0, 240, 255, 0.24)';
         pCtx.lineWidth = 1.2;
         pCtx.stroke();
       }
 
-      // 3. Concentric Sagging Spiral Webs (Drooping downwards like the reference)
-      const rings = [35, 70, 110, 160, 210, 260];
+      // 3. Broad Concentric Sagging Spiral Webs (Spanning the whole height and width)
+      const rings = [45, 95, 150, 215, 285, 360, 440];
       rings.forEach((r, rIdx) => {
-        pCtx.strokeStyle = rIdx % 2 === 0 ? 'rgba(0, 240, 255, 0.35)' : 'rgba(255, 42, 75, 0.3)';
+        pCtx.strokeStyle = rIdx % 2 === 0 ? 'rgba(0, 240, 255, 0.32)' : 'rgba(255, 42, 75, 0.28)';
         pCtx.lineWidth = 1.2;
 
         pCtx.beginPath();
         for (let i = 0; i < spokes - 1; i++) {
-          const a1 = Math.PI * 0.15 + (i * Math.PI * 0.70) / (spokes - 1);
-          const a2 = Math.PI * 0.15 + ((i + 1) * Math.PI * 0.70) / (spokes - 1);
+          const a1 = Math.PI * 0.06 + (i * Math.PI * 0.88) / (spokes - 1);
+          const a2 = Math.PI * 0.06 + ((i + 1) * Math.PI * 0.88) / (spokes - 1);
           const aMid = (a1 + a2) / 2;
 
-          const p1x = centerWebX + Math.cos(a1) * (r * 1.5);
-          const p1y = centerWebY + Math.sin(a1) * (r * 0.85);
+          const p1x = centerWebX + Math.cos(a1) * (r * 1.55);
+          const p1y = centerWebY + Math.sin(a1) * (r * 0.88);
 
-          const p2x = centerWebX + Math.cos(a2) * (r * 1.5);
-          const p2y = centerWebY + Math.sin(a2) * (r * 0.85);
+          const p2x = centerWebX + Math.cos(a2) * (r * 1.55);
+          const p2y = centerWebY + Math.sin(a2) * (r * 0.88);
 
-          // Sagging drooping curve downwards
-          const sagDist = r * 0.72;
-          const midX = centerWebX + Math.cos(aMid) * (sagDist * 1.5);
-          const midY = centerWebY + Math.sin(aMid) * (sagDist * 0.85) + 12;
+          // Authentic gravity sag downwards
+          const sagDist = r * 0.76;
+          const midX = centerWebX + Math.cos(aMid) * (sagDist * 1.55);
+          const midY = centerWebY + Math.sin(aMid) * (sagDist * 0.88) + 14;
 
           if (i === 0) pCtx.moveTo(p1x, p1y);
           pCtx.quadraticCurveTo(midX, midY, p2x, p2y);
@@ -2295,17 +2300,16 @@
         pCtx.stroke();
       });
 
-      // 4. Anchor points for each project node on the web
+      // 4. Glowing Anchor Points on Web
       PROJECTS_DATA.forEach(proj => {
         const ax = (proj.anchorXPercent / 100) * w;
         const ay = (proj.anchorYPercent / 100) * h;
 
-        // Anchor node glowing bead on web
         pCtx.beginPath();
-        pCtx.arc(ax, ay, 4.5, 0, Math.PI * 2);
+        pCtx.arc(ax, ay, 5.0, 0, Math.PI * 2);
         pCtx.fillStyle = proj.isFlagship ? '#FF2A4B' : '#00F0FF';
         pCtx.shadowColor = proj.isFlagship ? '#FF2A4B' : '#00F0FF';
-        pCtx.shadowBlur = 10;
+        pCtx.shadowBlur = 12;
         pCtx.fill();
         pCtx.shadowBlur = 0;
       });
