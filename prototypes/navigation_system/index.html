@@ -198,7 +198,7 @@
       max-height: 680px;
       border-radius: 24px;
       backdrop-filter: blur(28px);
-      padding: 36px 44px;
+      padding: 32px 40px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -315,7 +315,7 @@
       justify-content: space-between;
       align-items: center;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 16px;
+      padding-top: 14px;
     }
     .cta-button-group { display: flex; gap: 12px; }
     .hero-cta-primary {
@@ -476,22 +476,24 @@
     .skills-web-stage {
       position: relative;
       width: 100%;
-      height: calc(100% - 60px);
+      height: 480px;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
 
     #skills-radial-canvas {
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
       z-index: 1;
     }
 
-    /* Central "SKILLS" Monumental Hub */
+    /* Central "SKILLS" Monumental Web Core */
     .skills-center-core {
       position: absolute;
       top: 50%;
@@ -499,12 +501,11 @@
       transform: translate(-50%, -50%);
       z-index: 10;
       text-align: center;
-      background: rgba(11, 16, 28, 0.92);
-      border: 2.5px solid var(--accent-cyan);
-      padding: 24px 38px;
+      background: rgba(11, 16, 28, 0.95);
+      border: 2px solid var(--accent-cyan);
       border-radius: 50%;
-      width: 220px;
-      height: 220px;
+      width: 180px;
+      height: 180px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -514,7 +515,7 @@
     }
     .scc-tag {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 800;
       color: var(--accent-cyan);
       letter-spacing: 0.15em;
@@ -522,16 +523,16 @@
     }
     .scc-title {
       font-family: var(--font-display);
-      font-size: 38px;
+      font-size: 34px;
       font-weight: 900;
       letter-spacing: 0.05em;
       color: #FFFFFF;
-      text-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+      text-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
       line-height: 1.0;
     }
     .scc-sub {
       font-family: var(--font-mono);
-      font-size: 9.5px;
+      font-size: 9px;
       color: var(--text-muted);
       margin-top: 4px;
       letter-spacing: 0.06em;
@@ -543,7 +544,7 @@
       z-index: 20;
       transform: translate(-50%, -50%);
       cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -551,14 +552,14 @@
       user-select: none;
     }
     .web-stuck-node:hover {
-      transform: translate(-50%, -50%) scale(1.12);
+      transform: translate(-50%, -50%) scale(1.14);
     }
 
     .wsn-badge-circle {
-      width: 90px;
-      height: 90px;
+      width: 86px;
+      height: 86px;
       border-radius: 50%;
-      background: rgba(11, 16, 28, 0.95);
+      background: rgba(11, 16, 28, 0.96);
       border: 2px solid var(--accent-cyan);
       display: flex;
       flex-direction: column;
@@ -566,14 +567,14 @@
       justify-content: center;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-cyan-glow);
       backdrop-filter: blur(14px);
-      padding: 8px;
-      margin-bottom: 6px;
+      padding: 6px;
+      margin-bottom: 4px;
       transition: all 0.25s ease;
     }
     .web-stuck-node:hover .wsn-badge-circle {
       border-color: #FFFFFF;
       box-shadow: 0 0 30px var(--accent-cyan);
-      background: rgba(0, 210, 255, 0.15);
+      background: rgba(0, 210, 255, 0.2);
     }
     .web-stuck-node.accent-red .wsn-badge-circle {
       border-color: var(--accent-red);
@@ -582,17 +583,16 @@
     .web-stuck-node.accent-red:hover .wsn-badge-circle {
       border-color: #FFFFFF;
       box-shadow: 0 0 30px var(--accent-red);
-      background: rgba(255, 42, 75, 0.15);
+      background: rgba(255, 42, 75, 0.2);
     }
 
     .wsn-icon {
-      font-family: var(--font-mono);
-      font-size: 16px;
+      font-size: 18px;
       margin-bottom: 2px;
     }
     .wsn-label {
       font-family: var(--font-display);
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 900;
       color: #FFFFFF;
       letter-spacing: -0.01em;
@@ -603,23 +603,22 @@
       font-size: 9px;
       font-weight: 700;
       color: var(--accent-cyan);
-      background: rgba(0, 210, 255, 0.12);
-      padding: 2px 6px;
+      background: rgba(0, 210, 255, 0.15);
+      padding: 2px 8px;
       border-radius: 10px;
-      border: 1px solid rgba(0, 210, 255, 0.3);
-      margin-top: 2px;
+      border: 1px solid rgba(0, 210, 255, 0.35);
     }
     .web-stuck-node.accent-red .wsn-count-pill {
       color: var(--accent-red);
-      background: rgba(255, 42, 75, 0.12);
-      border-color: rgba(255, 42, 75, 0.3);
+      background: rgba(255, 42, 75, 0.15);
+      border-color: rgba(255, 42, 75, 0.35);
     }
 
     /* Centered Modal Popup Box for Selected Skill Group */
     .skills-modal-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(6, 8, 14, 0.85);
+      background: rgba(6, 8, 14, 0.88);
       backdrop-filter: blur(14px);
       z-index: 100;
       display: flex;
@@ -627,7 +626,7 @@
       justify-content: center;
       opacity: 0;
       pointer-events: none;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .skills-modal-overlay.active {
       opacity: 1;
@@ -636,15 +635,15 @@
 
     .skills-popup-box {
       width: 90vw;
-      max-width: 680px;
-      max-height: 82vh;
+      max-width: 660px;
+      max-height: 80vh;
       background: linear-gradient(145deg, #0D1527 0%, #151F36 100%);
       border: 2px solid var(--accent-cyan);
       border-radius: 20px;
-      padding: 32px 36px;
+      padding: 30px 34px;
       box-shadow: 0 25px 80px rgba(0, 0, 0, 0.95), 0 0 60px var(--accent-cyan-glow);
-      transform: scale(0.85);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: scale(0.88);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -659,10 +658,10 @@
 
     .modal-close-btn {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 34px;
-      height: 34px;
+      top: 18px;
+      right: 18px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -691,24 +690,24 @@
     }
     .modal-group-title {
       font-family: var(--font-display);
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 900;
       color: #FFFFFF;
       letter-spacing: -0.02em;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .modal-skills-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-bottom: 24px;
+      gap: 10px;
+      margin-bottom: 20px;
     }
     .modal-skill-item {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 10px;
-      padding: 14px 18px;
+      padding: 12px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -717,15 +716,15 @@
       display: flex;
       flex-direction: column;
       gap: 2px;
-      max-width: 440px;
+      max-width: 420px;
     }
     .msi-name {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 800;
       color: #FFFFFF;
     }
     .msi-context {
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--text-muted);
       line-height: 1.4;
     }
@@ -1005,12 +1004,12 @@
       .full-page-frame {
         width: 94vw;
         height: 84vh;
-        padding: 24px 20px;
+        padding: 20px 16px;
       }
-      .skills-center-core { width: 160px; height: 160px; }
-      .scc-title { font-size: 28px; }
-      .wsn-badge-circle { width: 72px; height: 72px; }
-      .wsn-label { font-size: 9.5px; }
+      .skills-center-core { width: 140px; height: 140px; }
+      .scc-title { font-size: 26px; }
+      .wsn-badge-circle { width: 68px; height: 68px; }
+      .wsn-label { font-size: 9px; }
       .about-lead-title { font-size: 32px; }
       .about-triad-grid { grid-template-columns: 1fr; gap: 14px; }
       .pillars-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -1117,7 +1116,7 @@
             <div class="home-telemetry-cue">
               <span>LOCATION: <strong>VELLORE / CHENNAI</strong></span>
               <span>&bull;</span>
-              <span>NETWORK: <strong>SPIDER-WEB v8</strong></span>
+              <span>NETWORK: <strong>SPIDER-WEB v8.2</strong></span>
             </div>
           </div>
         </div>
@@ -1238,7 +1237,7 @@
           <div class="hero-top-row" style="z-index: 30; position: relative;">
             <div class="hero-status-pill">
               <span class="status-dot"></span>
-              RADIAL SPIDER-WEB TAXONOMY // CLICK ANY NODE FOR DETAILS
+              LIVING SPIDER-WEB TAXONOMY // CLICK ANY NODE FOR DETAILS
             </div>
             <div class="hero-credentials-tag">
               Master Profile Ground Truth
@@ -1250,14 +1249,14 @@
             <canvas id="skills-radial-canvas"></canvas>
 
             <!-- Center Monumental "SKILLS" Hub -->
-            <div class="skills-center-core">
+            <div class="skills-center-core" id="skills-center-core">
               <div class="scc-tag">TAXONOMY // CORE</div>
               <div class="scc-title">SKILLS</div>
               <div class="scc-sub">6 RADIAL DOMAINS</div>
             </div>
 
-            <!-- Dynamic 6 Stuck-on-the-Web Category Nodes (Rendered in JS) -->
-            <div id="radial-nodes-mount"></div>
+            <!-- Dynamic 6 Stuck-on-the-Web Category Nodes -->
+            <div id="radial-nodes-mount" style="position: absolute; inset: 0; pointer-events: none;"></div>
 
             <!-- Centered Modal Popup Box for Skills Details -->
             <div class="skills-modal-overlay" id="skills-modal-overlay" onclick="closeSkillsModal(event)">
@@ -1438,8 +1437,8 @@
         tag: 'DOMAIN // 01',
         icon: '🧠',
         accentColor: 'cyan',
-        angleDeg: 300, // Top-Left
-        radius: 220,
+        posXPercent: 18,
+        posYPercent: 24,
         skills: [
           { name: 'PyTorch', context: 'Used in Indic Multilingual NLP sentence embedding experiments and cross-lingual alignment models.', linkTo: 'research', linkText: 'VIEW RESEARCH' },
           { name: 'TensorFlow', context: 'Used for neural modeling pipelines and comparative benchmark training.', linkTo: 'research', linkText: 'VIEW RESEARCH' },
@@ -1454,8 +1453,8 @@
         tag: 'DOMAIN // 02',
         icon: '👁️',
         accentColor: 'red',
-        angleDeg: 0, // Top-Right / Upper
-        radius: 230,
+        posXPercent: 50,
+        posYPercent: 12,
         skills: [
           { name: 'OpenCV', context: 'Real-time video frame acquisition, filtering, contour isolation, and image processing.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' },
           { name: 'MediaPipe', context: 'High-precision 21 3D hand landmark coordinate tracking for real-time sign recognition.', linkTo: 'projects', linkText: 'VIEW ISL TRANSLATOR' },
@@ -1468,8 +1467,8 @@
         tag: 'DOMAIN // 03',
         icon: '⚡',
         accentColor: 'cyan',
-        angleDeg: 60, // Right / Mid-Right
-        radius: 240,
+        posXPercent: 82,
+        posYPercent: 24,
         skills: [
           { name: 'FastAPI (Python)', context: 'Engineered flagship TeamFlow async backend with Pydantic schemas and dependency injection.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
           { name: 'React & Vite', context: 'Engineered modular component hierarchy and responsive state management for TeamFlow platform.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
@@ -1480,12 +1479,12 @@
       },
       {
         id: 'databases',
-        name: 'Databases & Storage',
+        name: 'Databases',
         tag: 'DOMAIN // 04',
         icon: '🗄️',
         accentColor: 'red',
-        angleDeg: 120, // Bottom-Right
-        radius: 225,
+        posXPercent: 82,
+        posYPercent: 76,
         skills: [
           { name: 'PostgreSQL 17.11', context: 'Primary relational database for TeamFlow; foreign keys, cascades, and indexed queries.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
           { name: 'SQLAlchemy 2.x', context: 'Declarative async ORM models, session handling, and transaction boundaries in FastAPI.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
@@ -1498,8 +1497,8 @@
         tag: 'DOMAIN // 05',
         icon: '💻',
         accentColor: 'cyan',
-        angleDeg: 180, // Bottom-Left / Left
-        radius: 240,
+        posXPercent: 50,
+        posYPercent: 88,
         skills: [
           { name: 'Python', context: 'Primary language across PyTorch research, FastAPI backends, and one-shot data scripts.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' },
           { name: 'Java', context: 'Object-oriented programming, data structures, and algorithmic software design.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
@@ -1512,8 +1511,8 @@
         tag: 'DOMAIN // 06',
         icon: '🛠️',
         accentColor: 'cyan',
-        angleDeg: 240, // Top-Left / Upper-Left
-        radius: 230,
+        posXPercent: 18,
+        posYPercent: 76,
         skills: [
           { name: 'PyTest', context: 'Automated backend verification, route security testing, and integration tests in TeamFlow.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
           { name: 'Mutation Testing', context: 'Evaluated resilience and test quality of critical software verification suites.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
@@ -1633,7 +1632,6 @@
 
       window.addEventListener('resize', () => {
         resizeCanvas();
-        positionRadialSkillsNodes();
         renderSkillsRadialWeb();
       });
       resizeCanvas();
@@ -1674,6 +1672,10 @@
         const el = document.createElement('div');
         el.className = `web-stuck-node ${node.accentColor === 'red' ? 'accent-red' : ''}`;
         el.id = `radial-node-${node.id}`;
+        el.style.left = `${node.posXPercent}%`;
+        el.style.top = `${node.posYPercent}%`;
+        el.style.pointerEvents = 'auto';
+
         el.onclick = (e) => {
           e.stopPropagation();
           openSkillsModal(node);
@@ -1689,78 +1691,85 @@
         radialNodesMount.appendChild(el);
       });
 
-      positionRadialSkillsNodes();
       renderSkillsRadialWeb();
-    }
-
-    function positionRadialSkillsNodes() {
-      const stage = document.getElementById('skills-web-stage');
-      if (!stage) return;
-      const rect = stage.getBoundingClientRect();
-      const cX = rect.width / 2;
-      const cY = rect.height / 2;
-
-      // Adjust radius based on screen size
-      const scaleFactor = Math.min(rect.width / 950, rect.height / 520, 1.0);
-
-      RADIAL_SKILLS_DATA.forEach(node => {
-        const el = document.getElementById(`radial-node-${node.id}`);
-        if (!el) return;
-
-        const rad = (node.angleDeg * Math.PI) / 180;
-        const currentRadius = node.radius * scaleFactor;
-        const posX = cX + Math.cos(rad) * (currentRadius * 1.35);
-        const posY = cY + Math.sin(rad) * (currentRadius * 0.95);
-
-        el.style.left = `${posX}px`;
-        el.style.top = `${posY}px`;
-      });
     }
 
     function renderSkillsRadialWeb() {
       const stage = document.getElementById('skills-web-stage');
       if (!stage || !skillsRadialCanvas) return;
       const rect = stage.getBoundingClientRect();
-      skillsRadialCanvas.width = rect.width;
-      skillsRadialCanvas.height = rect.height;
+      const w = rect.width || 1000;
+      const h = rect.height || 480;
+
+      skillsRadialCanvas.width = w;
+      skillsRadialCanvas.height = h;
 
       const rCtx = skillsRadialCanvas.getContext('2d');
-      rCtx.clearRect(0, 0, rect.width, rect.height);
+      rCtx.clearRect(0, 0, w, h);
 
-      const cX = rect.width / 2;
-      const cY = rect.height / 2;
+      const cX = w / 2;
+      const cY = h / 2;
 
-      // 1. Draw Concentric Spider-Web Circles
-      const rings = [75, 140, 205, 275, 345];
-      rCtx.lineWidth = 1.0;
-      rCtx.strokeStyle = 'rgba(0, 210, 255, 0.14)';
-
-      rings.forEach(r => {
+      // 1. Draw 12 Radial Spokes shooting out like a Spider Web
+      const spokes = 12;
+      rCtx.lineWidth = 1.2;
+      for (let i = 0; i < spokes; i++) {
+        const angle = (i * Math.PI * 2) / spokes;
+        rCtx.strokeStyle = 'rgba(0, 210, 255, 0.22)';
         rCtx.beginPath();
-        rCtx.ellipse(cX, cY, r * 1.35, r * 0.95, 0, 0, Math.PI * 2);
+        rCtx.moveTo(cX, cY);
+        rCtx.lineTo(cX + Math.cos(angle) * (w * 0.65), cY + Math.sin(angle) * (h * 0.75));
+        rCtx.stroke();
+      }
+
+      // 2. Draw Concentric Web Spirals with Realistic Inward Droop Curves
+      const rings = [60, 110, 160, 215, 275, 340];
+      rings.forEach((r, rIdx) => {
+        rCtx.strokeStyle = rIdx % 2 === 0 ? 'rgba(0, 210, 255, 0.35)' : 'rgba(255, 42, 75, 0.3)';
+        rCtx.lineWidth = 1.2;
+
+        rCtx.beginPath();
+        for (let i = 0; i < spokes; i++) {
+          const a1 = (i * Math.PI * 2) / spokes;
+          const a2 = ((i + 1) * Math.PI * 2) / spokes;
+          const aMid = (a1 + a2) / 2;
+
+          const p1x = cX + Math.cos(a1) * (r * 1.35);
+          const p1y = cY + Math.sin(a1) * (r * 0.95);
+
+          const p2x = cX + Math.cos(a2) * (r * 1.35);
+          const p2y = cY + Math.sin(a2) * (r * 0.95);
+
+          // Sag towards center like real woven web threads
+          const sagDist = r * 0.85;
+          const midX = cX + Math.cos(aMid) * (sagDist * 1.35);
+          const midY = cY + Math.sin(aMid) * (sagDist * 0.95);
+
+          if (i === 0) rCtx.moveTo(p1x, p1y);
+          rCtx.quadraticCurveTo(midX, midY, p2x, p2y);
+        }
         rCtx.stroke();
       });
 
-      // 2. Draw Radial Web Strands connecting Center Hub to each Category Node
+      // 3. Connect Center Hub directly to each Stuck-on-Web Category Node
       RADIAL_SKILLS_DATA.forEach(node => {
-        const el = document.getElementById(`radial-node-${node.id}`);
-        if (!el) return;
-
-        const rad = (node.angleDeg * Math.PI) / 180;
-        const nX = parseFloat(el.style.left) || (cX + Math.cos(rad) * 200);
-        const nY = parseFloat(el.style.top) || (cY + Math.sin(rad) * 200);
+        const nX = (node.posXPercent / 100) * w;
+        const nY = (node.posYPercent / 100) * h;
 
         rCtx.beginPath();
         rCtx.moveTo(cX, cY);
         rCtx.lineTo(nX, nY);
-        rCtx.strokeStyle = node.accentColor === 'red' ? 'rgba(255, 42, 75, 0.45)' : 'rgba(0, 210, 255, 0.45)';
-        rCtx.lineWidth = 1.5;
+        rCtx.strokeStyle = node.accentColor === 'red' ? '#FF2A4B' : '#00D2FF';
+        rCtx.lineWidth = 2.0;
+        rCtx.shadowColor = node.accentColor === 'red' ? '#FF2A4B' : '#00D2FF';
+        rCtx.shadowBlur = 10;
         rCtx.stroke();
+        rCtx.shadowBlur = 0;
 
-        // Subtle glowing anchor ring
+        // Glowing node anchor
         rCtx.beginPath();
-        rCtx.arc(nX, nY, 6, 0, Math.PI * 2);
-        rCtx.fillStyle = node.accentColor === 'red' ? '#FF2A4B' : '#00D2FF';
+        rCtx.arc(nX, nY, 5, 0, Math.PI * 2);
+        rCtx.fillStyle = '#FFFFFF';
         rCtx.fill();
       });
     }
@@ -1823,10 +1832,7 @@
       });
 
       if (currentSceneId === 'skills') {
-        setTimeout(() => {
-          positionRadialSkillsNodes();
-          renderSkillsRadialWeb();
-        }, 50);
+        setTimeout(renderSkillsRadialWeb, 60);
       }
     }
 
