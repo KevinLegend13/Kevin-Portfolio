@@ -198,7 +198,7 @@
       max-height: 680px;
       border-radius: 24px;
       backdrop-filter: blur(28px);
-      padding: 28px 36px;
+      padding: 24px 34px 20px 34px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -207,10 +207,8 @@
       user-select: none;
       box-shadow: 0 35px 100px rgba(0, 0, 0, 0.92);
       transition: box-shadow 0.3s ease;
-      overflow-y: auto;
-      scrollbar-width: none;
+      overflow: hidden;
     }
-    .full-page-frame::-webkit-scrollbar { display: none; }
 
     /* Home Specific Styling */
     #page-home {
@@ -222,7 +220,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .hero-status-pill {
       display: inline-flex;
@@ -315,7 +313,7 @@
       justify-content: space-between;
       align-items: center;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 14px;
+      padding-top: 12px;
     }
     .cta-button-group { display: flex; gap: 12px; }
     .hero-cta-primary {
@@ -362,11 +360,12 @@
       background: linear-gradient(145deg, rgba(20, 14, 30, 0.97) 0%, rgba(32, 20, 48, 0.95) 100%);
       border: 1.5px solid var(--border-red);
       box-shadow: 0 35px 100px rgba(0, 0, 0, 0.92), 0 0 60px var(--accent-red-glow);
+      overflow-y: auto;
     }
     .about-lead-header {
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 16px;
-      margin-bottom: 20px;
+      padding-bottom: 14px;
+      margin-bottom: 16px;
     }
     .about-lead-title {
       font-family: var(--font-display);
@@ -375,25 +374,25 @@
       letter-spacing: -0.03em;
       line-height: 1.1;
       color: #FFFFFF;
-      margin: 6px 0 8px 0;
+      margin: 4px 0 6px 0;
     }
     .about-lead-narrative {
-      font-size: 15.5px;
-      line-height: 1.6;
+      font-size: 15px;
+      line-height: 1.55;
       color: #E2E8F0;
       max-width: 960px;
     }
     .about-triad-grid {
       display: grid;
       grid-template-columns: 1.15fr 1.15fr 1fr;
-      gap: 18px;
-      margin-bottom: 20px;
+      gap: 16px;
+      margin-bottom: 16px;
     }
     .about-track-card {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 14px;
-      padding: 22px;
+      padding: 18px 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -409,36 +408,36 @@
       font-weight: 700;
       color: var(--accent-red);
       letter-spacing: 0.12em;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       text-transform: uppercase;
     }
     .track-title {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
       color: #FFFFFF;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       letter-spacing: -0.01em;
     }
     .track-body-text {
-      font-size: 13px;
-      line-height: 1.6;
+      font-size: 12.5px;
+      line-height: 1.55;
       color: var(--text-muted);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .track-fact-box {
       background: rgba(0, 0, 0, 0.35);
       border-left: 2px solid var(--accent-red);
-      padding: 10px 14px;
+      padding: 8px 12px;
       border-radius: 0 8px 8px 0;
       font-family: var(--font-mono);
-      font-size: 11.5px;
+      font-size: 11px;
       color: #CBD5E1;
-      line-height: 1.5;
+      line-height: 1.45;
     }
     .track-fact-box strong { color: #fff; }
     .about-semantic-links {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
     .semantic-jump-btn {
@@ -721,21 +720,21 @@
     .modal-context-body strong { color: #FFFFFF; }
 
     /* =========================================================================
-       3. SUSPENDED SPIDER-WEB LEVEL 1 & FULL LEVEL 2 CASE STUDIES
+       3. SUSPENDED SPIDER-WEB LEVEL 1 (NO SCROLL / CLEAN ALIGNMENT) & FULL LEVEL 2
        ========================================================================= */
     #page-projects {
-      background: radial-gradient(circle at 50% 30%, rgba(12, 24, 38, 0.98) 0%, rgba(6, 10, 18, 0.96) 100%);
+      background: radial-gradient(circle at 50% 15%, rgba(12, 24, 38, 0.98) 0%, rgba(6, 10, 18, 0.96) 100%);
       border: 1.5px solid #00F0FF;
       box-shadow: 0 35px 100px rgba(0, 0, 0, 0.92), 0 0 60px rgba(0, 240, 255, 0.25);
       overflow: hidden;
       position: relative;
     }
 
-    /* LEVEL 1: Full-Stage Dangling Spider-Web Canvas & Suspended Nodes */
+    /* LEVEL 1: Full-Stage Dangling Spider-Web Stage */
     .projects-dangling-stage {
       position: relative;
       width: 100%;
-      height: 520px;
+      height: 100%;
       overflow: hidden;
     }
 
@@ -763,12 +762,12 @@
     }
     @keyframes spiderBobbing {
       0%, 100% { transform: translate(-50%, 0); }
-      50% { transform: translate(-50%, 9px); }
+      50% { transform: translate(-50%, 7px); }
     }
 
     .dangling-project-node:hover {
       animation-play-state: paused;
-      transform: translate(-50%, -6px) scale(1.08);
+      transform: translate(-50%, -6px) scale(1.06);
     }
 
     .dpn-silk-thread {
@@ -779,11 +778,11 @@
     }
 
     .dpn-card-box {
-      width: 232px;
+      width: 228px;
       background: rgba(11, 18, 30, 0.96);
       border: 1.5px solid #00F0FF;
       border-radius: 14px;
-      padding: 14px 16px;
+      padding: 13px 16px;
       text-align: left;
       box-shadow: 0 14px 35px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 240, 255, 0.25);
       backdrop-filter: blur(16px);
@@ -808,7 +807,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
     .dpn-num-tag {
       font-family: var(--font-mono);
@@ -835,13 +834,13 @@
       color: #FFFFFF;
       letter-spacing: -0.01em;
       line-height: 1.15;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
     .dpn-sub-text {
-      font-size: 12px;
+      font-size: 11.5px;
       color: #CBD5E1;
       line-height: 1.45;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .dpn-cta-txt {
       font-family: var(--font-mono);
@@ -860,6 +859,7 @@
       flex-direction: column;
       gap: 22px;
       padding-right: 6px;
+      overflow-y: auto;
     }
 
     .cs-hero-header {
@@ -970,6 +970,7 @@
     #page-research {
       background: linear-gradient(135deg, rgba(28, 16, 28, 0.96) 0%, rgba(45, 22, 45, 0.94) 100%);
       border: 1.5px solid #FF007A;
+      overflow-y: auto;
     }
     .page-title-huge {
       font-family: var(--font-display);
@@ -1226,7 +1227,7 @@
       .full-page-frame {
         width: 94vw;
         height: 84vh;
-        padding: 20px 16px;
+        padding: 18px 14px;
       }
       .arch-diagram-grid { grid-template-columns: 1fr 1fr; }
       .skills-center-core { width: 140px; height: 140px; }
@@ -1337,7 +1338,7 @@
             <div class="home-telemetry-cue">
               <span>LOCATION: <strong>VELLORE / CHENNAI</strong></span>
               <span>&bull;</span>
-              <span>NETWORK: <strong>SPIDER-WEB v8.7</strong></span>
+              <span>NETWORK: <strong>SPIDER-WEB v8.8</strong></span>
             </div>
           </div>
         </div>
@@ -1514,7 +1515,7 @@
           <div class="node-title-txt">PROJECTS</div>
           <div class="node-status-txt">TeamFlow &bull; ISL Translator &bull; One Health</div>
         </div>
-        <!-- Full Page View (Switches between Full Suspended Spider-Web & Full Case Study) -->
+        <!-- Full Page View (Default starts directly centered on the rich web cards) -->
         <div class="full-page-frame" id="page-projects" style="display: none;">
           
           <!-- Top Header Row -->
@@ -1529,12 +1530,12 @@
           </div>
 
           <!-- Dynamic Projects Content View Container -->
-          <div id="projects-dynamic-mount" style="flex: 1; overflow-y: auto; scrollbar-width: none;">
+          <div id="projects-dynamic-mount" style="flex: 1; height: 100%; position: relative; overflow: hidden;">
             <!-- Rendered in JS: Dangling Spider-Web Stage or Level 2 Dedicated Case Study -->
           </div>
 
           <!-- Bottom Footer Row -->
-          <div class="home-footer-row" style="margin-top: 14px;">
+          <div class="home-footer-row" style="margin-top: 10px;">
             <div class="about-semantic-links" id="projects-footer-links">
               <button class="hero-cta-secondary" id="projects-back-btn" onclick="handleProjectsBackAction()">
                 &larr; RETURN TO HOME
@@ -1634,7 +1635,7 @@
 
   <script>
     // --- 1. Master Projects Ground Truth Data from Master Profile ---
-    // Spread across the full viewport width and height of the suspended spider-web
+    // Precisely positioned so that the web and all 6 dangling cards sit perfectly centered in the default view without scrolling
     const PROJECTS_DATA = [
       {
         id: 'teamflow',
@@ -1658,8 +1659,8 @@
         testing: 'Automated test suite using PyTest verifying endpoint status codes, unauthorized token rejections, role privilege boundaries, and database rollback behaviors.',
         takeaways: 'Demonstrates end-to-end full-stack software mastery, API contract rigor, production relational database engineering, and security-first system design.',
         anchorXPercent: 50,
-        anchorYPercent: 30,
-        threadLength: 65,
+        anchorYPercent: 12,
+        threadLength: 50,
         delayBob: '0s'
       },
       {
@@ -1679,9 +1680,9 @@
           { tier: 'ACCESSIBILITY OUTPUT', name: 'Speech & Text UI', role: 'Instant audio vocalization and text subtitle display.' }
         ],
         takeaways: 'Demonstrates computer vision pipeline expertise, real-time spatial geometry processing, and practical accessibility engineering.',
-        anchorXPercent: 15,
-        anchorYPercent: 18,
-        threadLength: 55,
+        anchorXPercent: 18,
+        anchorYPercent: 6,
+        threadLength: 45,
         delayBob: '0.8s'
       },
       {
@@ -1701,9 +1702,9 @@
           { tier: 'EXPLAINABILITY', name: 'Surveillance Dashboard', role: 'Spatiotemporal heatmaps and audit-ready decision trails.' }
         ],
         takeaways: 'Demonstrates advanced AI research capability, GraphRAG reasoning architectures, and cross-domain data fusion for high-impact decision support.',
-        anchorXPercent: 85,
-        anchorYPercent: 18,
-        threadLength: 75,
+        anchorXPercent: 82,
+        anchorYPercent: 6,
+        threadLength: 65,
         delayBob: '1.6s'
       },
       {
@@ -1722,9 +1723,9 @@
           { tier: 'DATA STORE', name: 'Relational DB', role: 'Ingredient tables, pantry inventories, and recipe association schemas.' }
         ],
         takeaways: 'Demonstrates full-stack web service development, clean API design, and intuitive user experience engineering.',
-        anchorXPercent: 26,
-        anchorYPercent: 42,
-        threadLength: 70,
+        anchorXPercent: 28,
+        anchorYPercent: 32,
+        threadLength: 60,
         delayBob: '1.2s'
       },
       {
@@ -1743,9 +1744,9 @@
           { tier: 'LLM INFERENCE', name: 'Neural Model Layer', role: 'Extracts summary, urgency rating, and structured action items.' }
         ],
         takeaways: 'Demonstrates prompt engineering mastery, LLM pipeline orchestration, and practical natural language automation.',
-        anchorXPercent: 74,
-        anchorYPercent: 42,
-        threadLength: 60,
+        anchorXPercent: 72,
+        anchorYPercent: 32,
+        threadLength: 50,
         delayBob: '2.4s'
       },
       {
@@ -1765,8 +1766,8 @@
         ],
         takeaways: 'Demonstrates cloud service integration, serverless mindset, and secure infrastructure operations.',
         anchorXPercent: 50,
-        anchorYPercent: 55,
-        threadLength: 85,
+        anchorYPercent: 44,
+        threadLength: 72,
         delayBob: '3.0s'
       }
     ];
@@ -2039,7 +2040,7 @@
       projectsDynamicMount.innerHTML = '';
 
       if (!activeCaseStudyId) {
-        // LEVEL 1: Full Suspended Dangling Spider-Web Stage
+        // LEVEL 1: Perfectly Centered Suspended Spider-Web Stage (No scroll)
         projectsStatusPill.innerHTML = '<span class="status-dot" style="background:#00F0FF; box-shadow:0 0 8px #00F0FF;"></span> SUSPENDED SPIDER-WEB // CLICK ANY DANGLING PROJECT';
         projectsBreadcrumb.textContent = 'Master Profile Source of Truth';
         projectsBackBtn.textContent = '← RETURN TO HOME';
@@ -2084,7 +2085,7 @@
         setTimeout(drawDanglingProjectsCanvas, 40);
 
       } else {
-        // LEVEL 2: Dedicated Full Case Study Experience
+        // LEVEL 2: Dedicated Full Case Study Experience (Scrollable)
         const proj = PROJECTS_DATA.find(p => p.id === activeCaseStudyId);
         if (!proj) return;
 
@@ -2209,7 +2210,7 @@
       }
     }
 
-    // Draw the full-stage suspended spider-web filling the entire canvas
+    // Draw the full suspended spider-web centered in the frame
     function drawDanglingProjectsCanvas() {
       const stage = document.getElementById('projects-dangling-stage');
       const dCanvas = document.getElementById('projects-dangling-canvas');
@@ -2217,7 +2218,7 @@
 
       const rect = stage.getBoundingClientRect();
       const w = rect.width || 1080;
-      const h = rect.height || 520;
+      const h = rect.height || 480;
 
       dCanvas.width = w;
       dCanvas.height = h;
@@ -2225,41 +2226,38 @@
       const pCtx = dCanvas.getContext('2d');
       pCtx.clearRect(0, 0, w, h);
 
-      // 1. Full-Stage Outer Anchor Suspension Lines connecting to top corners
+      // 1. Suspension bridge lines directly across the top header
       pCtx.strokeStyle = 'rgba(0, 240, 255, 0.32)';
       pCtx.lineWidth = 1.8;
 
-      // Left Bridge Line from top-left
       pCtx.beginPath();
       pCtx.moveTo(0, 0);
-      pCtx.quadraticCurveTo(w * 0.25, h * 0.12, w * 0.5, h * 0.16);
+      pCtx.quadraticCurveTo(w * 0.25, h * 0.08, w * 0.5, h * 0.10);
       pCtx.stroke();
 
-      // Right Bridge Line from top-right
       pCtx.beginPath();
       pCtx.moveTo(w, 0);
-      pCtx.quadraticCurveTo(w * 0.75, h * 0.12, w * 0.5, h * 0.16);
-      pCtx.stroke();
-
-      // Broad Outer Anchor Strands stretching to the bottom and side walls
-      pCtx.beginPath();
-      pCtx.moveTo(0, h * 0.35);
-      pCtx.quadraticCurveTo(w * 0.22, h * 0.32, w * 0.5, h * 0.16);
+      pCtx.quadraticCurveTo(w * 0.75, h * 0.08, w * 0.5, h * 0.10);
       pCtx.stroke();
 
       pCtx.beginPath();
-      pCtx.moveTo(w, h * 0.35);
-      pCtx.quadraticCurveTo(w * 0.78, h * 0.32, w * 0.5, h * 0.16);
+      pCtx.moveTo(0, h * 0.22);
+      pCtx.quadraticCurveTo(w * 0.22, h * 0.18, w * 0.5, h * 0.10);
       pCtx.stroke();
 
-      // 2. Full Radial Spokes emanating downward and outward across the whole viewport
+      pCtx.beginPath();
+      pCtx.moveTo(w, h * 0.22);
+      pCtx.quadraticCurveTo(w * 0.78, h * 0.18, w * 0.5, h * 0.10);
+      pCtx.stroke();
+
+      // 2. Full Radial Spokes emanating downward across the stage
       const spokes = 14;
       const centerWebX = w * 0.5;
-      const centerWebY = h * 0.16;
+      const centerWebY = h * 0.10;
 
       for (let i = 0; i < spokes; i++) {
         const angle = Math.PI * 0.06 + (i * Math.PI * 0.88) / (spokes - 1);
-        const radius = h * 0.92;
+        const radius = h * 0.95;
         const endX = centerWebX + Math.cos(angle) * (w * 0.55);
         const endY = centerWebY + Math.sin(angle) * radius;
 
@@ -2271,7 +2269,7 @@
         pCtx.stroke();
       }
 
-      // 3. Broad Concentric Sagging Spiral Webs (Spanning the whole height and width)
+      // 3. Broad Concentric Sagging Spiral Webs
       const rings = [45, 95, 150, 215, 285, 360, 440];
       rings.forEach((r, rIdx) => {
         pCtx.strokeStyle = rIdx % 2 === 0 ? 'rgba(0, 240, 255, 0.32)' : 'rgba(255, 42, 75, 0.28)';
@@ -2289,7 +2287,6 @@
           const p2x = centerWebX + Math.cos(a2) * (r * 1.55);
           const p2y = centerWebY + Math.sin(a2) * (r * 0.88);
 
-          // Authentic gravity sag downwards
           const sagDist = r * 0.76;
           const midX = centerWebX + Math.cos(aMid) * (sagDist * 1.55);
           const midY = centerWebY + Math.sin(aMid) * (sagDist * 0.88) + 14;
@@ -2318,7 +2315,6 @@
     function openProjectCaseStudy(projId) {
       activeCaseStudyId = projId;
       renderProjectsView();
-      projectsDynamicMount.scrollTop = 0;
     }
 
     function closeProjectCaseStudy() {
