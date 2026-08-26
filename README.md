@@ -11,7 +11,8 @@ The portfolio is conceptualized as a high-end, experimental/Awwwards-tier intera
 Rather than treating Spider-Man motifs as static decorative illustrations or a gimmick, the web serves as the foundational information architecture and navigation system:
 - **Connected Architecture**: Sections (Home, About, Skills, Projects, Research, Experience, Contact) exist as nodes in a dynamic web.
 - **Physical Navigation**: Selecting a node initiates a web-shooting transition that anchors and pulls the visitor directly into the destination space.
-- **Living Network for Skills**: Skill categories act as parent nodes where hovering or interacting expands connected child skills outward along web strands.
+- **Living Network for Skills**: Skill categories act as parent nodes where interacting zooms smoothly into a dedicated sub-web of individual technologies with direct project redirections.
+- **Two-Level Projects Architecture**: Level 1 discovery grid expanding into Level 2 full-page interactive case studies (featuring the TeamFlow flagship platform).
 - **Aesthetic Precision**: A sleek, dark black base elevated with vibrant red, blue, and white accents, high-contrast comic/Spider-Verse-influenced typography, and fluid micro-physics—retaining an unmistakably rigorous engineering and research identity.
 
 ---
@@ -32,41 +33,37 @@ Rather than treating Spider-Man motifs as static decorative illustrations or a g
    - **Miu Miu Immersive Bags**: Spatial navigation, scene/page movement, and experience-driven transitions.
    - **TRIONN**: Typography, structured storytelling, and interaction-led project showcases.
    - **Awwwards Benchmarks**: Experimental navigation, cursor physics, scroll dynamics, and micro-interactions.
-   - *Note: External references serve strictly as conceptual inspiration for interaction mechanics and will be reinterpreted into Kevin's original Spider-Man/web aesthetic.*
 
 ---
 
 ## Phase Roadmap Overview
 
-| Phase | Description |
-| :--- | :--- |
-| **Phase 0** | **Project Setup & Ground Truth** *(Completed)* |
-| **Phase 1** | **Creative Direction & Visual Identity** *(Completed — see [docs/creative_direction.md](./docs/creative_direction.md))* |
-| **Phase 2** | **Inspiration & Interaction Research** *(Completed — see [docs/interaction_research.md](./docs/interaction_research.md))* |
-| **Phase 3** | **Information Architecture & Node Connection Model** *(Completed — see [docs/information_architecture.md](./docs/information_architecture.md))* |
-| **Phase 4** | **Spider-Web Navigation System** *(Completed — see [docs/navigation_prototype.md](./docs/navigation_prototype.md) & [prototypes/navigation_system/index.html](./prototypes/navigation_system/index.html))* |
-| **Phase 5** | Landing / Home Experience & Intro Sequence |
-| **Phase 6** | About Experience (Identity, Timelines, Terminal/Interactive Facts) |
-| **Phase 7** | Interactive Skills Web (Parent-Child Strands & Hover Physics) |
-| **Phase 8** | Projects Experience (TeamFlow Case Study & Experience Flows) |
-| **Phase 9** | Research Experience (Multilingual NLP & One Health / Avian AI) |
-| **Phase 10** | Experience (Syncfusion AI Internship Showcase) |
-| **Phase 11** | Contact Experience (Final Web Node & Terminal/Links) |
-| **Phase 12** | Motion System & Web Physics Specification |
-| **Phase 13** | Visual Design System (Typography, Tokens, Shaders/Cards) |
-| **Phase 14** | Responsive & Mobile Touch Interaction Design |
-| **Phase 15** | Phased Production Implementation |
-| **Phase 16** | Functional, Performance & Accessibility Testing |
-| **Phase 17** | Final Polish & Production Readiness |
+| Phase | Description | Status |
+| :--- | :--- | :--- |
+| **Phase 0** | **Project Setup & Ground Truth** | *Completed* |
+| **Phase 1** | **Creative Direction & Visual Identity** *(see [docs/creative_direction.md](./docs/creative_direction.md))* | *Completed* |
+| **Phase 2** | **Inspiration & Interaction Research** *(see [docs/interaction_research.md](./docs/interaction_research.md))* | *Completed* |
+| **Phase 3** | **Information Architecture & Node Connection Model** *(see [docs/information_architecture.md](./docs/information_architecture.md))* | *Completed* |
+| **Phase 4** | **Spider-Web Navigation System** *(see [docs/navigation_prototype.md](./docs/navigation_prototype.md))* | *Completed* |
+| **Phase 5** | **Landing / Home Experience & Intro Sequence** | *Completed* |
+| **Phase 6** | **About Experience (Academic Journey & Triad of Strengths)** | *Completed* |
+| **Phase 7** | **Interactive Skills Web (Nested Sub-Web Zoom & Context Cards)** | *Completed* |
+| **Phase 8** | **Projects & Case Studies (Two-Level Model & TeamFlow Flagship)** *(see [docs/projects_experience.md](./docs/projects_experience.md))* | *Completed* |
+| **Phase 9** | Research Experience (Multilingual NLP & One Health / Avian AI) | *Pending* |
+| **Phase 10** | Experience (Syncfusion AI Internship Showcase) | *Pending* |
+| **Phase 11** | Contact Experience (Final Web Node & Terminal/Links) | *Pending* |
+| **Phase 12** | Motion System & Web Physics Specification | *Pending* |
+| **Phase 13** | Visual Design System (Typography, Tokens, Shaders/Cards) | *Pending* |
+| **Phase 14** | Responsive & Mobile Touch Interaction Design | *Pending* |
+| **Phase 15** | Phased Production Implementation | *Pending* |
+| **Phase 16** | Functional, Performance & Accessibility Testing | *Pending* |
+| **Phase 17** | Final Polish & Production Readiness | *Pending* |
 
 ---
 
 ## Current Status
-- **Stage**: Phase 4 Complete — Spider-Web Navigation System Prototype created, verified, and documented.
-- **Active Specifications & Prototypes**:
-  - [Creative Direction Specification](./docs/creative_direction.md)
-  - [Interaction Research Specification](./docs/interaction_research.md)
-  - [Information Architecture Specification](./docs/information_architecture.md)
-  - [Spider-Web Navigation Prototype Specification](./docs/navigation_prototype.md)
-  - [Runnable Navigation Prototype](./prototypes/navigation_system/index.html)
-- **Next Step**: Phase 5 — Landing / Home Experience & Intro Sequence. No production UI coding or full application expansion has been initiated.
+- **Stage**: Phase 8 Complete — Projects & Case Studies Experience implemented with Level 1 Discovery Grid and Level 2 Deep Case Studies (TeamFlow Flagship, ISL Translator, One Health AI, MyKitchen, AI Email Summarizer, AWS Attendance System).
+- **Active Prototype**:
+  - [Runnable Navigation Prototype](./prototypes/navigation_system/index.html) (`http://localhost:4173/prototypes/navigation_system/index.html`)
+- **Documentation**:
+  - [Projects Experience Specification](./docs/projects_experience.md)
