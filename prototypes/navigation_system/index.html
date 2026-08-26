@@ -3972,6 +3972,102 @@
         ambientCtx.fillStyle = `rgba(255, 255, 255, ${nodeAlpha.toFixed(3)})`;
         ambientCtx.fill();
       });
+
+      // 4. Render Edge & Corner Cobwebs Layer (Persistent Edge Atmosphere)
+      drawCornerCobwebs(ambientCtx, ambientCanvas.width, ambientCanvas.height, now, isReduced);
+    }
+
+    function drawCornerCobwebs(ctx, w, h, now, isReduced) {
+      const corners = [
+        { cx: 0, cy: 0, startA: 0, endA: Math.PI / 2, len: 340, spokes: 8 },
+        { cx: w, cy: 0, startA: Math.PI / 2, endA: Math.PI, len: 340, spokes: 8 },
+        { cx: 0, cy: h, startA: -Math.PI / 2, endA: 0, len: 340, spokes: 8 },
+        { cx: w, cy: h, startA: Math.PI, endA: 3 * Math.PI / 2, len: 340, spokes: 8 }
+      ];
+
+      corners.forEach((c, cIdx) => {
+        let mouseSag = 0;
+        if (!isReduced && mousePos.x >= 0) {
+          const dCorner = Math.hypot(c.cx - mousePos.x, c.cy - mousePos.y);
+          if (dCorner < 380) {
+            mouseSag = (1 - dCorner / 380) * 14;
+          }
+        }
+
+        const spokeAngles = [];
+        for (let i = 0; i < c.spokes; i++) {
+          const a = c.startA + (i / (c.spokes - 1)) * (c.endA - c.startA);
+          spokeAngles.push(a);
+
+          const r = c.len * (0.88 + 0.12 * Math.sin(i * 1.5 + cIdx));
+          const ex = c.cx + Math.cos(a) * r;
+          const ey = c.cy + Math.sin(a) * r;
+
+          ctx.beginPath();
+          ctx.moveTo(c.cx, c.cy);
+          ctx.lineTo(ex, ey);
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.24)';
+          ctx.lineWidth = 1.3;
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.arc(ex, ey, 2.2, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.38)';
+          ctx.fill();
+        }
+
+        const ringDists = [32, 68, 110, 160, 215, 275, 335];
+        ringDists.forEach((r, rIdx) => {
+          const alpha = 0.32 - (rIdx / ringDists.length) * 0.14;
+          ctx.strokeStyle = `rgba(255, 255, 255, ${alpha.toFixed(3)})`;
+          ctx.lineWidth = rIdx % 2 === 0 ? 1.4 : 1.0;
+
+          ctx.beginPath();
+          for (let i = 0; i < spokeAngles.length - 1; i++) {
+            const a1 = spokeAngles[i];
+            const a2 = spokeAngles[i + 1];
+            const aMid = (a1 + a2) / 2;
+
+            const p1x = c.cx + Math.cos(a1) * r;
+            const p1y = c.cy + Math.sin(a1) * r;
+
+            const p2x = c.cx + Math.cos(a2) * r;
+            const p2y = c.cy + Math.sin(a2) * r;
+
+            const sagFactor = r * 0.76 - mouseSag;
+            const midX = c.cx + Math.cos(aMid) * sagFactor;
+            const midY = c.cy + Math.sin(aMid) * sagFactor;
+
+            if (i === 0) ctx.moveTo(p1x, p1y);
+            ctx.quadraticCurveTo(midX, midY, p2x, p2y);
+          }
+          ctx.stroke();
+        });
+      });
+
+      // Edge Anchor Strands extending from screen borders
+      ctx.lineWidth = 1.0;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+      ctx.setLineDash([4, 5]);
+
+      const edgeAnchors = [
+        { x1: 0, y1: h * 0.35, x2: w * 0.12, y2: h * 0.38 },
+        { x1: 0, y1: h * 0.65, x2: w * 0.14, y2: h * 0.62 },
+        { x1: w, y1: h * 0.35, x2: w * 0.88, y2: h * 0.38 },
+        { x1: w, y1: h * 0.65, x2: w * 0.86, y2: h * 0.62 },
+        { x1: w * 0.35, y1: 0, x2: w * 0.38, y2: h * 0.12 },
+        { x1: w * 0.65, y1: 0, x2: w * 0.62, y2: h * 0.12 },
+        { x1: w * 0.35, y1: h, x2: w * 0.38, y2: h * 0.88 },
+        { x1: w * 0.65, y1: h, x2: w * 0.62, y2: h * 0.88 }
+      ];
+
+      edgeAnchors.forEach(ea => {
+        ctx.beginPath();
+        ctx.moveTo(ea.x1, ea.y1);
+        ctx.lineTo(ea.x2, ea.y2);
+        ctx.stroke();
+      });
+      ctx.setLineDash([]);
     }
 
     // --- 13. Physics & State Machine Loop ---
