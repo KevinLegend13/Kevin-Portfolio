@@ -167,13 +167,13 @@
       z-index: 10;
     }
 
-    #world-canvas {
+    #ambient-canvas {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 10;
+      z-index: 5;
       pointer-events: none;
     }
 
@@ -184,6 +184,16 @@
       width: 100%;
       height: 100%;
       z-index: 15;
+      pointer-events: none;
+    }
+
+    #world-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 25;
       pointer-events: none;
     }
 
@@ -1664,6 +1674,7 @@
   </header>
 
   <div id="world-viewport">
+    <canvas id="ambient-canvas"></canvas>
     <div id="entities-container">
 
       <!-- =======================================================
@@ -2648,8 +2659,11 @@
     let sparks = [];
 
     // DOM Elements
+    const ambientCanvas = document.getElementById('ambient-canvas');
+    const ambientCtx = ambientCanvas ? ambientCanvas.getContext('2d') : null;
     const canvas = document.getElementById('world-canvas');
     const ctx = canvas.getContext('2d');
+    const worldViewport = document.getElementById('world-viewport');
     const navPillContainer = document.getElementById('nav-pill-container');
     const teleState = document.getElementById('tele-state');
     const teleRoute = document.getElementById('tele-route');
@@ -2659,6 +2673,181 @@
     const introOverlay = document.getElementById('intro-overlay');
     const introBox = document.getElementById('intro-box');
     const copyToast = document.getElementById('copy-toast');
+
+    // --- Ambient Web Background Nodes & Strands Network (Phase 12) ---
+    let mousePos = { x: -1000, y: -1000 };
+
+    if (worldViewport) {
+      worldViewport.addEventListener('mousemove', (e) => {
+        const rect = worldViewport.getBoundingClientRect();
+        mousePos.x = e.clientX - rect.left;
+        mousePos.y = e.clientY - rect.top;
+      });
+      worldViewport.addEventListener('mouseleave', () => {
+        mousePos.x = -1000;
+        mousePos.y = -1000;
+      });
+    }
+
+    const AMBIENT_NODES = [
+      // 00 - Home Region Nodes
+      { id: 'h0', x: 0, y: 0, zone: 'home', depth: 1.0, size: 3.0, isPulse: true, phase: 0.0, curDx: 0, curDy: 0 },
+      { id: 'h1', x: -420, y: -260, zone: 'home', depth: 1.0, size: 2.2, isPulse: false, phase: 0.5, curDx: 0, curDy: 0 },
+      { id: 'h2', x: 420, y: -260, zone: 'home', depth: 1.0, size: 2.2, isPulse: false, phase: 1.2, curDx: 0, curDy: 0 },
+      { id: 'h3', x: 440, y: 260, zone: 'home', depth: 1.0, size: 2.2, isPulse: true, phase: 2.1, curDx: 0, curDy: 0 },
+      { id: 'h4', x: -440, y: 260, zone: 'home', depth: 1.0, size: 2.2, isPulse: false, phase: 2.8, curDx: 0, curDy: 0 },
+      { id: 'h5', x: 0, y: -380, zone: 'home', depth: 0.85, size: 2.0, isPulse: false, phase: 3.4, curDx: 0, curDy: 0 },
+      { id: 'h6', x: 0, y: 380, zone: 'home', depth: 0.85, size: 2.0, isPulse: false, phase: 4.1, curDx: 0, curDy: 0 },
+      { id: 'h7', x: -620, y: 0, zone: 'home', depth: 0.75, size: 1.8, isPulse: true, phase: 4.8, curDx: 0, curDy: 0 },
+      { id: 'h8', x: 620, y: 0, zone: 'home', depth: 0.75, size: 1.8, isPulse: true, phase: 5.5, curDx: 0, curDy: 0 },
+
+      // 01 - About Region Nodes (x: -1100, y: -650)
+      { id: 'ab0', x: -1100, y: -650, zone: 'about', depth: 1.0, size: 3.2, isPulse: true, phase: 0.2, curDx: 0, curDy: 0 },
+      { id: 'ab1', x: -1480, y: -880, zone: 'about', depth: 1.0, size: 2.0, isPulse: false, phase: 1.0, curDx: 0, curDy: 0 },
+      { id: 'ab2', x: -740, y: -860, zone: 'about', depth: 0.9, size: 2.2, isPulse: true, phase: 1.7, curDx: 0, curDy: 0 },
+      { id: 'ab3', x: -1520, y: -420, zone: 'about', depth: 0.8, size: 1.8, isPulse: false, phase: 2.4, curDx: 0, curDy: 0 },
+      { id: 'ab4', x: -720, y: -440, zone: 'about', depth: 1.0, size: 2.4, isPulse: false, phase: 3.1, curDx: 0, curDy: 0 },
+      { id: 'ab5', x: -1100, y: -980, zone: 'about', depth: 0.7, size: 1.8, isPulse: true, phase: 3.9, curDx: 0, curDy: 0 },
+
+      // 02 - Skills Region Nodes (x: 1100, y: -650)
+      { id: 'sk0', x: 1100, y: -650, zone: 'skills', depth: 1.0, size: 3.2, isPulse: true, phase: 0.4, curDx: 0, curDy: 0 },
+      { id: 'sk1', x: 740, y: -860, zone: 'skills', depth: 0.9, size: 2.2, isPulse: false, phase: 1.1, curDx: 0, curDy: 0 },
+      { id: 'sk2', x: 1480, y: -880, zone: 'skills', depth: 1.0, size: 2.0, isPulse: true, phase: 1.8, curDx: 0, curDy: 0 },
+      { id: 'sk3', x: 720, y: -440, zone: 'skills', depth: 1.0, size: 2.4, isPulse: false, phase: 2.6, curDx: 0, curDy: 0 },
+      { id: 'sk4', x: 1520, y: -420, zone: 'skills', depth: 0.8, size: 1.8, isPulse: false, phase: 3.3, curDx: 0, curDy: 0 },
+      { id: 'sk5', x: 1100, y: -980, zone: 'skills', depth: 0.7, size: 1.8, isPulse: true, phase: 4.2, curDx: 0, curDy: 0 },
+
+      // 03 - Projects Region Nodes (x: 1150, y: 650)
+      { id: 'pr0', x: 1150, y: 650, zone: 'projects', depth: 1.0, size: 3.2, isPulse: true, phase: 0.6, curDx: 0, curDy: 0 },
+      { id: 'pr1', x: 780, y: 440, zone: 'projects', depth: 1.0, size: 2.2, isPulse: false, phase: 1.4, curDx: 0, curDy: 0 },
+      { id: 'pr2', x: 1540, y: 420, zone: 'projects', depth: 0.8, size: 1.8, isPulse: true, phase: 2.2, curDx: 0, curDy: 0 },
+      { id: 'pr3', x: 760, y: 880, zone: 'projects', depth: 0.9, size: 2.4, isPulse: false, phase: 2.9, curDx: 0, curDy: 0 },
+      { id: 'pr4', x: 1520, y: 880, zone: 'projects', depth: 1.0, size: 2.0, isPulse: false, phase: 3.7, curDx: 0, curDy: 0 },
+      { id: 'pr5', x: 1150, y: 1020, zone: 'projects', depth: 0.7, size: 1.8, isPulse: true, phase: 4.5, curDx: 0, curDy: 0 },
+
+      // 04 - Research Region Nodes (x: -1150, y: 650)
+      { id: 'rs0', x: -1150, y: 650, zone: 'research', depth: 1.0, size: 3.2, isPulse: true, phase: 0.8, curDx: 0, curDy: 0 },
+      { id: 'rs1', x: -1540, y: 420, zone: 'research', depth: 0.8, size: 1.8, isPulse: false, phase: 1.5, curDx: 0, curDy: 0 },
+      { id: 'rs2', x: -780, y: 440, zone: 'research', depth: 1.0, size: 2.2, isPulse: true, phase: 2.3, curDx: 0, curDy: 0 },
+      { id: 'rs3', x: -1520, y: 880, zone: 'research', depth: 1.0, size: 2.0, isPulse: false, phase: 3.0, curDx: 0, curDy: 0 },
+      { id: 'rs4', x: -760, y: 880, zone: 'research', depth: 0.9, size: 2.4, isPulse: false, phase: 3.8, curDx: 0, curDy: 0 },
+      { id: 'rs5', x: -1150, y: 1020, zone: 'research', depth: 0.7, size: 1.8, isPulse: true, phase: 4.7, curDx: 0, curDy: 0 },
+
+      // 05 - Experience Region Nodes (x: 0, y: 1050)
+      { id: 'ex0', x: 0, y: 1050, zone: 'experience', depth: 1.0, size: 3.2, isPulse: true, phase: 0.3, curDx: 0, curDy: 0 },
+      { id: 'ex1', x: -440, y: 880, zone: 'experience', depth: 1.0, size: 2.2, isPulse: false, phase: 1.2, curDx: 0, curDy: 0 },
+      { id: 'ex2', x: 440, y: 880, zone: 'experience', depth: 1.0, size: 2.2, isPulse: true, phase: 2.0, curDx: 0, curDy: 0 },
+      { id: 'ex3', x: -380, y: 1260, zone: 'experience', depth: 0.85, size: 1.8, isPulse: false, phase: 2.8, curDx: 0, curDy: 0 },
+      { id: 'ex4', x: 380, y: 1260, zone: 'experience', depth: 0.85, size: 1.8, isPulse: false, phase: 3.6, curDx: 0, curDy: 0 },
+      { id: 'ex5', x: 0, y: 1380, zone: 'experience', depth: 0.7, size: 2.0, isPulse: true, phase: 4.4, curDx: 0, curDy: 0 },
+
+      // 06 - Contact Region Nodes (x: 0, y: -1050)
+      { id: 'ct0', x: 0, y: -1050, zone: 'contact', depth: 1.0, size: 3.2, isPulse: true, phase: 0.5, curDx: 0, curDy: 0 },
+      { id: 'ct1', x: -440, y: -880, zone: 'contact', depth: 1.0, size: 2.2, isPulse: false, phase: 1.3, curDx: 0, curDy: 0 },
+      { id: 'ct2', x: 440, y: -880, zone: 'contact', depth: 1.0, size: 2.2, isPulse: true, phase: 2.1, curDx: 0, curDy: 0 },
+      { id: 'ct3', x: -380, y: -1260, zone: 'contact', depth: 0.85, size: 1.8, isPulse: false, phase: 2.9, curDx: 0, curDy: 0 },
+      { id: 'ct4', x: 380, y: -1260, zone: 'contact', depth: 0.85, size: 1.8, isPulse: false, phase: 3.7, curDx: 0, curDy: 0 },
+      { id: 'ct5', x: 0, y: -1380, zone: 'contact', depth: 0.7, size: 2.0, isPulse: true, phase: 4.6, curDx: 0, curDy: 0 }
+    ];
+
+    const ambientNodeMap = {};
+    AMBIENT_NODES.forEach(n => ambientNodeMap[n.id] = n);
+
+    const AMBIENT_EDGES = [
+      // Home Internal & Perimeter
+      { u: 'h0', v: 'h1', type: 'structural', sag: 8 },
+      { u: 'h0', v: 'h2', type: 'structural', sag: 8 },
+      { u: 'h0', v: 'h3', type: 'structural', sag: -8 },
+      { u: 'h0', v: 'h4', type: 'structural', sag: -8 },
+      { u: 'h0', v: 'h5', type: 'structural', sag: 0 },
+      { u: 'h0', v: 'h6', type: 'structural', sag: 0 },
+      { u: 'h1', v: 'h5', type: 'micro', sag: 5 },
+      { u: 'h2', v: 'h5', type: 'micro', sag: 5 },
+      { u: 'h3', v: 'h6', type: 'micro', sag: -5 },
+      { u: 'h4', v: 'h6', type: 'micro', sag: -5 },
+      { u: 'h1', v: 'h7', type: 'depth', sag: 10 },
+      { u: 'h4', v: 'h7', type: 'depth', sag: -10 },
+      { u: 'h2', v: 'h8', type: 'depth', sag: 10 },
+      { u: 'h3', v: 'h8', type: 'depth', sag: -10 },
+
+      // About Internal & Connections
+      { u: 'ab0', v: 'ab1', type: 'structural', sag: 12 },
+      { u: 'ab0', v: 'ab2', type: 'structural', sag: 8 },
+      { u: 'ab0', v: 'ab3', type: 'structural', sag: -8 },
+      { u: 'ab0', v: 'ab4', type: 'structural', sag: -12 },
+      { u: 'ab0', v: 'ab5', type: 'depth', sag: 0 },
+      { u: 'ab1', v: 'ab5', type: 'micro', sag: 6 },
+      { u: 'ab2', v: 'ab5', type: 'micro', sag: -6 },
+      { u: 'ab1', v: 'ab3', type: 'micro', sag: 10 },
+      { u: 'ab2', v: 'ab4', type: 'micro', sag: -10 },
+
+      // Skills Internal & Connections
+      { u: 'sk0', v: 'sk1', type: 'structural', sag: 8 },
+      { u: 'sk0', v: 'sk2', type: 'structural', sag: 12 },
+      { u: 'sk0', v: 'sk3', type: 'structural', sag: -12 },
+      { u: 'sk0', v: 'sk4', type: 'structural', sag: -8 },
+      { u: 'sk0', v: 'sk5', type: 'depth', sag: 0 },
+      { u: 'sk1', v: 'sk5', type: 'micro', sag: -6 },
+      { u: 'sk2', v: 'sk5', type: 'micro', sag: 6 },
+      { u: 'sk1', v: 'sk3', type: 'micro', sag: -10 },
+      { u: 'sk2', v: 'sk4', type: 'micro', sag: 10 },
+
+      // Projects Internal & Connections
+      { u: 'pr0', v: 'pr1', type: 'structural', sag: 8 },
+      { u: 'pr0', v: 'pr2', type: 'structural', sag: 12 },
+      { u: 'pr0', v: 'pr3', type: 'structural', sag: -12 },
+      { u: 'pr0', v: 'pr4', type: 'structural', sag: -8 },
+      { u: 'pr0', v: 'pr5', type: 'depth', sag: 0 },
+      { u: 'pr1', v: 'pr2', type: 'micro', sag: 6 },
+      { u: 'pr3', v: 'pr4', type: 'micro', sag: -6 },
+      { u: 'pr1', v: 'pr3', type: 'micro', sag: 8 },
+      { u: 'pr2', v: 'pr4', type: 'micro', sag: 8 },
+
+      // Research Internal & Connections
+      { u: 'rs0', v: 'rs1', type: 'structural', sag: 12 },
+      { u: 'rs0', v: 'rs2', type: 'structural', sag: 8 },
+      { u: 'rs0', v: 'rs3', type: 'structural', sag: -8 },
+      { u: 'rs0', v: 'rs4', type: 'structural', sag: -12 },
+      { u: 'rs0', v: 'rs5', type: 'depth', sag: 0 },
+      { u: 'rs1', v: 'rs2', type: 'micro', sag: 6 },
+      { u: 'rs3', v: 'rs4', type: 'micro', sag: -6 },
+      { u: 'rs1', v: 'rs3', type: 'micro', sag: -8 },
+      { u: 'rs2', v: 'rs4', type: 'micro', sag: -8 },
+
+      // Experience Internal & Connections
+      { u: 'ex0', v: 'ex1', type: 'structural', sag: 8 },
+      { u: 'ex0', v: 'ex2', type: 'structural', sag: 8 },
+      { u: 'ex0', v: 'ex3', type: 'structural', sag: -8 },
+      { u: 'ex0', v: 'ex4', type: 'structural', sag: -8 },
+      { u: 'ex0', v: 'ex5', type: 'depth', sag: 0 },
+      { u: 'ex1', v: 'ex3', type: 'micro', sag: 6 },
+      { u: 'ex2', v: 'ex4', type: 'micro', sag: -6 },
+
+      // Contact Internal & Connections
+      { u: 'ct0', v: 'ct1', type: 'structural', sag: 8 },
+      { u: 'ct0', v: 'ct2', type: 'structural', sag: 8 },
+      { u: 'ct0', v: 'ct3', type: 'structural', sag: -8 },
+      { u: 'ct0', v: 'ct4', type: 'structural', sag: -8 },
+      { u: 'ct0', v: 'ct5', type: 'depth', sag: 0 },
+      { u: 'ct1', v: 'ct3', type: 'micro', sag: 6 },
+      { u: 'ct2', v: 'ct4', type: 'micro', sag: -6 },
+
+      // Inter-Scene Highway Spans (Connecting the full universe)
+      { u: 'ab2', v: 'ct1', type: 'structural', sag: 14 },
+      { u: 'sk1', v: 'ct2', type: 'structural', sag: -14 },
+      { u: 'ab4', v: 'h1', type: 'structural', sag: 10 },
+      { u: 'sk3', v: 'h2', type: 'structural', sag: -10 },
+      { u: 'rs2', v: 'h4', type: 'structural', sag: -10 },
+      { u: 'pr1', v: 'h3', type: 'structural', sag: 10 },
+      { u: 'rs4', v: 'ex1', type: 'structural', sag: -14 },
+      { u: 'pr3', v: 'ex2', type: 'structural', sag: 14 },
+      { u: 'ab4', v: 'rs2', type: 'depth', sag: 18 },
+      { u: 'sk3', v: 'pr1', type: 'depth', sag: -18 },
+      { u: 'ct1', v: 'h5', type: 'depth', sag: 6 },
+      { u: 'ct2', v: 'h5', type: 'depth', sag: -6 },
+      { u: 'ex1', v: 'h6', type: 'depth', sag: -6 },
+      { u: 'ex2', v: 'h6', type: 'depth', sag: 6 }
+    ];
 
     const skillsRadialCanvas = document.getElementById('skills-radial-canvas');
     const radialNodesMount = document.getElementById('radial-nodes-mount');
@@ -3562,6 +3751,10 @@
     }
 
     function resizeCanvas() {
+      if (ambientCanvas) {
+        ambientCanvas.width = window.innerWidth;
+        ambientCanvas.height = window.innerHeight - 64;
+      }
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight - 64;
     }
@@ -3678,7 +3871,110 @@
       }
     }
 
-    // --- 12. Physics & State Machine Loop ---
+    // --- 12. Global Ambient Web Background Rendering (Phase 12) ---
+    function renderAmbientWeb(now, dt) {
+      if (!ambientCtx || !ambientCanvas) return;
+
+      ambientCtx.clearRect(0, 0, ambientCanvas.width, ambientCanvas.height);
+
+      const centerX = window.innerWidth / 2;
+      const centerY = (window.innerHeight - 64) / 2;
+      const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const activeScene = targetSceneId || currentSceneId;
+
+      // 1. Update cursor deflection physics on ambient nodes
+      AMBIENT_NODES.forEach(node => {
+        const screenX = centerX + (node.x - camX * node.depth);
+        const screenY = centerY + (node.y - camY * node.depth);
+
+        if (!isReduced && mousePos.x >= 0) {
+          const dx = screenX - mousePos.x;
+          const dy = screenY - mousePos.y;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < 180 && dist > 1) {
+            const strength = Math.pow(1 - dist / 180, 2) * 8.5;
+            const targetDx = (dx / dist) * strength;
+            const targetDy = (dy / dist) * strength;
+            node.curDx += (targetDx - node.curDx) * 0.14;
+            node.curDy += (targetDy - node.curDy) * 0.14;
+          } else {
+            node.curDx += (0 - node.curDx) * 0.08;
+            node.curDy += (0 - node.curDy) * 0.08;
+          }
+        } else {
+          node.curDx = 0;
+          node.curDy = 0;
+        }
+      });
+
+      // 2. Render Layer 1 & 2 & 4: Ambient Strands (Micro, Structural, Depth)
+      AMBIENT_EDGES.forEach(edge => {
+        const u = ambientNodeMap[edge.u];
+        const v = ambientNodeMap[edge.v];
+        if (!u || !v) return;
+
+        const p1 = {
+          x: centerX + (u.x + u.curDx - camX * u.depth),
+          y: centerY + (u.y + u.curDy - camY * u.depth)
+        };
+        const p2 = {
+          x: centerX + (v.x + v.curDx - camX * v.depth),
+          y: centerY + (v.y + v.curDy - camY * v.depth)
+        };
+
+        const isZoneActive = (u.zone === activeScene || v.zone === activeScene);
+        let baseAlpha = edge.type === 'structural' ? 0.15 : (edge.type === 'depth' ? 0.09 : 0.07);
+        if (isZoneActive) baseAlpha += 0.06;
+
+        ambientCtx.beginPath();
+        ambientCtx.moveTo(p1.x, p1.y);
+
+        const midX = (p1.x + p2.x) / 2;
+        const midY = (p1.y + p2.y) / 2 + (edge.sag || 0);
+
+        if (edge.type === 'micro') {
+          ambientCtx.setLineDash([4, 5]);
+          ambientCtx.lineWidth = 1.0;
+          ambientCtx.strokeStyle = `rgba(226, 232, 240, ${baseAlpha.toFixed(3)})`;
+          ambientCtx.quadraticCurveTo(midX, midY, p2.x, p2.y);
+          ambientCtx.stroke();
+          ambientCtx.setLineDash([]);
+        } else if (edge.type === 'depth') {
+          ambientCtx.lineWidth = 2.0;
+          ambientCtx.strokeStyle = `rgba(148, 163, 184, ${baseAlpha.toFixed(3)})`;
+          ambientCtx.quadraticCurveTo(midX, midY, p2.x, p2.y);
+          ambientCtx.stroke();
+        } else {
+          ambientCtx.lineWidth = 1.3;
+          ambientCtx.strokeStyle = `rgba(255, 255, 255, ${baseAlpha.toFixed(3)})`;
+          ambientCtx.quadraticCurveTo(midX, midY, p2.x, p2.y);
+          ambientCtx.stroke();
+        }
+      });
+
+      // 3. Render Layer 3: Ambient Nodes (Subtle breathing pulse)
+      AMBIENT_NODES.forEach(node => {
+        const px = centerX + (node.x + node.curDx - camX * node.depth);
+        const py = centerY + (node.y + node.curDy - camY * node.depth);
+
+        const isZoneActive = (node.zone === activeScene);
+        let pulseVal = 0;
+        if (!isReduced && node.isPulse) {
+          pulseVal = Math.sin(now * 0.0018 + node.phase) * 0.12;
+        }
+
+        let nodeAlpha = (isZoneActive ? 0.42 : 0.22) + pulseVal;
+        nodeAlpha = Math.max(0.08, Math.min(0.70, nodeAlpha));
+
+        ambientCtx.beginPath();
+        ambientCtx.arc(px, py, node.size || 2.0, 0, Math.PI * 2);
+        ambientCtx.fillStyle = `rgba(255, 255, 255, ${nodeAlpha.toFixed(3)})`;
+        ambientCtx.fill();
+      });
+    }
+
+    // --- 13. Physics & State Machine Loop ---
     let lastTime = performance.now();
     let frameCount = 0;
     let lastFpsUpdate = performance.now();
@@ -3694,6 +3990,7 @@
         lastFpsUpdate = now;
       }
 
+      renderAmbientWeb(now, dt);
       evaluateStateMachine(now, dt);
       updateCameraPhysics(dt);
       positionEntities();
@@ -3918,22 +4215,6 @@
         x: centerX + (wx - camX),
         y: centerY + (wy - camY)
       });
-
-      ctx.lineWidth = 1.0;
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-      ctx.setLineDash([5, 5]);
-
-      for (let i = 0; i < SCENES.length; i++) {
-        for (let j = i + 1; j < SCENES.length; j++) {
-          const s1 = worldToScreen(SCENES[i].x, SCENES[i].y);
-          const s2 = worldToScreen(SCENES[j].x, SCENES[j].y);
-          ctx.beginPath();
-          ctx.moveTo(s1.x, s1.y);
-          ctx.lineTo(s2.x, s2.y);
-          ctx.stroke();
-        }
-      }
-      ctx.setLineDash([]);
 
       if (currentState !== STATES.IDLE && webOpacity > 0.01) {
         const sOrigin = worldToScreen(webOrigin.x, webOrigin.y);
