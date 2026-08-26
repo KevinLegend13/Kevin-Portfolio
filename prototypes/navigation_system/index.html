@@ -95,7 +95,6 @@
       justify-content: space-between;
       align-items: center;
       z-index: 200;
-      zoom: 0.88;
     }
 
     .brand-group {
@@ -219,18 +218,17 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      zoom: 0.82;
     }
 
     /* Full Page Container Base (Proportioned to sleek 80% scale) */
     .full-page-frame {
-      width: 88vw;
-      max-width: 1160px;
-      height: 78vh;
-      max-height: 680px;
-      border-radius: 24px;
+      width: 82vw;
+      max-width: 980px;
+      height: 72vh;
+      max-height: 560px;
+      border-radius: 20px;
       backdrop-filter: blur(28px);
-      padding: 24px 34px 20px 34px;
+      padding: 18px 26px 14px 26px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -252,26 +250,26 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     .hero-status-pill {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       color: var(--accent-cyan);
       letter-spacing: 0.12em;
-      padding: 5px 14px;
+      padding: 4px 12px;
       border-radius: 20px;
       background: rgba(0, 210, 255, 0.1);
       border: 1px solid rgba(0, 210, 255, 0.3);
       text-transform: uppercase;
     }
     .status-dot {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: var(--accent-cyan);
       box-shadow: 0 0 8px var(--accent-cyan);
@@ -283,29 +281,29 @@
     }
     .hero-credentials-tag {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 10.5px;
       color: var(--text-muted);
       letter-spacing: 0.05em;
     }
     .hero-credentials-tag strong { color: #fff; }
     .hero-name {
       font-family: var(--font-display);
-      font-size: 68px;
+      font-size: 52px;
       font-weight: 900;
       letter-spacing: -0.04em;
       line-height: 1.0;
       color: #FFFFFF;
-      margin: 8px 0 12px 0;
+      margin: 4px 0 8px 0;
       background: linear-gradient(135deg, #FFFFFF 40%, #94A3B8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .hero-tagline {
-      font-size: 17px;
-      line-height: 1.5;
+      font-size: 14.5px;
+      line-height: 1.45;
       color: #E2E8F0;
-      max-width: 860px;
-      margin-bottom: 22px;
+      max-width: 820px;
+      margin-bottom: 14px;
       font-weight: 500;
     }
     .hero-tagline span.highlight-cyan { color: var(--accent-cyan); font-weight: 700; }
@@ -313,14 +311,14 @@
     .pillars-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-bottom: 22px;
+      gap: 12px;
+      margin-bottom: 14px;
     }
     .pillar-card {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 12px;
-      padding: 16px 18px;
+      border-radius: 10px;
+      padding: 12px 14px;
       transition: all 0.25s ease;
       cursor: pointer;
       position: relative;
@@ -332,14 +330,14 @@
     }
     .pillar-num {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 700;
       color: var(--accent-cyan);
-      margin-bottom: 4px;
+      margin-bottom: 3px;
       letter-spacing: 0.1em;
     }
-    .pillar-title { font-size: 14.5px; font-weight: 800; color: #FFFFFF; margin-bottom: 4px; }
-    .pillar-desc { font-size: 11.5px; color: var(--text-muted); line-height: 1.4; }
+    .pillar-title { font-size: 13.5px; font-weight: 800; color: #FFFFFF; margin-bottom: 3px; }
+    .pillar-desc { font-size: 10.5px; color: var(--text-muted); line-height: 1.35; }
     .home-footer-row {
       display: flex;
       justify-content: space-between;
@@ -1590,7 +1588,6 @@
       border-radius: 8px;
       border: 1px solid var(--border-subtle);
       z-index: 200;
-      zoom: 0.88;
     }
     .key-hints kbd {
       background: rgba(255,255,255,0.12);
@@ -2576,12 +2573,12 @@
     // --- 5. Multi-Node Spatial Geometry (7 NODES) ---
     const SCENES = [
       { id: 'home', index: 1, label: 'HOME', x: 0, y: 0 },
-      { id: 'about', index: 2, label: 'ABOUT', x: -1100, y: -650 },
-      { id: 'skills', index: 3, label: 'SKILLS', x: 1100, y: -650 },
-      { id: 'projects', index: 4, label: 'PROJECTS', x: 1150, y: 650 },
-      { id: 'research', index: 5, label: 'RESEARCH', x: -1150, y: 650 },
-      { id: 'experience', index: 6, label: 'EXPERIENCE', x: 0, y: 1050 },
-      { id: 'contact', index: 7, label: 'CONTACT', x: 0, y: -1050 }
+      { id: 'about', index: 2, label: 'ABOUT', x: -1450, y: -850 },
+      { id: 'skills', index: 3, label: 'SKILLS', x: 1450, y: -850 },
+      { id: 'projects', index: 4, label: 'PROJECTS', x: 1500, y: 850 },
+      { id: 'research', index: 5, label: 'RESEARCH', x: -1500, y: 850 },
+      { id: 'experience', index: 6, label: 'EXPERIENCE', x: 0, y: 1400 },
+      { id: 'contact', index: 7, label: 'CONTACT', x: 0, y: -1400 }
     ];
 
     const sceneMap = {};
@@ -2680,53 +2677,53 @@
       { id: 'h7', x: -620, y: 0, zone: 'home', depth: 0.75, size: 1.8, isPulse: true, phase: 4.8, curDx: 0, curDy: 0 },
       { id: 'h8', x: 620, y: 0, zone: 'home', depth: 0.75, size: 1.8, isPulse: true, phase: 5.5, curDx: 0, curDy: 0 },
 
-      // 01 - About Region Nodes (x: -1100, y: -650)
-      { id: 'ab0', x: -1100, y: -650, zone: 'about', depth: 1.0, size: 3.2, isPulse: true, phase: 0.2, curDx: 0, curDy: 0 },
-      { id: 'ab1', x: -1480, y: -880, zone: 'about', depth: 1.0, size: 2.0, isPulse: false, phase: 1.0, curDx: 0, curDy: 0 },
-      { id: 'ab2', x: -740, y: -860, zone: 'about', depth: 0.9, size: 2.2, isPulse: true, phase: 1.7, curDx: 0, curDy: 0 },
-      { id: 'ab3', x: -1520, y: -420, zone: 'about', depth: 0.8, size: 1.8, isPulse: false, phase: 2.4, curDx: 0, curDy: 0 },
-      { id: 'ab4', x: -720, y: -440, zone: 'about', depth: 1.0, size: 2.4, isPulse: false, phase: 3.1, curDx: 0, curDy: 0 },
-      { id: 'ab5', x: -1100, y: -980, zone: 'about', depth: 0.7, size: 1.8, isPulse: true, phase: 3.9, curDx: 0, curDy: 0 },
+      // 01 - About Region Nodes (x: -1450, y: -850)
+      { id: 'ab0', x: -1450, y: -850, zone: 'about', depth: 1.0, size: 3.2, isPulse: true, phase: 0.2, curDx: 0, curDy: 0 },
+      { id: 'ab1', x: -1880, y: -1100, zone: 'about', depth: 1.0, size: 2.0, isPulse: false, phase: 1.0, curDx: 0, curDy: 0 },
+      { id: 'ab2', x: -1020, y: -1080, zone: 'about', depth: 0.9, size: 2.2, isPulse: true, phase: 1.7, curDx: 0, curDy: 0 },
+      { id: 'ab3', x: -1920, y: -620, zone: 'about', depth: 0.8, size: 1.8, isPulse: false, phase: 2.4, curDx: 0, curDy: 0 },
+      { id: 'ab4', x: -1000, y: -640, zone: 'about', depth: 1.0, size: 2.4, isPulse: false, phase: 3.1, curDx: 0, curDy: 0 },
+      { id: 'ab5', x: -1450, y: -1200, zone: 'about', depth: 0.7, size: 1.8, isPulse: true, phase: 3.9, curDx: 0, curDy: 0 },
 
-      // 02 - Skills Region Nodes (x: 1100, y: -650)
-      { id: 'sk0', x: 1100, y: -650, zone: 'skills', depth: 1.0, size: 3.2, isPulse: true, phase: 0.4, curDx: 0, curDy: 0 },
-      { id: 'sk1', x: 740, y: -860, zone: 'skills', depth: 0.9, size: 2.2, isPulse: false, phase: 1.1, curDx: 0, curDy: 0 },
-      { id: 'sk2', x: 1480, y: -880, zone: 'skills', depth: 1.0, size: 2.0, isPulse: true, phase: 1.8, curDx: 0, curDy: 0 },
-      { id: 'sk3', x: 720, y: -440, zone: 'skills', depth: 1.0, size: 2.4, isPulse: false, phase: 2.6, curDx: 0, curDy: 0 },
-      { id: 'sk4', x: 1520, y: -420, zone: 'skills', depth: 0.8, size: 1.8, isPulse: false, phase: 3.3, curDx: 0, curDy: 0 },
-      { id: 'sk5', x: 1100, y: -980, zone: 'skills', depth: 0.7, size: 1.8, isPulse: true, phase: 4.2, curDx: 0, curDy: 0 },
+      // 02 - Skills Region Nodes (x: 1450, y: -850)
+      { id: 'sk0', x: 1450, y: -850, zone: 'skills', depth: 1.0, size: 3.2, isPulse: true, phase: 0.4, curDx: 0, curDy: 0 },
+      { id: 'sk1', x: 1020, y: -1080, zone: 'skills', depth: 0.9, size: 2.2, isPulse: false, phase: 1.1, curDx: 0, curDy: 0 },
+      { id: 'sk2', x: 1880, y: -1100, zone: 'skills', depth: 1.0, size: 2.0, isPulse: true, phase: 1.8, curDx: 0, curDy: 0 },
+      { id: 'sk3', x: 1000, y: -640, zone: 'skills', depth: 1.0, size: 2.4, isPulse: false, phase: 2.6, curDx: 0, curDy: 0 },
+      { id: 'sk4', x: 1920, y: -620, zone: 'skills', depth: 0.8, size: 1.8, isPulse: false, phase: 3.3, curDx: 0, curDy: 0 },
+      { id: 'sk5', x: 1450, y: -1200, zone: 'skills', depth: 0.7, size: 1.8, isPulse: true, phase: 4.2, curDx: 0, curDy: 0 },
 
-      // 03 - Projects Region Nodes (x: 1150, y: 650)
-      { id: 'pr0', x: 1150, y: 650, zone: 'projects', depth: 1.0, size: 3.2, isPulse: true, phase: 0.6, curDx: 0, curDy: 0 },
-      { id: 'pr1', x: 780, y: 440, zone: 'projects', depth: 1.0, size: 2.2, isPulse: false, phase: 1.4, curDx: 0, curDy: 0 },
-      { id: 'pr2', x: 1540, y: 420, zone: 'projects', depth: 0.8, size: 1.8, isPulse: true, phase: 2.2, curDx: 0, curDy: 0 },
-      { id: 'pr3', x: 760, y: 880, zone: 'projects', depth: 0.9, size: 2.4, isPulse: false, phase: 2.9, curDx: 0, curDy: 0 },
-      { id: 'pr4', x: 1520, y: 880, zone: 'projects', depth: 1.0, size: 2.0, isPulse: false, phase: 3.7, curDx: 0, curDy: 0 },
-      { id: 'pr5', x: 1150, y: 1020, zone: 'projects', depth: 0.7, size: 1.8, isPulse: true, phase: 4.5, curDx: 0, curDy: 0 },
+      // 03 - Projects Region Nodes (x: 1500, y: 850)
+      { id: 'pr0', x: 1500, y: 850, zone: 'projects', depth: 1.0, size: 3.2, isPulse: true, phase: 0.6, curDx: 0, curDy: 0 },
+      { id: 'pr1', x: 1080, y: 640, zone: 'projects', depth: 1.0, size: 2.2, isPulse: false, phase: 1.4, curDx: 0, curDy: 0 },
+      { id: 'pr2', x: 1940, y: 620, zone: 'projects', depth: 0.8, size: 1.8, isPulse: true, phase: 2.2, curDx: 0, curDy: 0 },
+      { id: 'pr3', x: 1060, y: 1080, zone: 'projects', depth: 0.9, size: 2.4, isPulse: false, phase: 2.9, curDx: 0, curDy: 0 },
+      { id: 'pr4', x: 1920, y: 1080, zone: 'projects', depth: 1.0, size: 2.0, isPulse: false, phase: 3.7, curDx: 0, curDy: 0 },
+      { id: 'pr5', x: 1500, y: 1240, zone: 'projects', depth: 0.7, size: 1.8, isPulse: true, phase: 4.5, curDx: 0, curDy: 0 },
 
-      // 04 - Research Region Nodes (x: -1150, y: 650)
-      { id: 'rs0', x: -1150, y: 650, zone: 'research', depth: 1.0, size: 3.2, isPulse: true, phase: 0.8, curDx: 0, curDy: 0 },
-      { id: 'rs1', x: -1540, y: 420, zone: 'research', depth: 0.8, size: 1.8, isPulse: false, phase: 1.5, curDx: 0, curDy: 0 },
-      { id: 'rs2', x: -780, y: 440, zone: 'research', depth: 1.0, size: 2.2, isPulse: true, phase: 2.3, curDx: 0, curDy: 0 },
-      { id: 'rs3', x: -1520, y: 880, zone: 'research', depth: 1.0, size: 2.0, isPulse: false, phase: 3.0, curDx: 0, curDy: 0 },
-      { id: 'rs4', x: -760, y: 880, zone: 'research', depth: 0.9, size: 2.4, isPulse: false, phase: 3.8, curDx: 0, curDy: 0 },
-      { id: 'rs5', x: -1150, y: 1020, zone: 'research', depth: 0.7, size: 1.8, isPulse: true, phase: 4.7, curDx: 0, curDy: 0 },
+      // 04 - Research Region Nodes (x: -1500, y: 850)
+      { id: 'rs0', x: -1500, y: 850, zone: 'research', depth: 1.0, size: 3.2, isPulse: true, phase: 0.8, curDx: 0, curDy: 0 },
+      { id: 'rs1', x: -1940, y: 620, zone: 'research', depth: 0.8, size: 1.8, isPulse: false, phase: 1.5, curDx: 0, curDy: 0 },
+      { id: 'rs2', x: -1080, y: 640, zone: 'research', depth: 1.0, size: 2.2, isPulse: true, phase: 2.3, curDx: 0, curDy: 0 },
+      { id: 'rs3', x: -1920, y: 1080, zone: 'research', depth: 1.0, size: 2.0, isPulse: false, phase: 3.0, curDx: 0, curDy: 0 },
+      { id: 'rs4', x: -1060, y: 1080, zone: 'research', depth: 0.9, size: 2.4, isPulse: false, phase: 3.8, curDx: 0, curDy: 0 },
+      { id: 'rs5', x: -1500, y: 1240, zone: 'research', depth: 0.7, size: 1.8, isPulse: true, phase: 4.7, curDx: 0, curDy: 0 },
 
-      // 05 - Experience Region Nodes (x: 0, y: 1050)
-      { id: 'ex0', x: 0, y: 1050, zone: 'experience', depth: 1.0, size: 3.2, isPulse: true, phase: 0.3, curDx: 0, curDy: 0 },
-      { id: 'ex1', x: -440, y: 880, zone: 'experience', depth: 1.0, size: 2.2, isPulse: false, phase: 1.2, curDx: 0, curDy: 0 },
-      { id: 'ex2', x: 440, y: 880, zone: 'experience', depth: 1.0, size: 2.2, isPulse: true, phase: 2.0, curDx: 0, curDy: 0 },
-      { id: 'ex3', x: -380, y: 1260, zone: 'experience', depth: 0.85, size: 1.8, isPulse: false, phase: 2.8, curDx: 0, curDy: 0 },
-      { id: 'ex4', x: 380, y: 1260, zone: 'experience', depth: 0.85, size: 1.8, isPulse: false, phase: 3.6, curDx: 0, curDy: 0 },
-      { id: 'ex5', x: 0, y: 1380, zone: 'experience', depth: 0.7, size: 2.0, isPulse: true, phase: 4.4, curDx: 0, curDy: 0 },
+      // 05 - Experience Region Nodes (x: 0, y: 1400)
+      { id: 'ex0', x: 0, y: 1400, zone: 'experience', depth: 1.0, size: 3.2, isPulse: true, phase: 0.3, curDx: 0, curDy: 0 },
+      { id: 'ex1', x: -440, y: 1180, zone: 'experience', depth: 1.0, size: 2.2, isPulse: false, phase: 1.2, curDx: 0, curDy: 0 },
+      { id: 'ex2', x: 440, y: 1180, zone: 'experience', depth: 1.0, size: 2.2, isPulse: true, phase: 2.0, curDx: 0, curDy: 0 },
+      { id: 'ex3', x: -400, y: 1620, zone: 'experience', depth: 0.85, size: 1.8, isPulse: false, phase: 2.8, curDx: 0, curDy: 0 },
+      { id: 'ex4', x: 400, y: 1620, zone: 'experience', depth: 0.85, size: 1.8, isPulse: false, phase: 3.6, curDx: 0, curDy: 0 },
+      { id: 'ex5', x: 0, y: 1740, zone: 'experience', depth: 0.7, size: 2.0, isPulse: true, phase: 4.4, curDx: 0, curDy: 0 },
 
-      // 06 - Contact Region Nodes (x: 0, y: -1050)
-      { id: 'ct0', x: 0, y: -1050, zone: 'contact', depth: 1.0, size: 3.2, isPulse: true, phase: 0.5, curDx: 0, curDy: 0 },
-      { id: 'ct1', x: -440, y: -880, zone: 'contact', depth: 1.0, size: 2.2, isPulse: false, phase: 1.3, curDx: 0, curDy: 0 },
-      { id: 'ct2', x: 440, y: -880, zone: 'contact', depth: 1.0, size: 2.2, isPulse: true, phase: 2.1, curDx: 0, curDy: 0 },
-      { id: 'ct3', x: -380, y: -1260, zone: 'contact', depth: 0.85, size: 1.8, isPulse: false, phase: 2.9, curDx: 0, curDy: 0 },
-      { id: 'ct4', x: 380, y: -1260, zone: 'contact', depth: 0.85, size: 1.8, isPulse: false, phase: 3.7, curDx: 0, curDy: 0 },
-      { id: 'ct5', x: 0, y: -1380, zone: 'contact', depth: 0.7, size: 2.0, isPulse: true, phase: 4.6, curDx: 0, curDy: 0 }
+      // 06 - Contact Region Nodes (x: 0, y: -1400)
+      { id: 'ct0', x: 0, y: -1400, zone: 'contact', depth: 1.0, size: 3.2, isPulse: true, phase: 0.5, curDx: 0, curDy: 0 },
+      { id: 'ct1', x: -440, y: -1180, zone: 'contact', depth: 1.0, size: 2.2, isPulse: false, phase: 1.3, curDx: 0, curDy: 0 },
+      { id: 'ct2', x: 440, y: -1180, zone: 'contact', depth: 1.0, size: 2.2, isPulse: true, phase: 2.1, curDx: 0, curDy: 0 },
+      { id: 'ct3', x: -400, y: -1620, zone: 'contact', depth: 0.85, size: 1.8, isPulse: false, phase: 2.9, curDx: 0, curDy: 0 },
+      { id: 'ct4', x: 400, y: -1620, zone: 'contact', depth: 0.85, size: 1.8, isPulse: false, phase: 3.7, curDx: 0, curDy: 0 },
+      { id: 'ct5', x: 0, y: -1740, zone: 'contact', depth: 0.7, size: 2.0, isPulse: true, phase: 4.6, curDx: 0, curDy: 0 }
     ];
 
     const ambientNodeMap = {};
