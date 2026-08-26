@@ -50,8 +50,8 @@ Rather than treating Spider-Man motifs as static decorative illustrations or a g
 | **Phase 7** | **Interactive Skills Web (Nested Sub-Web Zoom & Context Cards)** | *Completed* |
 | **Phase 8** | **Projects & Case Studies (Two-Level Model & TeamFlow Flagship)** *(see [docs/projects_experience.md](./docs/projects_experience.md))* | *Completed* |
 | **Phase 9** | **Research Experience (Multilingual NLP & One Health / Avian AI)** *(see [docs/research_experience.md](./docs/research_experience.md))* | *Completed* |
-| **Phase 10** | Experience (Syncfusion AI Internship Showcase) | *Not Started* |
-| **Phase 11** | Contact Experience (Final Web Node & Terminal/Links) | *Pending* |
+| **Phase 10** | **Experience (Syncfusion AI Internship Showcase)** *(see [docs/experience.md](./docs/experience.md))* | *Completed* |
+| **Phase 11** | Contact Experience (Final Web Node & Terminal/Links) | *Not Started* |
 | **Phase 12** | Motion System & Web Physics Specification | *Pending* |
 | **Phase 13** | Visual Design System (Typography, Tokens, Shaders/Cards) | *Pending* |
 | **Phase 14** | Responsive & Mobile Touch Interaction Design | *Pending* |
@@ -62,9 +62,10 @@ Rather than treating Spider-Man motifs as static decorative illustrations or a g
 ---
 
 ## Current Status
-- **Stage**: Phase 9 Complete — Research Experience implemented with Level 1 Scientific Research Hub and Level 2 In-Depth Scientific Investigation Views (Indic NLP Embeddings, One Health Digital Twin & GraphRAG Platform).
+- **Stage**: Phase 10 Complete — Experience section implemented showcasing Kevin's AI Internship at Syncfusion Software Pvt. Ltd. (ASP.NET Core, React, TypeScript, C#, REST APIs, RBAC).
 - **Active Prototype**:
   - [Runnable Navigation Prototype](./prototypes/navigation_system/index.html) (`http://localhost:4173/prototypes/navigation_system/index.html`)
 - **Documentation**:
+  - [Experience Specification](./docs/experience.md)
   - [Research Experience Specification](./docs/research_experience.md)
   - [Projects Experience Specification](./docs/projects_experience.md)

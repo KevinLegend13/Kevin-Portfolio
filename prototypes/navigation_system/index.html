@@ -15,9 +15,11 @@
       --accent-red: #FF2A4B;
       --accent-cyan: #00D2FF;
       --accent-magenta: #FF007A;
+      --accent-amber: #FFB800;
       --accent-cyan-glow: rgba(0, 210, 255, 0.35);
       --accent-red-glow: rgba(255, 42, 75, 0.35);
       --accent-magenta-glow: rgba(255, 0, 122, 0.35);
+      --accent-amber-glow: rgba(255, 184, 0, 0.35);
       --text-primary: #F8FAFC;
       --text-muted: #94A3B8;
       --text-dim: #64748B;
@@ -25,6 +27,7 @@
       --border-cyan: rgba(0, 210, 255, 0.4);
       --border-red: rgba(255, 42, 75, 0.4);
       --border-magenta: rgba(255, 0, 122, 0.45);
+      --border-amber: rgba(255, 184, 0, 0.45);
       --font-display: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -957,7 +960,7 @@
     }
 
     /* =========================================================================
-       4. PHASE 9: RESEARCH SCIENTIFIC ENVIRONMENT & INVESTIGATION PIPELINES
+       4. PHASE 9: RESEARCH SCIENTIFIC ENVIRONMENT
        ========================================================================= */
     #page-research {
       background: radial-gradient(circle at 50% 20%, rgba(28, 12, 28, 0.98) 0%, rgba(8, 4, 12, 0.96) 100%);
@@ -967,7 +970,6 @@
       position: relative;
     }
 
-    /* Research Level 1 Hub */
     .research-hub-stage {
       position: relative;
       width: 100%;
@@ -1058,7 +1060,6 @@
     }
     .research-hub-card:hover .rhc-cta-btn { color: #FFFFFF; }
 
-    /* Research Level 2 In-Depth Investigation View */
     .research-investigation-view {
       display: flex;
       flex-direction: column;
@@ -1139,6 +1140,72 @@
     }
     .res-matrix-table td strong { color: #FFFFFF; font-family: var(--font-mono); }
 
+    /* =========================================================================
+       5. PHASE 10: EXPERIENCE (SYNCFUSION AI INTERNSHIP SHOWCASE)
+       ========================================================================= */
+    #page-experience {
+      background: radial-gradient(circle at 50% 20%, rgba(26, 20, 10, 0.98) 0%, rgba(10, 8, 4, 0.96) 100%);
+      border: 1.5px solid var(--accent-amber);
+      box-shadow: 0 35px 100px rgba(0, 0, 0, 0.92), 0 0 65px var(--accent-amber-glow);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+
+    .exp-hero-header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+    }
+
+    .exp-hero-title {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 900;
+      color: #FFFFFF;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin: 6px 0 6px 0;
+    }
+
+    .exp-timeline-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-amber);
+      background: rgba(255, 184, 0, 0.12);
+      border: 1px solid rgba(255, 184, 0, 0.3);
+      padding: 4px 12px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .exp-flow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .exp-flow-node {
+      background: rgba(20, 16, 10, 0.9);
+      border: 1.5px solid rgba(255, 184, 0, 0.35);
+      border-radius: 10px;
+      padding: 14px 12px;
+      text-align: center;
+      position: relative;
+    }
+
+    .exp-timeline-card {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 10px;
+    }
+
     /* Chromatic Shadow Accents */
     .full-page-frame.chromatic-impact {
       border-color: #00D2FF;
@@ -1190,6 +1257,11 @@
       background: #201020;
       border: 2px solid var(--accent-magenta);
       box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 0 25px var(--accent-magenta-glow);
+    }
+    .node-experience-style {
+      background: #241A0C;
+      border: 2px solid var(--accent-amber);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 0 25px var(--accent-amber-glow);
     }
     .node-anchor-dot {
       position: absolute;
@@ -1360,14 +1432,14 @@
         height: 84vh;
         padding: 18px 14px;
       }
-      .arch-diagram-grid { grid-template-columns: 1fr 1fr; }
+      .arch-diagram-grid, .exp-flow-grid { grid-template-columns: 1fr 1fr; }
       .res-pipeline-track { grid-template-columns: 1fr 1fr; }
       .research-grid-cards { grid-template-columns: 1fr; }
       .skills-center-core { width: 140px; height: 140px; }
       .scc-title { font-size: 20px; }
       .wsn-badge-circle { width: 68px; height: 68px; }
       .wsn-label { font-size: 9px; }
-      .about-lead-title { font-size: 32px; }
+      .about-lead-title, .exp-hero-title { font-size: 32px; }
       .about-triad-grid { grid-template-columns: 1fr; gap: 14px; }
       .pillars-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
       #telemetry-hud { display: none; }
@@ -1451,7 +1523,7 @@
               <div class="pillar-title">ISL Gesture Translator</div>
               <div class="pillar-desc">Real-time sign language recognition with OpenCV and MediaPipe 21-hand landmark intelligence.</div>
             </div>
-            <div class="pillar-card" onclick="requestNavigation('about')">
+            <div class="pillar-card" onclick="requestNavigation('experience')">
               <div class="pillar-num">04 // INDUSTRY TENURE</div>
               <div class="pillar-title">Syncfusion AI Intern</div>
               <div class="pillar-desc">Enterprise software engineering with ASP.NET Core, React, TypeScript, C#, and RBAC.</div>
@@ -1463,14 +1535,14 @@
               <button class="hero-cta-primary" onclick="requestNavigation('projects')">
                 <span>EXPLORE FLAGSHIP (TEAMFLOW)</span> &rarr;
               </button>
-              <button class="hero-cta-secondary" onclick="requestNavigation('about')">
-                ABOUT & ENGINEERING TRIAD
+              <button class="hero-cta-secondary" onclick="requestNavigation('experience')">
+                SYNCFUSION AI INTERNSHIP
               </button>
             </div>
             <div class="home-telemetry-cue">
               <span>LOCATION: <strong>VELLORE / CHENNAI</strong></span>
               <span>&bull;</span>
-              <span>NETWORK: <strong>SPIDER-WEB v8.9</strong></span>
+              <span>NETWORK: <strong>SPIDER-WEB v9.0</strong></span>
             </div>
           </div>
         </div>
@@ -1562,9 +1634,9 @@
           <div class="home-footer-row">
             <div class="about-semantic-links">
               <button class="hero-cta-secondary" onclick="requestNavigation('home')">&larr; RETURN TO HOME</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('experience')"><span>VIEW SYNCFUSION TENURE</span> &rarr;</button>
               <button class="semantic-jump-btn" onclick="requestNavigation('projects')"><span>VIEW FLAGSHIP (TEAMFLOW)</span> &rarr;</button>
               <button class="semantic-jump-btn" onclick="requestNavigation('skills')"><span>SKILLS TAXONOMY</span> &rarr;</button>
-              <button class="semantic-jump-btn" onclick="requestNavigation('research')"><span>RESEARCH INVESTIGATIONS</span> &rarr;</button>
             </div>
             <div class="home-telemetry-cue">
               <span>NODE: <strong>01 // ABOUT IDENTITY</strong></span>
@@ -1626,6 +1698,7 @@
           <div class="home-footer-row" style="z-index: 30; position: relative;">
             <div class="about-semantic-links">
               <button class="hero-cta-secondary" id="skills-back-btn" onclick="handleSkillsBackAction()">&larr; RETURN TO HOME</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('experience')"><span>SYNCFUSION STACK</span> &rarr;</button>
               <button class="semantic-jump-btn" onclick="requestNavigation('projects')"><span>CONNECT TO PROJECTS</span> &rarr;</button>
               <button class="semantic-jump-btn" onclick="requestNavigation('about')"><span>ABOUT BACKGROUND</span> &rarr;</button>
             </div>
@@ -1647,7 +1720,7 @@
           <div class="node-title-txt">PROJECTS</div>
           <div class="node-status-txt">TeamFlow &bull; ISL Translator &bull; One Health</div>
         </div>
-        <!-- Full Page View (Default starts directly centered on the rich web cards) -->
+        <!-- Full Page View -->
         <div class="full-page-frame" id="page-projects" style="display: none;">
           
           <!-- Top Header Row -->
@@ -1698,7 +1771,7 @@
           <div class="node-title-txt">RESEARCH</div>
           <div class="node-status-txt">Indic NLP &bull; Avian Digital Twin</div>
         </div>
-        <!-- Full Page View (Switches between Level 1 Scientific Hub & Level 2 Investigation) -->
+        <!-- Full Page View -->
         <div class="full-page-frame" id="page-research" style="display: none;">
           
           <!-- Top Header Row -->
@@ -1726,8 +1799,8 @@
               <button class="semantic-jump-btn" onclick="requestNavigation('skills')">
                 <span>CONNECTED SKILLS</span> &rarr;
               </button>
-              <button class="semantic-jump-btn" onclick="requestNavigation('projects')">
-                <span>VIEW SYSTEMS (PROJECTS)</span> &rarr;
+              <button class="semantic-jump-btn" onclick="requestNavigation('experience')">
+                <span>VIEW EXPERIENCE</span> &rarr;
               </button>
             </div>
             <div class="home-telemetry-cue">
@@ -1738,13 +1811,118 @@
         </div>
       </div>
 
+      <!-- =======================================================
+           NODE 05: EXPERIENCE (SYNCFUSION AI INTERNSHIP SHOWCASE)
+           ======================================================= -->
+      <div class="scene-entity" id="entity-experience">
+        <!-- Compact View -->
+        <div class="compact-node-view node-experience-style" id="compact-experience" onclick="requestNavigation('experience')">
+          <div class="node-anchor-dot" style="border-color: var(--accent-amber); box-shadow: 0 0 12px var(--accent-amber);"></div>
+          <div class="node-tag-txt" style="color: var(--accent-amber);">NODE_05 // TENURE</div>
+          <div class="node-title-txt">EXPERIENCE</div>
+          <div class="node-status-txt">Syncfusion AI Intern &bull; May–June 2026</div>
+        </div>
+        <!-- Full Page View -->
+        <div class="full-page-frame" id="page-experience" style="display: none;">
+          <div>
+            <!-- Top Header Row -->
+            <div class="hero-top-row">
+              <div class="hero-status-pill" style="color: var(--accent-amber); border-color: rgba(255,184,0,0.4); background: rgba(255,184,0,0.15);">
+                <span class="status-dot" style="background: var(--accent-amber); box-shadow: 0 0 8px var(--accent-amber);"></span>
+                INDUSTRY TENURE // ENTERPRISE SOFTWARE & AI
+              </div>
+              <div class="hero-credentials-tag">
+                Chennai / Onsite &bull; <strong>May–June 2026</strong>
+              </div>
+            </div>
+
+            <!-- Hero Section -->
+            <div class="exp-hero-header">
+              <div class="exp-timeline-badge">
+                <span>⏱ DURATION: MAY 2026 – JUNE 2026</span> &bull; <span>ROLE: AI INTERN</span>
+              </div>
+              <h2 class="exp-hero-title">Syncfusion Software Pvt. Ltd.</h2>
+              <p style="font-size: 14.5px; color: #E2E8F0; line-height: 1.55; max-width: 980px;">
+                Enterprise software engineering internship building production features with <strong>ASP.NET Core</strong>, <strong>React</strong>, <strong>TypeScript</strong>, <strong>C#</strong>, and robust <strong>Role-Based Access Control (RBAC)</strong> boundaries across cross-functional engineering teams.
+              </p>
+            </div>
+          </div>
+
+          <!-- Section 01: Engineering Architecture Flow -->
+          <div>
+            <div class="cs-sec-tag" style="color: var(--accent-amber); margin-bottom: 6px;">01. MULTI-TIER ENTERPRISE ARCHITECTURE</div>
+            <div class="exp-flow-grid">
+              <div class="exp-flow-node" onclick="requestNavigation('skills')" style="cursor: pointer;">
+                <div class="anb-tier" style="color: var(--accent-amber);">TIER 01 // UI CLIENT</div>
+                <div class="anb-name">React + TypeScript</div>
+                <div class="anb-role">Modular UI component tree, type-safe state & reactive DOM.</div>
+              </div>
+              <div class="exp-flow-node">
+                <div class="anb-tier" style="color: var(--accent-amber);">TIER 02 // INTERFACE</div>
+                <div class="anb-name">REST APIs</div>
+                <div class="anb-role">Structured HTTP endpoint contracts & payload validation.</div>
+              </div>
+              <div class="exp-flow-node" onclick="requestNavigation('skills')" style="cursor: pointer;">
+                <div class="anb-tier" style="color: var(--accent-amber);">TIER 03 // BACKEND</div>
+                <div class="anb-name">ASP.NET Core & C#</div>
+                <div class="anb-role">High-performance async services & controller business logic.</div>
+              </div>
+              <div class="exp-flow-node">
+                <div class="anb-tier" style="color: var(--accent-amber);">TIER 04 // SECURITY</div>
+                <div class="anb-name">RBAC Policies</div>
+                <div class="anb-role">Granular authorization boundaries & access verification.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 02: Core Engineering Deliverables -->
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px; margin: 12px 0;">
+            <div class="cs-section-block" style="padding: 16px 20px;">
+              <div class="cs-sec-tag" style="color: var(--accent-amber);">02. TECHNICAL RESPONSIBILITIES</div>
+              <div style="font-size: 12.5px; color: var(--text-muted); line-height: 1.6;">
+                &bull; <strong>Frontend Development:</strong> Built interactive web application features using React and TypeScript, adhering to enterprise design systems.<br>
+                &bull; <strong>Backend Services:</strong> Developed scalable server-side business logic and controllers utilizing ASP.NET Core and C#.<br>
+                &bull; <strong>Security & Authorization:</strong> Implemented Role-Based Access Control (RBAC) to enforce strict user permission boundaries across endpoints.<br>
+                &bull; <strong>API Contracts:</strong> Designed stateless REST APIs with structured JSON payloads and comprehensive error handling.
+              </div>
+            </div>
+
+            <!-- Section 03: Concise Verified Timeline -->
+            <div class="cs-section-block" style="padding: 16px 20px;">
+              <div class="cs-sec-tag" style="color: var(--accent-amber);">03. TENURE TIMELINE</div>
+              <div class="exp-timeline-card">
+                <div style="font-family: var(--font-mono); font-size: 10.5px; font-weight: 800; color: var(--accent-amber);">MAY 2026 // ONBOARDING & SETUP</div>
+                <div style="font-size: 11.5px; color: #CBD5E1; margin-top: 2px;">Environment onboarding, ASP.NET Core backend pipeline setup, and RBAC security boundary mapping.</div>
+              </div>
+              <div class="exp-timeline-card">
+                <div style="font-family: var(--font-mono); font-size: 10.5px; font-weight: 800; color: var(--accent-amber);">JUNE 2026 // FEATURE DELIVERY</div>
+                <div style="font-size: 11.5px; color: #CBD5E1; margin-top: 2px;">React/TypeScript feature integration, REST API verification, and enterprise code review delivery.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Footer Row -->
+          <div class="home-footer-row" style="margin-top: 10px;">
+            <div class="about-semantic-links">
+              <button class="hero-cta-secondary" onclick="requestNavigation('home')">&larr; RETURN TO HOME</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('skills')"><span>VIEW CONNECTED SKILLS</span> &rarr;</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('about')"><span>ABOUT BACKGROUND</span> &rarr;</button>
+              <button class="semantic-jump-btn" onclick="requestNavigation('projects')"><span>PROJECTS PLATFORMS</span> &rarr;</button>
+            </div>
+            <div class="home-telemetry-cue">
+              <span>NODE: <strong>05 // SYNCFUSION TENURE</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
     <canvas id="world-canvas"></canvas>
   </div>
 
   <!-- Keybinds Hint -->
   <div class="key-hints">
-    <span>Keys: <kbd>1</kbd> Home <kbd>2</kbd> About <kbd>3</kbd> Skills <kbd>4</kbd> Projects <kbd>5</kbd> Research</span>
+    <span>Keys: <kbd>1</kbd> Home <kbd>2</kbd> About <kbd>3</kbd> Skills <kbd>4</kbd> Projects <kbd>5</kbd> Research <kbd>6</kbd> Experience</span>
   </div>
 
   <!-- Live Telemetry HUD -->
@@ -1912,7 +2090,6 @@
     let activeCaseStudyId = null;
 
     // --- 2. Master Research Ground Truth Data from Master Profile ---
-    // Extensible architecture allowing seamless addition of future papers/investigations
     const RESEARCH_DATA = [
       {
         id: 'indic-nlp',
@@ -1988,7 +2165,7 @@
 
     let activeResearchId = null;
 
-    // --- Skills Domain Data Grounded in Master Profile ---
+    // --- 3. Skills Domain Data Grounded in Master Profile ---
     const SKILLS_DOMAINS = [
       {
         id: 'ai-ml',
@@ -2032,7 +2209,7 @@
           { name: 'FastAPI', numStr: '01', posXPercent: 18, posYPercent: 22, context: 'Engineered flagship TeamFlow async backend with Pydantic schemas and dependency injection.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
           { name: 'React & Vite', numStr: '02', posXPercent: 50, posYPercent: 12, context: 'Engineered modular component hierarchy and responsive state management for TeamFlow platform.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
           { name: 'TypeScript', numStr: '03', posXPercent: 82, posYPercent: 22, context: 'Strict type safety across frontend models, API contracts, and async network calls.', linkTo: 'projects', linkText: 'VIEW IN TEAMFLOW' },
-          { name: 'ASP.NET Core', numStr: '04', posXPercent: 82, posYPercent: 78, context: 'Enterprise feature development and RBAC authorization during Syncfusion AI Internship.', linkTo: 'about', linkText: 'VIEW IN ABOUT' },
+          { name: 'ASP.NET Core', numStr: '04', posXPercent: 82, posYPercent: 78, context: 'Enterprise feature development and RBAC authorization during Syncfusion AI Internship.', linkTo: 'experience', linkText: 'VIEW IN EXPERIENCE' },
           { name: 'Flask & REST APIs', numStr: '05', posXPercent: 18, posYPercent: 78, context: 'Stateless JSON endpoints, CORS security, and database integration in MyKitchen planner.', linkTo: 'projects', linkText: 'VIEW IN PROJECTS' }
         ]
       },
@@ -2085,7 +2262,7 @@
     let selectedSkillData = null;
     let isSkillsTransitioning = false;
 
-    // --- 3. Motion & Physics Configuration ---
+    // --- 4. Motion & Physics Configuration ---
     const CONFIG = {
       collapseDurationMs: 140,
       shootDurationMs: 150,
@@ -2101,19 +2278,20 @@
       chromaticEnabled: true
     };
 
-    // --- 4. Multi-Node Spatial Geometry ---
+    // --- 5. Multi-Node Spatial Geometry (6 NODES) ---
     const SCENES = [
       { id: 'home', index: 1, label: 'HOME', x: 0, y: 0 },
       { id: 'about', index: 2, label: 'ABOUT', x: -1100, y: -650 },
       { id: 'skills', index: 3, label: 'SKILLS', x: 1100, y: -650 },
       { id: 'projects', index: 4, label: 'PROJECTS', x: 1150, y: 650 },
-      { id: 'research', index: 5, label: 'RESEARCH', x: -1150, y: 650 }
+      { id: 'research', index: 5, label: 'RESEARCH', x: -1150, y: 650 },
+      { id: 'experience', index: 6, label: 'EXPERIENCE', x: 0, y: 1050 }
     ];
 
     const sceneMap = {};
     SCENES.forEach(s => sceneMap[s.id] = s);
 
-    // --- 5. 10-Stage Finite State Machine ---
+    // --- 6. 10-Stage Finite State Machine ---
     const STATES = {
       IDLE: 'IDLE',
       COLLAPSING: 'COLLAPSING',
@@ -2205,7 +2383,7 @@
     const researchBackBtn = document.getElementById('research-back-btn');
     const researchTelemetryStatus = document.getElementById('research-telemetry-status');
 
-    // --- 6. Initialize Navigation, Skills, Projects, and Research ---
+    // --- 7. Initialize Navigation, Skills, Projects, Research, Experience ---
     function init() {
       SCENES.forEach(s => {
         const btn = document.createElement('button');
@@ -2257,7 +2435,7 @@
       }, 1100);
     }
 
-    // --- 7. PHASE 9: RESEARCH LEVEL 1 HUB & LEVEL 2 INVESTIGATIONS ---
+    // --- 8. RESEARCH LEVEL 1 HUB & LEVEL 2 INVESTIGATIONS ---
     function renderResearchView() {
       if (!researchDynamicMount) return;
       researchDynamicMount.innerHTML = '';
@@ -2471,13 +2649,12 @@
       }
     }
 
-    // --- 8. Suspended Spider-Web (Projects Level 1 & Level 2) ---
+    // --- 9. Suspended Spider-Web (Projects Level 1 & Level 2) ---
     function renderProjectsView() {
       if (!projectsDynamicMount) return;
       projectsDynamicMount.innerHTML = '';
 
       if (!activeCaseStudyId) {
-        // LEVEL 1: Perfectly Centered Suspended Spider-Web Stage (No scroll)
         projectsDynamicMount.style.overflow = 'hidden';
         projectsStatusPill.innerHTML = '<span class="status-dot" style="background:#00F0FF; box-shadow:0 0 8px #00F0FF;"></span> SUSPENDED SPIDER-WEB // CLICK ANY DANGLING PROJECT';
         projectsBreadcrumb.textContent = 'Master Profile Source of Truth';
@@ -2492,7 +2669,6 @@
         dCanvas.id = 'projects-dangling-canvas';
         stage.appendChild(dCanvas);
 
-        // Mount Dangling Project Nodes
         PROJECTS_DATA.forEach(proj => {
           const node = document.createElement('div');
           node.className = `dangling-project-node ${proj.isFlagship ? 'flagship-node' : ''}`;
@@ -2523,7 +2699,6 @@
         setTimeout(drawDanglingProjectsCanvas, 40);
 
       } else {
-        // LEVEL 2: Dedicated Full Case Study Experience (Smoothly Scrollable)
         projectsDynamicMount.style.overflowY = 'auto';
         projectsDynamicMount.style.scrollbarWidth = 'none';
 
@@ -2538,7 +2713,6 @@
         const view = document.createElement('div');
         view.className = 'case-study-view-container';
 
-        // SECTION 01 — HERO
         const heroBlock = document.createElement('div');
         heroBlock.className = 'cs-hero-header';
         heroBlock.innerHTML = `
@@ -2551,7 +2725,6 @@
         `;
         view.appendChild(heroBlock);
 
-        // SECTION 02 — THE PROBLEM & OBJECTIVE
         const probBlock = document.createElement('div');
         probBlock.className = 'cs-section-block';
         probBlock.innerHTML = `
@@ -2561,7 +2734,6 @@
         `;
         view.appendChild(probBlock);
 
-        // SECTION 03 — SYSTEM OVERVIEW & ARCHITECTURE DIAGRAM
         if (proj.architecture) {
           const archBlock = document.createElement('div');
           archBlock.className = 'cs-section-block';
@@ -2581,7 +2753,6 @@
           view.appendChild(archBlock);
         }
 
-        // FLAGSHIP SPECIFIC SECTIONS: SECURITY, KANBAN, DB, TESTING
         if (proj.isFlagship) {
           const secBlock = document.createElement('div');
           secBlock.className = 'cs-section-block';
@@ -2620,7 +2791,6 @@
           view.appendChild(testBlock);
         }
 
-        // SECTION FINAL — ENGINEERING TAKEAWAYS
         const takeBlock = document.createElement('div');
         takeBlock.className = 'cs-section-block';
         takeBlock.style.borderColor = 'rgba(0, 240, 255, 0.35)';
@@ -2631,7 +2801,6 @@
         `;
         view.appendChild(takeBlock);
 
-        // Next project action
         const nextProjIdx = (PROJECTS_DATA.findIndex(p => p.id === activeCaseStudyId) + 1) % PROJECTS_DATA.length;
         const nextProj = PROJECTS_DATA[nextProjIdx];
         const navRow = document.createElement('div');
@@ -2651,7 +2820,6 @@
       }
     }
 
-    // Draw the full suspended spider-web centered in the frame
     function drawDanglingProjectsCanvas() {
       const stage = document.getElementById('projects-dangling-stage');
       const dCanvas = document.getElementById('projects-dangling-canvas');
@@ -2667,7 +2835,6 @@
       const pCtx = dCanvas.getContext('2d');
       pCtx.clearRect(0, 0, w, h);
 
-      // 1. Suspension bridge lines directly across the top header
       pCtx.strokeStyle = 'rgba(0, 240, 255, 0.32)';
       pCtx.lineWidth = 1.8;
 
@@ -2691,7 +2858,6 @@
       pCtx.quadraticCurveTo(w * 0.78, h * 0.18, w * 0.5, h * 0.10);
       pCtx.stroke();
 
-      // 2. Full Radial Spokes emanating downward across the stage
       const spokes = 14;
       const centerWebX = w * 0.5;
       const centerWebY = h * 0.10;
@@ -2710,7 +2876,6 @@
         pCtx.stroke();
       }
 
-      // 3. Broad Concentric Sagging Spiral Webs
       const rings = [45, 95, 150, 215, 285, 360, 440];
       rings.forEach((r, rIdx) => {
         pCtx.strokeStyle = rIdx % 2 === 0 ? 'rgba(0, 240, 255, 0.32)' : 'rgba(255, 42, 75, 0.28)';
@@ -2738,7 +2903,6 @@
         pCtx.stroke();
       });
 
-      // 4. Glowing Anchor Points on Web
       PROJECTS_DATA.forEach(proj => {
         const ax = (proj.anchorXPercent / 100) * w;
         const ay = (proj.anchorYPercent / 100) * h;
@@ -2772,7 +2936,7 @@
       }
     }
 
-    // --- 9. Skills Web Logic ---
+    // --- 10. Skills Web Logic ---
     function renderSkillsWebLayer() {
       if (!radialNodesMount) return;
       radialNodesMount.innerHTML = '';
@@ -3064,15 +3228,13 @@
       }
     }
 
-    // --- 10. Navigation Request Logic ---
+    // --- 11. Navigation Request Logic ---
     function requestNavigation(targetId) {
       closeSkillsModal();
 
-      // Whenever navigating to Projects, reset activeCaseStudyId to return to main web homepage
       if (targetId === 'projects') {
         activeCaseStudyId = null;
       }
-      // Whenever navigating to Research, reset activeResearchId to return to main investigation hub
       if (targetId === 'research') {
         activeResearchId = null;
       }
@@ -3098,14 +3260,12 @@
       webTip = { x: originScene.x, y: originScene.y };
       webOpacity = 1.0;
 
-      // Update Nav Buttons
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
       const activeBtn = document.getElementById(`btn-nav-${targetId}`);
       if (activeBtn) activeBtn.classList.add('active');
 
       teleRoute.textContent = `${currentSceneId} &rarr; ${targetSceneId}`;
 
-      // Reduced motion bypass
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         SCENES.forEach(s => {
           entityStates[s.id].mode = s.id === targetSceneId ? 'full' : 'compact';
@@ -3139,12 +3299,12 @@
           vy: Math.sin(angle) * speed,
           life: 1.0,
           decay: 0.035 + Math.random() * 0.035,
-          color: Math.random() > 0.25 ? '#00D2FF' : '#FF2A4B'
+          color: targetSceneId === 'experience' ? '#FFB800' : (Math.random() > 0.25 ? '#00D2FF' : '#FF2A4B')
         });
       }
     }
 
-    // --- 11. Physics & State Machine Loop ---
+    // --- 12. Physics & State Machine Loop ---
     let lastTime = performance.now();
     let frameCount = 0;
     let lastFpsUpdate = performance.now();
@@ -3369,7 +3529,7 @@
       }
     }
 
-    // --- 12. Canvas Web Vector Rendering ---
+    // --- 13. Canvas Web Vector Rendering ---
     function renderCanvasWeb() {
       const centerX = window.innerWidth / 2;
       const centerY = (window.innerHeight - 64) / 2;
@@ -3403,10 +3563,14 @@
         const sAnchor = worldToScreen(webAnchor.x, webAnchor.y);
 
         ctx.globalAlpha = webOpacity;
-        ctx.shadowColor = targetSceneId === 'research' ? '#FF007A' : '#00D2FF';
+        let strokeCol = '#00D2FF';
+        if (targetSceneId === 'research') strokeCol = '#FF007A';
+        if (targetSceneId === 'experience') strokeCol = '#FFB800';
+
+        ctx.shadowColor = strokeCol;
         ctx.shadowBlur = currentState === STATES.TENSION ? 20 : 12;
         ctx.lineWidth = currentState === STATES.TENSION ? 3.5 : 2.5;
-        ctx.strokeStyle = targetSceneId === 'research' ? '#FF007A' : '#00D2FF';
+        ctx.strokeStyle = strokeCol;
 
         ctx.beginPath();
         ctx.moveTo(sOrigin.x, sOrigin.y);
@@ -3427,7 +3591,11 @@
           ctx.quadraticCurveTo(midX, midY, sAnchor.x, sAnchor.y);
           ctx.stroke();
 
-          ctx.fillStyle = targetSceneId === 'research' ? '#FF007A' : '#FF2A4B';
+          let dotCol = '#FF2A4B';
+          if (targetSceneId === 'research') dotCol = '#FF007A';
+          if (targetSceneId === 'experience') dotCol = '#FFB800';
+
+          ctx.fillStyle = dotCol;
           ctx.beginPath();
           ctx.arc(sAnchor.x, sAnchor.y, 7, 0, Math.PI * 2);
           ctx.fill();
