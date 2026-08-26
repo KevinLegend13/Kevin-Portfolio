@@ -3786,6 +3786,12 @@
       if (targetId === 'research') {
         activeResearchId = null;
       }
+      if (targetId === 'skills' && !pendingSkillNavigation) {
+        activeSubDomain = null;
+      }
+      if (currentSceneId === 'skills' && targetId !== 'skills') {
+        activeSubDomain = null;
+      }
 
       if (targetId === currentSceneId && currentState === STATES.IDLE) {
         if (targetId === 'projects' && activeCaseStudyId !== null) {
@@ -3795,6 +3801,10 @@
         if (targetId === 'research' && activeResearchId !== null) {
           activeResearchId = null;
           renderResearchView();
+        }
+        if (targetId === 'skills' && activeSubDomain !== null) {
+          activeSubDomain = null;
+          renderSkillsWebLayer();
         }
         return;
       }
